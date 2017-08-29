@@ -19,6 +19,16 @@ public class Article {
     private String title;
     private String summery;
     private String cover;
+
+    public Article(Plan plan, Contractor contractor, String title, String summery, String cover) {
+        this.plan = plan;
+        this.contractor = contractor;
+        this.title = title;
+        this.summery = summery;
+        this.cover = cover;
+    }
+    public Article(){
+        
     }
 
     public Long getId() {
