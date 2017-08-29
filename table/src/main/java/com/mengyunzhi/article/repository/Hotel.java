@@ -9,19 +9,15 @@ public class Hotel {
     private Long id;
 
     // 酒店名称
-    @Column(length = 10)
     private String name;
 
     // 所在城市
-    @Column(length = 10)
     private String city;
 
     // 酒店星级
-    @Column(length = 10)
     private String starLevel;
 
     // 酒店备注
-    @Column(length = 10)
     private String remark;
 
     public Hotel() {
