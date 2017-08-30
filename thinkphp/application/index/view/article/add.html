@@ -1,12 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<title>文章编辑</title>
-	<link rel="stylesheet" type="text/css" href="\beautifulArtical\thinkphp\public\style\css\bootstrap-3.3.7-dist\css\bootstrap.min.css">
-</head>
-<script src="/beautifulArtical/thinkphp/public/style/js/articleController/Sortable.js"></script>
-<body class="row">
+{extend name="index"}
+{block name="title"}文章编辑{/block}
+{block name="content"}
 	<div class="col-md-8 col-md-offset-1" style="margin-top: 60px;">
 		<h2><span class="glyphicon glyphicon-edit"></span>&nbsp;文章编辑</h2>
 		<br>
@@ -78,6 +72,6 @@
 			<br><br>
 		</form>
 	</div>
-	<script src="/beautifulArtical/thinkphp/public/style/js/articleController/Configuration.js"></script>  
-</body>
-</html>
+	<script src="/beautifulArtical/thinkphp/public/style/js/articleController/Sortable.js"></script>
+	<script src="/beautifulArtical/thinkphp/public/style/js/articleController/Configuration.js"></script>
+	{/block}
