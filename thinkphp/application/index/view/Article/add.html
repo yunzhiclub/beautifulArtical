@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>文章编辑</title>
+	<link rel="stylesheet" type="text/css" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<script src="/beautifulArtical/thinkphp/public/static/js/Sortable.js"></script>
+<body>
+	<div class="col-md-8 col-md-offset-1" style="margin-top: 60px;">
+		<h2><span class="glyphicon glyphicon-edit"></span>&nbsp;文章编辑</h2>
+		<br>
+		<form>
+			<div class="form-group">
+				<label for="TitleInput">标题</label>
+				<input type="text" class="form-control" id="TitleInput" placeholder="标题">
+			</div>
+			<div class="form-group">
+				<label for="SummaryInput">摘要</label>
+				<input type="text" class="form-control" id="SummaryInput" placeholder="摘要">
+			</div>
+			<div class="form-group">
+				<label for="exampleInputFile">封面</label>
+				<input type="file" id="exampleInputFile">
+			</div>
+			<div class="form-group">
+				<label for="TextInput">正文</label>
+				<span class="col-md-offset-1">
+					<a class="btn btn-primary btn-sm" href="paragaph/paragraph.html"><span class="glyphicon glyphicon-plus"></span>&nbsp;段落</a>&nbsp;&nbsp;
+					<a class="btn btn-primary btn-sm" href="#"><span class="glyphicon glyphicon-plus"></span>&nbsp;景点</a>&nbsp;&nbsp;
+					<a class="btn btn-primary btn-sm" href="#"><span class="glyphicon glyphicon-plus"></span>&nbsp;方案报价</a>&nbsp;&nbsp;
+					<a class="btn btn-primary btn-sm" href="#"><span class="glyphicon glyphicon-plus"></span>&nbsp;订制师</a>
+				</span>
+			</div>
+			<ul id="foo" class="block__list block__list_words" style="list-style-type: none;">
+				<li >
+					<div class="panel panel-default">
+						<div class="panel-body">
+							<a>段落标题</a><br><br>
+							<img src="img/01.png" class="col-md-2" alt="图片" style="border:2px solid black;">
+							<p class="col-md-9">段落1</p>
+							
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="panel panel-default">
+						<div class="panel-body">
+							<a>段落标题</a><br><br>
+							<img src="img/01.png" class="col-md-2" alt="图片" style="border:2px solid black;">
+							<p class="col-md-9">段落2</p>
+							
+						</div>
+					</div>
+				</li>
+			</ul>
+			<button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-ok"></span>&nbsp;完成</button>
+			<button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-play"></span>&nbsp;预览</button>
+			<br><br>
+		</form>
+	</div>
+	<script>
+		Sortable.create(document.getElementById('foo'), {
+                                animation: 150, //动画参数
+                                forceFallback: true,
+                                onAdd: function (evt){   //拖拽时候添加有新的节点的时候发生该事件
+                                	console.log('onAdd.foo:', [evt.item, evt.from]); 
+                                },
+                                onUpdate: function (evt){  //拖拽更新节点位置发生该事件
+                                	console.log('onUpdate.foo:', [evt.item, evt.from]);  
+                                },
+                                onRemove: function (evt){   //删除拖拽节点的时候促发该事件
+                                	console.log('onRemove.foo:', [evt.item, evt.from]); 
+                                },
+                                onStart:function(evt){  //开始拖拽出发该函数
+                                	console.log('onStart.foo:', [evt.item, evt.from]);
+                                },
+                                onSort:function(evt){  //发生排序发生该事件
+                                	console.log('onSort.foo:', [evt.item, evt.from]);
+                                },
+                                onEnd: function(evt){ //拖拽完毕之后发生该事件
+                                	console.log('onEnd.foo:', [evt.item, evt.from]); 
+                                }
+                            });
+                        </script>  
+</body>
+</html>
