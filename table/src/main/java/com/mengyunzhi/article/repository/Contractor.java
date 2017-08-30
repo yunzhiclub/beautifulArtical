@@ -13,14 +13,14 @@ public class Contractor {
     private String name;
     private String phone;
     private String fax;
-    private String mobilePhone;
+    private String mobile;
     private String email;
 
-    public Contractor(String name, String phone, String fax, String mobilePhone, String email) {
+    public Contractor(String name, String phone, String fax, String mobile, String email) {
         this.name = name;
         this.phone = phone;
         this.fax = fax;
-        this.mobilePhone = mobilePhone;
+        this.mobile = mobile;
         this.email = email;
     }
 
@@ -43,8 +43,8 @@ public class Contractor {
         return fax;
     }
 
-    public String getMobilePhone() {
-        return mobilePhone;
+    public String getMobile() {
+        return mobile;
     }
 
     public String getEmail() {
@@ -67,8 +67,8 @@ public class Contractor {
         this.fax = fax;
     }
 
-    public void setMobilePhone(String mobilePhone) {
-        this.mobilePhone = mobilePhone;
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
     }
 
     public void setEmail(String email) {
@@ -82,7 +82,7 @@ public class Contractor {
                 ", name='" + name + '\'' +
                 ", phone='" + phone + '\'' +
                 ", fax='" + fax + '\'' +
-                ", mobilePhone='" + mobilePhone + '\'' +
+                ", mobile='" + mobile + '\'' +
                 ", email='" + email + '\'' +
                 '}';
     }
