@@ -10,15 +10,28 @@ public class Article {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     @OneToOne
     private Plan plan;
     @ManyToOne
     private Contractor contractor;
 
-
+    // 文章标题
     private String title;
+    // 文章摘要
     private String summery;
+    // 文章封面
     private String cover;
+
+    public Article(Plan plan, Contractor contractor, String title, String summery, String cover) {
+        this.plan = plan;
+        this.contractor = contractor;
+        this.title = title;
+        this.summery = summery;
+        this.cover = cover;
+    }
+    public Article(){
+        
     }
 
     public Long getId() {
