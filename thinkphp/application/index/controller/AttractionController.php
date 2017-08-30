@@ -16,6 +16,8 @@ use app\index\model\Attraction;
 class AttractionController extends Controller {
     
     public function add() {
+        $article_id = Request::instance()->param('id');
+        $this->assign('id',$article_id);
         return $this->fetch();
     }
 
@@ -33,11 +35,22 @@ class AttractionController extends Controller {
         $hotelStarLevel = Request::instance()->post('hotelStarLevel');
         $hotelRemark = Request::instance()->post('hotelRemark');
 
+        $article_id = Request::instance()->param('id');
+
         $file = request()->file('image');
 
-        Common::saveAttraction($title, $content, $name, $meal, $car, $guide, $weight);
-        Common::saveHotel($hotelName,$hotelCity,$hotelStarLevel,$hotelRemark);
+        if(is_null($file)) {
+            return $this->error('请上传图片', url('add'));
+        }
+
         $image = Common::uploadImage($file);
 
+        $hotel = Common::saveHotel($hotelName,$hotelCity,$hotelStarLevel,$hotelRemark);
+
+        if(!Common::saveAttraction($title, $content, $name, $meal, $car, $guide, $weight, $image, $hotel, $article_id)) {
+            return $this->error('保存失败', url('add'));
+        } else {
+            return $this->success('保存成功', url('Article/add'));
+        }
     }
 }

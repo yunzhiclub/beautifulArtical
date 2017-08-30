@@ -9,7 +9,7 @@
         <div class="col-md-6 col-md-offset-1" style="margin-top: 60px;">
             <h2><span class="glyphicon glyphicon-edit"></span>&nbsp;添加景点</h2>
             <br>
-            <form method="post" action="{:url('save')}">
+            <form method="post" action="{:url('save?id='.$id)}" enctype="multipart/form-data">
                 <div class="form-group">
                     <label>标题</label>
                     <input type="text" class="form-control" name="title" placeholder="地点">
