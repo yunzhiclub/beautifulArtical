@@ -1,4 +1,4 @@
-package com.mengyunzhi.article;
+package com.mengyunzhi.article.repository;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
