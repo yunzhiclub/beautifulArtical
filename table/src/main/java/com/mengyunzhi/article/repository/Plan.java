@@ -4,14 +4,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.util.Date;
+import java.sql.Date;
 
 @Entity
 public class Plan {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String travelDate; // 出行日期
+    private Date travelDate; // 出行日期
     private Long peopleNum; // 出行人数
     private String currency; // 币种
     private String type; // 类型
@@ -22,7 +22,7 @@ public class Plan {
     private Integer totalPrice; //总价
     private String remark; // 备注
 
-    public Plan(String travelDate, Long peopleNum, String currency, String type, Integer number, Integer frequency, Integer unitPrice, Integer totalCost, Integer totalPrice, String remark) {
+    public Plan(Date travelDate, Long peopleNum, String currency, String type, Integer number, Integer frequency, Integer unitPrice, Integer totalCost, Integer totalPrice, String remark) {
         this.travelDate = travelDate;
         this.peopleNum = peopleNum;
         this.currency = currency;
@@ -46,11 +46,11 @@ public class Plan {
         this.id = id;
     }
 
-    public String getTravelDate() {
+    public Date getTravelDate() {
         return travelDate;
     }
 
-    public void setTravelDate(String travelDate) {
+    public void setTravelDate(Date travelDate) {
         this.travelDate = travelDate;
     }
 

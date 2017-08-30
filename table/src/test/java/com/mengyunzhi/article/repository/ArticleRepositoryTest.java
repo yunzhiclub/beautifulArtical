@@ -5,6 +5,9 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.sql.Date;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 
@@ -23,16 +26,17 @@ public class ArticleRepositoryTest {
         Contractor contractor = new Contractor("张友善","1225458878","654846345","57468435435","zhangyoushan@yunzhi.com");
         contractorRespository.save(contractor);
         assertThat(contractor.getId()).isNotNull();
-
-        Plan plan =new Plan("20170830", (long) 10.0,"$","地接",10,1,1,10,10,"kfls");
+        Date date = new Date(2017,06,31);
+        Plan plan =new Plan(date,  10L,"$","地接",10,1,1,10,10,"kfls");
         planRepository.save(plan);
 
         assertThat(plan.getId()).isNotNull();
 
         Article article = new Article(plan,contractor,"我的一天","美好的一天","url");
+        articleRepository.save(article);
         assertThat(article.getTitle()).isNotNull();
         assertThat(article.getSummery()).isNotNull();
-        assertThat(article.getId()).isNotNull();
+        assertThat(articleRepository.findOne(article.getId())).isNotNull();
 
     }
 }
