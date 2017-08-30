@@ -27,7 +27,7 @@ class Common {
         }
     }
 
-    public static function saveAttraction($title, $content, $name, $meal, $car, $guide, $weight, $image, $hotel, $article_id) {
+    public static function saveAttraction($title, $content, $name, $meal, $car, $guide, $image, $hotel, $article_id) {
         $attraction = new Attraction();
         $attraction->title = $title;
         $attraction->description = $content;
@@ -35,8 +35,8 @@ class Common {
         $attraction->meal = $meal;
         $attraction->car = $car;
         $attraction->guide = $guide;
-        $attraction->weight = $weight;
         $attraction->image = $image;
+        $attraction->weight = Common::getAttractionWeight($article_id);
         $attraction->hotel_id = $hotel->id;
         $attraction->article_id = $article_id;
         if(!$attraction->save()) {
@@ -46,6 +46,11 @@ class Common {
         }
     }
 
+    public static function getAttractionWeight($article_id) {
+        $map = ['article_id' => $article_id];
+        $attractions = Attraction::where($map)->select();
+        return sizeof($attractions)+1;
+    }
 
     public static function uploadImage($file) {
         $info = $file->move(ROOT_PATH . 'public' . DS . 'uploads');

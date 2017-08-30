@@ -28,7 +28,6 @@ class AttractionController extends Controller {
         $meal = Request::instance()->post('meal');
         $car = Request::instance()->post('car');
         $guide = Request::instance()->post('guide');
-        $weight = Request::instance()->post('weight');
 
         $hotelName = Request::instance()->post('hotelName');
         $hotelCity = Request::instance()->post('hotelCity');
@@ -47,7 +46,7 @@ class AttractionController extends Controller {
 
         $hotel = Common::saveHotel($hotelName,$hotelCity,$hotelStarLevel,$hotelRemark);
 
-        if(!Common::saveAttraction($title, $content, $name, $meal, $car, $guide, $weight, $image, $hotel, $article_id)) {
+        if(!Common::saveAttraction($title, $content, $name, $meal, $car, $guide, $image, $hotel, $article_id)) {
             return $this->error('保存失败', url('add'));
         } else {
             return $this->success('保存成功', url('Article/add'));
