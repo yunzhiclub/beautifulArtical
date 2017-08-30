@@ -24,7 +24,7 @@ class ContractorController extends Controller
 		$Contractor->email = input('post.email');
 
 		if ($Contractor->save()) {
-			return $this->success('添加成功！');
+			return $this->success('添加成功！',url('article/add'));
 		}
 
 		return $this->error('添加失败！');
