@@ -3,6 +3,7 @@ namespace app\index\controller;
 
 use think\Controller;
 use think\Request;
+use app\index\model\Article;
 
 /**
  * 
@@ -18,8 +19,11 @@ class ArticleController extends Controller {
 		return $this->fetch();
 	}
 
-    public function add(){
+    public function firstadd(){
+    	return $this->fetch();
+    }
 
+    public function secondadd(){
     	return $this->fetch();
     }
 }
