@@ -10,18 +10,18 @@
 	<div class="col-md-8 col-md-offset-1" style="margin-top: 60px;">
 		<h2><span class="glyphicon glyphicon-edit"></span>&nbsp;文章编辑</h2>
 		<br>
-		<form>
+		<form method="post" action="{:url ('add');}">
 			<div class="form-group">
 				<label for="TitleInput">标题</label>
-				<input type="text" class="form-control" id="TitleInput" placeholder="标题">
+				<input type="text" class="form-control" id="TitleInput" placeholder="标题" name="title">
 			</div>
 			<div class="form-group">
 				<label for="SummaryInput">摘要</label>
-				<input type="text" class="form-control" id="SummaryInput" placeholder="摘要">
+				<input type="text" class="form-control" id="SummaryInput" placeholder="摘要" name="summary">
 			</div>
 			<div class="form-group">
 				<label for="exampleInputFile">封面</label>
-				<input type="file" id="exampleInputFile">
+				<input type="file" id="exampleInputFile" name="example">
 			</div>
 			<div class="form-group">
 				<label for="TextInput">正文</label>
@@ -59,29 +59,6 @@
 			<br><br>
 		</form>
 	</div>
-	<script>
-		Sortable.create(document.getElementById('foo'), {
-                                animation: 150, //动画参数
-                                forceFallback: true,
-                                onAdd: function (evt){   //拖拽时候添加有新的节点的时候发生该事件
-                                	console.log('onAdd.foo:', [evt.item, evt.from]); 
-                                },
-                                onUpdate: function (evt){  //拖拽更新节点位置发生该事件
-                                	console.log('onUpdate.foo:', [evt.item, evt.from]);  
-                                },
-                                onRemove: function (evt){   //删除拖拽节点的时候促发该事件
-                                	console.log('onRemove.foo:', [evt.item, evt.from]); 
-                                },
-                                onStart:function(evt){  //开始拖拽出发该函数
-                                	console.log('onStart.foo:', [evt.item, evt.from]);
-                                },
-                                onSort:function(evt){  //发生排序发生该事件
-                                	console.log('onSort.foo:', [evt.item, evt.from]);
-                                },
-                                onEnd: function(evt){ //拖拽完毕之后发生该事件
-                                	console.log('onEnd.foo:', [evt.item, evt.from]); 
-                                }
-                            });
-                        </script>  
+	<script src="/beautifulArtical/thinkphp/public/static/js/Configuration.js"></script>  
 </body>
 </html>
