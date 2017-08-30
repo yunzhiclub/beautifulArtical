@@ -9,7 +9,7 @@
         <div class="col-md-6 col-md-offset-1" style="margin-top: 60px;">
             <h2><span class="glyphicon glyphicon-edit"></span>&nbsp;添加景点</h2>
             <br>
-            <form method="post" action="#">
+            <form method="post" action="{:url('save')}">
                 <div class="form-group">
                     <label>标题</label>
                     <input type="text" class="form-control" name="title" placeholder="地点">
@@ -24,19 +24,19 @@
                 </div>
                 <div class="form-group">
                     <label>酒店名称</label>
-                    <input type="text" class="form-control" name="" placeholder="酒店名称">
+                    <input type="text" class="form-control" name="hotelName" placeholder="酒店名称">
                 </div>
                 <div class="form-group">
                     <label>酒店所在城市</label>
-                    <input type="text" class="form-control" name="" placeholder="酒店所在城市">
+                    <input type="text" class="form-control" name="hotelCity" placeholder="酒店所在城市">
                 </div>
                 <div class="form-group">
                     <label>酒店星级</label>
-                    <input type="text" class="form-control" name="star_level" placeholder="酒店星级">
+                    <input type="text" class="form-control" name="hotelStarLevel" placeholder="酒店星级">
                 </div>
                 <div class="form-group">
                     <label>酒店备注</label>
-                    <input type="text" class="form-control" name="remark" placeholder="酒店备注">
+                    <input type="text" class="form-control" name="hotelRemark" placeholder="酒店备注">
                 </div>
                 <div class="form-group">
                     <label>用餐</label>
@@ -58,7 +58,7 @@
                     <label>图片</label>
                     <input type="file" name="image">
                 </div>
-                <a href="#" class="btn btn-default"><span class="glyphicon glyphicon-ok"></span>&nbsp;完成</a>
+                <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-ok"></span>&nbsp;完成</button>
             </form>
         </div>
     </div>
