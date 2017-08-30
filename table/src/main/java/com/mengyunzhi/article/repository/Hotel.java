@@ -69,4 +69,15 @@ public class Hotel {
     public void setRemark(String remark) {
         this.remark = remark;
     }
+
+    @Override
+    public String toString() {
+        return "Hotel{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", city='" + city + '\'' +
+                ", starLevel='" + starLevel + '\'' +
+                ", remark='" + remark + '\'' +
+                '}';
+    }
 }
