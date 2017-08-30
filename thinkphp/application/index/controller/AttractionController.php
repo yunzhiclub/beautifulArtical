@@ -2,7 +2,9 @@
 
 namespace app\index\controller;
 
+use app\index\model\AttractionModel;
 use app\index\model\Common;
+use app\index\model\HotelModel;
 use think\Controller;
 use think\Request;
 use app\index\model\Hotel;
@@ -44,9 +46,11 @@ class AttractionController extends Controller {
 
         $image = Common::uploadImage($file);
 
-        $hotel = Common::saveHotel($hotelName,$hotelCity,$hotelStarLevel,$hotelRemark);
+        $hotelModel = new HotelModel();
+        $hotel = $hotelModel->saveHotel($hotelName,$hotelCity,$hotelStarLevel,$hotelRemark);
 
-        if(!Common::saveAttraction($title, $content, $name, $meal, $car, $guide, $image, $hotel, $article_id)) {
+        $attractionModel = new AttractionModel();
+        if(!$attractionModel->saveAttraction($title, $content, $name, $meal, $car, $guide, $image, $hotel, $article_id)) {
             return $this->error('保存失败', url('add'));
         } else {
             return $this->success('保存成功', url('Article/add'));
