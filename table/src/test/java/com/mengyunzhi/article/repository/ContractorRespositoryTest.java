@@ -1,4 +1,4 @@
-package com.mengyunzhi.article;
+package com.mengyunzhi.article.repository;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
