@@ -24,22 +24,30 @@ public class AttractionRepositoryTest {
     PlanRepository planRepository;
     @Autowired
     ContractorRespository contractorRespository;
+    @Autowired
+    HotelRepository hotelRepository;
 
 
     @Test
     public void savetest(){
+        // 定制师数据
         Contractor contractor = new Contractor("张友善","1225458878","654846345","57468435435","zhangyoushan@yunzhi.com");
         contractorRespository.save(contractor);
+        // 方案报价数据
         Date date = new Date(2017,06,31);
         Plan plan =new Plan(date,  10L,"$","地接",10,1,1,10,10,"kfls");
         planRepository.save(plan);
+        //文章数据
         Article article = new Article(plan,contractor,"我的一天","美好的一天","url");
         articleRepository.save(article);
-        Attraction attraction = new Attraction(article,"fdn","hao","jjjfdk","kkk","iii","url","url",10L);
+        // 酒店数据
+        Hotel hotel = new Hotel("zxc","zxc","zxc","zxc");
+        hotelRepository.save(hotel);
+        Attraction attraction = new Attraction();
+        attraction.setArticle(article);
+        attraction.setHotel(hotel);
         attractionRepository.save(attraction);
-        assertThat(attraction.getId()).isNotNull();
-        assertThat(attraction.getName()).isNotNull();
-        assertThat(attraction.getWeight()).isNotNull();
+        assertThat(attractionRepository.findOne(attraction.getId())).isNotNull();
 
     }
 }
