@@ -14,6 +14,14 @@ public class Attraction {
     @ManyToOne
     private Article article;
 
+    @OneToOne
+    private Hotel hotel;
+
+
+
+
+
+
     private String title;
     private String description;
     private String name;
@@ -21,21 +29,17 @@ public class Attraction {
     private String car;
     private String guide;
     private String image;
-    private Long weight;
+    private int weight;
 
 
-
-    public Attraction(Article article, String title, String description, String name, String meal, String car, String guide, String image, Long weight) {
-        this.article = article;
-        this.title = title;
-        this.description = description;
-        this.name = name;
-        this.meal = meal;
-        this.car = car;
-        this.guide = guide;
-        this.image = image;
-        this.weight = weight;
+    public Hotel getHotel() {
+        return hotel;
     }
+
+    public void setHotel(Hotel hotel) {
+        this.hotel = hotel;
+    }
+
     public Article getArticle() {
         return article;
     }
@@ -108,12 +112,15 @@ public class Attraction {
         this.image = image;
     }
 
-    public Long getWeight() {
+    public int getWeight() {
         return weight;
     }
 
-    public void setWeight(Long weight) {
+    public void setWeight(int weight) {
         this.weight = weight;
+    }
+
+    public Attraction() {
     }
 
     @Override
@@ -121,6 +128,7 @@ public class Attraction {
         return "Attraction{" +
                 "id=" + id +
                 ", article=" + article +
+                ", hotel=" + hotel +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", name='" + name + '\'' +
@@ -131,4 +139,6 @@ public class Attraction {
                 ", weight=" + weight +
                 '}';
     }
+
+
 }
