@@ -81,4 +81,16 @@ public class Paragraph {
     public void setWeight(int weight) {
         this.weight = weight;
     }
+
+    @Override
+    public String toString() {
+        return "Paragraph{" +
+                "id=" + id +
+                ", article=" + article +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", image='" + image + '\'' +
+                ", weight=" + weight +
+                '}';
+    }
 }
