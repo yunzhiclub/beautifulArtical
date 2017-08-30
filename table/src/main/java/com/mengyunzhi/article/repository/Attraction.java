@@ -10,8 +10,10 @@ public class Attraction {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     @ManyToOne
     private Article article;
+
     private String title;
     private String description;
     private String name;
@@ -112,5 +114,21 @@ public class Attraction {
 
     public void setWeight(Long weight) {
         this.weight = weight;
+    }
+
+    @Override
+    public String toString() {
+        return "Attraction{" +
+                "id=" + id +
+                ", article=" + article +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", name='" + name + '\'' +
+                ", meal='" + meal + '\'' +
+                ", car='" + car + '\'' +
+                ", guide='" + guide + '\'' +
+                ", image='" + image + '\'' +
+                ", weight=" + weight +
+                '}';
     }
 }
