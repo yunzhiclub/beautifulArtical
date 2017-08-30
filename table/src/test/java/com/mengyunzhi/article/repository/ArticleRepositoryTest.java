@@ -27,7 +27,7 @@ public class ArticleRepositoryTest {
         contractorRespository.save(contractor);
         assertThat(contractor.getId()).isNotNull();
         Date date = new Date(2017,06,31);
-        Plan plan =new Plan(date,  10L,"$","地接",10,1,1,10,10,"kfls");
+        Plan plan =new Plan();
         planRepository.save(plan);
 
         assertThat(plan.getId()).isNotNull();
