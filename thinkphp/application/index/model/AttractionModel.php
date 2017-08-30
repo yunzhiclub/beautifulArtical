@@ -18,7 +18,7 @@ class AttractionModel {
         $attraction->car = $car;
         $attraction->guide = $guide;
         $attraction->image = $image;
-        $attraction->weight = $this->getAttractionWeight($article_id);
+        $attraction->weight = Attraction::where('article_id', '=', $article_id)->count()+1;
         $attraction->hotel_id = $hotel->id;
         $attraction->article_id = $article_id;
         if(!$attraction->save()) {
@@ -26,11 +26,5 @@ class AttractionModel {
         } else {
             return true;
         }
-    }
-
-    public function getAttractionWeight($article_id) {
-        $map = ['article_id' => $article_id];
-        $attractions = Attraction::where($map)->select();
-        return sizeof($attractions)+1;
     }
 }
