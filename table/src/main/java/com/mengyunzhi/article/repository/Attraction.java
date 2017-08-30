@@ -1,9 +1,6 @@
 package com.mengyunzhi.article.repository;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * Created by Mr Chen on 2017/8/30.
@@ -13,6 +10,8 @@ public class Attraction {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @ManyToOne
+    private Article article;
     private String title;
     private String description;
     private String name;
@@ -22,7 +21,10 @@ public class Attraction {
     private String image;
     private Long weight;
 
-    public Attraction(String title, String description, String name, String meal, String car, String guide, String image, Long weight) {
+
+
+    public Attraction(Article article, String title, String description, String name, String meal, String car, String guide, String image, Long weight) {
+        this.article = article;
         this.title = title;
         this.description = description;
         this.name = name;
@@ -31,6 +33,13 @@ public class Attraction {
         this.guide = guide;
         this.image = image;
         this.weight = weight;
+    }
+    public Article getArticle() {
+        return article;
+    }
+
+    public void setArticle(Article article) {
+        this.article = article;
     }
 
     public Long getId() {
