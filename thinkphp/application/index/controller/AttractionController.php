@@ -82,4 +82,38 @@ class AttractionController extends Controller {
 
         return $this->fetch('add');
     }
+
+    public function update() {
+        // 获取URL
+        $articleId = Request::instance()->param('articleId');
+        $attractionId = Request::instance()->param('attractionId');
+        $hotelId = Request::instance()->param('hotelId');
+
+        // 获取数据
+        $title = Request::instance()->post('title');
+        $content = Request::instance()->post('content');
+        $name = Request::instance()->post('name');
+        $meal = Request::instance()->post('meal');
+        $car = Request::instance()->post('car');
+        $guide = Request::instance()->post('guide');
+        $hotelName = Request::instance()->post('hotelName');
+        $hotelCity = Request::instance()->post('hotelCity');
+        $hotelStarLevel = Request::instance()->post('hotelStarLevel');
+        $hotelRemark = Request::instance()->post('hotelRemark');
+
+        // 酒店处理
+        $hotel = Hotel::getNullHotel();
+        if($hotelName || $hotelCity || $hotelStarLevel || $hotelRemark) {
+            if(!is_null($hotelId)) {
+                $hotel = $hotel->updateHotel($hotelName, $hotelCity, $hotelStarLevel, $hotelRemark, $hotelId);
+            } else {
+                $hotel = $hotel->saveHotel($hotelName, $hotelCity, $hotelStarLevel, $hotelRemark);
+            }
+        } else {
+            if(!is_null($hotelId)) {
+                $hotel->deleteHotel($hotelId);
+            }
+            $hotel = null;
+        }
+    }
 }

@@ -26,6 +26,18 @@ class Hotel extends Model {
         }
     }
 
+    public function updateHotel($name, $city, $starLevel, $remark, $id) {
+        $this->deleteHotel($id);
+        return $this->saveHotel($name, $city, $starLevel, $remark, $id);
+    }
+
+    public function deleteHotel($id) {
+        $hotel = Hotel::get($id);
+        if(!$hotel->delete()) {
+            return $hotel->error('删除失败');
+        }
+    }
+
     public static function getNullHotel() {
         $hotel = new Hotel();
         $hotel->id = null;
