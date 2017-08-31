@@ -24,7 +24,7 @@ public class ContractorRespositoryTest {
         contractor.setName("张友善");
         contractor.setPhone("1225458878");
         contractor.setFax("654846345");
-        contractor.setMobilePhone("57468435435");
+        contractor.setMobile("57468435435");
         contractor.setEmail("zhangyoushan@yunzhi.com");
         contractorRespository.save(contractor);
         

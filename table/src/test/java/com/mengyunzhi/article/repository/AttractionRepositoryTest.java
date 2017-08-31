@@ -35,12 +35,12 @@ public class AttractionRepositoryTest {
         contractorRespository.save(contractor);
         // 方案报价数据
         Date date = new Date(2017,06,31);
-        Plan plan =new Plan(date,  10L,"$","地接",10,1,1,10,10,"kfls");
+        Plan plan =new Plan();
         planRepository.save(plan);
         //文章数据
         Article article = new Article(plan,contractor,"我的一天","美好的一天","url");
         articleRepository.save(article);
-        // 酒店数据
+        //酒店数据
         Hotel hotel = new Hotel("zxc","zxc","zxc","zxc");
         hotelRepository.save(hotel);
         Attraction attraction = new Attraction();
