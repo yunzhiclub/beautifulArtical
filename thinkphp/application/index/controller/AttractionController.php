@@ -115,5 +115,14 @@ class AttractionController extends Controller {
             }
             $hotel = null;
         }
+
+        // 图片处理
+        $image = null;
+
+        // 景点处理
+        $attraction = Attraction::getNullAttraction();
+        $attraction->updateAttraction($title, $content, $name, $meal, $car, $guide, $image, $hotel, $articleId, $attractionId);
+
+        return $this->success('更新成功');
     }
 }

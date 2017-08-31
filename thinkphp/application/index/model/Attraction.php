@@ -11,7 +11,7 @@ use think\Model;
  */
 
 class Attraction extends Model {
-    public function saveAttraction($title, $content, $name, $meal, $car, $guide, $image, $hotel, $article_id, $id = null) {
+    public function saveAttraction($title, $content, $name, $meal, $car, $guide, $image, $hotel, $article_id) {
         $this->title = $title;
         $this->description = $content;
         $this->designation = $name;
@@ -26,15 +26,16 @@ class Attraction extends Model {
             $this->hotel_id = $hotel->id;
         }
 
-        if(!is_null($id)) {
-            $this->id = $id;
-        }
-
         if(!$this->save()) {
             return false;
         } else {
             return true;
         }
+    }
+
+    public function updateAttraction($title, $content, $name, $meal, $car, $guide, $image, $hotel, $article_id, $id) {
+        $attraction = Attraction::get($id);
+        $attraction->saveAttraction($title, $content, $name, $meal, $car, $guide, $image, $hotel, $article_id);
     }
 
     public static function getNullAttraction() {
