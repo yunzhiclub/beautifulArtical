@@ -5,6 +5,8 @@ use think\Controller;
 use think\Request;
 use app\index\model\Article;
 use app\index\model\Common;
+use app\index\model\Plan;
+>>>>>>> refs/remotes/origin/development
 
 /**
  * 
