@@ -24,7 +24,7 @@ public class Attraction {
 
     private String title;
     private String description;
-    private String name;
+    private String designation;
     private String meal;
     private String car;
     private String guide;
@@ -32,12 +32,28 @@ public class Attraction {
     private int weight;
 
 
-    public Hotel getHotel() {
-        return hotel;
+    public Attraction() {
     }
 
-    public void setHotel(Hotel hotel) {
+    public Attraction(Article article, Hotel hotel, String title, String description, String designation, String meal, String car, String guide, String image, int weight) {
+        this.article = article;
         this.hotel = hotel;
+        this.title = title;
+        this.description = description;
+        this.designation = designation;
+        this.meal = meal;
+        this.car = car;
+        this.guide = guide;
+        this.image = image;
+        this.weight = weight;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Article getArticle() {
@@ -48,12 +64,12 @@ public class Attraction {
         this.article = article;
     }
 
-    public Long getId() {
-        return id;
+    public Hotel getHotel() {
+        return hotel;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setHotel(Hotel hotel) {
+        this.hotel = hotel;
     }
 
     public String getTitle() {
@@ -72,12 +88,12 @@ public class Attraction {
         this.description = description;
     }
 
-    public String getName() {
-        return name;
+    public String getDesignation() {
+        return designation;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setDesignation(String designation) {
+        this.designation = designation;
     }
 
     public String getMeal() {
@@ -120,9 +136,6 @@ public class Attraction {
         this.weight = weight;
     }
 
-    public Attraction() {
-    }
-
     @Override
     public String toString() {
         return "Attraction{" +
@@ -131,7 +144,7 @@ public class Attraction {
                 ", hotel=" + hotel +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
-                ", name='" + name + '\'' +
+                ", designation='" + designation + '\'' +
                 ", meal='" + meal + '\'' +
                 ", car='" + car + '\'' +
                 ", guide='" + guide + '\'' +
@@ -139,6 +152,4 @@ public class Attraction {
                 ", weight=" + weight +
                 '}';
     }
-
-
 }

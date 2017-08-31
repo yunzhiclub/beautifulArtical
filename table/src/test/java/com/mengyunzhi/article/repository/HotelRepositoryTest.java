@@ -20,7 +20,7 @@ public class HotelRepositoryTest {
     @Test
     public void saveHotel() {
         Hotel hotel = new Hotel();
-        hotel.setName("测试酒店");
+        hotel.setDesignation("测试酒店");
 
         hotel = hotelRepository.save(hotel);
         assertThat(hotelRepository.findOne(hotel.getId())).isNotNull();
