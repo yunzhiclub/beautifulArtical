@@ -23,29 +23,55 @@ class ArticleController extends Controller {
 	}
     // 返回firstadd界面
     public function firstadd(){
-
-    	return $this->fetch();
+        $id = Request::instance()->param('id/d');
+        if( is_null($id)){
+            $this->assign('title', '');
+            $this->assign('summery', '');
+            $this->assign('cover', '');
+            $this->assign('haveid', '');
+            return $this->fetch();
+        }else{
+            $Article = Article::get($id);
+            $this->assign('title', $Article->title);
+            $this->assign('summery', $Article->summery);
+            $this->assign('cover', $Article->cover);
+            $this->assign('haveid', $id);
+            return $this->fetch();
+        }
     }
     // firstadd界面完成后触发时间
     public function addfirst(){
-    	$title = Request::instance()->post('title');
-    	$summary = Request::instance()->post('summary');
-    	$Article = new Article;
-    	$Article->title = $title;
-    	$Article->summery = $summary;
-        // 获取文件
+        
+        $id = Request::instance()->param('id/d');
+        $title = Request::instance()->post('title');
+        $summary = Request::instance()->post('summary');
         $file = request()->file('image');
-        if(is_null($file)){
-            $this->error('请插入图片',url('firstadd'));
+        // 判断是否是重写 
+        if(is_null($id)){
+        	$Article = new Article;
+        }else{
+            $Article = Article::get($id);
+            // 判断图片是否更改
+            if(is_null($file)){
+                $this->success('你没有更改图片',url('secondadd',['id'=>$Article->id]));
+            }
+            // 删除之前保存的图片
         }
-        // 保存文件，返回路径
-        $image = Common::uploadImage($file);
-        $Article->cover = $image;
-        // 判断是否保存
-    	$judgment = $Article->save();
-    	if($judgment){
-    		$this->success('success',url('secondadd',['id'=>$Article->id]));
-    	}
+        	$Article->title = $title;
+        	$Article->summery = $summary;
+            // 获取文件
+            
+            if(is_null($file)){
+                $this->error('请插入图片',url('firstadd'));
+            }
+            // 保存文件，返回路径
+            $image = Common::uploadImage($file);
+            $Article->cover = $image;
+            // 判断是否保存
+        	$judgment = $Article->save();
+        	if($judgment){
+        		$this->success('success',url('secondadd',['id'=>$Article->id]));
+        	}
     }
     // 返回firstadd界面
     public function secondadd(){
