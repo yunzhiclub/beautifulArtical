@@ -18,8 +18,10 @@ use app\index\model\Attraction;
 class AttractionController extends Controller {
     
     public function add() {
-        $article_id = Request::instance()->param('id');
-        $this->assign('article_id',$article_id);
+        $articleId = Request::instance()->param('articleId');
+        $this->assign('articleId',$articleId);
+        $this->assign('attraction',Attraction::getNullAttraction());
+        $this->assign('hotel',Hotel::getNullHotel());
         return $this->fetch();
     }
 
@@ -60,5 +62,24 @@ class AttractionController extends Controller {
         } else {
             return $this->success('保存成功', url('Article/secondadd?id='.$article_id));
         }
+    }
+
+    public function edit() {
+        $articleId = Request::instance()->param('articleId');
+        $attractionId = Request::instance()->param('attractionId');
+
+        $attraction = Attraction::get($attractionId);
+
+        if(!is_null($attraction->hotel_id)) {
+            $hotel = Hotel::get($attraction->hotel_id);
+        } else {
+            $hotel = Hotel::getNullHotel();
+        }
+
+        $this->assign('articleId', $articleId);
+        $this->assign('attraction', $attraction);
+        $this->assign('hotel', $hotel);
+
+        return $this->fetch('add');
     }
 }
