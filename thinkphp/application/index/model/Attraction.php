@@ -36,4 +36,17 @@ class Attraction extends Model {
             return true;
         }
     }
+
+    public static function getNullAttraction() {
+        $attraction = new Attraction();
+        $attraction->id = null;
+        $attraction->title = '';
+        $attraction->description = '';
+        $attraction->designation = '';
+        $attraction->meal = '';
+        $attraction->car = '';
+        $attraction->guide = '';
+        $attraction->image = '';
+        return $attraction;
+    }
 }

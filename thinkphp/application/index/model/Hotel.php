@@ -25,4 +25,14 @@ class Hotel extends Model {
             return $this;
         }
     }
+
+    public static function getNullHotel() {
+        $hotel = new Hotel();
+        $hotel->id = null;
+        $hotel->designation = '';
+        $hotel->city = '';
+        $hotel->star_level = '';
+        $hotel->remark = '';
+        return $hotel;
+    }
 }
