@@ -1,82 +1,42 @@
-{extend name="index" /}
-{block name="title"}
-添加方案报价
-{/block}
-
-{block name="content"}
+{extend name="index" /} {block name="title"} 添加方案报价 {/block} {block name="content"}
 <div class="row-fluid">
     <div class="col-md-6 col-md-offset-1" style="margin-top: 60px; margin-bottom:100px ">
-    <h2><span class="glyphicon glyphicon-edit"></span>&nbsp;新增方案报价</h2>
-            <br>
-        <form method="post" action="#">
+        <h2><span class="glyphicon glyphicon-edit"></span>&nbsp;新增方案报价</h2>
+        <br>
+        <form method="post" action="{:url('save')}">
             <div class="control-group">
-                <label>出行日期</label>
+                <label for="travelDate">出行日期</label>
                 <div class="controls">
                     <input type="date" class="form-control" name="travelDate" placeholder="出行日期" />
                 </div>
             </div>
             <div class="control-group">
-                <label class="control-label" for="inputEmail">出行人数</label>
+                <label class="control-label" for="peopleNum">出行人数</label>
                 <div class="controls">
-                    <input type="text" class="form-control" name="peopleNum" placeholder="出行人数"/>
+                    <input type="text" class="form-control" name="peopleNum" placeholder="出行人数" />
                 </div>
             </div>
             <div class="control-group">
-                <label>币种</label>
+                <label for="currency">币种</label>
                 <div class="controls">
                     <input type="text" class="form-control" name="currency" placeholder="币种" />
                 </div>
             </div>
             <div class="control-group">
-                <label>类型</label>
-                <div class="controls">
-                    <input type="currency" class="form-control" name="type" placeholder="类型" />
-                </div>
-            </div>
-            <div class="control-group">
-                <label>数量</label>
-                <div class="controls">
-                    <input type="text" class="form-control" name="number" placeholder="数量" />
-                </div>
-            </div>
-            <div class="control-group">
-                <label>频次</label>
-                <div class="controls">
-                    <input type="text" class="form-control" name="frequency" placeholder="频次" />
-                </div>
-            </div>
-            <div class="control-group">
-                <label>单价</label>
-                <div class="controls">
-                    <input type="text" class="form-control" name="unitPrice" placeholder="单价" />
-                </div>
-            </div>
-            <div class="control-group">
-                <label>总费用</label>
+                <label for="totalCost">总费用</label>
                 <div class="controls">
                     <input type="text" class="form-control" name="totalCost" placeholder="总费用" />
                 </div>
             </div>
             <div class="control-group">
-                <label>总价</label>
-                <div class="controls">
-                    <input type="text" class="form-control" name="totalPrice" placeholder="总价" />
-                </div>
-            </div>
-            <div class="control-group">
-                <label>备注</label>
-                <div class="controls">
-                    <input type="text" class="form-control" name="remark" placeholder="备注" />
-                </div>
-            </div>
-            <div class="control-group">
-                <label>最晚付款时间</label>
+                <label for="lastPayTime">最晚付款时间</label>
                 <div class="controls">
                     <input type="date" class="form-control" name="lastPayTime" placeholder="最晚付款时间" />
                 </div>
             </div>
+            <br>
             <div class="control-group">
-                <a href="#" class="btn btn-default"><span class="glyphicon glyphicon-ok"></span>&nbsp;完成</a>
+                <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-play"></span>&nbsp;下一步</button>
             </div>
         </form>
     </div>

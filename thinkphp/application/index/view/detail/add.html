@@ -1,0 +1,56 @@
+{extend name="index" /} {block name="title"} 添加方案报价 {/block} {block name="content"}
+<div class="row-fluid">
+    <div class="col-md-6 col-md-offset-1" style="margin-top: 60px; margin-bottom:100px ">
+        <h2><span class="glyphicon glyphicon-edit"></span>&nbsp;方案报价明细</h2>
+        <br>
+        <form method="post" action="{:url('save')}">
+            <div class="control-group">
+                <label for="type">类型</label>
+                <div class="controls">
+                    <input type="currency" class="form-control" name="type" placeholder="类型" />
+                </div>
+            </div>
+            <div class="control-group">
+                <label for="number">数量</label>
+                <div class="controls">
+                    <input type="number" class="form-control" name="number" placeholder="数量" />
+                </div>
+            </div>
+            <div class="control-group">
+                <label for="frequency">频次</label>
+                <div class="controls">
+                    <input type="number" class="form-control" name="frequency" placeholder="频次" />
+                </div>
+            </div>
+            <div class="control-group">
+                <label for="unitPrice">单价</label>
+                <div class="controls">
+                    <input type="text" class="form-control" name="unitPrice" placeholder="单价" />
+                </div>
+            </div>
+            <div class="control-group">
+                <label for="totalPrice">总价</label>
+                <div class="controls">
+                    <input type="text" class="form-control" name="totalPrice" placeholder="总价" />
+                </div>
+            </div>
+            <div class="control-group">
+                <label for="remark">备注</label>
+                <div class="controls">
+                    <input type="text" class="form-control" name="remark" placeholder="备注" />
+                </div>
+            </div>
+            <div class="control-group">
+                <label for="lastPayTime">最晚付款时间</label>
+                <div class="controls">
+                    <input type="date" class="form-control" name="lastPayTime" placeholder="最晚付款时间" />
+                </div>
+            </div>
+            <br>
+            <div class="control-group">
+                <a href="#" class="btn btn-default"><span class="glyphicon glyphicon-ok"></span>&nbsp;提交</a>
+            </div>
+        </form>
+    </div>
+</div>
+{/block}

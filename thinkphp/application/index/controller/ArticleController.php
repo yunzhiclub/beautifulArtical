@@ -3,6 +3,7 @@ namespace app\index\controller;
 
 use think\Controller;
 use think\Request;
+use app\index\model\Plan;
 
 /**
  * 
