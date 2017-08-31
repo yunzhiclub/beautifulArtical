@@ -63,7 +63,7 @@ class Attraction extends Model {
         $attraction->meal = '';
         $attraction->car = '';
         $attraction->guide = '';
-        $attraction->image = '';
+        $attraction->image = null;
         return $attraction;
     }
 }

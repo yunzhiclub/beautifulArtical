@@ -38,7 +38,7 @@ class AttractionController extends Controller {
         $hotelStarLevel = Request::instance()->post('hotelStarLevel');
         $hotelRemark = Request::instance()->post('hotelRemark');
 
-        $article_id = Request::instance()->param('id');
+        $article_id = Request::instance()->param('articleId');
 
         // 酒店处理
         if($hotelName || $hotelCity || $hotelStarLevel || $hotelRemark) {
