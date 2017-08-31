@@ -117,7 +117,13 @@ class AttractionController extends Controller {
         }
 
         // 图片处理
-        $image = null;
+        $file = request()->file('image');
+        if(!is_null($file)) {
+            $image = Common::uploadImage($file);
+        } else {
+            $attraction = Attraction::get($attractionId);
+            $image = $attraction->image;
+        }
 
         // 景点处理
         $attraction = Attraction::getNullAttraction();
