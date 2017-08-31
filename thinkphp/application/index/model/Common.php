@@ -1,5 +1,4 @@
 <?php
-
 namespace app\index\model;
 /**
  * Created by PhpStorm.
@@ -11,7 +10,6 @@ namespace app\index\model;
  * @return 文件存储后的路径
  */
 class Common {
-
     public static function uploadImage($file) {
         $info = $file->move(ROOT_PATH . 'public' . DS . 'uploads');
         if($info){
