@@ -23,8 +23,11 @@ class PlanController extends Controller
 	}
 	public function save()
 	{
-        $data = Request::instance()->post;
+
+		//文章id
+        $Request = Request::instance();
         $Plan = new Plan();
+        $Plan->travelDate = $Request->post('travleDate');
         $Plan->travelDate = $Request->post('travleDate');
         $plan->peopleNum = $Request->post('peopleNum');
         $plan->currency = $Request->post('currency');
@@ -35,7 +38,7 @@ class PlanController extends Controller
             return $this->error('数据添加错误：' . $Plan->getError());
         }
 
-        return $this->success('操作成功', url('Detail/add'));
+        return $this->success('操作成功', url('../Detail/add'));
 
 	}
 
