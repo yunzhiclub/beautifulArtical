@@ -11,11 +11,14 @@ use think\Model;
  */
 
 class Hotel extends Model {
-    public function saveHotel($name, $city, $starLevel, $remark) {
+    public function saveHotel($name, $city, $starLevel, $remark, $id = null) {
         $this->designation = $name;
         $this->city = $city;
         $this->star_level = $starLevel;
         $this->remark = $remark;
+        if(!is_null($id)) {
+            $this->id = $id;
+        }
         if(!$this->save()) {
             return $this->getError();
         } else {
