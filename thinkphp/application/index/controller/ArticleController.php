@@ -21,7 +21,7 @@ class ArticleController extends Controller {
 	}
 
     public function firstadd(){
-    	
+
     	return $this->fetch();
     }
     public function addfirst(){
