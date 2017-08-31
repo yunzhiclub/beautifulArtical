@@ -18,18 +18,12 @@ class ContractorController extends Controller
 	{
 		// 接收表单数据
 		$postData = Request::instance()->post();
-		$Contractor = new Contractor;
-
-		$Contractor->name = $postData['name'];
-		$Contractor->phone = $postData['phone'];
-		$Contractor->fax = $postData['fax'];
-		$Contractor->mobile = $postData['mobile'];
-		$Contractor->email = $postData['email'];
-
-		if ($Contractor->save()) {
-			return $this->success('添加成功！',url('article/add'));
+		$article_id = Request::instance()->param('id');
+		$Contractor = new Contractor();
+		if ($Contractor->saveContractor($postData, $article_id)) {
+			return $this->success('保存成功！', url('article/secondadd'));
 		}
 
-		return $this->error('添加失败！');
+		return $this->error('保存失败！');
 	}
 }
