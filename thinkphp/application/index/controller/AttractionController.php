@@ -19,7 +19,7 @@ class AttractionController extends Controller {
     
     public function add() {
         $article_id = Request::instance()->param('id');
-        $this->assign('attractionid',$article_id);
+        $this->assign('article_id',$article_id);
         return $this->fetch();
     }
 

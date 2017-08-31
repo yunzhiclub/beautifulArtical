@@ -33,6 +33,15 @@ class ArticleController extends Controller {
     	$Article = new Article;
     	$Article->title = $title;
     	$Article->summery = $summary;
+        // 获取文件
+        $file = request()->file('image');
+        if(is_null($file)){
+            $this->error('请插入图片',url('firstadd'));
+        }
+        // 保存文件，返回路径
+        $image = Common::uploadImage($file);
+        $Article->cover = $image;
+        // 判断是否保存
     	$judgment = $Article->save();
     	if($judgment){
     		$this->success('success',url('secondadd',['id'=>$Article->id]));
@@ -45,27 +54,24 @@ class ArticleController extends Controller {
     	$Article = Article::get($id);
     	$this->assign('title', $Article->title);
     	$this->assign('summery', $Article->summery);
+        $this->assign('cover', $Article->cover);
     	$this->assign('id', $id);
-        // 返回景点添加的信息
-        //$attractionid = Request::instance()->param('attractionid/d');
-        $Attraction = Attraction::all();
-        // $this->assign('attractiontitle', $Attraction->title);
-        // $this->assign('attractioncontent', $Attraction->content);
-        // $this->assign('attractionimage', $Attraction->image);
+        // 根据权重排序
+        $Attraction = Attraction::order('weight')->select();
+        
         $this->assign('attraction', $Attraction);
-        var_dump($Attraction);
+
     	return $this->fetch();
     }
     public function addsecond(){
     	$judgment = 0;
     	$id = Request::instance()->param('id/d');
     	$Article = Article::get($id);
-    	$file = request()->file('image');
-    	$image = Common::uploadImage($file);
-    	$Article->cover = $image;
+        // 添加订制师，报价，景点，段落的信息
     	$judgment = $Article->save();
     	if($judgment){
     		$this->success('success',url('index'));
     	}
+        $this->error('失败',url('index'));
     }
 }
