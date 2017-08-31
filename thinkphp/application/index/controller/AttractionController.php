@@ -19,7 +19,7 @@ class AttractionController extends Controller {
     
     public function add() {
         $article_id = Request::instance()->param('id');
-        $this->assign('id',$article_id);
+        $this->assign('article_id',$article_id);
         return $this->fetch();
     }
 
@@ -49,16 +49,16 @@ class AttractionController extends Controller {
         // 图片处理
         $file = request()->file('image');
         if(is_null($file)) {
-            return $this->error('请上传图片', url('add'));
+            return $this->error('请上传图片', url('add?id='.$article_id));
         }
         $image = Common::uploadImage($file);
 
         // 景点处理
         $attraction = new Attraction();
         if(!$attraction->saveAttraction($title, $content, $name, $meal, $car, $guide, $image, $hotel, $article_id)) {
-            return $this->error('保存失败', url('add'));
+            return $this->error('保存失败', url('add?id='.$article_id));
         } else {
-            return $this->success('保存成功', url('Article/secondadd'));
+            return $this->success('保存成功', url('Article/secondadd?id='.$article_id));
         }
     }
 }
