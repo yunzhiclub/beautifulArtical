@@ -54,6 +54,14 @@ class Attraction extends Model {
         return true;
     }
 
+    public function checkImageIsNull() {
+        if(is_null($this->image)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public static function getNullAttraction() {
         $attraction = new Attraction();
         $attraction->id = null;

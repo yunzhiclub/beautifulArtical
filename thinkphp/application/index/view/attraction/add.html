@@ -63,13 +63,11 @@
                 </div>
                 <div class="form-group">
                     <label>图片</label>
-                    {php}
-                        if(is_null($attraction->image)){
-                            echo '<input type="file" name="image">';
-                        } else {
-                            echo '<img src="./{$attraction->image}" style="height: 100px; width: 180px;">';
-                        }
-                    {/php}
+                    {eq name="$attraction->checkImageIsNull()" value="true"}
+                        <input type="file" name="image">
+                    {else /}
+                        <img src="__PUBLIC__/uploads/{$attraction->image}" style="height: 100px; width: 180px;">
+                    {/eq}
                 </div>
                 <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-ok"></span>&nbsp;完成</button>
             </form>
