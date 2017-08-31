@@ -23,7 +23,7 @@ class ArticleController extends Controller {
 	}
     // 返回firstadd界面
     public function firstadd(){
-    	
+
     	return $this->fetch();
     }
     // firstadd界面完成后触发时间
