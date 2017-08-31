@@ -19,7 +19,7 @@ class AttractionController extends Controller {
     
     public function add() {
         $article_id = Request::instance()->param('id');
-        $this->assign('id',$article_id);
+        $this->assign('attractionid',$article_id);
         return $this->fetch();
     }
 
@@ -53,7 +53,7 @@ class AttractionController extends Controller {
         if(!$attractionModel->saveAttraction($title, $content, $name, $meal, $car, $guide, $image, $hotel, $article_id)) {
             return $this->error('保存失败', url('add'));
         } else {
-            return $this->success('保存成功', url('Article/add'));
+            return $this->success('保存成功', url('Article/secondadd'));
         }
     }
 }
