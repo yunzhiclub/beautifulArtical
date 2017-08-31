@@ -19,8 +19,12 @@ class AttractionModel {
         $attraction->guide = $guide;
         $attraction->image = $image;
         $attraction->weight = Attraction::where('article_id', '=', $article_id)->count()+1;
-        $attraction->hotel_id = $hotel->id;
         $attraction->article_id = $article_id;
+
+        if(!is_null($hotel)){
+            $attraction->hotel_id = $hotel->id;
+        }
+
         if(!$attraction->save()) {
             return false;
         } else {

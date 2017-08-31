@@ -38,22 +38,27 @@ class AttractionController extends Controller {
 
         $article_id = Request::instance()->param('id');
 
-        $file = request()->file('image');
+        // 酒店处理
+        if($hotelName || $hotelCity || $hotelStarLevel || $hotelRemark) {
+            $hotel = new Hotel();
+            $hotel = $hotel->saveHotel($hotelName,$hotelCity,$hotelStarLevel,$hotelRemark);
+        } else {
+            $hotel = null;
+        }
 
+        // 图片处理
+        $file = request()->file('image');
         if(is_null($file)) {
             return $this->error('请上传图片', url('add'));
         }
-
         $image = Common::uploadImage($file);
 
-        $hotelModel = new HotelModel();
-        $hotel = $hotelModel->saveHotel($hotelName,$hotelCity,$hotelStarLevel,$hotelRemark);
-
+        // 景点处理
         $attractionModel = new AttractionModel();
         if(!$attractionModel->saveAttraction($title, $content, $name, $meal, $car, $guide, $image, $hotel, $article_id)) {
             return $this->error('保存失败', url('add'));
         } else {
-            return $this->success('保存成功', url('Article/add'));
+            return $this->success('保存成功', url('Article/secondadd'));
         }
     }
 }
