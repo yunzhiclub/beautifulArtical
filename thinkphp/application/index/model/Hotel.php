@@ -32,8 +32,10 @@ class Hotel extends Model {
     public function deleteHotel($id) {
         $hotel = Hotel::get($id);
         if(!$hotel->delete()) {
-            return $hotel->getError();
+            return false;
         }
+
+        return true;
     }
 
     public static function getNullHotel() {

@@ -125,4 +125,13 @@ class AttractionController extends Controller {
 
         return $this->success('更新成功');
     }
+
+    public function delete() {
+        $attractionId = Request::instance()->param('attractionId');
+        $attraction = new Attraction();
+        if(!$attraction->deleteAttraction($attractionId)) {
+            return $this->error('删除失败',url('article/add'));
+        }
+        return $this->success('删除成功',url('article/add'));
+    }
 }

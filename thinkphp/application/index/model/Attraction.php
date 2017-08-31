@@ -38,6 +38,22 @@ class Attraction extends Model {
         $attraction->saveAttraction($title, $content, $name, $meal, $car, $guide, $image, $hotel, $article_id);
     }
 
+    public function deleteAttraction($id) {
+        $attraction = Attraction::get($id);
+        $hotelId = $attraction->hotel_id;
+
+        if(!$attraction->delete()) {
+            return false;
+        }
+        if(!is_null($hotelId)) {
+            $hotel = new Hotel();
+            if(!$hotel->deleteHotel($hotelId)){
+                return false;
+            }
+        }
+        return true;
+    }
+
     public static function getNullAttraction() {
         $attraction = new Attraction();
         $attraction->id = null;
