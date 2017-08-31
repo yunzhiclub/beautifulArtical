@@ -54,8 +54,8 @@ class AttractionController extends Controller {
         $image = Common::uploadImage($file);
 
         // 景点处理
-        $attractionModel = new AttractionModel();
-        if(!$attractionModel->saveAttraction($title, $content, $name, $meal, $car, $guide, $image, $hotel, $article_id)) {
+        $attraction = new Attraction();
+        if(!$attraction->saveAttraction($title, $content, $name, $meal, $car, $guide, $image, $hotel, $article_id)) {
             return $this->error('保存失败', url('add'));
         } else {
             return $this->success('保存成功', url('Article/secondadd'));

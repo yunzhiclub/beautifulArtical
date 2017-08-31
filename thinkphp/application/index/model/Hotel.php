@@ -12,7 +12,7 @@ use think\Model;
 
 class Hotel extends Model {
     public function saveHotel($name, $city, $starLevel, $remark) {
-        $this->name = $name;
+        $this->designation = $name;
         $this->city = $city;
         $this->star_level = $starLevel;
         $this->remark = $remark;
