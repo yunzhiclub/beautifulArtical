@@ -11,7 +11,8 @@ use app\index\model\Common;
  * @version $Id$
  */
 
-class Paragraph extends Model {
+class Paragraph extends Model 
+{
     /**
      * @param $className 类名
      * @param $keyWords  关键字
@@ -41,10 +42,6 @@ class Paragraph extends Model {
     	// 保存图片路径
     	$this->image = $image;
 
-    	if ($this->save()) {
-    		// $this->success('保存成功！', url('article/add'));
-    	}
-
-    	// return $this->error('保存失败！');
+    	return $this->save();
     }
 }

@@ -14,18 +14,22 @@ use app\index\model\Article;
  */
 
 class ParagraphController extends Controller {
-	public function index(){
+	public function index()
+	{
 		$article_id = Request::instance()->param('id');
         $this->assign('id',$article_id);
 
         return $this->fetch();
 	}
-	public function add(){
+	public function add()
+	{
 		$data = Request::instance()->post();
 		$articleId = Request::instance()->param('article_id');
 		$paragraph = new Paragraph();
-		$paragraph->saveParagraph($data, $articleId);
-		return ;
+		if ($paragraph->saveParagraph($data, $articleId)) {
+			return $this->success('保存成功！', url('article/secondadd'));
+		}
+		return $this->error('保存失败！');
 	}
 
 }
