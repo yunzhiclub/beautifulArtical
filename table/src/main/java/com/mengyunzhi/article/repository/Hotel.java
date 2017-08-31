@@ -9,7 +9,7 @@ public class Hotel {
     private Long id;
 
     // 酒店名称
-    private String name;
+    private String designation;
 
     // 所在城市
     private String city;
@@ -23,8 +23,8 @@ public class Hotel {
     public Hotel() {
     }
 
-    public Hotel(String name, String city, String starLevel, String remark) {
-        this.name = name;
+    public Hotel(String designation, String city, String starLevel, String remark) {
+        this.designation = designation;
         this.city = city;
         this.starLevel = starLevel;
         this.remark = remark;
@@ -38,12 +38,12 @@ public class Hotel {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getDesignation() {
+        return designation;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setDesignation(String designation) {
+        this.designation = designation;
     }
 
     public String getCity() {
@@ -74,7 +74,7 @@ public class Hotel {
     public String toString() {
         return "Hotel{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", designation='" + designation + '\'' +
                 ", city='" + city + '\'' +
                 ", starLevel='" + starLevel + '\'' +
                 ", remark='" + remark + '\'' +
