@@ -5,6 +5,8 @@ use think\Controller;
 use think\Request;
 use app\index\model\Article;
 use app\index\model\Common;
+use app\index\model\Attraction;
+
 
 /**
  * 
@@ -19,11 +21,12 @@ class ArticleController extends Controller {
 	{
 		return $this->fetch();
 	}
-
+    // 返回firstadd界面
     public function firstadd(){
     	
     	return $this->fetch();
     }
+    // firstadd界面完成后触发时间
     public function addfirst(){
     	$title = Request::instance()->post('title');
     	$summary = Request::instance()->post('summary');
@@ -35,12 +38,22 @@ class ArticleController extends Controller {
     		$this->success('success',url('secondadd',['id'=>$Article->id]));
     	}
     }
+    // 返回firstadd界面
     public function secondadd(){
+        // 返回firstadd界面添加的信息
     	$id = Request::instance()->param('id/d');
     	$Article = Article::get($id);
     	$this->assign('title', $Article->title);
     	$this->assign('summery', $Article->summery);
     	$this->assign('id', $id);
+        // 返回景点添加的信息
+        //$attractionid = Request::instance()->param('attractionid/d');
+        $Attraction = Attraction::all();
+        // $this->assign('attractiontitle', $Attraction->title);
+        // $this->assign('attractioncontent', $Attraction->content);
+        // $this->assign('attractionimage', $Attraction->image);
+        $this->assign('attraction', $Attraction);
+        var_dump($Attraction);
     	return $this->fetch();
     }
     public function addsecond(){
