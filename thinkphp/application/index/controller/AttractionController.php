@@ -117,11 +117,12 @@ class AttractionController extends Controller {
         }
 
         // 图片处理
+        $attraction = Attraction::get($attractionId);
         $file = request()->file('image');
         if(!is_null($file)) {
+            Common::deleteImage('__PUBLIC__/uploads/{$attraction->image}');
             $image = Common::uploadImage($file);
         } else {
-            $attraction = Attraction::get($attractionId);
             $image = $attraction->image;
         }
 
