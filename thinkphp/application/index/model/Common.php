@@ -25,9 +25,11 @@ class Common
             return $file->getError();
         }
     }
+
+
     // 删除指定文件夹下的图片
-    public static function deleteImage($url)
+    public static function deleteImage($imagePath)
     {
-        unlink($url);
+        unlink($imagePath);
     }
 }
