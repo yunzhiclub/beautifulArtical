@@ -32,6 +32,7 @@ class Paragraph extends Model
     {
 		$this->title = $data['title'];
 		$this->content = $data['content'];
+        $this->is_before_attraction = (boolean)$data['is_before_attraction'];
 		$this->article_id = $articleId['article_id'];
 		$this->weight = $this->getWeight("weight", $this->article_id);
 		
