@@ -62,7 +62,7 @@
                     {eq name="$attraction->checkImageIsNull()" value="true"}
                         <input type="file" name="image">
                     {else /}
-                        <img src="__PUBLIC__/uploads/{$attraction->image}" style="height: 100px; width: 180px;">
+                        <img src="{:__ROOT__}/upload/{$attraction->image}" style="height: 100px; width: 180px;">
                         <input type="file" name="image" style="display: inline">
                     {/eq}
                 </div>

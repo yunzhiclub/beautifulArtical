@@ -3,7 +3,6 @@ namespace app\index\service;
 
 use app\index\model\Article;
 use app\index\model\Common;
-
 /**
  * 
  * @authors zhuchenshu
@@ -22,10 +21,8 @@ class Articleservice {
             if(is_null($file)){
                 $this->success('你没有更改图片',url('secondadd',['id'=>$Article->id]));
             }
-            // 删除之前保存的图片
-            // if(is_file(__PUBLIC__/uploads/$Article->image)){
-            //     Common::deleteImage(__PUBLIC__/uploads/$Article->image);
-            // }
+            //删除之前保存的图片
+            //Common::deleteImage('D:/xampp/htdocs/'.__ROOT__.'/upload/ '.$Article->cover);
             return $Article;
         }
     }
