@@ -1,4 +1,4 @@
-    <?php
+<?php
 namespace app\index\controller;
 
 use think\Controller;
@@ -53,7 +53,7 @@ class ArticleController extends Controller {
     	$Article->cover = $image;
     	$judgment = $Article->save();
     	if($judgment){
-    		$this->success('success',url('index'));
+    		$this->success('success',url('Article/index'));
     	}
     }
 }

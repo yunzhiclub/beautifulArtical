@@ -12,12 +12,14 @@ public class Plan {
     private Long peopleNum; // 出行人数
     private String currency; // 币种
     private Integer totalCost; // 总费用
+    private Date lastPayTime; // 最晚付款时间
 
-    public Plan(Date travelDate, Long peopleNum, String currency, Integer totalCost) {
+    public Plan(Date travelDate, Long peopleNum, String currency, Integer totalCost, Date lastPayTime) {
         this.travelDate = travelDate;
         this.peopleNum = peopleNum;
         this.currency = currency;
         this.totalCost = totalCost;
+        this.lastPayTime = lastPayTime;
     }
     public Plan(){
 
@@ -63,6 +65,14 @@ public class Plan {
         this.totalCost = totalCost;
     }
 
+    public Date getLastPayTime() {
+        return lastPayTime;
+    }
+
+    public void setLastPayTime(Date lastPayTime) {
+        this.lastPayTime = lastPayTime;
+    }
+
     @Override
     public String toString() {
         return "Plan{" +
@@ -71,6 +81,7 @@ public class Plan {
                 ", peopleNum=" + peopleNum +
                 ", currency='" + currency + '\'' +
                 ", totalCost=" + totalCost +
+                ", lastPayTime=" + lastPayTime +
                 '}';
     }
 }
