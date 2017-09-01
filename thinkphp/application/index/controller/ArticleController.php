@@ -7,6 +7,7 @@ use app\index\model\Article;
 use app\index\model\Common;
 use app\index\model\Attraction;
 use app\index\model\Plan;
+use app\index\model\Paragraph;
 use app\index\service\Articleservice;
 
 /**
@@ -49,7 +50,7 @@ class ArticleController extends Controller {
         $summary = Request::instance()->post('summary');
         $file = request()->file('image');
         // 判断是否是重写 
-        $Article = Articleservice::ifedit($id);
+        $Article = Articleservice::ifedit($id,$file);
         $Article->title = $title;
         $Article->summery = $summary;
         // 获取文件 
@@ -65,7 +66,7 @@ class ArticleController extends Controller {
         	$this->success('success',url('secondadd',['id'=>$Article->id]));
         }
     }
-    // 返回firstadd界面
+    // 返回secondadd界面
     public function secondadd(){
         // 返回firstadd界面添加的信息
     	$id = Request::instance()->param('id/d');
@@ -74,10 +75,17 @@ class ArticleController extends Controller {
     	$this->assign('summery', $Article->summery);
         $this->assign('cover', $Article->cover);
     	$this->assign('id', $id);
-        // 根据权重排序
+        // 根据景点权重排序
         $Attraction = Attraction::order('weight')->select();
         $this->assign('attraction', $Attraction);
+        // 段落根据权重排序
+        $ParagraphUp = Paragraph::where('is_before_attraction',1)->order('weight')->select();
+        $ParagraphDown = Paragraph::where('is_before_attraction',0)->order('weight')->select();
+        // $Paragraph = Paragraph::order('weight')->select();
+        $this->assign('paragraphup', $ParagraphUp);
+        $this->assign('paragraphdown', $ParagraphDown);
     	return $this->fetch();
+
     }
     public function addsecond(){
     	$judgment = 0;
