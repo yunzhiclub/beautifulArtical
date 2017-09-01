@@ -18,7 +18,7 @@ class Common
      */
     public static function uploadImage($file)
     {
-        $info = $file->move(ROOT_PATH . 'public' . DS . 'uploads');
+        $info = $file->move(PUBLIC_PATH);
         if ($info) {
             return $info->getSaveName();
         } else {
