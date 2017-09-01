@@ -56,6 +56,9 @@ class ArticleController extends Controller {
                 $this->success('你没有更改图片',url('secondadd',['id'=>$Article->id]));
             }
             // 删除之前保存的图片
+            if(is_file(#)){
+                Common::deleteImage(#);
+            }
         }
         	$Article->title = $title;
         	$Article->summery = $summary;
