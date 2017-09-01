@@ -4,16 +4,17 @@
 	<div class="col-md-10 col-md-offset-1" style="margin-top: 60px;">
 		<h2><span class="glyphicon glyphicon-edit"></span>&nbsp;添加段落</h2>
 		<br>
-		<form method="post" action="{:url('add?id='.$id)}" enctype="multipart/form-data">
+		{php}$action = request()->action() === 'add' ? 'save' : 'update';{/php}
+		<form method="post" action="{:url($action)}" enctype="multipart/form-data">
 			<div class="form-group">
 				<label for="title">标题</label>
-				<input type="text" class="form-control" placeholder="标题" name="title" id="title">
+				<input type="text" class="form-control" placeholder="标题" name="title" id="title" value="{$Paragraph->getData('title')}">
 			</div>
 			<div class="form-group">
 				<label>段落</label>
 				<!-- 加载编辑器的容器 -->
 				<script id="container" name="content" type="text/plain">
-					这里写你的初始化内容
+					{$Paragraph->getData('content')}
 				</script>
 				<!-- 配置文件 -->
 				<script type="text/javascript" src="/beautifulArtical/thinkphp/public/style/js/paragraphController/ueditor.config.js"></script>
@@ -33,6 +34,10 @@
 			<div class="form-group">
 				<label for="exampleInputFile">图片</label>
 				<input type="file" id="exampleInputFile" name="image">
+				{eq name="Paragraph->image" value=""}
+				{else/}
+				<img src="/beautifulArtical/thinkphp/public/uploads/{$Paragraph->image}" style="height: 100px; width: 180px; " alt="无图" >
+				{/eq}
 			</div>
 			<button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-ok"></span>&nbsp;完成</button>
 		</form>

@@ -44,4 +44,27 @@ class Paragraph extends Model
 
     	return $this->save();
     }
+
+    /**
+     * 更新段落信息
+     * @param  $data         接收的表单信息
+     * @return boolean       更新成功返回true，否则返回false
+     */
+    public function updateParagraph($data)
+    {
+        $this->title = $data['title'];
+        $this->content = $data['content'];
+        
+        // 传入图片
+        $file = request()->file('image');
+        // 返回图片路径
+        $image = Common::uploadImage($file);
+        // 保存图片路径
+        $this->image = $image;
+
+        if ($this->save()) {
+            return true;
+        }
+        return false;
+    }
 }
