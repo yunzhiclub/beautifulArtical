@@ -16,7 +16,7 @@ use app\index\model\Article;
 class ParagraphController extends Controller {
 	public function index()
 	{
-		$article_id = Request::instance()->param('id');
+		$article_id = Request::instance()->param('articleId');
         $this->assign('id',$article_id);
 
         return $this->fetch();
@@ -27,7 +27,7 @@ class ParagraphController extends Controller {
 		$articleId = Request::instance()->param('article_id');
 		$paragraph = new Paragraph();
 		if ($paragraph->saveParagraph($data, $articleId)) {
-			return $this->success('保存成功！', url('article/secondadd'));
+			return $this->success('保存成功！', url('article/secondadd?id='.$articleId));
 		}
 		return $this->error('保存失败！');
 	}
