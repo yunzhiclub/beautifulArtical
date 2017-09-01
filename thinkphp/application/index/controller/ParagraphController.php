@@ -65,12 +65,12 @@ class ParagraphController extends Controller {
 	public function edit()
 	{
 		// 获取id
-		$id = Request::instance()->param('id/d');
+		$id = Request::instance()->param(26);
 		
-		if (is_null($id)) {
-			return $this->error('未获取到ID');
-		}
-		
+		// if (is_null($id)) {
+		// 	return $this->error('未获取到ID');
+		// }
+
 		// 根据id获取对象
 		$Paragraph = Paragraph::get($id);
 		// 将对象传给v层
@@ -81,9 +81,11 @@ class ParagraphController extends Controller {
 
 	public function update()
 	{
-		$data = Request::instance()->post('id/d');
-		$Paragraph = new Paragraph();
-		if ($Paragraph->updateParagraph($data)) {
+		$data = Request::instance()->post();
+		$id = Request::instance()->param('id');
+
+		$Paragraph = Paragraph::get($id);
+		if ($Paragraph->updateParagraph($data, $id)) {
 			return $this->success('保存成功！', url('article/secondadd'));
 		}
 

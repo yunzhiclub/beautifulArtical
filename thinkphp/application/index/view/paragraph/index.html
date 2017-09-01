@@ -5,7 +5,7 @@
 		<h2><span class="glyphicon glyphicon-edit"></span>&nbsp;添加段落</h2>
 		<br>
 		{php}$action = request()->action() === 'index' ? 'add' : 'update';{/php}
-		<form method="post" action="{:url($action)}" enctype="multipart/form-data">
+		<form method="post" action="{:url($action , ['id' => $Paragraph->getData('id')])}" enctype="multipart/form-data">
 			<div class="form-group">
 				<label for="title">标题</label>
 				<input type="text" class="form-control" placeholder="标题" name="title" id="title" value="{$Paragraph->getData('title')}">
@@ -33,7 +33,7 @@
 			</div>
 			<div class="form-group">
 				<label for="exampleInputFile">图片</label>
-				<input type="file" id="exampleInputFile" name="image">
+				<input type="file" id="exampleInputFile" name="image" value="{$Paragraph->getData('image')}">
 				{eq name="Paragraph->image" value=""}
 				{else/}
 				<img src="/beautifulArtical/thinkphp/public/uploads/{$Paragraph->image}" style="height: 100px; width: 180px; " alt="无图" >
@@ -43,12 +43,12 @@
             <label for="">是否位于景点前</label>
             <div class="radio">
                 <label>
-                    <input type="radio" name="is_before_attraction" value="1"> 是
+                    <input type="radio" name="is_before_attraction" value="1" checked> 是
                 </label>
             </div>
             <div class="radio">
                 <label>
-                    <input type="radio" name="is_before_attraction" value="0"> 否
+                    <input type="radio" name="is_before_attraction" value="0" {eq name="Paragraph->getData('is_before_attraction')" value="0" } checked="checked"{/eq}> 否
                 </label>
             </div>
         </div>
