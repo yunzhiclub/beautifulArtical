@@ -7,6 +7,8 @@ use app\index\model\Article;
 use app\index\model\Common;
 use app\index\model\Attraction;
 use app\index\model\Plan;
+use app\index\model\Paragraph;
+use app\index\service\Articleservice;
 
 /**
  * 
@@ -24,6 +26,7 @@ class ArticleController extends Controller {
     // 返回firstadd界面
     public function firstadd(){
         $id = Request::instance()->param('id/d');
+        // 判断是否为重写界面
         if( is_null($id)){
             $this->assign('title', '');
             $this->assign('summery', '');
@@ -47,33 +50,23 @@ class ArticleController extends Controller {
         $summary = Request::instance()->post('summary');
         $file = request()->file('image');
         // 判断是否是重写 
-        if(is_null($id)){
-        	$Article = new Article;
-        }else{
-            $Article = Article::get($id);
-            // 判断图片是否更改
-            if(is_null($file)){
-                $this->success('你没有更改图片',url('secondadd',['id'=>$Article->id]));
-            }
-            // 删除之前保存的图片
+        $Article = Articleservice::ifedit($id,$file);
+        $Article->title = $title;
+        $Article->summery = $summary;
+        // 获取文件 
+        if(is_null($file)){
+            $this->error('请插入图片',url('firstadd'));
+         }
+         // 保存文件，返回路径
+        $image = Common::uploadImage($file);
+        $Article->cover = $image;
+        // 判断是否保存
+        $judgment = $Article->save();
+        if($judgment){
+        	$this->success('success',url('secondadd',['id'=>$Article->id]));
         }
-        	$Article->title = $title;
-        	$Article->summery = $summary;
-            // 获取文件
-            
-            if(is_null($file)){
-                $this->error('请插入图片',url('firstadd'));
-            }
-            // 保存文件，返回路径
-            $image = Common::uploadImage($file);
-            $Article->cover = $image;
-            // 判断是否保存
-        	$judgment = $Article->save();
-        	if($judgment){
-        		$this->success('success',url('secondadd',['id'=>$Article->id]));
-        	}
     }
-    // 返回firstadd界面
+    // 返回secondadd界面
     public function secondadd(){
         // 返回firstadd界面添加的信息
     	$id = Request::instance()->param('id/d');
@@ -82,12 +75,17 @@ class ArticleController extends Controller {
     	$this->assign('summery', $Article->summery);
         $this->assign('cover', $Article->cover);
     	$this->assign('id', $id);
-        // 根据权重排序
+        // 根据景点权重排序
         $Attraction = Attraction::order('weight')->select();
-        
         $this->assign('attraction', $Attraction);
-
+        // 将段落按在景点的上下顺序分成两个类，并根据权重排序
+        $ParagraphUp = Paragraph::where('is_before_attraction',1)->order('weight')->select();
+        $ParagraphDown = Paragraph::where('is_before_attraction',0)->order('weight')->select();
+        // $Paragraph = Paragraph::order('weight')->select();
+        $this->assign('paragraphup', $ParagraphUp);
+        $this->assign('paragraphdown', $ParagraphDown);
     	return $this->fetch();
+
     }
     public function addsecond(){
     	$judgment = 0;
