@@ -7,6 +7,7 @@ use app\index\model\Article;
 use app\index\model\Common;
 use app\index\model\Attraction;
 use app\index\model\Plan;
+use app\index\service\Articleservice;
 
 /**
  * 
@@ -24,6 +25,7 @@ class ArticleController extends Controller {
     // 返回firstadd界面
     public function firstadd(){
         $id = Request::instance()->param('id/d');
+        // 判断是否为重写界面
         if( is_null($id)){
             $this->assign('title', '');
             $this->assign('summery', '');
@@ -47,31 +49,21 @@ class ArticleController extends Controller {
         $summary = Request::instance()->post('summary');
         $file = request()->file('image');
         // 判断是否是重写 
-        if(is_null($id)){
-        	$Article = new Article;
-        }else{
-            $Article = Article::get($id);
-            // 判断图片是否更改
-            if(is_null($file)){
-                $this->success('你没有更改图片',url('secondadd',['id'=>$Article->id]));
-            }
-            // 删除之前保存的图片
+        $Article = Articleservice::ifedit($id);
+        $Article->title = $title;
+        $Article->summery = $summary;
+        // 获取文件 
+        if(is_null($file)){
+            $this->error('请插入图片',url('firstadd'));
+         }
+         // 保存文件，返回路径
+        $image = Common::uploadImage($file);
+        $Article->cover = $image;
+        // 判断是否保存
+        $judgment = $Article->save();
+        if($judgment){
+        	$this->success('success',url('secondadd',['id'=>$Article->id]));
         }
-        	$Article->title = $title;
-        	$Article->summery = $summary;
-            // 获取文件
-            
-            if(is_null($file)){
-                $this->error('请插入图片',url('firstadd'));
-            }
-            // 保存文件，返回路径
-            $image = Common::uploadImage($file);
-            $Article->cover = $image;
-            // 判断是否保存
-        	$judgment = $Article->save();
-        	if($judgment){
-        		$this->success('success',url('secondadd',['id'=>$Article->id]));
-        	}
     }
     // 返回firstadd界面
     public function secondadd(){
@@ -84,9 +76,7 @@ class ArticleController extends Controller {
     	$this->assign('id', $id);
         // 根据权重排序
         $Attraction = Attraction::order('weight')->select();
-        
         $this->assign('attraction', $Attraction);
-
     	return $this->fetch();
     }
     public function addsecond(){
