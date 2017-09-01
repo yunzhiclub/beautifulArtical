@@ -4,6 +4,7 @@ use think\Request;
 use think\Controller;
 use app\index\model\Detail;
 use app\index\model\Plan;
+use app\index\model\Article;
 
 
 class DetailController extends Controller
@@ -16,15 +17,20 @@ class DetailController extends Controller
 
 	public function add()
 	{
+		$articleId = Request::instance()->param('id');
+		$this->assign('id', $articleId);
         return $this->fetch();
 	}
 
 
 	public function save()
 	{
+		$Article = new Article();
+		$articleId = Request::instance()->param('id');
 
 		$data = Request::instance()->post();
 		$Plan = new Plan();
+		$Plan->article_id = $articleId;
 		$Plan->travel_date = $data['travelDate'];
         $Plan->people_num = $data['peopleNum'];
         $Plan->currency = $data['currency'];
@@ -62,6 +68,6 @@ class DetailController extends Controller
         if (!$Detail1->save()) {
             return $this->error('数据添加错误：' . $Detail->getError());
         }
-        return $this->success('success', url('Article/secondadd?planId='.$Plan->id));
+        return $this->success('success', url('Article/secondadd', ["id" => $articleId]));
 	}
 }

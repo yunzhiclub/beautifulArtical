@@ -9,9 +9,5 @@ use think\Model;
  */
 class Plan extends Model
 {
-    private $Article;
-    public function Article() 
-    {
-    	return $this->belongsTo('teacher');
-    }  
+
 }
