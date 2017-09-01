@@ -78,7 +78,7 @@ class ArticleController extends Controller {
         // 根据景点权重排序
         $Attraction = Attraction::order('weight')->select();
         $this->assign('attraction', $Attraction);
-        // 段落根据权重排序
+        // 将段落按在景点的上下顺序分成两个类，并根据权重排序
         $ParagraphUp = Paragraph::where('is_before_attraction',1)->order('weight')->select();
         $ParagraphDown = Paragraph::where('is_before_attraction',0)->order('weight')->select();
         // $Paragraph = Paragraph::order('weight')->select();
