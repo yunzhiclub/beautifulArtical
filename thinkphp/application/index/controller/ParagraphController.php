@@ -31,5 +31,16 @@ class ParagraphController extends Controller {
 		}
 		return $this->error('保存失败！');
 	}
+	public function delete()
+	{
+		$id = Request::instance()->param('11');
 
+		$Paragraph = Paragraph::get($id);
+
+		if ($Paragraph->delete()) {
+			return $this->success('删除成功！');
+		}
+
+		return $this->error('删除失败！');
+	}
 }
