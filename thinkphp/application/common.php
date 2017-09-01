@@ -13,6 +13,8 @@
 namespace app;
 
 //初始化
+use function PHPSTORM_META\elementType;
+
 Common::init();
 
 class Common{
@@ -35,5 +37,9 @@ class Common{
             $root = '';
         }
         define('__ROOT__', $root);
+
+        // 定义常量PUBLIC_PATH
+        $publicPath = realpath(ROOT_PATH) . DS . 'public' . '/upload';
+        define('PUBLIC_PATH' , $publicPath);
     }
 }
