@@ -65,16 +65,16 @@ class Paragraph extends Model
         $this->is_before_attraction = (boolean)$data['is_before_attraction'];
 
         // 获取文件 
-        if(is_null($file)){
-            $this->error('请插入图片',url('index'));
-         }
-         // 保存文件，返回路径
-        $image = Common::uploadImage($file);
-        $this->image = $image;
+        if(!is_null($file)){
+            // 保存文件，返回路径
+            $image = Common::uploadImage($file);
+            $this->image = $image;
 
-        if ($this->save()) {
-            return true;
+            if ($this->save()) {
+                return true;
+            }
         }
+         
         return false;
     }
 
@@ -87,7 +87,7 @@ class Paragraph extends Model
             $Paragraph = Paragraph::get($id);
             // 判断图片是否更改
             if(is_null($file)){
-                $this->success('你没有更改图片',url('secondadd',['id'=>$Article->id]));
+                return $Paragraph;
             }
             // 删除之前保存的图片
             // if(is_file(__PUBLIC__/uploads/$Paragraph->image)){

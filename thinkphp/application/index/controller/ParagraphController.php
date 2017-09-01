@@ -44,6 +44,7 @@ class ParagraphController extends Controller {
 	public function delete()
 	{
 		$id = Request::instance()->param('id');
+		$articleId = Request::instance()->param('article_id');
 
 		if (is_null($id)) {
 			return $this->error('未获取到ID');
