@@ -19,7 +19,17 @@ use app\index\service\Articleservice;
 
 class ArticleController extends Controller {
 
-	public function index()
+    protected $articleService = null;
+
+    //构造函数实例化ArticleService
+    function __construct(Request $request = null)
+    {
+        parent::__construct($request);
+        //实例化服务层
+        $this->articleService = new Articleservice();
+    }
+
+    public function index()
 	{
 		return $this->fetch();
 	}
@@ -44,26 +54,21 @@ class ArticleController extends Controller {
     }
     // firstadd界面完成后触发时间
     public function addfirst(){
-        
-        $id = Request::instance()->param('id/d');
-        $title = Request::instance()->post('title');
-        $summary = Request::instance()->post('summary');
-        $file = request()->file('image');
-        // 判断是否是重写 
-        $Article = Articleservice::ifedit($id,$file);
-        $Article->title = $title;
-        $Article->summery = $summary;
-        // 获取文件 
-        if(is_null($file)){
-            $this->error('请插入图片',url('firstadd'));
-         }
-         // 保存文件，返回路径
-        $image = Common::uploadImage($file);
-        $Article->cover = $image;
-        // 判断是否保存
-        $judgment = $Article->save();
-        if($judgment){
-        	$this->success('success',url('secondadd',['id'=>$Article->id]));
+
+        //接受参数
+        $param = Request::instance();
+
+        //调用service中的保存方法
+        $message =  $this->articleService->addOrEditAriticle($param);
+
+        //返回相应的界面
+        if ($message['status'] === 'success') {
+            //跳转成功的界面
+            $this->success($message['message'], url($message['route'], ['id' => $message['param']['id']]));
+
+        } else {
+            //跳转失败的界面
+            $this->error($message['message'], url($message['route']));
         }
     }
     // 返回secondadd界面
