@@ -32,4 +32,46 @@ class Attraction extends Model {
             return true;
         }
     }
+
+    public function updateAttraction($title, $content, $name, $meal, $car, $guide, $image, $hotel, $article_id, $id) {
+        $attraction = Attraction::get($id);
+        $attraction->saveAttraction($title, $content, $name, $meal, $car, $guide, $image, $hotel, $article_id);
+    }
+
+    public function deleteAttraction($id) {
+        $attraction = Attraction::get($id);
+        $hotelId = $attraction->hotel_id;
+
+        if(!$attraction->delete()) {
+            return false;
+        }
+        if(!is_null($hotelId)) {
+            $hotel = new Hotel();
+            if(!$hotel->deleteHotel($hotelId)){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public function checkImageIsNull() {
+        if(is_null($this->image)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static function getNullAttraction() {
+        $attraction = new Attraction();
+        $attraction->id = null;
+        $attraction->title = '';
+        $attraction->description = '';
+        $attraction->designation = '';
+        $attraction->meal = '';
+        $attraction->car = '';
+        $attraction->guide = '';
+        $attraction->image = null;
+        return $attraction;
+    }
 }
