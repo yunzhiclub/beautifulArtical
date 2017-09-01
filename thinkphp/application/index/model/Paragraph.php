@@ -33,7 +33,7 @@ class Paragraph extends Model
 		$this->title = $data['title'];
 		$this->content = $data['content'];
         $this->is_before_attraction = (boolean)$data['is_before_attraction'];
-		$this->article_id = $articleId['article_id'];
+		$this->article_id = $articleId;
 		$this->weight = $this->getWeight("weight", $this->article_id);
 		
 		// 传入图片
@@ -55,6 +55,7 @@ class Paragraph extends Model
     {
         $this->title = $data['title'];
         $this->content = $data['content'];
+        $this->is_before_attraction = (boolean)$data['is_before_attraction'];
         
         // 传入图片
         $file = request()->file('image');

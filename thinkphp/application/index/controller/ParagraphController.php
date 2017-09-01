@@ -16,16 +16,18 @@ use app\index\model\Article;
 class ParagraphController extends Controller {
 	public function index()
 	{
-		$article_id = Request::instance()->param('id');
-		if (is_null($article_id)) {
+		$articleId = Request::instance()->param('article_id');
+		$paragraphId = Request::instance()->param('id');
+		if (is_null($paragraphId)) {
 			$Paragraph = new Paragraph();
 			$Paragraph->id = 0;
 			$Paragraph->title = '';
 			$Paragraph->content = '';
 			$Paragraph->image = '';
+			$Paragraph->is_before_attraction = '';
 			$this->assign('Paragraph', $Paragraph);
 		}
-        $this->assign('id',$article_id);
+        $this->assign('id',$articleId);
 
         return $this->fetch();
 	}
@@ -41,7 +43,11 @@ class ParagraphController extends Controller {
 	}
 	public function delete()
 	{
-		$id = Request::instance()->param('11');
+		$id = Request::instance()->param('id');
+
+		if (is_null($id)) {
+			return $this->error('未获取到ID');
+		}
 
 		$Paragraph = Paragraph::get($id);
 
@@ -60,6 +66,11 @@ class ParagraphController extends Controller {
 	{
 		// 获取id
 		$id = Request::instance()->param('id/d');
+		
+		if (is_null($id)) {
+			return $this->error('未获取到ID');
+		}
+		
 		// 根据id获取对象
 		$Paragraph = Paragraph::get($id);
 		// 将对象传给v层
