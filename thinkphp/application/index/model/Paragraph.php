@@ -44,7 +44,11 @@ class Paragraph extends Model
     	// 保存图片路径
     	$this->image = $image;
 
-    	return $this->save();
+    	if ($this->save()) {
+            return true;
+        }
+
+        return false;
     }
 
     /**

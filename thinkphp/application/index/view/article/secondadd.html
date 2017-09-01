@@ -21,7 +21,7 @@
 		<div class="form-group">
 			<label for="TextInput">正文</label>
 			<span class="col-md-offset-1">
-				<a class="btn btn-primary btn-sm" href="{:url('Paragraph/index?article_id='.$id)}"><span class="glyphicon glyphicon-plus"></span>&nbsp;段落</a>&nbsp;&nbsp;
+				<a class="btn btn-primary btn-sm" href="{:url('Paragraph/index', ['article_id'=>'$id','id'=>''])}"><span class="glyphicon glyphicon-plus"></span>&nbsp;段落</a>&nbsp;&nbsp;
 				<a class="btn btn-primary btn-sm" href="{:url('Attraction/add?id='.$id)}"><span class="glyphicon glyphicon-plus"></span>&nbsp;景点</a>&nbsp;&nbsp;
 				<a class="btn btn-primary btn-sm" href="#"><span class="glyphicon glyphicon-plus"></span>&nbsp;方案报价</a>&nbsp;&nbsp;
 				<a class="btn btn-primary btn-sm" href="{:url('Contractor/add?id='.$id)}"><span class="glyphicon glyphicon-plus"></span>&nbsp;订制师</a>
@@ -43,7 +43,7 @@
 					</div>
 					<div class="row">
 						<div class="col-md-12" style="height: 40px; margin-top: 10px;">
-							<a class="btn btn-info btn-sm" href="{:url('Paragraph/edit?article_id='.$id)}"><span class="glyphicon glyphicon-pencil"></span>&nbsp;编辑</a>
+							<a class="btn btn-info btn-sm" href="{:url('Paragraph/edit,['article_id'=>'$id','id'=>$paragraph->id])}"><span class="glyphicon glyphicon-pencil"></span>&nbsp;编辑</a>
 							<a class="btn btn-danger btn-sm" href="{:url('Paragraph/delete', ['article_id'=>'$id','id'=>$paragraph->id])}"><span class="glyphicon glyphicon-trash"></span>&nbsp;删除</a>
 						</div>
 					</div>

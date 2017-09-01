@@ -14,6 +14,15 @@ use app\index\model\Article;
  */
 
 class ParagraphController extends Controller {
+	protected $paragraphService = null;
+
+    //构造函数实例化ArticleService
+    function __construct(Request $request = null)
+    {
+        parent::__construct($request);
+        //实例化服务层
+        $this->paragraphService = new Paragraphservice();
+    }
 	public function index()
 	{
 		$articleId = Request::instance()->param('article_id');
@@ -33,13 +42,21 @@ class ParagraphController extends Controller {
 	}
 	public function add()
 	{
-		$data = Request::instance()->post();
-		$articleId = Request::instance()->param('article_id');
-		$paragraph = new Paragraph();
-		if ($paragraph->saveParagraph($data, $articleId)) {
-			return $this->success('保存成功！', url('article/secondadd'));
+		// 接收数据
+		$param = Request::instance();
+
+		// 调用service层保存方法
+		$message = $this->paragraphService->addOrEditParagraph($param);
+
+		// 返回相应界面
+		if ($message['status'] === 'success') {
+			// 跳转保存成功界面
+			return $this->success($message['message'], url($message['route']));
+
+		} else {
+			// 跳转保存失败界面
+			return $this->error($message['message'], url($message['route']));
 		}
-		return $this->error('保存失败！');
 	}
 	public function delete()
 	{
@@ -66,14 +83,15 @@ class ParagraphController extends Controller {
 	public function edit()
 	{
 		// 获取id
-		$id = Request::instance()->param(26);
+		$articleId = Request::instance()->param('article_id');
+		$paragraphId = Request::instance()->param('id');
 		
-		// if (is_null($id)) {
-		// 	return $this->error('未获取到ID');
-		// }
+		if (is_null($paragraphId)) {
+			return $this->error('未获取到ID');
+		}
 
 		// 根据id获取对象
-		$Paragraph = Paragraph::get($id);
+		$Paragraph = Paragraph::get($paragraphId);
 		// 将对象传给v层
 		$this->assign('Paragraph', $Paragraph);
 		// 就收返回数据
@@ -82,14 +100,29 @@ class ParagraphController extends Controller {
 
 	public function update()
 	{
-		$data = Request::instance()->post();
-		$id = Request::instance()->param('id');
+		// 接收参数
+		$param = Request::instance();
 
-		$Paragraph = Paragraph::get($id);
-		if ($Paragraph->updateParagraph($data, $id)) {
-			return $this->success('保存成功！', url('article/secondadd'));
+		// 调用Service层保存方法
+		$message = $this->paragraphService->addOrEditParagraph($param);
+
+		// 返回保存结果
+		if ($message['status'] === 'success') {
+			// 返回保存成功界面
+			return $this->success($message['message'], url($message['route']));
+		} else {
+			// 返回保存失败界面
+			return $this->error($message['message'], url($message['route']));
 		}
 
-		return $this->error('保存失败！', url('article/secondadd'));
+		// $data = Request::instance()->post();
+		// $id = Request::instance()->param('id');
+
+		// $Paragraph = Paragraph::get($id);
+		// if ($Paragraph->updateParagraph($data, $id)) {
+		// 	return $this->success('保存成功！', url('article/secondadd'));
+		// }
+
+		// return $this->error('保存失败！', url('article/secondadd'));
 	}
 }
