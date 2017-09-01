@@ -12,7 +12,7 @@ use app\index\model\Common;
  */
 
 class Articleservice {
-    public static function ifedit($id){
+    public static function ifedit($id,$file){
     	 if(is_null($id)){
         	$Article = new Article;
         	return $Article;
@@ -23,9 +23,9 @@ class Articleservice {
                 $this->success('你没有更改图片',url('secondadd',['id'=>$Article->id]));
             }
             // 删除之前保存的图片
-            if(is_file(__PUBLIC__/uploads/$Article->image)){
-                Common::deleteImage(__PUBLIC__/uploads/$Article->image);
-            }
+            // if(is_file(__PUBLIC__/uploads/$Article->image)){
+            //     Common::deleteImage(__PUBLIC__/uploads/$Article->image);
+            // }
             return $Article;
         }
     }
