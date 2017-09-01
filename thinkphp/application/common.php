@@ -10,3 +10,30 @@
 // +----------------------------------------------------------------------
 
 // 应用公共文件
+namespace app;
+
+//初始化
+Common::init();
+
+class Common{
+
+    /**
+     * 系统初始化
+     */
+    public static function init() {
+        //定义全局变量
+        self::definePath();
+    }
+
+    /**
+     * 定义路径
+     */
+    static public function definePath() {
+        //定义常量__ROOT__
+        $root = dirname($_SERVER['SCRIPT_NAME']);
+        if ($root == DS) {
+            $root = '';
+        }
+        define('__ROOT__', $root);
+    }
+}

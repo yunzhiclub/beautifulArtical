@@ -23,15 +23,19 @@ public class Paragraph {
     // 权重
     private int weight;
 
+    // 是否景点前
+    private boolean isBeforeAttraction;
+
     public Paragraph() {
     }
 
-    public Paragraph(Article article, String title, String content, String image, int weight) {
+    public Paragraph(Article article, String title, String content, String image, int weight, boolean isBeforeAttraction) {
         this.article = article;
         this.title = title;
         this.content = content;
         this.image = image;
         this.weight = weight;
+        this.isBeforeAttraction = isBeforeAttraction;
     }
 
     public Long getId() {
@@ -82,6 +86,14 @@ public class Paragraph {
         this.weight = weight;
     }
 
+    public boolean isBeforeAttraction() {
+        return isBeforeAttraction;
+    }
+
+    public void setBeforeAttraction(boolean beforeAttraction) {
+        isBeforeAttraction = beforeAttraction;
+    }
+
     @Override
     public String toString() {
         return "Paragraph{" +
@@ -91,6 +103,8 @@ public class Paragraph {
                 ", content='" + content + '\'' +
                 ", image='" + image + '\'' +
                 ", weight=" + weight +
+                ", isBeforeAttraction=" + isBeforeAttraction +
                 '}';
     }
+
 }

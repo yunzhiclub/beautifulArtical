@@ -4,18 +4,19 @@
 	<div class="col-md-8 col-md-offset-1" style="margin-top: 60px;">
 		<h2><span class="glyphicon glyphicon-edit"></span>&nbsp;文章编辑</h2>
 		<br>
-		<form method="post" action="{:url ('addfirst');}" enctype="multipart/form-data">
+		<form method="post" action="{:url ('addfirst',['id'=>$haveid])}" enctype="multipart/form-data">
 			<div class="form-group">
 				<label for="TitleInput">标题</label>
-				<input type="text" class="form-control" id="TitleInput" placeholder="标题" name="title" >
+				<input type="text" class="form-control" id="TitleInput" placeholder="标题" name="title" value="{$title}">
 			</div>
 			<div class="form-group">
 				<label for="SummaryInput">摘要</label>
-				<input type="text" class="form-control" id="SummaryInput" placeholder="摘要" name="summary">
+				<input type="text" class="form-control" id="SummaryInput" placeholder="摘要" name="summary" value="{$summery}">
 			</div>
 			<div class="form-group">
 			<label for="exampleInputFile">封面</label>
 			<input type="file" id="exampleInputFile" name="image">
+			<img src="/beautifulArtical/thinkphp/public/uploads/{$cover}" style="height: 100px; width: 180px; " alt="无图" >
 			</div>
 			<button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-arrow-right"></span>&nbsp;下一步</button>
 			<br><br>
