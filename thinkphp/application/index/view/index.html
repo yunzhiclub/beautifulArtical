@@ -7,8 +7,29 @@
     <link rel="stylesheet" type="text/css" href="/beautifulArtical/thinkphp/public/style/css/bootstrap-3.3.7-dist/css/bootstrap.min.css">
 </head>
 <body>
+    <div class="row">
+        <div class="container">
+            <nav class="navbar navbar-default" role="navigation">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="{:url('article/index')}">首页</a>
+                    </div>
+                    <div class="nav navbar-nav navbar-right">
+                        <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-log-out"></span>&nbsp;登出</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
 	{block name="content"}
 	{/block}
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <p>©</p>
+            <br>
+            <p>技术支持：梦云智</p>
+        </div>
+    </div>
 </body>
 <script src="/beautifulArtical/thinkphp/public/style/js/articleController/Sortable.js"></script>
 <script src="/beautifulArtical/thinkphp/public/style/js/articleController/Configuration.js"></script>
