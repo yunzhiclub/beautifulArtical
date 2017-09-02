@@ -22,10 +22,10 @@ class Paragraph extends Model
     {
         
         $object = new Paragraph();
-        
-        $object->where('article_id', $articleId)->max($keyWords);
-        $object++;
-        return $object;
+
+        $weight = $object->where('article_id', $articleId)->max($keyWords);
+        $weight++;
+        return $weight;
     }
 
     public function saveParagraph($data, $articleId)
@@ -35,6 +35,9 @@ class Paragraph extends Model
         $this->is_before_attraction = (boolean)$data['is_before_attraction'];
 		$this->article_id = $articleId;
 		$this->weight = $this->getWeight("weight", $this->article_id);
+        var_dump($this->weight);
+        var_dump($articleId);
+         
 		
 		// 传入图片
     	$file = request()->file('image');
