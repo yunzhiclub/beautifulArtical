@@ -11,13 +11,13 @@ public class Plan {
     @OneToOne
     private Article article; //文章实体
     private Date travelDate; // 出行日期
-    private Long peopleNum; // 出行人数
+    private String peopleNum; // 出行人数
     private String currency; // 币种
     private Integer totalCost; // 总费用
     private Date lastPayTime; // 最晚付款时间
 
 
-    public Plan(Article article, Date travelDate, Long peopleNum, String currency, Integer totalCost, Date lastPayTime) {
+    public Plan(Article article, Date travelDate, String peopleNum, String currency, Integer totalCost, Date lastPayTime) {
         this.article = article;
         this.travelDate = travelDate;
         this.peopleNum = peopleNum;
@@ -53,11 +53,11 @@ public class Plan {
         this.travelDate = travelDate;
     }
 
-    public Long getPeopleNum() {
+    public String getPeopleNum() {
         return peopleNum;
     }
 
-    public void setPeopleNum(Long peopleNum) {
+    public void setPeopleNum(String peopleNum) {
         this.peopleNum = peopleNum;
     }
 
