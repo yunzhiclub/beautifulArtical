@@ -49,7 +49,7 @@ class DetailController extends Controller
         //返回相应的界面
         if ($message['status'] === 'success') {
             //跳转成功的界面
-            $this->success($message['message'], url($message['route'], ['id' => $message['param']['id']]));
+            $this->success($message['message'], url($message['route'], ['id' => $message['articleId']]));
         } else {
             //跳转失败的界面
             $this->error($message['message'], url($message['route']));

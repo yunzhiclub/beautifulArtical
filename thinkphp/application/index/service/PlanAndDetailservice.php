@@ -38,7 +38,7 @@ class PlanAndDetailservice
         $zhusu_unitPrice = $param->post('zhusu_unitPrice');
         $zhusu_totalPrice = $param->post('zhusu_totalPrice');
 
-        $message['param']['id'] = $articleId;
+        $message['articleId'] = $articleId;
 
         // 实例化一个空的方案报价
         $Plan = new Plan();
@@ -54,34 +54,25 @@ class PlanAndDetailservice
             return $this->error('数据添加错误：' . $Plan->getError());
         }
 
+        $this->saveDetail($dijie_remark, $Plan, 'dijie', $dijie_number, $dijie_frequency, $dijie_unitPrice, $dijie_totalPrice);
+        $this->saveDetail($zhusu_remark, $Plan, 'zhusu', $zhusu_number, $zhusu_frequency, $zhusu_unitPrice, $zhusu_totalPrice);
 
-        // 实例化一个空的明细信息
-		$Detail = new Detail();
-		$Detail->remark = $dijie_remark;
-		$Detail->plan_id = $Plan->id;
-		$Detail->type = 'dijie';
-		$Detail->number = $dijie_number;
-		$Detail->frequency = $dijie_frequency;
-		$Detail->unit_price = $dijie_unitPrice;
-		$Detail->total_price = $dijie_totalPrice;
-		// 添加数据
-        if (!$Detail->save()) {
-            return $this->error('数据添加错误：' . $Detail->getError());
-        }
-        // 实例化另一个空的明细信息
-        $Detail1 = new Detail();
-		$Detail1->remark = $zhusu_remark;
-		$Detail1->plan_id = $Plan->id;
-		$Detail1->type = 'zhusu';
-		$Detail1->number = $zhusu_number;
-		$Detail1->frequency = $zhusu_frequency;
-		$Detail1->unit_price = $zhusu_unitPrice;
-		$Detail1->total_price = $zhusu_totalPrice;
-		// 添加数据
-        if (!$Detail1->save()) {
-            return $this->error('数据添加错误：' . $Detail->getError());
-        }
         return $message;
 
+	}
+
+    public function saveDetail($remark, $Plan, $type, $number, $frequency, $unit_price, $total_price) 
+    {
+		$Detail = new Detail();
+		$Detail->remark = $remark;
+		$Detail->plan_id = $Plan->id;
+		$Detail->type = $type;
+		$Detail->number = $number;
+		$Detail->frequency = $frequency;
+		$Detail->unit_price = $unit_price;
+		$Detail->total_price = $total_price;
+		if (!$Detail->save()) {
+            return $this->error('数据添加错误：' . $Detail->getError());
+        }
 	}
 }
