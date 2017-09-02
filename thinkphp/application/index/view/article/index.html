@@ -20,7 +20,7 @@
                 <div style="border:#F8F8F8 solid 1px;margin: 2px -8px;">
                 <div class="row">
                     <div class="col-md-10 col-md-offset-1">
-                        <a href="#"><h3 style="overflow: hidden;white-space:nowrap;text-overflow: ellipsis;">{$article->title}</h3></a>
+                        <a href="{:url('article/preview',['id' => $article->id])}"><h3 style="overflow: hidden;white-space:nowrap;text-overflow: ellipsis;">{$article->title}</h3></a>
                     </div>
                 </div>
 
@@ -28,12 +28,12 @@
 
                 <div class="row" style="height: 125px;">
                     <div class="col-md-4">
-                        <a href="#">
+                        <a href="{:url('article/preview',['id' => $article->id])}">
                             <img src="{:__ROOT__}/upload/{$article->cover}" style="width: 125px;height: 125px;">
                         </a>
                     </div>
                     <div class="col-md-8">
-                        <a href="#">
+                        <a href="{:url('article/preview',['id' => $article->id])}">
                             <p style="width:200px;height:124px;overflow:hidden;word-wrap:break-word;color: black;">{$article->summery}</p>
                         </a>
                     </div>
@@ -41,13 +41,13 @@
 
                 <div class="row" style="margin-top: 5px;margin-bottom: 5px;">
                     <div class="col-md-1">
-                        <a href="#" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-eye-open"></i>&nbsp;预览</a>
+                        <a href="{:url('article/preview',['id' => $article->id])}" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-eye-open"></i>&nbsp;预览</a>
                     </div>
                     <div class="col-md-1 col-md-offset-2">
                         <a href="{:url('article/secondadd',['id' => $article->id])}" class="btn btn-info btn-sm"><i class="glyphicon glyphicon-pencil"></i>&nbsp;编辑</a>
                     </div>
                     <div class="col-md-1 col-md-offset-2">
-                        <a href="#" class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i>&nbsp;删除</a>
+                        <a href="{:url('article/delete',['id' => $article->id])}" class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i>&nbsp;删除</a>
                     </div>
                 </div>
                 </div>

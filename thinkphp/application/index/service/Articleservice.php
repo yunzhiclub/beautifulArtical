@@ -5,6 +5,7 @@ namespace app\index\service;
 use app\index\model\Article;
 use app\index\model\Common;
 use app\index\model\Attraction;
+use app\index\model\Paragraph;
 /**
  *
  * @authors zhuchenshu
@@ -89,9 +90,9 @@ class Articleservice
         $Attractions = Attraction::order('weight')->where('article_id',$articleid)->select();
         $number=$number-1;
         // 当前景点与上一个景点的权重交换
-        $a = $Attractions[$number]->weight;
+        $Median = $Attractions[$number]->weight;
         $Attractions[$number]->weight = $Attractions[$number-1]->weight;
-        $Attractions[$number-1]->weight = $a;
+        $Attractions[$number-1]->weight = $Median;
         // 保存交换后的景点
         $Attractions[$number]->save();
         $Attractions[$number-1]->save();
@@ -105,11 +106,67 @@ class Articleservice
         $Attractions = Attraction::order('weight')->where('article_id',$articleid)->select();
         $number=$number-1;
         // 当前景点与下一个景点的权重交换
-        $a = $Attractions[$number]->weight;
+        $Median = $Attractions[$number]->weight;
         $Attractions[$number]->weight = $Attractions[$number+1]->weight;
-        $Attractions[$number+1]->weight = $a;
+        $Attractions[$number+1]->weight = $Median;
         // 保存交换后的景点
         $Attractions[$number]->save();
         $Attractions[$number+1]->save();
+    }
+    public function secondAriticle($param) {
+        // 传入文章id
+        $articleid = $param->param('id/d');
+        $Article = Article::get($articleid);
+
+        $message = [];
+        $message['title'] = $Article->title;
+        $message['summery'] = $Article->summery;
+        $message['cover'] = $Article->cover;
+        $message['id'] = $articleid;
+
+        // 根据景点权重排序
+        $Attraction = Attraction::order('weight')->where('article_id',$articleid)->select();
+        $message['attraction'] = $Attraction;
+
+        // 获取传入景点的个数
+        $length = sizeof($Attraction);
+        $message['length'] = $length;
+
+        // 将段落按在景点的上下顺序分成两个类，并根据权重排序
+        $ParagraphUp = Paragraph::where('is_before_attraction',1)->where('article_id',$articleid)->order('weight')->select();
+        $ParagraphDown = Paragraph::where('is_before_attraction',0)->where('article_id',$articleid)->order('weight')->select();
+        // $Paragraph = Paragraph::order('weight')->select();
+        $message['paragraphup'] = $ParagraphUp;
+        $message['paragraphdown'] = $ParagraphDown;
+
+        return $message;
+    }
+    public function deleteAriticle($param) {
+        // 获取文章id
+        $articleid = $param->param('id/d');
+        // 根据文章id获取文章实体，并删除
+        $Article = Article::get($articleid);
+        Common::deleteImage('upload/'.$Article->cover);
+        $Attraction->delete();
+        // 根据文章id获取段落组，并删除
+        $Paragraph = Paragraph::where('article_id',$articleid);
+        $length = sizeof($Paragraph);
+        for($i = 0;$i < $length;$i++){
+            Common::deleteImage('upload/'.$Paragraph[$i]->image);
+            $Paragraph[$i]->delete();
+        }
+        // 根据文章id获取景点组，并删除
+        $Attraction = Attraction::where('article_id',$articleid);
+        $length = sizeof($Attraction);
+        for($i = 0;$i < $length;$i++){
+            Common::deleteImage('upload/'.$Attraction[$i]->image);
+            $Attraction[$i]->delete();
+        }
+        // 根据文章id获取方案报价，并删除
+        $Plan = Plan::where('article_id',$articleid);
+        $Plan->delete();
+        // 根据文章id获取订制师，并删除
+        $Contractor = Contractor::where('article_id',$articleid);
+        $Contractor->delete();
     }
 }
