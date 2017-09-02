@@ -95,6 +95,11 @@ class ArticleController extends Controller {
         // $Paragraph = Paragraph::order('weight')->select();
         $this->assign('paragraphup', $ParagraphUp);
         $this->assign('paragraphdown', $ParagraphDown);
+
+        $map = ['article_id' => $id];
+        $plan = Plan::get($map);
+        $this->assign('plan', $plan);
+
     	return $this->fetch();
 
     }
