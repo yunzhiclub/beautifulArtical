@@ -39,7 +39,7 @@ class ParagraphController extends Controller {
 			$Paragraph->is_before_attraction = '';
 			$this->assign('Paragraph', $Paragraph);
 		}
-        $this->assign('id',$articleId);
+        $this->assign('article_id',$articleId);
 
         return $this->fetch();
 	}

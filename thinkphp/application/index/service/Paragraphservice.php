@@ -14,12 +14,12 @@ class Paragraphservice
 		$message['route'] = 'article/secondadd';
 
 		// 获取参数
-		$articleId = $param->param('article_id');
+		$articleId = $param->param('articleId');
 		$id = $param->param('id');
+
 		$data = $param->post();
 		$file = request()->file('image');
 
-		
 
 		// 实例化一个空段落
 		$Paragraph = new Paragraph();
