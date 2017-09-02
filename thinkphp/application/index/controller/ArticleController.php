@@ -106,4 +106,8 @@ class ArticleController extends Controller {
     	}
         $this->error('失败',url('index'));
     }
+
+    public function preview() {
+        return $this->fetch();
+    }
 }
