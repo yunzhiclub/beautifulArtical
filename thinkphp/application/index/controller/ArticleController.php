@@ -12,7 +12,7 @@ use app\index\service\Articleservice;
 
 /**
  * 
- * @authors 朱晨澍、朴世超
+ * @authors 朱晨澍、朴世超、张喜硕
  * @date    2017-08-30 09:08:35
  * @version $Id$
  */
@@ -31,6 +31,9 @@ class ArticleController extends Controller {
 
     public function index()
 	{
+	    $article = new Article();
+	    $articles = $article->paginate(6);
+	    $this->assign('articles', $articles);
 		return $this->fetch();
 	}
     // 返回firstadd界面
