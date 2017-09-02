@@ -120,7 +120,7 @@ class AttractionController extends Controller {
         $attraction = Attraction::get($attractionId);
         $file = request()->file('image');
         if(!is_null($file)) {
-            // Common::deleteImage(__ROOT__.'/upload/'.$attraction->image);
+            Common::deleteImage('upload/'.$attraction->image);
             $image = Common::uploadImage($file);
         } else {
             $image = $attraction->image;
