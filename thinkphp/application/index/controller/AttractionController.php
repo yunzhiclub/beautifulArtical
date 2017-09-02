@@ -120,7 +120,7 @@ class AttractionController extends Controller {
         $attraction = Attraction::get($attractionId);
         $file = request()->file('image');
         if(!is_null($file)) {
-            Common::deleteImage('__PUBLIC__/uploads/{$attraction->image}');
+            // Common::deleteImage(__ROOT__.'/upload/'.$attraction->image);
             $image = Common::uploadImage($file);
         } else {
             $image = $attraction->image;
@@ -130,15 +130,16 @@ class AttractionController extends Controller {
         $attraction = Attraction::getNullAttraction();
         $attraction->updateAttraction($title, $content, $name, $meal, $car, $guide, $image, $hotel, $articleId, $attractionId);
 
-        return $this->success('更新成功');
+        return $this->success('更新成功',url('article/secondadd?id='.$articleId));
     }
 
     public function delete() {
         $attractionId = Request::instance()->param('attractionId');
+        $articleId = Request::instance()->param('articleId');
         $attraction = new Attraction();
         if(!$attraction->deleteAttraction($attractionId)) {
-            return $this->error('删除失败',url('article/add'));
+            return $this->error('删除失败',url('article/secondadd?id='.$articleId));
         }
-        return $this->success('删除成功',url('article/add'));
+        return $this->success('删除成功',url('article/secondadd?id='.$articleId));
     }
 }
