@@ -102,7 +102,7 @@ class ArticleController extends Controller {
         // 添加订制师，报价，景点，段落的信息
     	$judgment = $Article->save();
     	if($judgment){
-    		$this->success('success',url('index'));
+    		$this->success('success',url('Article/index'));
     	}
         $this->error('失败',url('index'));
     }
