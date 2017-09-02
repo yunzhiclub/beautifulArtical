@@ -30,7 +30,6 @@ class Paragraph extends Model
 
     public function saveParagraph($data, $articleId)
     {
-        $this->id = $data['id'];
 		$this->title = $data['title'];
 		$this->content = $data['content'];
         $this->is_before_attraction = (boolean)$data['is_before_attraction'];
@@ -39,11 +38,14 @@ class Paragraph extends Model
 		
 		// 传入图片
     	$file = request()->file('image');
-    	// 返回图片路径
-    	$image = Common::uploadImage($file);
-    	// 保存图片路径
-    	$this->image = $image;
-
+    	
+        if (!is_null($file)) {
+            // 返回图片路径
+            $image = Common::uploadImage($file);
+            // 保存图片路径
+            $this->image = $image;
+        } 
+    	
     	if ($this->save()) {
             return true;
         }
@@ -72,13 +74,12 @@ class Paragraph extends Model
         if(!is_null($file)){
             // 保存文件，返回路径
             $image = Common::uploadImage($file);
-            $this->image = $image;
-
-            if ($this->save()) {
-                return true;
-            }
+            $this->image = $image;  
         }
-         
+
+        if ($this->save()) {
+            return true;
+        }
         return false;
     }
 

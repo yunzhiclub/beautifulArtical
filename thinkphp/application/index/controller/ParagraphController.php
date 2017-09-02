@@ -5,6 +5,8 @@ use think\Controller;
 use think\Request;
 use app\index\model\Paragraph;
 use app\index\model\Article;
+use app\index\service\Paragraphservice;
+
 
 /**
  * 
@@ -23,6 +25,7 @@ class ParagraphController extends Controller {
         //实例化服务层
         $this->paragraphService = new Paragraphservice();
     }
+
 	public function index()
 	{
 		$articleId = Request::instance()->param('article_id');
@@ -40,6 +43,7 @@ class ParagraphController extends Controller {
 
         return $this->fetch();
 	}
+
 	public function add()
 	{
 		// 接收数据
@@ -58,6 +62,7 @@ class ParagraphController extends Controller {
 			return $this->error($message['message'], url($message['route']));
 		}
 	}
+	
 	public function delete()
 	{
 		$id = Request::instance()->param('id');
@@ -114,15 +119,5 @@ class ParagraphController extends Controller {
 			// 返回保存失败界面
 			return $this->error($message['message'], url($message['route']));
 		}
-
-		// $data = Request::instance()->post();
-		// $id = Request::instance()->param('id');
-
-		// $Paragraph = Paragraph::get($id);
-		// if ($Paragraph->updateParagraph($data, $id)) {
-		// 	return $this->success('保存成功！', url('article/secondadd'));
-		// }
-
-		// return $this->error('保存失败！', url('article/secondadd'));
 	}
 }
