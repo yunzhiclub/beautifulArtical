@@ -4,9 +4,20 @@ namespace app\index\controller;
 use think\Controller;
 use think\Request;
 use app\index\model\User;
+use app\index\service\Loginservice;
 
 class LoginController extends Controller
 {
+	protected $loginService = null;
+
+	//构造函数实例化Loginservice
+	function __construct(Request $request = null)
+    {
+    	 parent::__construct($request);
+        //实例化服务层
+        $this->loginService = new Loginservice();
+    }
+
 	public function index()
 	{
 		return $this->fetch();
@@ -14,22 +25,20 @@ class LoginController extends Controller
 
 	public function login()
 	{
-		// 接收post信息
-		$data = Request::instance()->post();
+		// 接收信息
+		$param = Request::instance();
 
-		// 验证用户名是否正确
-		$map = array('username'=>$data['username']);
-		$User = User::get($map);
+		// 调用service层方法
+		$message = $this->loginService->ifLogin($param);
 
-		if (!is_null($User) && $User->getData('password') === $data['password']) {
-			// 用户名密码正确，将username存入session
-			session('userId', $User->getData('id'));
-			return $this->success('登录成功！', url('article/index'));
+		// 返回相应信息
+		if ($message['status'] === 'success') {
+			// 返回登录成功界面
+			return $this->success($message['message'], url($message['route']));
 
 		} else {
-			// 密码错误，跳转到登录界面
-			return $this->error('用户名或密码错误！', url('index'));
-		}
-		
+			// 返回登录失败界面
+			return $this->error($message['message'], url($message['route']));
+		}		
 	}
 }
