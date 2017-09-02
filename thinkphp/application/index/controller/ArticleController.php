@@ -31,8 +31,8 @@ class ArticleController extends Controller {
 
     public function index()
 	{
-	    $article = new Article();
-	    $articles = $article->paginate(6);
+        $PageSize = config('paginate.var_page');
+	    $articles = Article::order('id desc')->paginate($PageSize);
 	    $this->assign('articles', $articles);
 		return $this->fetch();
 	}
