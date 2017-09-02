@@ -65,24 +65,40 @@ class ParagraphController extends Controller {
 	
 	public function delete()
 	{
-		$id = Request::instance()->param('id');
-		$articleId = Request::instance()->param('article_id');
+		// 接收数据
+		$param = Request::instance();
 
-		if (is_null($id)) {
-			return $this->error('未获取到ID');
+		// 调用service层删除方法
+		$message = $this->paragraphService->deleteParagraph($param);
+
+		// 返回相应界面
+		if ($message['status'] === 'success') {
+			// 返回删除成功界面
+			return $this->success($message['message'], url($message['route']));
+
+		} else {
+			// 返回删除失败界面
+			return $this->error($message['message'], url($message['route']));
 		}
+		
+		// $id = Request::instance()->param('id');
+		// $articleId = Request::instance()->param('article_id');
 
-		$Paragraph = Paragraph::get($id);
+		// if (is_null($id)) {
+		// 	return $this->error('未获取到ID');
+		// }
 
-		if (is_null($Paragraph)) {
-			return $this->error('未获取到对象信息！' ,url('article/secondadd'));
-		}
+		// $Paragraph = Paragraph::get($id);
 
-		if ($Paragraph->delete()) {
-			return $this->success('删除成功！',url('article/secondadd'));
-		}
+		// if (is_null($Paragraph)) {
+		// 	return $this->error('未获取到对象信息！' ,url('article/secondadd'));
+		// }
 
-		return $this->error('删除失败！' ,url('article/secondadd'));
+		// if ($Paragraph->delete()) {
+		// 	return $this->success('删除成功！',url('article/secondadd'));
+		// }
+
+		// return $this->error('删除失败！' ,url('article/secondadd'));
 	}
 
 	public function edit()
