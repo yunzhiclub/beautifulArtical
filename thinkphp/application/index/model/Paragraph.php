@@ -38,11 +38,67 @@ class Paragraph extends Model
 		
 		// 传入图片
     	$file = request()->file('image');
-    	// 返回图片路径
-    	$image = Common::uploadImage($file);
-    	// 保存图片路径
-    	$this->image = $image;
+    	
+        if (!is_null($file)) {
+            // 返回图片路径
+            $image = Common::uploadImage($file);
+            // 保存图片路径
+            $this->image = $image;
+        } 
+    	
+    	if ($this->save()) {
+            return true;
+        }
 
-    	return $this->save();
+        return false;
+    }
+
+    /**
+     * 更新段落信息
+     * @param  $data         接收的表单信息
+     * @return boolean       更新成功返回true，否则返回false
+     */
+    public function updateParagraph($data, $id)
+    {    
+        // 传入图片
+        $file = request()->file('image');
+
+        // 判断是否是重写 
+        $Paragraph = $this->ifedit($id,$file);
+        $this->id = $id;
+        $this->title = $data['title'];
+        $this->content = $data['content'];
+        $this->is_before_attraction = (boolean)$data['is_before_attraction'];
+
+        // 获取文件 
+        if(!is_null($file)){
+            // 保存文件，返回路径
+            $image = Common::uploadImage($file);
+            $this->image = $image;  
+        }
+
+        if ($this->save()) {
+            return true;
+        }
+        return false;
+    }
+
+    public function ifedit($id, $file)
+    {
+        if(is_null($id)){
+            $Paragraph = new Paragraph;
+            return $Paragraph;
+        }else{
+            $Paragraph = Paragraph::get($id);
+            // 判断图片是否更改
+            if(is_null($file)){
+                return $Paragraph;
+            }
+            // 删除之前保存的图片
+            // if(is_file(__PUBLIC__/uploads/$Paragraph->image)){
+            //     Common::deleteImage(__PUBLIC__/uploads/$Paragraph->image);
+            // }
+            return $Paragraph;
+        }
     }
 }
