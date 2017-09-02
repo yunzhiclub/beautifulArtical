@@ -11,8 +11,7 @@ public class Article {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToOne
-    private Plan plan;
+
     @ManyToOne
     private Contractor contractor;
 
@@ -23,8 +22,10 @@ public class Article {
     // 文章封面
     private String cover;
 
+
+
     public Article(Plan plan, Contractor contractor, String title, String summery, String cover) {
-        this.plan = plan;
+
         this.contractor = contractor;
         this.title = title;
         this.summery = summery;
@@ -40,14 +41,6 @@ public class Article {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Plan getPlan() {
-        return plan;
-    }
-
-    public void setPlan(Plan plan) {
-        this.plan = plan;
     }
 
     public Contractor getContractor() {
@@ -80,5 +73,15 @@ public class Article {
 
     public void setCover(String cover) {
         this.cover = cover;
+    }
+    @Override
+    public String toString() {
+        return "Article{" +
+                "id=" + id +
+                ", contractor=" + contractor +
+                ", title='" + title + '\'' +
+                ", summery='" + summery + '\'' +
+                ", cover='" + cover + '\'' +
+                '}';
     }
 }
