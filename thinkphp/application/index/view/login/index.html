@@ -15,15 +15,15 @@
     </div>
     <div class="col-md-4 signup-form" style="border:2px; border-color: #ACEBAE;border-style: solid; margin-top: 40px; margin-right: 500px; margin-left: 500px; padding: 30px; ">
         <div class="">
-            <form class="form-horizontal">
+            <form class="form-horizontal" action="{:url('login')}" method="post">
                 <div class="form-group">
                     <div class="col-sm-12">
-                        <input type="text" class="form-control" id="username" placeholder="用户名...">
+                        <input type="text" class="form-control" name="username" placeholder="用户名...">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-12">
-                        <input type="password" class="form-control" id="password" placeholder="密码...">
+                        <input type="password" class="form-control" name="password" placeholder="密码...">
                     </div>
                 </div>
                 <br>
