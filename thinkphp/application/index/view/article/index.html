@@ -12,266 +12,59 @@
         <div class="container">
             <hr>
         </div>
-        <div class="row">
-            <div class="col-md-2 col-md-offset-3">
-                <div class="package list-group-item">
-                    <div class="row">
-                        <div class="col-md-10 col-md-offset-1">
-                            <a href="#"><h3>标题</h3></a>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col-md-8">
-                            <div class="col-md-10">
-                                <a href="#">
-                    		<img src="\beautifulArtical\thinkphp\public\1.jpg" height="125" weight="125">
-                    	</a>
-                            </div>
-                        </div>
-                    </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-md-10 col-md-offset-1">
-                            <a href="#">
-                                <p>文章摘要</p>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-1">
-                            <button type="button" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-eye-open"></i>&nbsp;预览</button>
-                        </div>
-                        <div class="col-md-1 col-md-offset-2">
-                            <button type="button" class="btn btn-info btn-sm"><i class="glyphicon glyphicon-pencil"></i>&nbsp;编辑</button>
-                        </div>
-                        <div class="col-md-1 col-md-offset-2">
-                            <button type="button" class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i>&nbsp;删除</button>
-                        </div>
+
+        <ul class="container list-unstyled">
+        {volist name="articles" id="article" key="key"}
+
+            <li class="col-md-4" style="height: 275px;margin: 5px 0;">
+                <div style="border:#F8F8F8 solid 1px;margin: 2px -8px;">
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
+                        <a href="{:url('article/preview',['id' => $article->id])}"><h3 style="overflow: hidden;white-space:nowrap;text-overflow: ellipsis;">{$article->title}</h3></a>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-2">
-                <div class="package list-group-item">
-                    <div class="row">
-                        <div class="col-md-10 col-md-offset-1">
-                            <a href="#"><h3>标题</h3></a>
-                        </div>
+
+                <hr />
+
+                <div class="row" style="height: 125px;">
+                    <div class="col-md-4">
+                        <a href="{:url('article/preview',['id' => $article->id])}">
+                            <img src="{:__ROOT__}/upload/{$article->cover}" style="width: 125px;height: 125px;">
+                        </a>
                     </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col-md-8">
-                            <div class="col-md-10">
-                                <a href="#">
-                    		<img src="\beautifulArtical\thinkphp\public\1.jpg" height="125" weight="125">
-                    	</a>
-                            </div>
-                        </div>
-                    </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-md-10 col-md-offset-1">
-                            <a href="#">
-                                <p>文章摘要</p>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-1">
-                            <button type="button" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-eye-open"></i>&nbsp;预览</button>
-                        </div>
-                        <div class="col-md-1 col-md-offset-2">
-                            <button type="button" class="btn btn-info btn-sm"><i class="glyphicon glyphicon-pencil"></i>&nbsp;编辑</button>
-                        </div>
-                        <div class="col-md-1 col-md-offset-2">
-                            <button type="button" class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i>&nbsp;删除</button>
-                        </div>
+                    <div class="col-md-8">
+                        <a href="{:url('article/preview',['id' => $article->id])}">
+                            <p style="width:200px;height:124px;overflow:hidden;word-wrap:break-word;color: black;">{$article->summery}</p>
+                        </a>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-2">
-                <div class="package list-group-item">
-                    <div class="row">
-                        <div class="col-md-10 col-md-offset-1">
-                            <a href="#"><h3>标题</h3></a>
-                        </div>
+
+                <div class="row" style="margin-top: 5px;margin-bottom: 5px;">
+                    <div class="col-md-1">
+                        <a href="{:url('article/preview',['id' => $article->id])}" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-eye-open"></i>&nbsp;预览</a>
                     </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col-md-8">
-                            <div class="col-md-10">
-                                <a href="#">
-                    		<img src="\beautifulArtical\thinkphp\public\1.jpg" height="125" weight="125">
-                    	</a>
-                            </div>
-                        </div>
+                    <div class="col-md-1 col-md-offset-2">
+                        <a href="{:url('article/secondadd',['id' => $article->id])}" class="btn btn-info btn-sm"><i class="glyphicon glyphicon-pencil"></i>&nbsp;编辑</a>
                     </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-md-10 col-md-offset-1">
-                            <a href="#">
-                                <p>文章摘要</p>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-1">
-                            <button type="button" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-eye-open"></i>&nbsp;预览</button>
-                        </div>
-                        <div class="col-md-1 col-md-offset-2">
-                            <button type="button" class="btn btn-info btn-sm"><i class="glyphicon glyphicon-pencil"></i>&nbsp;编辑</button>
-                        </div>
-                        <div class="col-md-1 col-md-offset-2">
-                            <button type="button" class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i>&nbsp;删除</button>
-                        </div>
+                    <div class="col-md-1 col-md-offset-2">
+                        <a href="#" class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i>&nbsp;删除</a>
                     </div>
                 </div>
-            </div>
-        </div>
-        <br>
-        <div class="row">
-            <div class="col-md-2 col-md-offset-3">
-                <div class="package list-group-item">
-                    <div class="row">
-                        <div class="col-md-10 col-md-offset-1">
-                            <a href="#"><h3>标题</h3></a>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col-md-8">
-                            <div class="col-md-10">
-                                <a href="#">
-                    		<img src="\beautifulArtical\thinkphp\public\1.jpg" height="125" weight="125">
-                    	</a>
-                            </div>
-                        </div>
-                    </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-md-10 col-md-offset-1">
-                            <a href="#">
-                                <p>文章摘要</p>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-1">
-                            <button type="button" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-eye-open"></i>&nbsp;预览</button>
-                        </div>
-                        <div class="col-md-1 col-md-offset-2">
-                            <button type="button" class="btn btn-info btn-sm"><i class="glyphicon glyphicon-pencil"></i>&nbsp;编辑</button>
-                        </div>
-                        <div class="col-md-1 col-md-offset-2">
-                            <button type="button" class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i>&nbsp;删除</button>
-                        </div>
-                    </div>
                 </div>
-            </div>
-            <div class="col-md-2">
-                <div class="package list-group-item">
-                    <div class="row">
-                        <div class="col-md-10 col-md-offset-1">
-                            <a href="#"><h3>标题</h3></a>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col-md-8">
-                            <div class="col-md-10">
-                                <a href="#">
-                    		<img src="\beautifulArtical\thinkphp\public\1.jpg" height="125" weight="125">
-                    	</a>
-                            </div>
-                        </div>
-                    </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-md-10 col-md-offset-1">
-                            <a href="#">
-                                <p>文章摘要</p>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-1">
-                            <button type="button" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-eye-open"></i>&nbsp;预览</button>
-                        </div>
-                        <div class="col-md-1 col-md-offset-2">
-                            <button type="button" class="btn btn-info btn-sm"><i class="glyphicon glyphicon-pencil"></i>&nbsp;编辑</button>
-                        </div>
-                        <div class="col-md-1 col-md-offset-2">
-                            <button type="button" class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i>&nbsp;删除</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-2">
-                <div class="package list-group-item">
-                    <div class="row">
-                        <div class="col-md-10 col-md-offset-1">
-                            <a href="#"><h3>标题</h3></a>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col-md-8">
-                            <div class="col-md-10">
-                                <a href="#">
-                    		<img src="\beautifulArtical\thinkphp\public\1.jpg" height="125" weight="125">
-                    	</a>
-                            </div>
-                        </div>
-                    </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-md-10 col-md-offset-1">
-                            <a href="#">
-                                <p>文章摘要</p>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-1">
-                            <button type="button" class="btn btn-primary btn-sm"><i class="glyphicon glyphicon-eye-open"></i>&nbsp;预览</button>
-                        </div>
-                        <div class="col-md-1 col-md-offset-2">
-                            <button type="button" class="btn btn-info btn-sm"><i class="glyphicon glyphicon-pencil"></i>&nbsp;编辑</button>
-                        </div>
-                        <div class="col-md-1 col-md-offset-2">
-                            <button type="button" class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i>&nbsp;删除</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-offset-7">
-        	<nav aria-label="Page navigation">
-            <ul class="pagination">
-                <li>
-                    <a href="#" aria-label="Previous">
-        				<span aria-hidden="true">&laquo;</span>
-      				</a>
-                </li>
-                <li><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li>
-                    <a href="#" aria-label="Next">
-        				<span aria-hidden="true">&raquo;</span>
-      				</a>
-                </li>
-            </ul>
-        	</nav>
+            </li>
+
+        {/volist}
+        </ul>
+
+        <div class="container text-right">
+            {$articles->render()}
         </div>
     </div>
-</div>
+
     <div class="container">
         <hr>
     </div>
-    <div class="row" style="margin-top: 90px;">
+    <div class="row">
         <div class="col-md-12">
             <p class="text-center">Copyright &copy; XXX科技有限公司 All Rights Reserved</p>
             <p class="text-center">Powered By:梦云智</p>

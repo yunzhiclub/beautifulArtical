@@ -12,7 +12,7 @@ use app\index\service\Articleservice;
 
 /**
  * 
- * @authors 朱晨澍、朴世超
+ * @authors 朱晨澍、朴世超、张喜硕
  * @date    2017-08-30 09:08:35
  * @version $Id$
  */
@@ -31,6 +31,9 @@ class ArticleController extends Controller {
 
     public function index()
 	{
+        $PageSize = config('paginate.var_page');
+	    $articles = Article::order('id desc')->paginate($PageSize);
+	    $this->assign('articles', $articles);
 		return $this->fetch();
 	}
     // 返回firstadd界面
@@ -81,11 +84,14 @@ class ArticleController extends Controller {
         $this->assign('cover', $Article->cover);
     	$this->assign('id', $id);
         // 根据景点权重排序
-        $Attraction = Attraction::order('weight')->select();
+        $Attraction = Attraction::order('weight')->where('article_id',$id)->select();
         $this->assign('attraction', $Attraction);
+        // 获取传入景点的个数
+        $length = sizeof($Attraction);
+        $this->assign('length', $length);
         // 将段落按在景点的上下顺序分成两个类，并根据权重排序
-        $ParagraphUp = Paragraph::where('is_before_attraction',1)->order('weight')->select();
-        $ParagraphDown = Paragraph::where('is_before_attraction',0)->order('weight')->select();
+        $ParagraphUp = Paragraph::where('is_before_attraction',1)->where('article_id',$id)->order('weight')->select();
+        $ParagraphDown = Paragraph::where('is_before_attraction',0)->where('article_id',$id)->order('weight')->select();
         // $Paragraph = Paragraph::order('weight')->select();
         $this->assign('paragraphup', $ParagraphUp);
         $this->assign('paragraphdown', $ParagraphDown);
@@ -99,8 +105,29 @@ class ArticleController extends Controller {
         // 添加订制师，报价，景点，段落的信息
     	$judgment = $Article->save();
     	if($judgment){
-    		$this->success('success',url('index'));
+    		$this->success('success',url('Article/index'));
     	}
         $this->error('失败',url('index'));
+    }
+
+    public function preview() {
+        return $this->fetch();
+    }
+
+    public function upAttraction() {
+        // 接收参数
+        $param = Request::instance();
+        $id = Request::instance()->param('articleId/d');
+        //调用service中的方法
+        $message =  $this->articleService->upAttraction($param); 
+        $this->success('向上排序成功',url('secondadd',['id'=>$id]));
+    }
+    public function downAttraction() {
+        // 接收参数
+        $param = Request::instance();
+        $id = Request::instance()->param('articleId/d');
+        //调用service中的方法
+        $message =  $this->articleService->downAttraction($param); 
+        $this->success('向下排序成功',url('secondadd',['id'=>$id]));
     }
 }
