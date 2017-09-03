@@ -7,19 +7,17 @@ class Paragraphservice
 {
 	public function addOrEditParagraph($param)
 	{
-		// 初始化返回信息
-		$message = [];
-		$message['status'] = 'success';
-		$message['message'] = '保存成功！';
-		$message['route'] = 'article/secondadd';
-
 		// 获取参数
 		$articleId = $param->param('article_id');
 		$id = $param->param('id');
 		$data = $param->post();
 		$file = request()->file('image');
 
-		
+		// 初始化返回信息
+		$message = [];
+		$message['status'] = 'success';
+		$message['message'] = '保存成功！';
+		$message['route'] = "'article/secondadd',['id'=>$articleId]";
 
 		// 实例化一个空段落
 		$Paragraph = new Paragraph();
