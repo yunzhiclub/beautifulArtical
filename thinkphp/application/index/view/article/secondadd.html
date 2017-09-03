@@ -24,7 +24,7 @@
 				<a class="btn btn-primary btn-sm" href="{:url('Paragraph/index', ['article_id'=>$id,'id'=>''])}"><span class="glyphicon glyphicon-plus"></span>&nbsp;段落</a>&nbsp;&nbsp;
 				<a class="btn btn-primary btn-sm" href="{:url('Attraction/add?id='.$id)}"><span class="glyphicon glyphicon-plus"></span>&nbsp;景点</a>&nbsp;&nbsp;
 				<a class="btn btn-primary btn-sm" href="{:url('Detail/add?id='.$id)}"><span class="glyphicon glyphicon-plus"></span>&nbsp;方案报价</a>&nbsp;&nbsp;
-				<a class="btn btn-primary btn-sm" href="{:url('Contractor/add?id='.$id)}"><span class="glyphicon glyphicon-plus"></span>&nbsp;订制师</a>
+				<a class="btn btn-primary btn-sm" href="{:url('Contractor/add', ['article_id'=>$id])}"><span class="glyphicon glyphicon-plus"></span>&nbsp;订制师</a>
 			</span>
 		</div>
 		<ul id="foo" class="block__list block__list_words" style="list-style-type: none;">
