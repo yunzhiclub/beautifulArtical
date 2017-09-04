@@ -30,7 +30,8 @@ class DetailService
         
         return false;
 	}
-
+    
+    // 方法的增加实现代码的简化
     public function save($remark, $Plan, $type, $number, $frequency, $unit_price, $total_price) 
     {
 		$Detail = new Detail();
