@@ -103,6 +103,57 @@
 			</div>
 		</li>
 		{/volist}
+			<!--方案报价-->
+		{volist name="plans" id="plan"}
+			<li>
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<h4>方案报价</h4>
+						<div class="row">
+							<div class="col-md-12">
+								<p>出发日期：{$plan->travel_date}</p>
+								<p>出行人数：{$plan->people_num}</p>
+								<p>币种：{$plan->currency}</p>
+								<p>总费用：{$plan->total_cost}</p>
+								<p>最晚付款时间：{$plan->last_pay_time}</p>
+								<table class="table table-hover table-bordered">
+									<tr class="info">
+										<th>类型</th>
+										<th>数量</th>
+										<th>频次</th>
+										<th>单价</th>
+										<th>总价</th>
+										<th>备注</th>
+									</tr>
+									<tr>
+										<td>地接</td>
+										<td>{$plan->getDetailByType('dijie')->number}</td>
+										<td>{$plan->getDetailByType('dijie')->frequency}</td>
+										<td>{$plan->getDetailByType('dijie')->unit_price}</td>
+										<td>{$plan->getDetailByType('dijie')->total_price}</td>
+										<td>{$plan->getDetailByType('dijie')->remark}</td>
+									</tr>
+									<tr>
+										<td>住宿</td>
+										<td>{$plan->getDetailByType('zhusu')->number}</td>
+										<td>{$plan->getDetailByType('zhusu')->frequency}</td>
+										<td>{$plan->getDetailByType('zhusu')->unit_price}</td>
+										<td>{$plan->getDetailByType('zhusu')->total_price}</td>
+										<td>{$plan->getDetailByType('zhusu')->remark}</td>
+									</tr>
+								</table>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12" style="height: 40px; margin-top: 10px;">
+								<a class="btn btn-info btn-sm" href="{:url('')}"><span class="glyphicon glyphicon-pencil"></span>&nbsp;编辑</a>
+								<a class="btn btn-danger btn-sm" href="{:url('')}"><span class="glyphicon glyphicon-trash"></span>&nbsp;删除</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</li>
+		{/volist}
 	</ul>
 	<button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-ok"></span>&nbsp;完成</button>
 	<br><br>
