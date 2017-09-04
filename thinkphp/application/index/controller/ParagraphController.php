@@ -1,7 +1,7 @@
 <?php
 namespace app\index\controller;
 
-use think\Controller;
+use app\index\controller\IndexController;
 use think\Request;
 use app\index\model\Paragraph;
 use app\index\model\Article;
@@ -15,7 +15,7 @@ use app\index\service\Paragraphservice;
  * @version $Id$
  */
 
-class ParagraphController extends Controller {
+class ParagraphController extends IndexController {
 	protected $paragraphService = null;
 
     //构造函数实例化ArticleService
