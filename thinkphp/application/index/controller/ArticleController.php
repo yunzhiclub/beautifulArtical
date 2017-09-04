@@ -79,6 +79,12 @@ class ArticleController extends Controller {
         // 接收参数
         $param = Request::instance();
 
+        // 获取并传输plan
+        $id = Request::instance()->param('id');
+        $plan = new Plan();
+        $plans = $plan->getPlanByArticleId($id);
+        $this->assign('plans', $plans);
+
         // 调用service中的保存方法
         $message =  $this->articleService->secondAriticle($param);
         // 将serve中处理的数据传给前台
