@@ -104,6 +104,7 @@
 		</li>
 		{/volist}
 			<!--方案报价-->
+		{volist name="plans" id="plan"}
 			<li>
 				<div class="panel panel-default">
 					<div class="panel-body">
@@ -126,19 +127,19 @@
 									</tr>
 									<tr>
 										<td>地接</td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
+										<td>{$plan->getDetailByType('dijie')->number}</td>
+										<td>{$plan->getDetailByType('dijie')->frequency}</td>
+										<td>{$plan->getDetailByType('dijie')->unit_price}</td>
+										<td>{$plan->getDetailByType('dijie')->total_price}</td>
+										<td>{$plan->getDetailByType('dijie')->remark}</td>
 									</tr>
 									<tr>
 										<td>住宿</td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
+										<td>{$plan->getDetailByType('zhusu')->number}</td>
+										<td>{$plan->getDetailByType('zhusu')->frequency}</td>
+										<td>{$plan->getDetailByType('zhusu')->unit_price}</td>
+										<td>{$plan->getDetailByType('zhusu')->total_price}</td>
+										<td>{$plan->getDetailByType('zhusu')->remark}</td>
 									</tr>
 								</table>
 							</div>
@@ -152,6 +153,7 @@
 					</div>
 				</div>
 			</li>
+		{/volist}
 	</ul>
 	<button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-ok"></span>&nbsp;完成</button>
 	<br><br>
