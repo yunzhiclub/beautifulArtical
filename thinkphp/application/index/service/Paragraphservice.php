@@ -8,16 +8,18 @@ class Paragraphservice
 	public function addOrEditParagraph($param)
 	{
 		// 获取参数
-		$articleId = $param->param('article_id');
+		$articleId = $param->param('articleId');
 		$id = $param->param('id');
 		$data = $param->post();
-		$file = request()->file('image');
 
 		// 初始化返回信息
 		$message = [];
 		$message['status'] = 'success';
 		$message['message'] = '保存成功！';
-		$message['route'] = "'article/secondadd',['id'=>$articleId]";
+		$message['route'] = 'article/secondadd';
+		$message['id'] = $articleId;
+		
+		$file = request()->file('image');
 
 		// 实例化一个空段落
 		$Paragraph = new Paragraph();
@@ -62,21 +64,21 @@ class Paragraphservice
 
 	public function deleteParagraph($param)
 	{
+		// 获取参数
+		$id = $param->param('id');
+		$articleId = $param->param('article_id');
+
 		// 初始化返回信息
 		$message = [];
 		$message['message'] = '删除成功！';
 		$message['status'] = 'success';
 		$message['route'] = 'article/secondadd';
-
-		// 获取参数
-		$id = $param->param('id');
-		$articleId = $param->param('article_id');
+		$message['id'] = $articleId;
 
 		// 获取段落id为空
 		if (is_null($id) || $id === 0) {
 			$message['status'] = 'error';
 			$message['message'] = '未获取到id';
-			$message['route'] = 'article/secondadd';
 
 		} else {
 			// 获取段落
@@ -86,14 +88,12 @@ class Paragraphservice
 			if (is_null($Paragraph)) {
 				$message['status'] = 'error';
 				$message['message'] = '未获取到对象信息！';
-				$message['route'] = 'article/secondadd';
 
 			} else {
 				// 删除失败
 				if (!$Paragraph->delete()) {
 					$message['status'] = 'error';
 					$message['message'] = '删除失败！';
-					$message['route'] = 'article/secondadd';
 				}
 			}
 		}

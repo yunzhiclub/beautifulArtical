@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>登录</title>
+    <link rel="stylesheet" type="text/css" href="/beautifulArtical/thinkphp/public/style/css/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div style="margin-top: 100px; margin-left: 44%;">
+        <h3>
+			欢迎使用本系统
+		</h3>
+    </div>
+    <div class="col-md-4 signup-form" style="border:2px; border-color: #ACEBAE;border-style: solid; margin-top: 40px; margin-right: 500px; margin-left: 500px; padding: 30px; ">
+        <div class="">
+            <form class="form-horizontal" action="{:url('login')}" method="post">
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <input type="text" class="form-control" name="username" placeholder="用户名...">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <input type="password" class="form-control" name="password" placeholder="密码...">
+                    </div>
+                </div>
+                <br>
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <button type="submit" class="btn btn-info btn-lg" style="width: 100%;">登录</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="col-md-offset-5">
+        <p>Copyright @ Power by mengyunzhi</p>
+    </div>
+</body>
+
+</html>
