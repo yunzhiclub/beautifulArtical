@@ -6,6 +6,7 @@ use app\index\model\Article;
 use app\index\model\Common;
 use app\index\model\Attraction;
 use app\index\model\Paragraph;
+use app\index\model\Hotel;
 /**
  *
  * @authors zhuchenshu
@@ -118,6 +119,9 @@ class Articleservice
         $articleid = $param->param('id/d');
         $Article = Article::get($articleid);
 
+        // 传入酒店实体
+        $Hotel = Hotel::all();
+
         $message = [];
         $message['title'] = $Article->title;
         $message['summery'] = $Article->summery;
@@ -138,6 +142,7 @@ class Articleservice
         // $Paragraph = Paragraph::order('weight')->select();
         $message['paragraphup'] = $ParagraphUp;
         $message['paragraphdown'] = $ParagraphDown;
+        $message['hotel'] = $Hotel;
 
         return $message;
     }
