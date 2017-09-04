@@ -19,12 +19,12 @@ class Article extends Model
 	 */
     public function saveContractorId($contractorId, $articleId)
     {
-        $this->id = $articleId;
-        $this->contractor_id = $contractorId;
+        $Article = Article::get($articleId);
+        $Article->contractor_id = $contractorId;
 
-    	if ($this->save()) {
-    		return true;
-    	}
-    	return false;
+        if ($Article->save()) {
+            return true;
+        }
+        return false;
     }
 }
