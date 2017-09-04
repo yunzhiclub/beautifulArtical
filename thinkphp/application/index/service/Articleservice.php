@@ -119,9 +119,6 @@ class Articleservice
         $articleid = $param->param('id/d');
         $Article = Article::get($articleid);
 
-        // 传入酒店实体
-        $Hotel = Hotel::all();
-
         $message = [];
         $message['title'] = $Article->title;
         $message['summery'] = $Article->summery;
@@ -135,14 +132,30 @@ class Articleservice
         // 获取传入景点的个数
         $length = sizeof($Attraction);
         $message['length'] = $length;
+        // 将文章中的各个景点的酒店合并到一个对象组中
+        $Hotels = array();
+        $tempHotel = new Hotel();
 
+        foreach ($Attraction as $key => $value) {
+            $hotelId = $value->hotel_id;
+            var_dump($hotelId);
+            if(!is_null($hotelId)) {
+                $tempHotel = Hotel::where('id', $hotelId)->find();
+            }
+            if (!is_null($tempHotel)) {
+                //如果酒店不为空
+                array_push($Hotels, $tempHotel);
+            }
+            $tempHotel = null;
+        }
+        var_dump($Hotels);
         // 将段落按在景点的上下顺序分成两个类，并根据权重排序
         $ParagraphUp = Paragraph::where('is_before_attraction',1)->where('article_id',$articleid)->order('weight')->select();
         $ParagraphDown = Paragraph::where('is_before_attraction',0)->where('article_id',$articleid)->order('weight')->select();
         // $Paragraph = Paragraph::order('weight')->select();
         $message['paragraphup'] = $ParagraphUp;
         $message['paragraphdown'] = $ParagraphDown;
-        $message['hotel'] = $Hotel;
+        $message['hotel'] = $Hotels;
 
         return $message;
     }
