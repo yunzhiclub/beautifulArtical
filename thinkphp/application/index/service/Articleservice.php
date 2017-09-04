@@ -138,7 +138,6 @@ class Articleservice
 
         foreach ($Attraction as $key => $value) {
             $hotelId = $value->hotel_id;
-            var_dump($hotelId);
             if(!is_null($hotelId)) {
                 $tempHotel = Hotel::where('id', $hotelId)->find();
             }
