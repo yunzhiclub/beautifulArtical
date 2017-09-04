@@ -76,43 +76,42 @@ class ArticleController extends Controller {
     }
     // 返回secondadd界面
     public function secondadd(){
-        // 返回firstadd界面添加的信息
-    	$id = Request::instance()->param('id/d');
-    	$Article = Article::get($id);
-    	$this->assign('title', $Article->title);
-    	$this->assign('summery', $Article->summery);
-        $this->assign('cover', $Article->cover);
-    	$this->assign('id', $id);
-        // 根据景点权重排序
-        $Attraction = Attraction::order('weight')->where('article_id',$id)->select();
-        $this->assign('attraction', $Attraction);
-        // 获取传入景点的个数
-        $length = sizeof($Attraction);
-        $this->assign('length', $length);
-        // 将段落按在景点的上下顺序分成两个类，并根据权重排序
-        $ParagraphUp = Paragraph::where('is_before_attraction',1)->where('article_id',$id)->order('weight')->select();
-        $ParagraphDown = Paragraph::where('is_before_attraction',0)->where('article_id',$id)->order('weight')->select();
-        // $Paragraph = Paragraph::order('weight')->select();
-        $this->assign('paragraphup', $ParagraphUp);
-        $this->assign('paragraphdown', $ParagraphDown);
+        // 接收参数
+        $param = Request::instance();
 
-        $map = ['article_id' => $id];
-        $plan = Plan::get($map);
-        $this->assign('plan', $plan);
-
+        // 调用service中的保存方法
+        $message =  $this->articleService->secondAriticle($param);
+        // 将serve中处理的数据传给前台
+        // 标题
+        $this->assign('title', $message['title']);
+        // 摘要
+        $this->assign('summery', $message['summery']);
+        // 封面
+        $this->assign('cover', $message['cover']);
+        // 文章id
+        $this->assign('id', $message['id']);
+        //景点信息
+        $this->assign('attraction', $message['attraction']);
+        // 景点数量
+        $this->assign('length', $message['length']);
+        // 段落（景点上）
+        $this->assign('paragraphup', $message['paragraphup']);
+        // 段落（景点下）
+        $this->assign('paragraphdown', $message['paragraphdown']);
+        // 返回v层数据
     	return $this->fetch();
 
     }
     public function addsecond(){
-    	$judgment = 0;
-    	$id = Request::instance()->param('id/d');
-    	$Article = Article::get($id);
-        // 添加订制师，报价，景点，段落的信息
-    	$judgment = $Article->save();
-    	if($judgment){
-    		$this->success('success',url('Article/index'));
-    	}
-        $this->error('失败',url('index'));
+        $this->success('文章编辑成功',url('index'));
+    }
+    public function delete() {
+        // 接收参数
+        $param = Request::instance();
+        //调用service中的方法
+        $message =  $this->articleService->deleteAttraction($param);
+
+        $this->success('文章删除成功',url('index'));
     }
 
     public function preview() {
