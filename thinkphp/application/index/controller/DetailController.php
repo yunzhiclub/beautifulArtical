@@ -5,14 +5,28 @@ use think\Controller;
 use app\index\model\Detail;
 use app\index\model\Plan;
 use app\index\model\Article;
+use app\index\service\PlanAndDetailservice;
 
 
 class DetailController extends Controller
 {
 
-	public function index()
-	{
+	protected $planAndDetailService = null;
 
+    //构造函数实例化ArticleService
+    function __construct(Request $request = null)
+    {
+        parent::__construct($request);
+        //实例化服务层
+        $this->planAndDetailService = new PlanAndDetailservice();
+    }
+
+    public function index()
+	{
+		$PageSize = config('paginate.var_page');
+	    $details = Detail::order('id desc')->paginate($PageSize);
+	    $this->assign('details', $details);
+		return $this->fetch();
 	}
 
 	public function add()
@@ -22,52 +36,23 @@ class DetailController extends Controller
         return $this->fetch();
 	}
 
-
+    // add页面完成后触发事件
 	public function save()
 	{
-		$Article = new Article();
-		$articleId = Request::instance()->param('id');
+        $Article = new Article();
+        $articleId = Request::instance()->param('id');
+		//接受参数
+        $param = Request::instance();
+        //调用service中的保存方法
+        $message =  $this->planAndDetailService->addPlanAndDetail($param);
 
-		$data = Request::instance()->post();
-		$Plan = new Plan();
-		$Plan->article_id = $articleId;
-		$Plan->travel_date = $data['travelDate'];
-        $Plan->people_num = $data['peopleNum'];
-        $Plan->currency = $data['currency'];
-        $Plan->total_cost = $data['totalCost'];
-        $Plan->last_pay_time = $data['lastPayTime'];
-		// 添加数据
-        if (!$Plan->save()) {
-            return $this->error('数据添加错误：' . $Plan->getError());
+        //返回相应的界面
+        if ($message['status'] === 'success') {
+            //跳转成功的界面
+            $this->success($message['message'], url($message['route'], ['id' => $message['articleId']]));
+        } else {
+            //跳转失败的界面
+            $this->error($message['message'], url($message['route']));
         }
-
-		
-		// 实例化明细信息
-		$Detail = new Detail();
-		$Detail->remark = $data['dijie_remark'];
-		$Detail->plan_id = $Plan->id;
-		$Detail->type = $data['dijie_type'];
-		$Detail->number = $data['dijie_number'];
-		$Detail->frequency = $data['dijie_frequency'];
-		$Detail->unit_price = $data['dijie_unitPrice'];
-		$Detail->total_price = $data['dijie_totalPrice'];
-		// 添加数据
-        if (!$Detail->save()) {
-            return $this->error('数据添加错误：' . $Detail->getError());
-        }
-
-		$Detail1 = new Detail();
-		$Detail1->remark = $data['zhusu_remark'];
-		$Detail1->plan_id = $Plan->id;
-		$Detail1->type = $data['zhusu_type'];
-		$Detail1->number = $data['zhusu_number'];
-		$Detail1->frequency = $data['zhusu_frequency'];
-		$Detail1->unit_price = $data['zhusu_unitPrice'];
-		$Detail1->total_price = $data['zhusu_totalPrice'];
-		// 添加数据
-        if (!$Detail1->save()) {
-            return $this->error('数据添加错误：' . $Detail->getError());
-        }
-        return $this->success('success', url('Article/secondadd', ["id" => $articleId]));
 	}
 }

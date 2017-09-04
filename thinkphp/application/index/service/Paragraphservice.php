@@ -7,8 +7,6 @@ class Paragraphservice
 {
 	public function addOrEditParagraph($param)
 	{
-		
-
 		// 获取参数
 		$articleId = $param->param('articleId');
 		$id = $param->param('id');
@@ -22,7 +20,6 @@ class Paragraphservice
 		$message['id'] = $articleId;
 		
 		$file = request()->file('image');
-
 
 		// 实例化一个空段落
 		$Paragraph = new Paragraph();
