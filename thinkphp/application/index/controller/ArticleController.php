@@ -104,6 +104,8 @@ class ArticleController extends Controller {
         $this->assign('paragraphup', $message['paragraphup']);
         // 段落（景点下）
         $this->assign('paragraphdown', $message['paragraphdown']);
+        // 酒店
+        $this->assign('hotel',$message['hotel']);
         // 返回v层数据
     	return $this->fetch();
 
