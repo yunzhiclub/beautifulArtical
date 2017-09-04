@@ -33,19 +33,16 @@ class Loginservice
 	}
 
 	/**
-	 * 获取用户对象
-	 * @param  object   $object  实体对象
+	 * 获取当前用户对象
 	 * @return object            返回用户对象
 	 */
-	public function getUser($object)
+	public function getCurrentUser()
 	{
-		// 获取传入对象的user_id
-		$id = $object->getData('user_id');
+		// 获取当前session中的user_id
+		$id = session('id');
 
-		// 获取相应的user对象
+		// 根据user_id获取对象
 		$User = User::get($id);
-
-		// 返回获取到的对象
 		return $User;
 	}
 }
