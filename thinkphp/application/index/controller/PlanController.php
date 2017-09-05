@@ -1,12 +1,12 @@
 <?php
 namespace app\index\controller;
-use think\Controller;
+use app\index\controller\IndexController;
 use think\Request;
 use app\index\model\Plan;
 use app\index\model\Article;
 
 
-class PlanController extends Controller
+class PlanController extends IndexController
 {
 
 	public function index()
