@@ -39,10 +39,42 @@ class Loginservice
 	public function getCurrentUser()
 	{
 		// 获取当前session中的user_id
-		$id = session('id');
+		$id = session('userId');
 
-		// 根据user_id获取对象
-		$User = User::get($id);
-		return $User;
+		// 用户id不存在
+		if (is_null($id) || $id === 0) {
+			// 返回空对象
+			$User = new User();
+			return $User;
+
+		// 用户id存在
+		} else {
+			// 根据user_id获取对象
+			$User = User::get($id);
+			return $User;
+		}
+	}
+
+	/**
+	 * 判断用户是否登录
+	 * @return boolean true/登录；false/未登录
+	 */
+	public function isLogin()
+	{
+		$userId = session('userId');
+
+		if (isset($userId)) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	public function logOut()
+	{
+		// 销毁session中的数据
+		session('userId', null);
+		
+		return true;
 	}
 }

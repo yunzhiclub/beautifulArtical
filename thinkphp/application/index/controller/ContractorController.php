@@ -1,7 +1,7 @@
 <?php
 namespace app\index\controller;
 
-use think\Controller;
+use app\index\controller\IndexController;
 use think\Request;
 use app\index\model\Contractor;
 use app\index\service\Contractorservice;
@@ -9,7 +9,7 @@ use app\index\service\Contractorservice;
 /**
  * @author 朴世超
  */
-class ContractorController extends Controller
+class ContractorController extends IndexController
 {
 	protected $contractorService = null;
 

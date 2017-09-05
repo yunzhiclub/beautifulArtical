@@ -1,12 +1,16 @@
 <?php
 namespace app\index\controller;
 use think\Request;
-use think\Controller;
 use app\index\service\PlanService;
 use app\index\service\DetailService;
+use app\index\controller\IndexController;
+use app\index\model\Detail;
+use app\index\model\Plan;
+use app\index\model\Article;
+use app\index\service\PlanAndDetailservice;
 
 
-class DetailController extends Controller
+class DetailController extends IndexController
 {
     // 实现方法的实例化
     function __construct(Request $request = null)

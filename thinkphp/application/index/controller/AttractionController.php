@@ -5,7 +5,7 @@ namespace app\index\controller;
 use app\index\model\AttractionModel;
 use app\index\model\Common;
 use app\index\model\HotelModel;
-use think\Controller;
+use app\index\controller\IndexController;
 use think\Request;
 use app\index\model\Hotel;
 use app\index\model\Attraction;
@@ -15,7 +15,7 @@ use app\index\model\Attraction;
  * @authors 张喜硕
  */
 
-class AttractionController extends Controller {
+class AttractionController extends IndexController {
     
     public function add() {
         $articleId = Request::instance()->param('articleId');

@@ -35,9 +35,6 @@ class Paragraph extends Model
         $this->is_before_attraction = (boolean)$data['is_before_attraction'];
 		$this->article_id = $articleId;
 		$this->weight = $this->getWeight("weight", $this->article_id);
-        var_dump($this->weight);
-        var_dump($articleId);
-         
 		
 		// 传入图片
     	$file = request()->file('image');
