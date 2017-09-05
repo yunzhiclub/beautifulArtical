@@ -16,7 +16,7 @@
                         <a href="#thirdform" data-toggle="tab">第三步</a>
                     </li>
                 </ul>
-                <form action="{:url('save', ['id' => $id])}" method="post">
+                <form action="{:url('save', ['id' => $id,'planId'=>$plan->id,'detailIddijie'=>$plan->getDetailByType('dijie')->id]),'detailId'=>$plan->getDetailByType('zhusu')->id}" method="post">
                     <div id="myTabContent" class="tab-content">
                         <div class="tab-pane fade in active" id="firstform">
                             <br>
@@ -24,31 +24,31 @@
                             <div class="control-group">
                                 <label for="travelDate">出行日期</label>
                                 <div class="controls">
-                                    <input type="date" class="form-control" name="travelDate" placeholder="出行日期"  />
+                                    <input type="date" class="form-control" name="travelDate" placeholder="出行日期" value="{$plan->travel_date}" />
                                 </div>
                             </div>
                             <div class="control-group">
                                 <label class="control-label" for="peopleNum">出行人数</label>
                                 <div class="controls">
-                                    <input type="text" class="form-control" name="peopleNum" placeholder="出行人数"  />
+                                    <input type="text" class="form-control" name="peopleNum" placeholder="出行人数" value="{$plan->people_num}" />
                                 </div>
                             </div>
                             <div class="control-group">
                                 <label for="currency">币种</label>
                                 <div class="controls">
-                                    <input type="text" class="form-control" name="currency" placeholder="币种"  />
+                                    <input type="text" class="form-control" name="currency" placeholder="币种" value="{$plan->currency}" />
                                 </div>
                             </div>
                             <div class="control-group">
                                 <label for="totalCost">总费用</label>
                                 <div class="controls">
-                                    <input type="text" class="form-control" name="totalCost" placeholder="总费用" />
+                                    <input type="text" class="form-control" name="totalCost" placeholder="总费用" value="{$plan->total_cost}"/>
                                 </div>
                             </div>
                             <div class="control-group">
                                 <label for="lastPayTime">最晚付款时间</label>
                                 <div class="controls">
-                                    <input type="date" class="form-control" name="lastPayTime" placeholder="最晚付款时间"  />
+                                    <input type="date" class="form-control" name="lastPayTime" placeholder="最晚付款时间" value="{$plan->last_pay_time}" />
                                 </div>
                             </div>
                             <br>
@@ -61,31 +61,31 @@
                             <div class="control-group">
                                 <label for="number">数量</label>
                                 <div class="controls">
-                                    <input type="number" class="form-control" name="dijie_number" placeholder="数量"  />
+                                    <input type="number" class="form-control" name="dijie_number" placeholder="数量" value="{$plan->getDetailByType('dijie')->number}" />
                                 </div>
                             </div>
                             <div class="control-group">
                                 <label for="frequency">频次</label>
                                 <div class="controls">
-                                    <input type="number" class="form-control" name="dijie_frequency" placeholder="频次"  />
+                                    <input type="number" class="form-control" name="dijie_frequency" placeholder="频次" value="{$plan->getDetailByType('dijie')->frequency}" />
                                 </div>
                             </div>
                             <div class="control-group">
                                 <label for="unitPrice">单价</label>
                                 <div class="controls">
-                                    <input type="text" class="form-control" name="dijie_unitPrice" placeholder="单价"  />
+                                    <input type="text" class="form-control" name="dijie_unitPrice" placeholder="单价" value="{$plan->getDetailByType('dijie')->unit_price}" />
                                 </div>
                             </div>
                             <div class="control-group">
                                 <label for="totalPrice">总价</label>
                                 <div class="controls">
-                                    <input type="text" class="form-control" name="dijie_totalPrice" placeholder="总价" />
+                                    <input type="text" class="form-control" name="dijie_totalPrice" placeholder="总价" value="{$plan->getDetailByType('dijie')->total_price}" />
                                 </div>
                             </div>
                             <div class="control-group">
                                 <label for="remark">备注</label>
                                 <div class="controls">
-                                    <input type="text" class="form-control" name="dijie_remark" placeholder="备注"  />
+                                    <input type="text" class="form-control" name="dijie_remark" placeholder="备注" value="{$plan->getDetailByType('dijie')->remark}" />
                                 </div>
                             </div>
                             <br>
@@ -98,31 +98,31 @@
                             <div class="control-group">
                                 <label for="number">数量</label>
                                 <div class="controls">
-                                    <input type="number" class="form-control" name="zhusu_number" placeholder="数量" />
+                                    <input type="number" class="form-control" name="zhusu_number" placeholder="数量" value="{$plan->getDetailByType('zhusu')->number}" />
                                 </div>
                             </div>
                             <div class="control-group">
                                 <label for="frequency">频次</label>
                                 <div class="controls">
-                                    <input type="number" class="form-control" name="zhusu_frequency" placeholder="频次"  />
+                                    <input type="number" class="form-control" name="zhusu_frequency" placeholder="频次" value="{$plan->getDetailByType('zhusu')->frequency}" />
                                 </div>
                             </div>
                             <div class="control-group">
                                 <label for="unitPrice">单价</label>
                                 <div class="controls">
-                                    <input type="text" class="form-control" name="zhusu_unitPrice" placeholder="单价"  />
+                                    <input type="text" class="form-control" name="zhusu_unitPrice" placeholder="单价" value="{$plan->getDetailByType('zhusu')->unit_price}" />
                                 </div>
                             </div>
                             <div class="control-group">
                                 <label for="totalPrice">总价</label>
                                 <div class="controls">
-                                    <input type="text" class="form-control" name="zhusu_totalPrice" placeholder="总价"  />
+                                    <input type="text" class="form-control" name="zhusu_totalPrice" placeholder="总价" value="{$plan->getDetailByType('zhusu')->total_price}" />
                                 </div>
                             </div>
                             <div class="control-group">
                                 <label for="remark">备注</label>
                                 <div class="controls">
-                                    <input type="text" class="form-control" name="zhusu_remark" placeholder="备注"  />
+                                    <input type="text" class="form-control" name="zhusu_remark" placeholder="备注" value="{$plan->getDetailByType('zhusu')->remark}" />
                                 </div>
                             </div>
                             <br>

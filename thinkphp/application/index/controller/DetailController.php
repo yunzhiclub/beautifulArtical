@@ -31,6 +31,8 @@ class DetailController extends Controller
 
 	public function add()
 	{
+        $judge = Request::instance()->param('judge');
+        
 		$articleId = Request::instance()->param('id');
 		$this->assign('id', $articleId);
         return $this->fetch();
@@ -39,6 +41,10 @@ class DetailController extends Controller
     // add页面完成后触发事件
 	public function save()
 	{
+        // 判断是编辑传来的保存还是新建传来的保存
+        if(!is_null($planId)){
+
+        }
         $Article = new Article();
         $articleId = Request::instance()->param('id');
 		//接受参数
@@ -55,4 +61,21 @@ class DetailController extends Controller
             $this->error($message['message'], url($message['route']));
         }
 	}
+     public function edit() {
+        // v层数据传输
+        $request = Request::instance();
+        $articleId = Request::instance()->param('article_id/d');
+        //调用service中的编辑方法
+        $message =  $this->planAndDetailService->editPlan($request);
+
+        $this->assign('detail',$message['detail']);
+        $this->assign('plan',$message['plan']);
+
+        return $this->fetch('edit',['id'=>$articleId]);
+    }
+    public function delete() {
+        // v层数据传输
+        $Request = Request::instance();
+
+    }
 }

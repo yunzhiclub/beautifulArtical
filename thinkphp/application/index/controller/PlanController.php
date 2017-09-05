@@ -38,6 +38,4 @@ class PlanController extends Controller
         }
         return $this->success('success', url('Detail/index'));
 	}
-
-
 }

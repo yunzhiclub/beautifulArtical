@@ -75,4 +75,20 @@ class PlanAndDetailservice
             return $this->error('数据添加错误：' . $Detail->getError());
         }
 	}
+    public function editPlan($param) {
+        // 获取方案id
+        $planId = $param->param('planId/d');
+        $Detail = Detail::get($planId);
+        $articleId = $param->param('article_id/d');
+
+        $message = [];
+        $message['detail'] = $Detail;
+        var_dump($planId);
+        $planId = $Detail->plan_id;
+        $Plan = Plan::get($planId);
+
+        $message['plan'] = $Plan;
+
+        return $message;
+    }
 }
