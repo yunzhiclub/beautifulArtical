@@ -24,7 +24,7 @@ class PlanAndDetailservice
 		$planId = $param->param('id/d');
 		$travelDate = $param->post('travelDate');
         $peopleNum = $param->post('peopleNum');
-        $currency = $currency = $param->post('currency');
+        $currency = $param->post('currency');
         $totalCost = $param->post('totalCost');
         $lastPayTime = $param->post('lastPayTime');
         $dijie_remark = $param->post('dijie_remark');
@@ -61,7 +61,7 @@ class PlanAndDetailservice
 
 	}
 
-    public function saveDetail($remark, $Plan, $type, $number, $frequency, $unit_price, $total_price) 
+    public function saveDetail($remark, $Plan, $type, $number, $frequency, $unitPrice, $totalPrice) 
     {
 		$Detail = new Detail();
 		$Detail->remark = $remark;
@@ -69,8 +69,8 @@ class PlanAndDetailservice
 		$Detail->type = $type;
 		$Detail->number = $number;
 		$Detail->frequency = $frequency;
-		$Detail->unit_price = $unit_price;
-		$Detail->total_price = $total_price;
+		$Detail->unit_price = $unitPrice;
+		$Detail->total_price = $totalPrice;
 		if (!$Detail->save()) {
             return $this->error('数据添加错误：' . $Detail->getError());
         }

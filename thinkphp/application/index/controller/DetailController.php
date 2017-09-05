@@ -23,8 +23,8 @@ class DetailController extends IndexController
 
     public function index()
 	{
-		$PageSize = config('paginate.var_page');
-	    $details = Detail::order('id desc')->paginate($PageSize);
+		$pageSize = config('paginate.var_page');
+	    $details = Detail::order('id desc')->paginate($pageSize);
 	    $this->assign('details', $details);
 		return $this->fetch();
 	}

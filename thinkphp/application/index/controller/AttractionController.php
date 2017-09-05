@@ -38,29 +38,29 @@ class AttractionController extends IndexController {
         $hotelStarLevel = Request::instance()->post('hotelStarLevel');
         $hotelRemark = Request::instance()->post('hotelRemark');
 
-        $article_id = Request::instance()->param('articleId');
+        $articleId = Request::instance()->param('articleId');
 
         // 酒店处理
         if($hotelName || $hotelCity || $hotelStarLevel || $hotelRemark) {
-            $hotel = new Hotel();
-            $hotel = $hotel->saveHotel($hotelName,$hotelCity,$hotelStarLevel,$hotelRemark);
+            $Hotel = new Hotel();
+            $Hotel = $Hotel->saveHotel($hotelName,$hotelCity,$hotelStarLevel,$hotelRemark);
         } else {
-            $hotel = null;
+            $Hotel = null;
         }
 
         // 图片处理
         $file = request()->file('image');
         if(is_null($file)) {
-            return $this->error('请上传图片', url('add?id='.$article_id));
+            return $this->error('请上传图片', url('add?id='.$articleId));
         }
         $image = Common::uploadImage($file);
 
         // 景点处理
         $attraction = new Attraction();
-        if(!$attraction->saveAttraction($title, $content, $name, $meal, $car, $guide, $image, $hotel, $article_id)) {
-            return $this->error('保存失败', url('add?id='.$article_id));
+        if(!$attraction->saveAttraction($title, $content, $name, $meal, $car, $guide, $image, $Hotel, $articleId)) {
+            return $this->error('保存失败', url('add?id='.$articleId));
         } else {
-            return $this->success('保存成功', url('Article/secondadd?id='.$article_id));
+            return $this->success('保存成功', url('Article/secondadd?id='.$articleId));
         }
     }
 
@@ -68,17 +68,17 @@ class AttractionController extends IndexController {
         $articleId = Request::instance()->param('articleId');
         $attractionId = Request::instance()->param('attractionId');
 
-        $attraction = Attraction::get($attractionId);
+        $Attraction = Attraction::get($attractionId);
 
-        if(!is_null($attraction->hotel_id)) {
-            $hotel = Hotel::get($attraction->hotel_id);
+        if(!is_null($Attraction->hotel_id)) {
+            $Hotel = Hotel::get($Attraction->hotel_id);
         } else {
-            $hotel = Hotel::getNullHotel();
+            $Hotel = Hotel::getNullHotel();
         }
 
         $this->assign('articleId', $articleId);
-        $this->assign('attraction', $attraction);
-        $this->assign('hotel', $hotel);
+        $this->assign('attraction', $Attraction);
+        $this->assign('hotel', $Hotel);
 
         return $this->fetch('add');
     }
@@ -102,33 +102,33 @@ class AttractionController extends IndexController {
         $hotelRemark = Request::instance()->post('hotelRemark');
 
         // 酒店处理
-        $hotel = Hotel::getNullHotel();
+        $Hotel = Hotel::getNullHotel();
         if($hotelName || $hotelCity || $hotelStarLevel || $hotelRemark) {
             if(!is_null($hotelId)) {
-                $hotel = $hotel->updateHotel($hotelName, $hotelCity, $hotelStarLevel, $hotelRemark, $hotelId);
+                $Hotel = $Hotel->updateHotel($hotelName, $hotelCity, $hotelStarLevel, $hotelRemark, $hotelId);
             } else {
-                $hotel = $hotel->saveHotel($hotelName, $hotelCity, $hotelStarLevel, $hotelRemark);
+                $Hotel = $Hotel->saveHotel($hotelName, $hotelCity, $hotelStarLevel, $hotelRemark);
             }
         } else {
             if(!is_null($hotelId)) {
-                $hotel->deleteHotel($hotelId);
+                $Hotel->deleteHotel($hotelId);
             }
-            $hotel = null;
+            $Hotel = null;
         }
 
         // 图片处理
-        $attraction = Attraction::get($attractionId);
+        $Attraction = Attraction::get($attractionId);
         $file = request()->file('image');
         if(!is_null($file)) {
-            Common::deleteImage('upload/'.$attraction->image);
+            Common::deleteImage('upload/'.$Attraction->image);
             $image = Common::uploadImage($file);
         } else {
-            $image = $attraction->image;
+            $image = $Attraction->image;
         }
 
         // 景点处理
-        $attraction = Attraction::getNullAttraction();
-        $attraction->updateAttraction($title, $content, $name, $meal, $car, $guide, $image, $hotel, $articleId, $attractionId);
+        $Attraction = Attraction::getNullAttraction();
+        $Attraction->updateAttraction($title, $content, $name, $meal, $car, $guide, $image, $Hotel, $articleId, $attractionId);
 
         return $this->success('更新成功',url('article/secondadd?id='.$articleId));
     }
@@ -136,8 +136,8 @@ class AttractionController extends IndexController {
     public function delete() {
         $attractionId = Request::instance()->param('attractionId');
         $articleId = Request::instance()->param('articleId');
-        $attraction = new Attraction();
-        if(!$attraction->deleteAttraction($attractionId)) {
+        $Attraction = new Attraction();
+        if(!$Attraction->deleteAttraction($attractionId)) {
             return $this->error('删除失败',url('article/secondadd?id='.$articleId));
         }
         return $this->success('删除成功',url('article/secondadd?id='.$articleId));

@@ -11,7 +11,7 @@ use think\Model;
  */
 
 class Attraction extends Model {
-    public function saveAttraction($title, $content, $name, $meal, $car, $guide, $image, $hotel, $article_id) {
+    public function saveAttraction($title, $content, $name, $meal, $car, $guide, $image, $hotel, $articleId) {
         $this->title = $title;
         $this->description = $content;
         $this->designation = $name;
@@ -19,8 +19,8 @@ class Attraction extends Model {
         $this->car = $car;
         $this->guide = $guide;
         $this->image = $image;
-        $this->weight = Attraction::where('article_id', '=', $article_id)->count()+1;
-        $this->article_id = $article_id;
+        $this->weight = Attraction::where('article_id', '=', $articleId)->count()+1;
+        $this->article_id = $articleId;
 
         if(!is_null($hotel)){
             $this->hotel_id = $hotel->id;
@@ -33,22 +33,22 @@ class Attraction extends Model {
         }
     }
 
-    public function updateAttraction($title, $content, $name, $meal, $car, $guide, $image, $hotel, $article_id, $id) {
-        $attraction = Attraction::get($id);
-        $attraction->saveAttraction($title, $content, $name, $meal, $car, $guide, $image, $hotel, $article_id);
+    public function updateAttraction($title, $content, $name, $meal, $car, $guide, $image, $hotel, $articleId, $id) {
+        $Attraction = Attraction::get($id);
+        $Attraction->saveAttraction($title, $content, $name, $meal, $car, $guide, $image, $hotel, $articleId);
     }
 
     public function deleteAttraction($id) {
-        $attraction = Attraction::get($id);
-        $hotelId = $attraction->hotel_id;
+        $Attraction = Attraction::get($id);
+        $hotelId = $Attraction->hotel_id;
 
-        Common::deleteImage('upload/'.$attraction->image);
-        if(!$attraction->delete()) {
+        Common::deleteImage('upload/'.$Attraction->image);
+        if(!$Attraction->delete()) {
             return false;
         }
         if(!is_null($hotelId)) {
-            $hotel = new Hotel();
-            if(!$hotel->deleteHotel($hotelId)){
+            $Hotel = new Hotel();
+            if(!$Hotel->deleteHotel($hotelId)){
                 return false;
             }
         }
@@ -64,15 +64,15 @@ class Attraction extends Model {
     }
 
     public static function getNullAttraction() {
-        $attraction = new Attraction();
-        $attraction->id = null;
-        $attraction->title = '';
-        $attraction->description = '';
-        $attraction->designation = '';
-        $attraction->meal = '';
-        $attraction->car = '';
-        $attraction->guide = '';
-        $attraction->image = null;
-        return $attraction;
+        $Attraction = new Attraction();
+        $Attraction->id = null;
+        $Attraction->title = '';
+        $Attraction->description = '';
+        $Attraction->designation = '';
+        $Attraction->meal = '';
+        $Attraction->car = '';
+        $Attraction->guide = '';
+        $Attraction->image = null;
+        return $Attraction;
     }
 }

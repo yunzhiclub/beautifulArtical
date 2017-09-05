@@ -24,10 +24,10 @@ class ContractorController extends IndexController
 	public function add()
 	{
 		// 获取文章id
-		$articleId = Request::instance()->param('article_id');
+		$articleId = Request::instance()->param('article_id/d');
 
 		// 连接v层
-		$this->assign('article_id', $articleId);
+		$this->assign('articleId', $articleId);
 
 		// 返回添加界面
 		return $this->fetch();
