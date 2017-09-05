@@ -42,6 +42,7 @@ class Attraction extends Model {
         $attraction = Attraction::get($id);
         $hotelId = $attraction->hotel_id;
 
+        Common::deleteImage('upload/'.$attraction->image);
         if(!$attraction->delete()) {
             return false;
         }
