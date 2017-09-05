@@ -1,7 +1,7 @@
 <?php
 namespace app\index\controller;
 
-use think\Controller;
+use app\index\controller\IndexController;
 use think\Request;
 use app\index\model\Article;
 use app\index\model\Common;
@@ -17,7 +17,7 @@ use app\index\service\Articleservice;
  * @version $Id$
  */
 
-class ArticleController extends Controller {
+class ArticleController extends IndexController {
 
     protected $articleService = null;
 
