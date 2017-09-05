@@ -232,13 +232,13 @@ class Articleservice
         }
 
         // 删除定制师
-        $Contractor = Contractor::get($Article->contractor_id);
-        if(!is_null($Contractor)) {
-            if(!$Contractor->delete()) {
-                $message['message'] = '删除定制师失败';
-                $message['status'] = 'error';
-            }
-        }
+//        $Contractor = Contractor::get($Article->contractor_id);
+//        if(!is_null($Contractor)) {
+//            if(!$Contractor->delete()) {
+//                $message['message'] = '删除定制师失败';
+//                $message['status'] = 'error';
+//            }
+//        }
 
         return $message;
     }
