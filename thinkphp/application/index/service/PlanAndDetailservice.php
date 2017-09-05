@@ -78,17 +78,33 @@ class PlanAndDetailservice
     public function editPlan($param) {
         // 获取方案id
         $planId = $param->param('planId/d');
-        $Detail = Detail::get($planId);
+        $Plan = Plan::get($planId);
+        $DetailZhusu = $Plan->getDetailByType('zhusu');
+        $DetailDijie = $Plan->getDetailByType('dijie');
         $articleId = $param->param('article_id/d');
 
         $message = [];
-        $message['detail'] = $Detail;
-        var_dump($planId);
+        $message['detailzhusu'] = $DetailZhusu;
+        $message['detaildijie'] = $DetailDijie;
+
         $planId = $Detail->plan_id;
         $Plan = Plan::get($planId);
 
         $message['plan'] = $Plan;
 
         return $message;
+    }
+    public function deletePlan($param) {
+        $planId = $param->param('planId/d');
+        $Plan = Plan::get($planId);
+        $DetailZhusu = $Plan->getDetailByType('zhusu');
+        $DetailDijie = $Plan->getDetailByType('dijie');
+        $planDelete = $Plan->delete();
+        $dijieDelete = $DetailDijie->delete();
+        $zhusuDelete = $DetailZhusu->delete();
+        if($planDelete && $dijieDelete && $zhusuDelete){
+            return true;
+        }
+            return false;
     }
 }

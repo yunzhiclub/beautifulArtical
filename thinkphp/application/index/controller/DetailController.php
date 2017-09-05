@@ -65,10 +65,11 @@ class DetailController extends Controller
         // v层数据传输
         $request = Request::instance();
         $articleId = Request::instance()->param('article_id/d');
-        //调用service中的编辑方法
+        // 调用service中的编辑方法
         $message =  $this->planAndDetailService->editPlan($request);
 
-        $this->assign('detail',$message['detail']);
+        $this->assign('detailzhusu',$message['detailzhusu']);
+        $this->assign('detaildijie',$message['detaildijie']);
         $this->assign('plan',$message['plan']);
 
         return $this->fetch('edit',['id'=>$articleId]);
@@ -76,6 +77,11 @@ class DetailController extends Controller
     public function delete() {
         // v层数据传输
         $Request = Request::instance();
-
+        $articleId = Request::instance()->param('article_id/d');
+        $message = $this->planAndDetailService->deletePlan($Request);
+        if($message){
+            $this->success('删除成功',url('article/secondadd',['id'=>$articleId]));
+        }
+        $this->error('删除失败',url('article/secondadd',['id'=>$articleId]));
     }
 }
