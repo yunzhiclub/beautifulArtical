@@ -41,4 +41,13 @@ class LoginController extends Controller
 			return $this->error($message['message'], url($message['route']));
 		}		
 	}
+
+	public function logout()
+	{
+		if ($this->loginService->logOut()) {
+			return $this->success('注销成功！', url('index'));
+		} else {
+			return $this->error('注销失败！', url('index'));
+		}
+	}
 }

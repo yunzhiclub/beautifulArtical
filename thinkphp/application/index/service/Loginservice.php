@@ -69,4 +69,12 @@ class Loginservice
 			return false;
 		}
 	}
+
+	public function logOut()
+	{
+		// 销毁session中的数据
+		session('userId', null);
+		
+		return true;
+	}
 }
