@@ -8,8 +8,13 @@ use think\Request;
 
 class DetailService
 {
-	public function add($param, $Plan)
+	public function add($param, $planId)
 	{
+        // 初始化返回信息
+        $message = [];
+        $message['status'] = 'success';
+        $message['message'] = '保存成功！';
+
 
         //获取到参数
         $articleId = $param->param('id');
@@ -24,26 +29,27 @@ class DetailService
         $zhusu_unitPrice = $param->post('zhusu_unitPrice');
         $zhusu_totalPrice = $param->post('zhusu_totalPrice');
         
-        if($this->save($dijie_remark, $Plan, 'dijie', $dijie_number, $dijie_frequency, $dijie_unitPrice, $dijie_totalPrice) && $this->save($zhusu_remark, $Plan, 'zhusu', $zhusu_number, $zhusu_frequency, $zhusu_unitPrice, $zhusu_totalPrice)) {
-            return true;
+        if($this->save($dijie_remark, $planId, 'dijie', $dijie_number, $dijie_frequency, $dijie_unitPrice, $dijie_totalPrice) && $this->save($zhusu_remark, $planId, 'zhusu', $zhusu_number, $zhusu_frequency, $zhusu_unitPrice, $zhusu_totalPrice)) {
+            return  $message['message'] = '保存成功！';
         }
         
-        return false;
+        $message['message'] = '保存失败';
+        return $message;
 	}
     
     // 方法的增加实现代码的简化
-    public function save($remark, $Plan, $type, $number, $frequency, $unit_price, $total_price) 
+    public function save($remark, $planId, $type, $number, $frequency, $unit_price, $total_price) 
     {
 		$Detail = new Detail();
 		$Detail->remark = $remark;
-		$Detail->plan_id = $Plan->id;
+		$Detail->plan_id = $planId;
 		$Detail->type = $type;
 		$Detail->number = $number;
 		$Detail->frequency = $frequency;
 		$Detail->unit_price = $unit_price;
 		$Detail->total_price = $total_price;
 		if (!$Detail->save()) {
-            return $this->error('数据添加错误：' . $Detail->getError());
+            return false;
         }
         return true;
 	}

@@ -11,6 +11,12 @@ class PlanService
 
 	public function save($param)
 	{
+        // 初始化返回信息
+        $message = [];
+        $message['status'] = 'success';
+        $message['message'] = '保存成功！';
+
+
         //获取到参数
         $articleId = Request::instance()->param('id');
         $travelDate = $param->post('travelDate');
@@ -30,10 +36,13 @@ class PlanService
 
         // 添加数据
         if (!$Plan->save()) {
-            return $this->error('数据添加错误：' . $Plan->getError());
+            $message['message'] = '方案报价未保存成功！';;
         }
 
-        return $Plan;
+        $message['planId'] = $Plan->id;
+        $message['id'] = $articleId;
+
+        return $message;
 	}
 
 }
