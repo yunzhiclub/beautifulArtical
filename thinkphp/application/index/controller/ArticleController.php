@@ -106,6 +106,12 @@ class ArticleController extends IndexController {
         $this->assign('paragraphdown', $message['paragraphdown']);
         // 酒店
         $this->assign('hotel',$message['hotel']);
+        // 判断是否有酒店
+        if(sizeof($message['hotel'])==0){
+            $this->assign('judgeHotel','0');
+        }else{
+            $this->assign('judgeHotel','1');
+        }
         // 返回v层数据
     	return $this->fetch();
 
