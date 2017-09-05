@@ -123,9 +123,13 @@ class ArticleController extends IndexController {
         // 接收参数
         $param = Request::instance();
         //调用service中的方法
-        $message =  $this->articleService->deleteAttraction($param);
+        $message =  $this->articleService->deleteArticle($param);
 
-        $this->success('文章删除成功',url('index'));
+        if($message['status'] == 'success') {
+            $this->success($message['message'],url('article/index'));
+        } else {
+            $this->error($message['message'], url('article/index'));
+        }
     }
 
     public function preview() {
