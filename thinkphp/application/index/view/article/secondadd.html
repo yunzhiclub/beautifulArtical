@@ -22,7 +22,7 @@
 			<label for="TextInput">正文</label>
 			<span class="col-md-offset-1">
 				<a class="btn btn-primary btn-sm" href="{:url('Paragraph/index', ['article_id'=>$id,'id'=>''])}"><span class="glyphicon glyphicon-plus"></span>&nbsp;段落</a>&nbsp;&nbsp;
-				<a class="btn btn-primary btn-sm" href="{:url('Attraction/add?id='.$id)}"><span class="glyphicon glyphicon-plus"></span>&nbsp;景点</a>&nbsp;&nbsp;
+				<a class="btn btn-primary btn-sm" href="{:url('Attraction/add',['articleId' => $id])}"><span class="glyphicon glyphicon-plus"></span>&nbsp;景点</a>&nbsp;&nbsp;
 				<a class="btn btn-primary btn-sm" href="{:url('Detail/add', ['id'=>$id])}"><span class="glyphicon glyphicon-plus"></span>&nbsp;方案报价</a>&nbsp;&nbsp;
 				<a class="btn btn-primary btn-sm" href="{:url('Contractor/add', ['article_id'=>$id])}"><span class="glyphicon glyphicon-plus"></span>&nbsp;订制师</a>
 			</span>
