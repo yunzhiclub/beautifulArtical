@@ -44,4 +44,41 @@ class DetailController extends IndexController
         return $this->error($message['message'], url('add', ['articleId' =>$message['articleId']]));
         
 	}
+    // 报价方案的更新
+    public function update() {
+        $articleId = Request::instance()->param('id');
+        // 接收参数
+        $param = Request::instance();
+        // 传递到s层执行
+        $message = $this->planService->edit($param);
+        // 将plan及detail数据保存
+        if($this->detailService->add($param, $message['planId'])) {
+            return $this->success($message['message'], url('Article/secondadd', ['articleId' =>$message['id']]));
+        }else{
+            return $this->error('地接或住宿未修改', url('Article/secondadd', ['articleId' =>$message['id']]));
+        }
+        
+        return $this->error($message['message'], url('Article/secondadd', ['id' =>$message['id']]));
+    }
+     public function edit() {
+        // v层数据传输
+        $request = Request::instance();
+        $articleId = Request::instance()->param('article_id/d');
+        // 调用service中的编辑方法
+        $message =  $this->planService->editPlan($request);
+
+        $this->assign('plan',$message['plan']);
+
+        return $this->fetch('edit',['articleId'=>$articleId]);
+    }
+    public function delete() {
+        // v层数据传输
+        $Request = Request::instance();
+        $articleId = Request::instance()->param('article_id/d');
+        $message = $this->planService->deletePlan($Request);
+        if($message){
+            $this->success('删除成功',url('article/secondadd',['id'=>$articleId]));
+        }
+        $this->error('删除失败',url('article/secondadd',['id'=>$articleId]));
+    }
 }
