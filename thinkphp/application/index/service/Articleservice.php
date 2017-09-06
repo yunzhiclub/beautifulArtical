@@ -156,6 +156,8 @@ class Articleservice
         // $Paragraph = Paragraph::order('weight')->select();
         $message['paragraphup'] = $ParagraphUp;
         $message['paragraphdown'] = $ParagraphDown;
+        $Contractor = Contractor::get($Article->contractor_id);
+        $message['contractor'] = $Contractor;
         $message['hotel'] = $Hotels;
 
         return $message;
