@@ -28,7 +28,7 @@ class ParagraphController extends IndexController {
 
 	public function index()
 	{
-		$articleId = Request::instance()->param('article_id/d');
+		$articleId = Request::instance()->param('articleId/d');
 		$paragraphId = Request::instance()->param('id/d');
 		if (is_null($paragraphId)) {
 			$Paragraph = new Paragraph();
@@ -55,11 +55,11 @@ class ParagraphController extends IndexController {
 		// 返回相应界面
 		if ($message['status'] === 'success') {
 			// 跳转保存成功界面
-			return $this->success($message['message'], url($message['route'],['id'=>$message['id']]));
+			return $this->success($message['message'], url($message['route'],['articleId'=>$message['articleId']]));
 
 		} else {
 			// 跳转保存失败界面
-			return $this->error($message['message'], url($message['route'],['id'=>$message['id']]));
+			return $this->error($message['message'], url($message['route'],['articleId'=>$message['articleId']]));
 		}
 	}
 	
@@ -74,18 +74,18 @@ class ParagraphController extends IndexController {
 		// 返回相应界面
 		if ($message['status'] === 'success') {
 			// 返回删除成功界面
-			return $this->success($message['message'], url($message['route'], ['id'=>$message['id']]));
+			return $this->success($message['message'], url($message['route'], ['articleId'=>$message['articleId']]));
 
 		} else {
 			// 返回删除失败界面
-			return $this->error($message['message'], url($message['route'], ['id' =>$message['id']]));
+			return $this->error($message['message'], url($message['route'], ['articleId' =>$message['articleId']]));
 		}
 	}
 
 	public function edit()
 	{
 		// 获取id
-		$articleId = Request::instance()->param('article_id/d');
+		$articleId = Request::instance()->param('articleId/d');
 		$paragraphId = Request::instance()->param('id/d');
 		
 		if (is_null($paragraphId)) {
@@ -112,10 +112,10 @@ class ParagraphController extends IndexController {
 		// 返回保存结果
 		if ($message['status'] === 'success') {
 			// 返回保存成功界面
-			return $this->success($message['message'], url($message['route'], ['id' =>$message['id']]));
+			return $this->success($message['message'], url($message['route'], ['articleId' =>$message['articleId']]));
 		} else {
 			// 返回保存失败界面
-			return $this->error($message['message'], url($message['route'], ['id' =>$message['id']]));
+			return $this->error($message['message'], url($message['route'], ['articleId' =>$message['articleId']]));
 		}
 	}
 }

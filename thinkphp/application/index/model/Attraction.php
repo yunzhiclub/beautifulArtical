@@ -11,10 +11,10 @@ use think\Model;
  */
 
 class Attraction extends Model {
-    public function saveAttraction($title, $content, $name, $meal, $car, $guide, $image, $hotel, $articleId) {
+    public function saveAttraction($title, $content, $designation, $meal, $car, $guide, $image, $hotel, $articleId) {
         $this->title = $title;
         $this->description = $content;
-        $this->designation = $name;
+        $this->designation = $designation;
         $this->meal = $meal;
         $this->car = $car;
         $this->guide = $guide;
@@ -33,9 +33,9 @@ class Attraction extends Model {
         }
     }
 
-    public function updateAttraction($title, $content, $name, $meal, $car, $guide, $image, $hotel, $articleId, $id) {
+    public function updateAttraction($title, $content, $designation, $meal, $car, $guide, $image, $hotel, $articleId, $id) {
         $Attraction = Attraction::get($id);
-        $Attraction->saveAttraction($title, $content, $name, $meal, $car, $guide, $image, $hotel, $articleId);
+        $Attraction->saveAttraction($title, $content, $designation, $meal, $car, $guide, $image, $hotel, $articleId);
     }
 
     public function deleteAttraction($id) {

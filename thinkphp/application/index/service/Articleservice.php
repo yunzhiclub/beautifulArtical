@@ -31,7 +31,7 @@ class Articleservice
         $message['message'] = '添加成功，请继续完善文章详情';
 
         //获取到参数
-        $articleId = $parma->param('id/d');
+        $articleId = $parma->param('articleId/d');
         $title = $parma->post('title');
         $summery = $parma->post('summery');
         $file = request()->file('image');
@@ -52,7 +52,7 @@ class Articleservice
                 $message['status'] = 'success';
                 $message['message'] = '修改成功';
                 $message['route'] = 'secondadd';
-                $message['param']['id'] = $Article->id;
+                $message['param']['articleId'] = $Article->id;
                 return $message;
             }
         } else {
@@ -75,7 +75,7 @@ class Articleservice
         
         if($Article->save()) {
             //保存成功
-            $message['param']['id'] = $Article->id;
+            $message['param']['articleId'] = $Article->id;
         } else {
             //保存失败
             $message['status'] = 'error';
@@ -119,14 +119,14 @@ class Articleservice
     }
     public function secondAriticle($param) {
         // 传入文章id
-        $articleId = $param->param('id/d');
+        $articleId = $param->param('articleId/d');
         $Article = Article::get($articleId);
 
         $message = [];
         $message['title'] = $Article->title;
         $message['summery'] = $Article->summery;
         $message['cover'] = $Article->cover;
-        $message['id'] = $articleId;
+        $message['articleId'] = $articleId;
 
         // 根据景点权重排序
         $Attraction = Attraction::order('weight')->where('article_id',$articleId)->select();
@@ -136,7 +136,7 @@ class Articleservice
         $length = sizeof($Attraction);
         $message['length'] = $length;
         // 将文章中的各个景点的酒店合并到一个对象组中
-        $Hotels = array();
+        $Hotels = [];
         $TempHotel = new Hotel();
 
         foreach ($Attraction as $key => $value) {
@@ -172,7 +172,7 @@ class Articleservice
         $message = [];
         $message['message'] = '删除成功';
         $message['status'] = 'success';
-        $articleId = $param->param('id/d');
+        $articleId = $param->param('articleId/d');
         $Article = Article::get($articleId);
 
         // 验证文章是否为空

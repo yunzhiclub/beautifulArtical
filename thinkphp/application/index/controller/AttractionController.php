@@ -28,7 +28,7 @@ class AttractionController extends IndexController {
     public function save() {
         $title = Request::instance()->post('title');
         $content = Request::instance()->post('content');
-        $name = Request::instance()->post('name');
+        $designation = Request::instance()->post('designation');
         $meal = Request::instance()->post('meal');
         $car = Request::instance()->post('car');
         $guide = Request::instance()->post('guide');
@@ -51,16 +51,16 @@ class AttractionController extends IndexController {
         // 图片处理
         $file = request()->file('image');
         if(is_null($file)) {
-            return $this->error('请上传图片', url('add?id='.$articleId));
+            return $this->error('请上传图片', url('add?articleId='.$articleId));
         }
         $image = Common::uploadImage($file);
 
         // 景点处理
-        $attraction = new Attraction();
-        if(!$attraction->saveAttraction($title, $content, $name, $meal, $car, $guide, $image, $Hotel, $articleId)) {
-            return $this->error('保存失败', url('add?id='.$articleId));
+        $Attraction = new Attraction();
+        if(!$Attraction->saveAttraction($title, $content, $designation, $meal, $car, $guide, $image, $Hotel, $articleId)) {
+            return $this->error('保存失败', url('add?articleId='.$articleId));
         } else {
-            return $this->success('保存成功', url('Article/secondadd?id='.$articleId));
+            return $this->success('保存成功', url('Article/secondadd?articleId='.$articleId));
         }
     }
 
@@ -130,7 +130,7 @@ class AttractionController extends IndexController {
         $Attraction = Attraction::getNullAttraction();
         $Attraction->updateAttraction($title, $content, $name, $meal, $car, $guide, $image, $Hotel, $articleId, $attractionId);
 
-        return $this->success('更新成功',url('article/secondadd?id='.$articleId));
+        return $this->success('更新成功',url('article/secondadd?articleId='.$articleId));
     }
 
     public function delete() {
@@ -138,8 +138,8 @@ class AttractionController extends IndexController {
         $articleId = Request::instance()->param('articleId');
         $Attraction = new Attraction();
         if(!$Attraction->deleteAttraction($attractionId)) {
-            return $this->error('删除失败',url('article/secondadd?id='.$articleId));
+            return $this->error('删除失败',url('article/secondadd?articleId='.$articleId));
         }
-        return $this->success('删除成功',url('article/secondadd?id='.$articleId));
+        return $this->success('删除成功',url('article/secondadd?articleId='.$articleId));
     }
 }

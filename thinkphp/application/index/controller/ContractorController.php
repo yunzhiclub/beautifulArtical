@@ -24,7 +24,7 @@ class ContractorController extends IndexController
 	public function add()
 	{
 		// 获取文章id
-		$articleId = Request::instance()->param('article_id/d');
+		$articleId = Request::instance()->param('articleId/d');
 
 		// 连接v层
 		$this->assign('articleId', $articleId);
@@ -44,11 +44,11 @@ class ContractorController extends IndexController
 		// 返回相应的界面
 		if ($message['status'] === 'success') {
 			// 返回保存成功界面
-			return $this->success($message['message'], url($message['route'], ['id'=>$message['id']]));
+			return $this->success($message['message'], url($message['route'], ['articleId'=>$message['articleId']]));
 
 		} else {
 			// 返回保存失败界面
-			return $this->error($message['message'], url($message['route'], ['id'=>$message['id']]));
+			return $this->error($message['message'], url($message['route'], ['articleId'=>$message['articleId']]));
 		}
 	}
 }

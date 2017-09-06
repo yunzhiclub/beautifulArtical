@@ -38,20 +38,20 @@ class ArticleController extends IndexController {
 	}
     // 返回firstadd界面
     public function firstadd(){
-        $articleId = Request::instance()->param('id/d');
+        $articleId = Request::instance()->param('articleId/d');
         // 判断是否为重写界面
         if( is_null($articleId)){
             $this->assign('title', '');
             $this->assign('summery', '');
             $this->assign('cover', '');
-            $this->assign('haveid', '');
+            $this->assign('articleId', '');
             return $this->fetch();
         }else{
             $Article = Article::get($articleId);
             $this->assign('title', $Article->title);
             $this->assign('summery', $Article->summery);
             $this->assign('cover', $Article->cover);
-            $this->assign('haveid', $articleId);
+            $this->assign('articleId', $articleId);
             return $this->fetch();
         }
     }
@@ -67,7 +67,7 @@ class ArticleController extends IndexController {
         //返回相应的界面
         if ($message['status'] === 'success') {
             //跳转成功的界面
-            $this->success($message['message'], url($message['route'], ['id' => $message['param']['id']]));
+            $this->success($message['message'], url($message['route'], ['articleId' => $message['param']['articleId']]));
 
         } else {
             //跳转失败的界面
@@ -80,7 +80,7 @@ class ArticleController extends IndexController {
         $param = Request::instance();
 
         // 获取并传输plan
-        $articleId = Request::instance()->param('id');
+        $articleId = Request::instance()->param('articleId');
         $Plan = new Plan();
         $Plans = $Plan->getPlanByArticleId($articleId);
         $this->assign('plans', $Plans);
@@ -95,7 +95,7 @@ class ArticleController extends IndexController {
         // 封面
         $this->assign('cover', $message['cover']);
         // 文章id
-        $this->assign('id', $message['id']);
+        $this->assign('articleId', $message['articleId']);
         //景点信息
         $this->assign('attraction', $message['attraction']);
         // 景点数量
@@ -142,7 +142,7 @@ class ArticleController extends IndexController {
         $articleId = Request::instance()->param('articleId/d');
         //调用service中的方法
         $message =  $this->articleService->upAttraction($param); 
-        $this->success('向上排序成功',url('secondadd',['id'=>$articleId]));
+        $this->success('向上排序成功',url('secondadd',['articleId'=>$articleId]));
     }
     public function downAttraction() {
         // 接收参数
@@ -150,6 +150,6 @@ class ArticleController extends IndexController {
         $articleId = Request::instance()->param('articleId/d');
         //调用service中的方法
         $message =  $this->articleService->downAttraction($param); 
-        $this->success('向下排序成功',url('secondadd',['id'=>$articleId]));
+        $this->success('向下排序成功',url('secondadd',['articleId'=>$articleId]));
     }
 }
