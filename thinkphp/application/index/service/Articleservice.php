@@ -61,6 +61,8 @@ class Articleservice
                 $message['status'] = 'error';
                 $message['message'] = '请上传图片';
                 $message['route'] = 'firstadd';
+
+                return $message;
             }
         }
         
