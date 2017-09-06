@@ -21,9 +21,9 @@ class Paragraph extends Model
     public static function getWeight($keyWords, $articleId)
     {
         
-        $object = new Paragraph();
+        $Paragraph = new Paragraph();
 
-        $weight = $object->where('article_id', $articleId)->max($keyWords);
+        $weight = $Paragraph->where('article_id', $articleId)->max($keyWords);
         $weight++;
         return $weight;
     }

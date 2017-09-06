@@ -31,7 +31,7 @@ class Articleservice
         $message['message'] = '添加成功，请继续完善文章详情';
 
         //获取到参数
-        $id = $parma->param('id/d');
+        $articleId = $parma->param('articleId/d');
         $title = $parma->post('title');
         $summery = $parma->post('summery');
         $file = request()->file('image');
@@ -39,9 +39,9 @@ class Articleservice
         //实例化一个空文章
         $Article = new Article();
 
-        if(!is_null($id)) {
+        if(!is_null($articleId)) {
             //编辑文章
-            $Article = Article::get($id);
+            $Article = Article::get($articleId);
             // 判断图片是否更改
             if(!is_null($file)) {
                 // 删除之前保存的图片,这样写是有问题的有待改进(增加附件列表上传后进行sha1加密，比较两个文件时候相同后再进行删除)
@@ -52,7 +52,7 @@ class Articleservice
                 $message['status'] = 'success';
                 $message['message'] = '修改成功';
                 $message['route'] = 'secondadd';
-                $message['param']['id'] = $Article->id;
+                $message['param']['articleId'] = $Article->id;
                 return $message;
             }
         } else {
@@ -61,6 +61,8 @@ class Articleservice
                 $message['status'] = 'error';
                 $message['message'] = '请上传图片';
                 $message['route'] = 'firstadd';
+
+                return $message;
             }
         }
         
@@ -75,7 +77,7 @@ class Articleservice
         
         if($Article->save()) {
             //保存成功
-            $message['param']['id'] = $Article->id;
+            $message['param']['articleId'] = $Article->id;
         } else {
             //保存失败
             $message['status'] = 'error';
@@ -87,75 +89,73 @@ class Articleservice
     }
     public function upAttraction($param) {
         // 获取参数
-        $articleid = $param->param('articleId/d');
+        $articleId = $param->param('articleId/d');
         // 获取要改变位置的序列号
         $number = $param->param('number/d');
         // 获取当前景点根据权重的排序
-        $Attractions = Attraction::order('weight')->where('article_id',$articleid)->select();
+        $Attractions = Attraction::order('weight')->where('article_id',$articleId)->select();
         $number=$number-1;
         // 当前景点与上一个景点的权重交换
-        $Median = $Attractions[$number]->weight;
+        $median = $Attractions[$number]->weight;
         $Attractions[$number]->weight = $Attractions[$number-1]->weight;
-        $Attractions[$number-1]->weight = $Median;
+        $Attractions[$number-1]->weight = $median;
         // 保存交换后的景点
         $Attractions[$number]->save();
         $Attractions[$number-1]->save();
     }
     public function downAttraction($param){
         // 获取参数
-        $articleid = $param->param('articleId/d');
+        $articleId = $param->param('articleId/d');
         // 获取要改变位置的序列号
         $number = $param->param('number/d');
         // 获取当前景点根据权重的排序
-        $Attractions = Attraction::order('weight')->where('article_id',$articleid)->select();
+        $Attractions = Attraction::order('weight')->where('article_id',$articleId)->select();
         $number=$number-1;
         // 当前景点与下一个景点的权重交换
-        $Median = $Attractions[$number]->weight;
+        $median = $Attractions[$number]->weight;
         $Attractions[$number]->weight = $Attractions[$number+1]->weight;
-        $Attractions[$number+1]->weight = $Median;
+        $Attractions[$number+1]->weight = $median;
         // 保存交换后的景点
         $Attractions[$number]->save();
         $Attractions[$number+1]->save();
     }
     public function secondAriticle($param) {
         // 传入文章id
-        $articleid = $param->param('id/d');
-        $Article = Article::get($articleid);
+        $articleId = $param->param('articleId/d');
+        $Article = Article::get($articleId);
 
         $message = [];
         $message['title'] = $Article->title;
         $message['summery'] = $Article->summery;
         $message['cover'] = $Article->cover;
-        $message['id'] = $articleid;
+        $message['articleId'] = $articleId;
 
         // 根据景点权重排序
-        $Attraction = Attraction::order('weight')->where('article_id',$articleid)->select();
+        $Attraction = Attraction::order('weight')->where('article_id',$articleId)->select();
         $message['attraction'] = $Attraction;
 
         // 获取传入景点的个数
         $length = sizeof($Attraction);
         $message['length'] = $length;
         // 将文章中的各个景点的酒店合并到一个对象组中
-        $Hotels = array();
-        $tempHotel = new Hotel();
+        $Hotels = [];
 
         foreach ($Attraction as $key => $value) {
             $hotelId = $value->hotel_id;
             if(!is_null($hotelId)) {
                 $tempHotel = Hotel::where('id', $hotelId)->find();
-            }
-            if (!is_null($tempHotel)) {
-                //如果酒店不为空
-                array_push($Hotels, $tempHotel);
+                if (!is_null($tempHotel)) {
+                    array_push($Hotels, $tempHotel);
+                }
             }
             $tempHotel = null;
         }
         // 将段落按在景点的上下顺序分成两个类，并根据权重排序
-        $ParagraphUp = Paragraph::where('is_before_attraction',1)->where('article_id',$articleid)->order('weight')->select();
-        $ParagraphDown = Paragraph::where('is_before_attraction',0)->where('article_id',$articleid)->order('weight')->select();
+        $paragraphUp = Paragraph::where('is_before_attraction',1)->where('article_id',$articleId)->order('weight')->select();
+        $paragraphDown = Paragraph::where('is_before_attraction',0)->where('article_id',$articleId)->order('weight')->select();
         // $Paragraph = Paragraph::order('weight')->select();
-        $message['paragraphup'] = $ParagraphUp;
-        $message['paragraphdown'] = $ParagraphDown;
+        $message['paragraphUp'] = $paragraphUp;
+        $message['paragraphDown'] = $paragraphDown;
         $Contractor = Contractor::get($Article->contractor_id);
         $message['contractor'] = $Contractor;
         $message['hotel'] = $Hotels;
@@ -174,7 +174,7 @@ class Articleservice
         $message = [];
         $message['message'] = '删除成功';
         $message['status'] = 'success';
-        $articleId = $param->param('id/d');
+        $articleId = $param->param('articleId/d');
         $Article = Article::get($articleId);
 
         // 验证文章是否为空
