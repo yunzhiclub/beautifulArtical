@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="/beautifulArtical/thinkphp/public/style/js/plugin/layui-v1.0.7/css/layui.css">
     <link rel="stylesheet" href="/beautifulArtical/thinkphp/public/style/css/date.css">
 </head>
+
 <body class="container">
     <div class="row" style="margin-top: 20px;">
         <div class="container">
@@ -20,7 +21,7 @@
                     </div>
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
-                            <li {eq name=':request()->controller()' value="User"} class="active" {/eq}><a href="{:url('User/index')}">个人中心</a></li>
+                            <li {eq name=':request()->controller()' value="User" } class="active" {/eq}><a href="{:url('User/index')}">个人中心</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li><a href="{:url('login/logout')}"><i class="glyphicon glyphicon-log-out"></i>&nbsp;登出</a></li>
@@ -30,8 +31,11 @@
             </nav>
         </div>
     </div>
-	{block name="content"}
-	{/block}
+    <div class="col-md-8 col-md-offset-1" style="margin-top: 60px;margin-bottom: 100px;">
+        <div class="row">
+            {block name="content"} {/block}
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-12">
             <p class="text-center">Copyright &copy; XXX科技有限公司 All Rights Reserved</p>
