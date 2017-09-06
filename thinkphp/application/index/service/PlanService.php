@@ -78,4 +78,35 @@ class PlanService
 
         return $message;
     }
+    public function editPlan($param) {
+        // 获取方案id
+        $planId = $param->param('planId/d');
+        $Plan = Plan::get($planId);
+        $DetailZhusu = $Plan->getDetailByType('zhusu');
+        $DetailDijie = $Plan->getDetailByType('dijie');
+        $articleId = $param->param('article_id/d');
+
+        $message = [];
+        $message['detailzhusu'] = $DetailZhusu;
+        $message['detaildijie'] = $DetailDijie;
+
+        $message['plan'] = $Plan;
+
+        return $message;
+    }
+    public function deletePlan($param) {
+        $planId = $param->param('planId/d');
+        $Plan = Plan::get($planId);
+        $DetailZhusu = $Plan->getDetailByType('zhusu');
+        $DetailDijie = $Plan->getDetailByType('dijie');
+        
+        $dijieDelete = $DetailDijie->delete();
+        $zhusuDelete = $DetailZhusu->delete();
+        $planDelete = $Plan->delete();
+        
+        if($planDelete && $dijieDelete && $zhusuDelete){
+            return true;
+        }
+            return false;
+    }
 }

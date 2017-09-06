@@ -18,15 +18,11 @@ class DetailController extends IndexController
         parent::__construct($request);
         $this->planService = new PlanService();
         $this->detailService = new DetailService();
-        $this->planAndDetailService = new PlanAndDetailservice();
     }
 
     // 增加界面
 	public function add()
 	{
-        $judge = Request::instance()->param('judge');
-        
-		$articleId = Request::instance()->param('id');
 		$articleId = Request::instance()->param('id/d');
 		$this->assign('id', $articleId);
         return $this->fetch();
@@ -35,8 +31,6 @@ class DetailController extends IndexController
     // add页面完成后触发事件
 	public function save()
 	{
-        $Article = new Article();
-        $articleId = Request::instance()->param('id');
 		//接受参数
         $param = Request::instance();
         //调用service中的保存方法
@@ -71,10 +65,8 @@ class DetailController extends IndexController
         $request = Request::instance();
         $articleId = Request::instance()->param('article_id/d');
         // 调用service中的编辑方法
-        $message =  $this->planAndDetailService->editPlan($request);
+        $message =  $this->planService->editPlan($request);
 
-        $this->assign('detailzhusu',$message['detailzhusu']);
-        $this->assign('detaildijie',$message['detaildijie']);
         $this->assign('plan',$message['plan']);
 
         return $this->fetch('edit',['articleId'=>$articleId]);
@@ -83,7 +75,7 @@ class DetailController extends IndexController
         // v层数据传输
         $Request = Request::instance();
         $articleId = Request::instance()->param('article_id/d');
-        $message = $this->planAndDetailService->deletePlan($Request);
+        $message = $this->planService->deletePlan($Request);
         if($message){
             $this->success('删除成功',url('article/secondadd',['id'=>$articleId]));
         }

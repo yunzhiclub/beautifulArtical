@@ -18,8 +18,13 @@
                     <div class="navbar-header">
                         <a class="navbar-brand" href="{:url('article/index')}">首页</a>
                     </div>
-                    <div class="nav navbar-nav navbar-right">
-                        <a class="navbar-brand" href="{:url('login/logout')}"><span class="glyphicon glyphicon-log-out"></span>&nbsp;登出</a>
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li {eq name=':request()->controller()' value="User"} class="active" {/eq}><a href="{:url('User/index')}">个人中心</a></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="{:url('login/logout')}"><i class="glyphicon glyphicon-log-out"></i>&nbsp;登出</a></li>
+                        </ul>
                     </div>
                 </div>
             </nav>
