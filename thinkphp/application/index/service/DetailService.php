@@ -17,19 +17,19 @@ class DetailService
 
 
         //获取到参数
-        $articleId = $param->param('id');
-        $dijie_remark = $param->post('dijie_remark');
-        $dijie_number = $param->post('dijie_number');
-        $dijie_frequency = $param->post('dijie_frequency');
-        $dijie_unitPrice = $param->post('dijie_unitPrice');
-        $dijie_totalPrice = $param->post('dijie_totalPrice');
-        $zhusu_remark = $param->post('zhusu_remark');
-        $zhusu_number = $param->post('zhusu_number');
-        $zhusu_frequency = $param->post('zhusu_frequency');
-        $zhusu_unitPrice = $param->post('zhusu_unitPrice');
-        $zhusu_totalPrice = $param->post('zhusu_totalPrice');
+        $articleId = $param->param('articleId/d');
+        $dijieRemark = $param->post('dijie_remark');
+        $dijieNumber = $param->post('dijie_number');
+        $dijieFrequency = $param->post('dijie_frequency');
+        $dijieUnitPrice = $param->post('dijie_unitPrice');
+        $dijieTotalPrice = $param->post('dijie_totalPrice');
+        $zhusuRemark = $param->post('zhusu_remark');
+        $zhusuNumber = $param->post('zhusu_number');
+        $zhusuFrequency = $param->post('zhusu_frequency');
+        $zhusuUnitPrice = $param->post('zhusu_unitPrice');
+        $zhusuTotalPrice = $param->post('zhusu_totalPrice');
         
-        if($this->save($dijie_remark, $planId, 'dijie', $dijie_number, $dijie_frequency, $dijie_unitPrice, $dijie_totalPrice) && $this->save($zhusu_remark, $planId, 'zhusu', $zhusu_number, $zhusu_frequency, $zhusu_unitPrice, $zhusu_totalPrice)) {
+        if($this->save($dijieRemark, $planId, 'dijie', $dijieNumber, $dijieFrequency, $dijieUnitPrice, $dijieTotalPrice) && $this->save($zhusuRemark, $planId, 'zhusu', $zhusuNumber, $zhusuFrequency, $zhusuUnitPrice, $zhusuTotalPrice)) {
             return  $message['message'] = '保存成功！';
         }
         
