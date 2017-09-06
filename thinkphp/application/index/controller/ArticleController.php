@@ -4,6 +4,7 @@ namespace app\index\controller;
 use app\index\controller\IndexController;
 use think\Request;
 use app\index\model\Article;
+use app\index\model\Contractor;
 use app\index\model\Common;
 use app\index\model\Attraction;
 use app\index\model\Plan;
@@ -111,6 +112,15 @@ class ArticleController extends IndexController {
             $this->assign('judgeHotel','0');
         }else{
             $this->assign('judgeHotel','1');
+        }
+
+        // 抓取定制师数据
+        $this->assign("contractor",$message['contractor']);
+        // 判断是否有定制师
+        if(sizeof($message['contractor'])==0){
+            $this->assign('judgeContractor','0');
+        }else{
+            $this->assign('judgeContractor','1');
         }
         // 返回v层数据
     	return $this->fetch();

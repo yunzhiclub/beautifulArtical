@@ -2,6 +2,7 @@
 namespace app\index\service;
 
 use app\index\model\Paragraph;
+use app\index\model\Common;
 
 class Paragraphservice
 {
@@ -91,6 +92,7 @@ class Paragraphservice
 
 			} else {
 				// 删除失败
+                Common::deleteImage('upload/'.$Paragraph->image);
 				if (!$Paragraph->delete()) {
 					$message['status'] = 'error';
 					$message['message'] = '删除失败！';

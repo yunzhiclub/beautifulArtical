@@ -95,9 +95,7 @@ class Paragraph extends Model
                 return $Paragraph;
             }
             // 删除之前保存的图片
-            // if(is_file(__PUBLIC__/uploads/$Paragraph->image)){
-            //     Common::deleteImage(__PUBLIC__/uploads/$Paragraph->image);
-            // }
+            Common::deleteImage('upload/'.$Paragraph->image);
             return $Paragraph;
         }
     }

@@ -18,11 +18,11 @@ class Contractor extends Model
 	 */
 	public function saveContractor($data, $articleId)
 	{
-		$this->name = $data['name'];
-		$this->phone = $data['phone'];
-		$this->fax = $data['fax'];
-		$this->mobile = $data['mobile'];
-		$this->email = $data['email'];
+		$this->designation = $Data['designation'];
+		$this->phone = $Data['phone'];
+		$this->fax = $Data['fax'];
+		$this->mobile = $Data['mobile'];
+		$this->email = $Data['email'];
 
 		
 		if ($this->save()) {
