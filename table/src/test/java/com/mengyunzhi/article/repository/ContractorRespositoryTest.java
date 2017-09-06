@@ -21,7 +21,7 @@ public class ContractorRespositoryTest {
     @Test
     public void save() {
         Contractor contractor = new Contractor();
-        contractor.setName("张友善");
+        contractor.setDesignation("张友善");
         contractor.setPhone("1225458878");
         contractor.setFax("654846345");
         contractor.setMobile("57468435435");

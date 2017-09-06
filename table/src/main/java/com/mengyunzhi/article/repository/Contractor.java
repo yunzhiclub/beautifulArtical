@@ -10,14 +10,14 @@ public class Contractor {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String name;
+    private String designation;
     private String phone;
     private String fax;
     private String mobile;
     private String email;
 
-    public Contractor(String name, String phone, String fax, String mobile, String email) {
-        this.name = name;
+    public Contractor(String designation, String phone, String fax, String mobile, String email) {
+        this.designation = designation;
         this.phone = phone;
         this.fax = fax;
         this.mobile = mobile;
@@ -31,8 +31,8 @@ public class Contractor {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public String getDesignation() {
+        return designation;
     }
 
     public String getPhone() {
@@ -55,8 +55,8 @@ public class Contractor {
         this.id = id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setDesignation(String designation) {
+        this.designation = designation;
     }
 
     public void setPhone(String phone) {
@@ -79,7 +79,7 @@ public class Contractor {
     public String toString() {
         return "Contractor{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", name='" + designation + '\'' +
                 ", phone='" + phone + '\'' +
                 ", fax='" + fax + '\'' +
                 ", mobile='" + mobile + '\'' +
