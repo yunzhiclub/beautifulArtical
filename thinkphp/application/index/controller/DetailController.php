@@ -23,8 +23,8 @@ class DetailController extends IndexController
     // 增加界面
 	public function add()
 	{
-		$articleId = Request::instance()->param('id/d');
-		$this->assign('id', $articleId);
+		$articleId = Request::instance()->param('articleId/d');
+		$this->assign('articleId', $articleId);
         return $this->fetch();
 	}
 
@@ -38,10 +38,10 @@ class DetailController extends IndexController
         
         // 保存数据
         if($this->detailService->add($param, $message['planId'])) {
-            return $this->success($message['message'], url('Article/secondadd', ['id' =>$message['id']]));
+            return $this->success($message['message'], url('Article/secondadd', ['articleId' =>$message['articleId']]));
         }
         
-        return $this->error($message['message'], url('add', ['id' =>$message['id']]));
+        return $this->error($message['message'], url('add', ['articleId' =>$message['articleId']]));
         
 	}
     // 报价方案的更新
@@ -53,9 +53,9 @@ class DetailController extends IndexController
         $message = $this->planService->edit($param);
         // 将plan及detail数据保存
         if($this->detailService->add($param, $message['planId'])) {
-            return $this->success($message['message'], url('Article/secondadd', ['id' =>$message['id']]));
+            return $this->success($message['message'], url('Article/secondadd', ['articleId' =>$message['id']]));
         }else{
-            return $this->error('地接或住宿未修改', url('Article/secondadd', ['id' =>$message['id']]));
+            return $this->error('地接或住宿未修改', url('Article/secondadd', ['articleId' =>$message['id']]));
         }
         
         return $this->error($message['message'], url('Article/secondadd', ['id' =>$message['id']]));

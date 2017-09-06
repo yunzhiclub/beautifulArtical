@@ -16,12 +16,11 @@ class PlanService
         $message['status'] = 'success';
         $message['message'] = '保存成功！';
 
-
-        // 获取到参数
-        $articleId = Request::instance()->param('id');
+        //获取到参数
+        $articleId = $param->param('articleId/d');
         $travelDate = $param->post('travelDate');
         $peopleNum = $param->post('peopleNum');
-        $currency = $currency = $param->post('currency');
+        $currency = $param->post('currency');
         $totalCost = $param->post('totalCost');
         $lastPayTime = $param->post('lastPayTime');
 
@@ -41,7 +40,7 @@ class PlanService
         }
 
         $message['planId'] = $Plan->id;
-        $message['id'] = $articleId;
+        $message['articleId'] = $articleId;
 
         return $message;
 	}
