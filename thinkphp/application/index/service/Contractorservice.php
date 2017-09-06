@@ -9,14 +9,14 @@ class Contractorservice
 	{
 		// 获取接收信息
 		$data = $param->post();
-		$articleId = $param->param('article_id');
+		$articleId = $param->param('articleId/d');
 
 		// 初始化返回信息
 		$message = [];
 		$message['status'] = 'success';
 		$message['message'] = '保存成功！';
 		$message['route'] = 'article/secondadd';
-		$message['id'] = $articleId;
+		$message['articleId'] = $articleId;
 
 		// 实例化一个空对象
 		$Contractor = new Contractor();

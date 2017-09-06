@@ -9,8 +9,8 @@ class Paragraphservice
 	public function addOrEditParagraph($param)
 	{
 		// 获取参数
-		$articleId = $param->param('articleId');
-		$id = $param->param('id');
+		$articleId = $param->param('articleId/d');
+		$paragraphId = $param->param('id/d');
 		$data = $param->post();
 
 		// 初始化返回信息
@@ -18,19 +18,19 @@ class Paragraphservice
 		$message['status'] = 'success';
 		$message['message'] = '保存成功！';
 		$message['route'] = 'article/secondadd';
-		$message['id'] = $articleId;
+		$message['articleId'] = $articleId;
 		
 		$file = request()->file('image');
 
 		// 实例化一个空段落
 		$Paragraph = new Paragraph();
 
-		if (!is_null($id) && $id !== '0') {
+		if (!is_null($paragraphId) && $paragraphId !== 0) {
 			// 编辑段落
-			$Paragraph = Paragraph::get($id);
+			$Paragraph = Paragraph::get($paragraphId);
 			
 			// 调用m层更新方法
-			if ($Paragraph->updateParagraph($data, $id)) {
+			if ($Paragraph->updateParagraph($data, $paragraphId)) {
 				// 更新成功
 				$message['param']['id'] = $Paragraph->id;
 
@@ -66,15 +66,15 @@ class Paragraphservice
 	public function deleteParagraph($param)
 	{
 		// 获取参数
-		$id = $param->param('id');
-		$articleId = $param->param('article_id');
+		$paragraphId = $param->param('id/d');
+		$articleId = $param->param('articleId/d');
 
 		// 初始化返回信息
 		$message = [];
 		$message['message'] = '删除成功！';
 		$message['status'] = 'success';
 		$message['route'] = 'article/secondadd';
-		$message['id'] = $articleId;
+		$message['articleId'] = $articleId;
 
 		// 获取段落id为空
 		if (is_null($id) || $id === 0) {
@@ -83,7 +83,7 @@ class Paragraphservice
 
 		} else {
 			// 获取段落
-			$Paragraph = Paragraph::get($id);
+			$Paragraph = Paragraph::get($paragraphId);
 
 			// 获取段落为空
 			if (is_null($Paragraph)) {
