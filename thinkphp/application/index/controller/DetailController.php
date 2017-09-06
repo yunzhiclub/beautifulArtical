@@ -18,6 +18,7 @@ class DetailController extends IndexController
         parent::__construct($request);
         $this->planService = new PlanService();
         $this->detailService = new DetailService();
+        $this->planAndDetailService = new PlanAndDetailservice();
     }
 
     // 增加界面
@@ -34,10 +35,6 @@ class DetailController extends IndexController
     // add页面完成后触发事件
 	public function save()
 	{
-        // 判断是编辑传来的保存还是新建传来的保存
-        if(!is_null($planId)){
-
-        }
         $Article = new Article();
         $articleId = Request::instance()->param('id');
 		//接受参数
@@ -53,6 +50,22 @@ class DetailController extends IndexController
         return $this->error($message['message'], url('add', ['id' =>$message['id']]));
         
 	}
+    // 报价方案的更新
+    public function update() {
+        $articleId = Request::instance()->param('id');
+        // 接收参数
+        $param = Request::instance();
+        // 传递到s层执行
+        $message = $this->planService->edit($param);
+        // 将plan及detail数据保存
+        if($this->detailService->add($param, $message['planId'])) {
+            return $this->success($message['message'], url('Article/secondadd', ['id' =>$message['id']]));
+        }else{
+            return $this->error('地接或住宿未修改', url('Article/secondadd', ['id' =>$message['id']]));
+        }
+        
+        return $this->error($message['message'], url('Article/secondadd', ['id' =>$message['id']]));
+    }
      public function edit() {
         // v层数据传输
         $request = Request::instance();
@@ -64,7 +77,7 @@ class DetailController extends IndexController
         $this->assign('detaildijie',$message['detaildijie']);
         $this->assign('plan',$message['plan']);
 
-        return $this->fetch('edit',['id'=>$articleId]);
+        return $this->fetch('edit',['articleId'=>$articleId]);
     }
     public function delete() {
         // v层数据传输

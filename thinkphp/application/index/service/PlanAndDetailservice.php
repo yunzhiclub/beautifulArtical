@@ -87,9 +87,6 @@ class PlanAndDetailservice
         $message['detailzhusu'] = $DetailZhusu;
         $message['detaildijie'] = $DetailDijie;
 
-        $planId = $Detail->plan_id;
-        $Plan = Plan::get($planId);
-
         $message['plan'] = $Plan;
 
         return $message;
@@ -99,9 +96,11 @@ class PlanAndDetailservice
         $Plan = Plan::get($planId);
         $DetailZhusu = $Plan->getDetailByType('zhusu');
         $DetailDijie = $Plan->getDetailByType('dijie');
-        $planDelete = $Plan->delete();
+        
         $dijieDelete = $DetailDijie->delete();
         $zhusuDelete = $DetailZhusu->delete();
+        $planDelete = $Plan->delete();
+        
         if($planDelete && $dijieDelete && $zhusuDelete){
             return true;
         }

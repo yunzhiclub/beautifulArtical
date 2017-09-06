@@ -16,7 +16,7 @@
                         <a href="#thirdform" data-toggle="tab">第三步</a>
                     </li>
                 </ul>
-                <form action="{:url('save', ['id' => $id,'planId'=>$plan->id,'detailIddijie'=>$plan->getDetailByType('dijie')->id]),'detailId'=>$plan->getDetailByType('zhusu')->id}" method="post">
+                <form action="{:url('update', ['id' => $articleId,'planId'=>$plan->id])}" method="post">
                     <div id="myTabContent" class="tab-content">
                         <div class="tab-pane fade in active" id="firstform">
                             <br>
