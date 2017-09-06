@@ -1,7 +1,7 @@
 <?php
 namespace app\index\controller;
 
-use think\Controller;
+use app\index\controller\IndexController;
 use think\Request;
 use app\index\model\Article;
 use app\index\model\Common;
@@ -17,7 +17,7 @@ use app\index\service\Articleservice;
  * @version $Id$
  */
 
-class ArticleController extends Controller {
+class ArticleController extends IndexController {
 
     protected $articleService = null;
 
@@ -106,6 +106,12 @@ class ArticleController extends Controller {
         $this->assign('paragraphdown', $message['paragraphdown']);
         // 酒店
         $this->assign('hotel',$message['hotel']);
+        // 判断是否有酒店
+        if(sizeof($message['hotel'])==0){
+            $this->assign('judgeHotel','0');
+        }else{
+            $this->assign('judgeHotel','1');
+        }
         // 返回v层数据
     	return $this->fetch();
 
@@ -117,9 +123,13 @@ class ArticleController extends Controller {
         // 接收参数
         $param = Request::instance();
         //调用service中的方法
-        $message =  $this->articleService->deleteAttraction($param);
+        $message =  $this->articleService->deleteArticle($param);
 
-        $this->success('文章删除成功',url('index'));
+        if($message['status'] == 'success') {
+            $this->success($message['message'],url('article/index'));
+        } else {
+            $this->error($message['message'], url('article/index'));
+        }
     }
 
     public function preview() {

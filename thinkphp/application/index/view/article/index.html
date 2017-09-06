@@ -13,14 +13,14 @@
             <hr>
         </div>
 
-        <ul class="container list-unstyled">
+        <ul class="container list-unstyled" style="height: 570px;">
         {volist name="articles" id="article" key="key"}
 
             <li class="col-md-4" style="height: 275px;margin: 5px 0;">
                 <div style="border:#F8F8F8 solid 1px;margin: 2px -8px;">
                 <div class="row">
                     <div class="col-md-10 col-md-offset-1">
-                        <a href="{:url('article/preview',['id' => $article->id])}"><h3 style="overflow: hidden;white-space:nowrap;text-overflow: ellipsis;">{$article->title}</h3></a>
+                        <h3 style="overflow: hidden;white-space:nowrap;text-overflow: ellipsis;">{$article->title}</h3>
                     </div>
                 </div>
 
@@ -28,14 +28,10 @@
 
                 <div class="row" style="height: 125px;">
                     <div class="col-md-4">
-                        <a href="{:url('article/preview',['id' => $article->id])}">
                             <img src="{:__ROOT__}/upload/{$article->cover}" style="width: 125px;height: 125px;">
-                        </a>
                     </div>
                     <div class="col-md-8">
-                        <a href="{:url('article/preview',['id' => $article->id])}">
                             <p style="width:200px;height:124px;overflow:hidden;word-wrap:break-word;color: black;">{$article->summery}</p>
-                        </a>
                     </div>
                 </div>
 
@@ -56,18 +52,12 @@
         {/volist}
         </ul>
 
-        <div class="container text-right">
+        <div class="container text-right" style="height: 79px;">
             {$articles->render()}
         </div>
     </div>
 
     <div class="container">
         <hr>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <p class="text-center">Copyright &copy; XXX科技有限公司 All Rights Reserved</p>
-            <p class="text-center">Powered By:梦云智</p>
-        </div>
     </div>
 {/block}

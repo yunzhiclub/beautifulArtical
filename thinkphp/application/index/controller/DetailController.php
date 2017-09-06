@@ -1,39 +1,32 @@
 <?php
 namespace app\index\controller;
 use think\Request;
-use think\Controller;
+use app\index\service\PlanService;
+use app\index\service\DetailService;
+use app\index\controller\IndexController;
 use app\index\model\Detail;
 use app\index\model\Plan;
 use app\index\model\Article;
 use app\index\service\PlanAndDetailservice;
 
 
-class DetailController extends Controller
+class DetailController extends IndexController
 {
-
-	protected $planAndDetailService = null;
-
-    //构造函数实例化ArticleService
+    // 实现方法的实例化
     function __construct(Request $request = null)
     {
         parent::__construct($request);
-        //实例化服务层
-        $this->planAndDetailService = new PlanAndDetailservice();
+        $this->planService = new PlanService();
+        $this->detailService = new DetailService();
     }
 
-    public function index()
-	{
-		$PageSize = config('paginate.var_page');
-	    $details = Detail::order('id desc')->paginate($PageSize);
-	    $this->assign('details', $details);
-		return $this->fetch();
-	}
-
+    // 增加界面
 	public function add()
 	{
         $judge = Request::instance()->param('judge');
         
 		$articleId = Request::instance()->param('id');
+		$articleId = Request::instance()->param('id/d');
 		$this->assign('id', $articleId);
         return $this->fetch();
 	}
@@ -50,16 +43,15 @@ class DetailController extends Controller
 		//接受参数
         $param = Request::instance();
         //调用service中的保存方法
-        $message =  $this->planAndDetailService->addPlanAndDetail($param);
-
-        //返回相应的界面
-        if ($message['status'] === 'success') {
-            //跳转成功的界面
-            $this->success($message['message'], url($message['route'], ['id' => $message['articleId']]));
-        } else {
-            //跳转失败的界面
-            $this->error($message['message'], url($message['route']));
+        $message = $this->planService->save($param);
+        
+        // 保存数据
+        if($this->detailService->add($param, $message['planId'])) {
+            return $this->success($message['message'], url('Article/secondadd', ['id' =>$message['id']]));
         }
+        
+        return $this->error($message['message'], url('add', ['id' =>$message['id']]));
+        
 	}
      public function edit() {
         // v层数据传输

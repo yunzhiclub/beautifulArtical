@@ -7,6 +7,9 @@ use app\index\model\Common;
 use app\index\model\Attraction;
 use app\index\model\Paragraph;
 use app\index\model\Hotel;
+use app\index\model\Plan;
+use app\index\model\Contractor;
+use app\index\model\Detail;
 /**
  *
  * @authors zhuchenshu
@@ -157,32 +160,102 @@ class Articleservice
 
         return $message;
     }
-    public function deleteAriticle($param) {
-        // 获取文章id
-        $articleid = $param->param('id/d');
-        // 根据文章id获取文章实体，并删除
-        $Article = Article::get($articleid);
+    /**
+     * 张喜硕
+     * 删除文章
+     * @return $message
+     * $message['message'] 提示信息
+     * $message['status'] 状态，成功为success，失败为error
+     */
+    public function deleteArticle($param) {
+
+        $message = [];
+        $message['message'] = '删除成功';
+        $message['status'] = 'success';
+        $articleId = $param->param('id/d');
+        $Article = Article::get($articleId);
+
+        // 验证文章是否为空
+        if(is_null($Article)) {
+            $message['message'] = '文章为空';
+            $message['status'] = 'error';
+            return $message;
+        }
+
+        // 删除段落
+        $Paragraphs = Paragraph::where('article_id',$articleId)->select();
+        if(!is_null($Paragraphs)) {
+            foreach ($Paragraphs as $Paragraph) {
+                Common::deleteImage('upload/'.$Paragraph->image);
+                if(!$Paragraph->delete()) {
+                    $message['message'] = '删除段落失败';
+                    $message['status'] = 'error';
+                }
+            }
+        }
+
+        // 删除景点
+        $Attractions = Attraction::where('article_id',$articleId)->select();
+        $TempAttraction = new Attraction();
+        if(!is_null($Attractions)) {
+            foreach ($Attractions as $Attraction) {
+                if(!$TempAttraction->deleteAttraction($Attraction->id)) {
+                    $message['message'] = '删除景点失败';
+                    $message['status'] = 'error';
+                }
+            }
+        }
+
+        // 删除方案报价
+        $Plans = Plan::where('article_id',$articleId)->select();
+        if(!is_null($Plans)) {
+            foreach ($Plans as $Plan) {
+                $Details = Detail::where('plan_id',$Plan->id)->select();
+                foreach ($Details as $Detail) {
+                    if(!$Detail->delete()) {
+                        $message['message'] = '删除明细失败';
+                        $message['status'] = 'error';
+                    }
+                }
+                if(!$Plan->delete()) {
+                    $message['message'] = '删除方案报价失败';
+                    $message['status'] = 'error';
+                }
+            }
+        }
+
+        // 删除文章
         Common::deleteImage('upload/'.$Article->cover);
-        $Attraction->delete();
-        // 根据文章id获取段落组，并删除
-        $Paragraph = Paragraph::where('article_id',$articleid);
-        $length = sizeof($Paragraph);
-        for($i = 0;$i < $length;$i++){
-            Common::deleteImage('upload/'.$Paragraph[$i]->image);
-            $Paragraph[$i]->delete();
+        if(!$Article->delete()) {
+            $message['message'] = '删除文章失败';
+            $message['status'] = 'error';
         }
-        // 根据文章id获取景点组，并删除
-        $Attraction = Attraction::where('article_id',$articleid);
-        $length = sizeof($Attraction);
-        for($i = 0;$i < $length;$i++){
-            Common::deleteImage('upload/'.$Attraction[$i]->image);
-            $Attraction[$i]->delete();
+
+        // 删除定制师
+//        $Contractor = Contractor::get($Article->contractor_id);
+//        if(!is_null($Contractor)) {
+//            if(!$Contractor->delete()) {
+//                $message['message'] = '删除定制师失败';
+//                $message['status'] = 'error';
+//            }
+//        }
+
+        return $message;
+    }
+    /**
+     * 保存订制师ID 
+     * @param  id       $contractorId 订制师ID
+     * @param  id       $articleId    文章ID
+     * @return boolen                 保存成功返回true，否则返回false
+     */
+    public function saveContractorId($contractorId, $articleId)
+    {
+        $Article = Article::get($articleId);
+        $Article->contractor_id = $contractorId;
+
+        if ($Article->save()) {
+            return true;
         }
-        // 根据文章id获取方案报价，并删除
-        $Plan = Plan::where('article_id',$articleid);
-        $Plan->delete();
-        // 根据文章id获取订制师，并删除
-        $Contractor = Contractor::where('article_id',$articleid);
-        $Contractor->delete();
+        return false;
     }
 }

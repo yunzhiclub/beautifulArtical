@@ -3,6 +3,7 @@ namespace app\index\model;
 
 use think\Model;
 use app\index\model\Article;
+use app\index\service\Articleservice;
 
 /**
  * @author 朴世超
@@ -26,7 +27,7 @@ class Contractor extends Model
 		
 		if ($this->save()) {
 			
-			$Article = new Article();
+			$Article = new Articleservice();
 			if ($Article->saveContractorId($this->id, $articleId)) {
 				return true;
 			}
