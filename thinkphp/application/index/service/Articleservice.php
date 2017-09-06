@@ -143,10 +143,9 @@ class Articleservice
             $hotelId = $value->hotel_id;
             if(!is_null($hotelId)) {
                 $TempHotel = Hotel::where('id', $hotelId)->find();
-            }
-            if (!is_null($TempHotel)) {
-                //如果酒店不为空
-                array_push($Hotels, $TempHotel);
+                if (!is_null($TempHotel)) {
+                    array_push($Hotels, $TempHotel);
+                }
             }
             $TempHotel = null;
         }
