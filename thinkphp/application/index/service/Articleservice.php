@@ -143,11 +143,12 @@ class Articleservice
             $hotelId = $value->hotel_id;
             if(!is_null($hotelId)) {
                 $tempHotel = Hotel::where('id', $hotelId)->find();
+                if (!is_null($tempHotel)) {
+                    //如果酒店不为空
+                    array_push($Hotels, $tempHotel);
+                }
             }
-            if (!is_null($tempHotel)) {
-                //如果酒店不为空
-                array_push($Hotels, $tempHotel);
-            }
+
             $tempHotel = null;
         }
         // 将段落按在景点的上下顺序分成两个类，并根据权重排序
