@@ -84,6 +84,7 @@ class AttractionController extends IndexController {
         $this->assign('articleId', $articleId);
         $this->assign('attraction', $Attraction);
         $this->assign('hotel', $Hotel);
+        $this->assign('materials', $this->materialService->getAll());
 
         return $this->fetch('add');
     }
@@ -103,6 +104,8 @@ class AttractionController extends IndexController {
         $hotelCity = Request::instance()->post('hotelCity');
         $hotelStarLevel = Request::instance()->post('hotelStarLevel');
         $hotelRemark = Request::instance()->post('hotelRemark');
+
+        $materialId = Request::instance()->post('materialId');
 
         // 酒店处理
         $Hotel = Hotel::getNullHotel();
@@ -124,7 +127,7 @@ class AttractionController extends IndexController {
 
         // 景点处理
         $Attraction = Attraction::getNullAttraction();
-        $Attraction->updateAttraction($title, $meal, $car, $guide, $Hotel, $articleId, $attractionId);
+        $Attraction->updateAttraction($title, $meal, $car, $guide, $Hotel, $articleId, $attractionId , $materialId);
 
         return $this->success('更新成功',url('article/secondadd?articleId='.$articleId));
     }
