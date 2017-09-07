@@ -78,11 +78,15 @@ class Materialservice  {
                 $message['message'] = '未获取到素材';
 
             } else {
+                $image = $Material->image;
                 // 删除素材失败
-                Common::deleteImage('upload/'.$Material->image);
                 if (!$Material->delete()) {
                     $message['status'] = 'error';
                     $message['message'] = '删除失败';
+
+                } else {
+                    // 删除照片
+                    Common::deleteImage('upload/'.$image);
                 }
             }
         }
