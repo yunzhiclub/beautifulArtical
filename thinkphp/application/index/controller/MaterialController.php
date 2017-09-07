@@ -22,16 +22,17 @@ class MaterialController extends IndexController {
         //实例化服务层
         $this->materialService = new Materialservice();
     }
-    
+    // 素材管理界面
     public function index() {
     	// 
     	return $this->fetch();
     }
-    public function addIndex() {
-    	// 
+    // 添加界面
+    public function add() {
     	return $this->fetch();
     }
-    public function add() {
+    // 添加操作
+    public function addOperate() {
     	//接受参数
         $param = Request::instance();
 
@@ -48,6 +49,11 @@ class MaterialController extends IndexController {
             $this->error($message['message'], url($message['route']));
         }
     }
+    // 编辑操作
+    
+    /**
+     * 素材删除
+     */
     public function delete()
     {
         // 接受参数
@@ -66,4 +72,7 @@ class MaterialController extends IndexController {
             $this->error($message['message'], url($message['route']));
         }
     }
+
+    
+
 }
