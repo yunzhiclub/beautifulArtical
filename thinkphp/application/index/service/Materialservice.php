@@ -152,7 +152,7 @@ class Materialservice  {
         } else {
             $Attraction = new Attraction();
             $list = $Attraction->where('material_id', '=', $materialId)->select();
-            if (!is_null($list)) {
+            if (!empty($list)) {
                 $message['status'] = 'error';
                 $message['message'] = '该素材已被使用，不能删除！';
             } else {

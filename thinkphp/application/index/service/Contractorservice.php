@@ -1,7 +1,8 @@
 <?php
 namespace app\index\service;
 
-use app\index\Model\Contractor;
+use app\index\model\Contractor;
+use app\index\model\Article;
 
 class Contractorservice
 {
@@ -33,7 +34,7 @@ class Contractorservice
 		$message['route'] = 'index';
 
 		// 接收数据
-		$contractorId = $param->post('contractorId/d');
+		$contractorId = $param->param('contractorId/d');
 
 		// 订制师id为空
 		if (is_null($contractorId) || $contractorId === 0) {
@@ -44,11 +45,11 @@ class Contractorservice
 			// 获取所有此订制师用的文章
 			$Article = new Article();
 			$list = $Article->where('contractor_id', '=', $contractorId)->select();
-			
+
 			// 有文章用订制师，不能删除
-			if (!is_null($list)) {
+			if (!empty($list)) {
 				$message['status'] = 'error';
-				$message['message'] = '次订制师已被使用，不能删除！';
+				$message['message'] = '此订制师已被使用，不能删除！';
 
 			} else {
 				// 获取订制师对象
