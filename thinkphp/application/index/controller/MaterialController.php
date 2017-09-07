@@ -50,4 +50,32 @@ class MaterialController extends IndexController {
         }
     }
     // 编辑操作
+    public function edit() {
+        // 接受参数
+        $param = Request::instance();
+        // 调用service中的编辑方法
+        $message =  $this->materialService->materialEdit($param);
+        // 传递素材信息到v层
+        $this->assign('content', $message['content']);
+        $this->assign('designation', $message['designation']);
+        $this->assign('image', $message['image']);
+        $this->assign('materialId', $message['materialId']);
+        return $this->fetch();
+    }
+    // 更新操作
+    public function update() {
+        // 接收参数
+        $param = Request::instance();
+        // 传入s层执行更新
+        $message = $this->materialService->materalUpdate($param);
+        // 传回执行信息
+        if ($message['status'] === 'success') {
+            //跳转成功的界面
+            $this->success($message['message'], url($message['route']));
+
+        } else {
+            //跳转失败的界面
+            $this->error($message['message'], url($message['route']));
+        }
+    }
 }

@@ -51,4 +51,52 @@ class Materialservice  {
         }
         return $message;
     }
+    public function materialUpdate($parma)  {
+        // 初始化信息
+        $message = [];
+        $message['status'] = 'success';
+        $message['route'] = 'index';
+        $message['message'] = '景点素材编辑成功';
+
+        // 接受传来的素材id
+        $materialId = $parma->param('materialId/d');
+
+        $Material = Material::get($materialId);
+
+        $Material->content = $parma->post('content');
+        $Material->designation = $parma->post('designation');
+        $file = request()->file('image');
+
+        if(!is_null($file)){
+            // 删除原有图片
+
+            $imagePath = Common::uploadImage($file);
+            // 保存新加图片
+            $Material->image = $imagePath;
+        }
+        if(!$Material->save() ) {
+            $message['status'] = 'error';
+            $message['route'] = 'index';
+            $message['message'] = '景点素材没有改变';
+        } 
+    }
+    public function materialEdit($parma) {
+        // 初始化信息
+        $message = [];
+        $message['status'] = 'success';
+        $message['route'] = 'index';
+        $message['message'] = '景点素材添加成功';
+
+        // 接受传来的素材id
+        $materialId = $parma->param('materialId/d');
+        $Material = Material::get($materialId);
+        var_dump($Material);
+
+        $message['content'] = $Material->content;
+        $message['designation'] = $Material->designation;
+        $message['image'] = $Material->image;
+        $message['materialId'] = $materialId;
+
+        return $message;
+    } 
 }

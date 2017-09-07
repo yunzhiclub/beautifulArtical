@@ -1,0 +1,25 @@
+{extend name="index"}
+{block name="title"}素材管理{/block}
+{block name="content"}
+	<div class="col-md-8 col-md-offset-1" style="margin-top: 60px;margin-bottom: 362px;">
+		<h2><span class="glyphicon glyphicon-edit"></span>&nbsp;素材管理</h2>
+		<br>
+		<form method="post" action="{:url ('update',['materialId'=>$materialId])}" enctype="multipart/form-data">
+			<div class="form-group">
+				<label for="TitleInput">名称</label>
+				<input type="text" class="form-control" id="TitleInput" placeholder="名称" name="designation" value="{$content}">
+			</div>
+			<div class="form-group">
+				<label for="SummaryInput">描述</label>
+				<textarea type="text" rows="5" cols="30" class="form-control" id="SummaryInput" placeholder="描述" name="content" value="{$designation}">{$designation}</textarea>
+			</div>
+			<div class="form-group">
+			<label for="exampleInputFile">图片</label>
+			<img src="{:__ROOT__}/upload/{$image}" alt="">
+			<input type="file" id="exampleInputFile" name="image">
+			</div>
+			<button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-ok"></span>&nbsp;完成</button>
+			<br><br>
+		</form>
+	</div>
+	{/block}
