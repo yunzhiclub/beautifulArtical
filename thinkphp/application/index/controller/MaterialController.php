@@ -75,7 +75,7 @@ class MaterialController extends IndexController {
         // 接收参数
         $param = Request::instance();
         // 传入s层执行更新
-        $message = $this->materialService->materalUpdate($param);
+        $message = $this->materialService->materialUpdate($param);
         // 传回执行信息
         if ($message['status'] === 'success') {
             //跳转成功的界面
