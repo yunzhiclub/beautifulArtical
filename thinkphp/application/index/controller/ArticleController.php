@@ -115,7 +115,7 @@ class ArticleController extends IndexController {
         }
 
         // 抓取定制师数据
-        $this->assign("contractor",$message['contractor']);
+        $this->assign("contractors",$message['contractors']);
         // 判断是否有定制师
         if(sizeof($message['contractor'])==0){
             $this->assign('judgeContractor','0');

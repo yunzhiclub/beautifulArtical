@@ -5,6 +5,11 @@
 	<h2><span class="glyphicon glyphicon-edit"></span>&nbsp;文章编辑</h2>
 	<br>
 	<form method="post" action="{:url ('addsecond',['articleId'=>$articleId])}" enctype="multipart/form-data">
+        <select name="contractor_id" id="contractor">
+           {volist name="contractors" id="_Contractor"}
+            <option value="{$_Contractor->getData('id')}">{$_Contractor->getData('designation')}</option>
+           {/volist}
+        </select>
 		<div class="form-group">
 			<label for="TitleInput">标题</label>
 			<input type="text" class="form-control" id="TitleInput" placeholder="标题" name="title" value="{$title}">
