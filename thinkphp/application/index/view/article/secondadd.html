@@ -57,27 +57,27 @@
 			</div>
 		</li>
 		{/volist}
-			{volist name="attraction" id="attractions"}
+			{volist name="attraction" id="_attraction"}
 			<li>
 				<div class="panel panel-default">
 					<div class="panel-body">
-						<h4>{$attractions->title}</h4>
+						<h4>{$_attraction->title}</h4>
 						<div class="row">
 							<div class="col-md-3" style="height: 100px;">
-								<img src="{:__ROOT__}/upload/{$attractions->image}" style="height: 100px; width: 180px;">
+								<img src="{:__ROOT__}/upload/{$_attraction->getMaterial($_attraction->material_id)->image}" alt="" style="height: 100px; width: 180px;">
 							</div>
 							<div class="col-md-6 col-md-offset-1" style="height: 100px;  display:-webkit-box;overflow:hidden;text-overflow:ellipsis;-webkit-line-clamp:2;-webkit-box-orient:vertical; ">
-							{$attractions->description}
+								{$_attraction->getMaterial($_attraction->material_id)->designation}
 							</div>
 							<div class="col-md-2">
-								{eq name="$i" value="1"} {else /}<a class="btn btn-default" href="{:url('upAttraction',['articleId'=>$articleId,'attractionId'=>$attractions->id,'number'=>$i])}"  ><span class="glyphicon glyphicon-arrow-up" ></span></a>{/eq}<br>
-								{eq name="$i" value="$length"} {else /}<a class="btn btn-default" href="{:url('downAttraction',['articleId'=>$articleId,'attractionId'=>$attractions->id,'number'=>$i])}"  ><span class="glyphicon glyphicon-arrow-down"></span></a>{/eq}
+								{eq name="$i" value="1"} {else /}<a class="btn btn-default" href="{:url('upAttraction',['articleId'=>$articleId,'attractionId'=>$_attraction->id,'number'=>$i])}"  ><span class="glyphicon glyphicon-arrow-up" ></span></a>{/eq}<br>
+								{eq name="$i" value="$length"} {else /}<a class="btn btn-default" href="{:url('downAttraction',['articleId'=>$articleId,'attractionId'=>$_attraction->id,'number'=>$i])}"  ><span class="glyphicon glyphicon-arrow-down"></span></a>{/eq}
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-md-12" style="height: 40px; margin-top: 10px;">
-								<a class="btn btn-info btn-sm" href="{:url('attraction/edit' ,['articleId'=>$articleId,'attractionId'=>$attractions->id] )}"><span class="glyphicon glyphicon-pencil"></span>&nbsp;编辑</a>
-								<a class="btn btn-danger btn-sm" href="{:url('attraction/delete' ,['articleId'=>$articleId,'attractionId'=>$attractions->id] )}"><span class="glyphicon glyphicon-trash"></span>&nbsp;删除</a>
+								<a class="btn btn-info btn-sm" href="{:url('attraction/edit' ,['articleId'=>$articleId,'attractionId'=>$_attraction->id] )}"><span class="glyphicon glyphicon-pencil"></span>&nbsp;编辑</a>
+								<a class="btn btn-danger btn-sm" href="{:url('attraction/delete' ,['articleId'=>$articleId,'attractionId'=>$_attraction->id] )}"><span class="glyphicon glyphicon-trash"></span>&nbsp;删除</a>
 							</div>
 						</div>
 				</div>
@@ -110,8 +110,9 @@
 		{/volist}
 		<li>
 			<div>
-				<table class="table table-hover table-responsive">
+				<table class="table table-hover table-responsive table-bordered">
 				{eq name="$judgeHotel" value="0"} {else/}
+					<h3>酒店信息</h3>
 					<tr class="warning">
 							<th>名称</th>
 							<th>城市</th>
