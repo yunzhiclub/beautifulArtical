@@ -1,24 +1,15 @@
-{extend name="index" /}
-
-{block name="title"}
-景点管理
-{/block}
-
-{block name="content"}
-<div class="row">
-    <div class="col-md-8 col-md-offset-1">
+{extend name="index" /} {block name="title"} 景点管理 {/block} {block name="content"}
+<div class="col-md-8 col-md-offset-1" style="margin-top: 60px;margin-bottom: 100px;">
+    <div class="row">
         <h2><span class="glyphicon glyphicon-edit"></span>&nbsp;
-            {eq name="$attraction->id" value=""}
-            添加景点
-            {else /}
-            编辑景点
-            {/eq}
-        </h2>
-        <br>
-        {php}$action = request()->action() === 'add' ? 'save' : 'update';{/php}
-        <form method="post"
-              action="{:url($action, ['articleId' => $articleId, 'attractionId' => $attraction->id, 'hotelId' => $hotel->id])}"
-              enctype="multipart/form-data">
+                {eq name="$attraction->id" value=""}
+                    添加景点
+                {else /}
+                    编辑景点
+                {/eq}
+            </h2>
+        <br> {php}$action = request()->action() === 'add' ? 'save' : 'update';{/php}
+        <form method="post" action="{:url($action, ['articleId' => $articleId, 'attractionId' => $attraction->id, 'hotelId' => $hotel->id])}" enctype="multipart/form-data">
             <div class="form-group">
                 <label>标题</label>
                 <input type="text" class="form-control" name="title" placeholder="标题" value="{$attraction->title}">
