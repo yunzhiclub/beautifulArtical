@@ -51,4 +51,23 @@ class ContractorController extends IndexController
 			return $this->error($message['message'], url($message['route'], ['articleId'=>$message['articleId']]));
 		}
 	}
+
+	public function delete()
+	{
+		// 接收数据
+		$param = Request::instance();
+
+		// 调用service层删除方法
+		$message = $this->contractorService->deleteContractor($param);
+
+		// 返回相应界面
+		if ($message['status'] === 'success') {
+			// 返回成功界面
+			return $this->success($message['message'], url($message['route']));
+
+		} else {
+			// 返回失败界面
+			return $this->error($message['message'], url($message['route']));
+		}
+	}
 }
