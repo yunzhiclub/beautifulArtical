@@ -38,7 +38,7 @@
                         <a href="{:url('edit' ,['contractorId'=>$contractor->id] )}" class="btn btn-info btn-sm"><i class="glyphicon glyphicon-pencil"></i>&nbsp;编辑</a>
                     </div>
                     <div class="col-md-1 col-md-offset-2">
-                        <a href="" class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i>&nbsp;删除</a>
+                        <a href="{:url('contractor/delete',['contractorId'=>$contractor->id])}" class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i>&nbsp;删除</a>
                     </div>
                 </div>
             </div>

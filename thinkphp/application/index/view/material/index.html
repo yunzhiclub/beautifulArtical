@@ -10,6 +10,9 @@
         </div>
         <div class="container">
             <hr>
+        </div>
+
+        <ul class="container list-unstyled" style="height: 570px;">
             {volist name="materials" id="material"}
             <li style="list-style-type: none;">
                 <div class="panel panel-default">
@@ -33,6 +36,9 @@
                 </div>
             </li>
             {/volist}
+        </ul>
+
+        <div class="container text-right" style="height: 79px;">
             {$materials->render()}
         </div>
     </div>
