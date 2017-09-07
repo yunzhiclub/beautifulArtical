@@ -40,12 +40,16 @@ class ArticleController extends IndexController {
     // 返回firstadd界面
     public function firstadd(){
         $articleId = Request::instance()->param('articleId/d');
+        // 获取所有定制师
+        $contractors = Contractor::all();
+        $this->assign('contractors',$contractors);
         // 判断是否为重写界面
         if( is_null($articleId)){
             $this->assign('title', '');
             $this->assign('summery', '');
             $this->assign('cover', '');
             $this->assign('articleId', '');
+            $this->assign('contractorId', '');
             return $this->fetch();
         }else{
             $Article = Article::get($articleId);
@@ -53,6 +57,7 @@ class ArticleController extends IndexController {
             $this->assign('summery', $Article->summery);
             $this->assign('cover', $Article->cover);
             $this->assign('articleId', $articleId);
+            $this->assign('contractorId', $Article->contractor_id);
             return $this->fetch();
         }
     }

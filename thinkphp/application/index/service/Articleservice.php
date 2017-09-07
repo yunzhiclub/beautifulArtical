@@ -34,6 +34,7 @@ class Articleservice
         $articleId = $parma->param('articleId/d');
         $title = $parma->post('title');
         $summery = $parma->post('summery');
+        $contractorId = $parma->post('$contractorId');
         $file = request()->file('image');
 
         //实例化一个空文章
@@ -61,13 +62,13 @@ class Articleservice
                 $message['status'] = 'error';
                 $message['message'] = '请上传图片';
                 $message['route'] = 'firstadd';
-
                 return $message;
             }
         }
         
         $Article->title = $title;
         $Article->summery = $summery;
+        $Article->contractor_id = $contractorId;
 
         if(!is_null($file)) {
             // 保存文件，返回路径
