@@ -125,6 +125,41 @@
 				</table>
 			</div>
 		</li>
+        <!-- 定制师 -->
+            <li>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <table class="table table-hover table-bordered">
+                                    {eq name="$judgeContractor" value="0"} {else/}
+                                    <tr>
+                                        <th>定制师</th>
+                                        <td>{$contractor->designation}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>电话号码</th>
+                                        <td>{$contractor->phone}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>传真号码</th>
+                                        <td>{$contractor->fax}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>手机号码</th>
+                                        <td>{$contractor->mobile}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>电子邮件</th>
+                                        <td>{$contractor->email}</td>
+                                    </tr>
+                                    {/eq}
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
 			<!--方案报价-->
 		{volist name="plans" id="plan"}
 			<li>
