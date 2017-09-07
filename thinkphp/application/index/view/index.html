@@ -21,10 +21,9 @@
                     </div>
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
-                            <li {eq name=':request()->controller()' value="User" } class="active" {/eq}><a href="{:url('User/index')}">个人中心</a></li>
-                        </ul>
-                        <ul class="nav navbar-nav">
                             <li {eq name=':request()->controller()' value="Material"} class="active" {/eq}><a href="{:url('Material/index')}">素材管理</a></li>
+                            <li {eq name=':request()->controller()' value="Contractor"} class="active" {/eq}><a href="{:url('Contractor/index')}">定制师管理</a></li>
+                            <li {eq name=':request()->controller()' value="User" } class="active" {/eq}><a href="{:url('User/index')}">个人中心</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
                             <li><a href="{:url('login/logout')}"><i class="glyphicon glyphicon-log-out"></i>&nbsp;登出</a></li>

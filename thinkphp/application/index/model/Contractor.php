@@ -16,7 +16,7 @@ class Contractor extends Model
 	 * @param  	$articleId 接收的文章id
 	 * @return  boolen	   保存成功返回true，否则返回false
 	 */
-	public function saveContractor($data, $articleId)
+	public function saveContractor($data)
 	{
 		$this->designation = $data['designation'];
 		$this->phone = $data['phone'];
@@ -24,13 +24,8 @@ class Contractor extends Model
 		$this->mobile = $data['mobile'];
 		$this->email = $data['email'];
 
-		
 		if ($this->save()) {
-			
-			$Articleservice = new Articleservice();
-			if ($Articleservice->saveContractorId($this->id, $articleId)) {
-				return true;
-			}
+			return true;
 		}
 		return false;
 	}
