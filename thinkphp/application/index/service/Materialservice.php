@@ -6,12 +6,16 @@ use app\index\model\Common;
 
 /**
  * 
- * @authors zhuchenshu
+ * @authors liming zhuchenshu
  * @date    2017-09-07 09:09:54
  * @version $Id$
  */
 
 class Materialservice  {
+    public function getAll() {
+        $material = new Material();
+        return $material->select();
+    }
     public function materialAdd($parma) {
     	//初始化返回信息
         $message = [];

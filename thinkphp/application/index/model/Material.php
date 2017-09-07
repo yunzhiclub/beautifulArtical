@@ -1,15 +1,17 @@
 <?php
-namespace app\index\model;
-
-use think\Model;
 /**
- * 
- * @authors zhuchenshu
- * @date    2017-09-07 08:33:48
- * @version $Id$
+ * Created by PhpStorm.
+ * User: liming
+ * Date: 17-9-7
+ * Time: 上午8:41
  */
 
-class Material extends Model {
-    
-    
+namespace app\index\model;
+
+
+use think\Model;
+
+class Material extends Model
+{
+
 }
