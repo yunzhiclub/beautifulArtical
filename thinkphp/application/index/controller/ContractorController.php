@@ -72,6 +72,7 @@ class ContractorController extends IndexController
 			// 返回保存失败界面
 			return $this->error($message['message'], url($message['route']));
 		}
+	}
 	public function delete()
 	{
 		// 接收数据
