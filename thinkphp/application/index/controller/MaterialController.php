@@ -1,6 +1,7 @@
 <?php
 namespace app\index\controller;
 
+use app\index\model\Material;
 use think\Request;
 use app\index\controller\IndexController;
 use app\index\service\Materialservice;
@@ -24,7 +25,14 @@ class MaterialController extends IndexController {
     }
     // 素材管理界面
     public function index() {
-    	// 
+    	//取出配置信息
+        $pageSize = config('paginate.var_page');
+        $materials = Material::order('id desc')->paginate($pageSize);
+
+        //将数据传给V层
+        $this->assign('materials', $materials);
+
+        //渲染
     	return $this->fetch();
     }
     // 添加界面
@@ -49,5 +57,56 @@ class MaterialController extends IndexController {
             $this->error($message['message'], url($message['route']));
         }
     }
+    
+    /**
+     * 素材删除
+     */
+    public function delete()
+    {
+        // 接受参数
+        $param = Request::instance();
+
+        // 调用Service层的删除方法
+        $message = $this->materialService->deleteMaterial($param);
+
+        // 返回相应的结果
+        if ($message['status'] === 'success') {
+            // 跳转成功界面
+            $this->success($message['message'], url($message['route']));
+
+        } else {
+            // 跳转失败界面
+            $this->error($message['message'], url($message['route']));
+        }
+    }
+
     // 编辑操作
+    public function edit() {
+        // 接受参数
+        $param = Request::instance();
+        // 调用service中的编辑方法
+        $message =  $this->materialService->materialEdit($param);
+        // 传递素材信息到v层
+        $this->assign('content', $message['content']);
+        $this->assign('designation', $message['designation']);
+        $this->assign('image', $message['image']);
+        $this->assign('materialId', $message['materialId']);
+        return $this->fetch();
+    }
+    // 更新操作
+    public function update() {
+        // 接收参数
+        $param = Request::instance();
+        // 传入s层执行更新
+        $message = $this->materialService->materialUpdate($param);
+        // 传回执行信息
+        if ($message['status'] === 'success') {
+            //跳转成功的界面
+            $this->success($message['message'], url($message['route']));
+
+        } else {
+            //跳转失败的界面
+            $this->error($message['message'], url($message['route']));
+        }
+    }
 }

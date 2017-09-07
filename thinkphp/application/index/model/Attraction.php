@@ -31,9 +31,9 @@ class Attraction extends Model {
         }
     }
 
-    public function updateAttraction($title, $meal, $car, $guide, $hotel, $articleId, $id) {
+    public function updateAttraction($title, $meal, $car, $guide, $hotel, $articleId, $id, $materialId) {
         $Attraction = Attraction::get($id);
-        $Attraction->saveAttraction($title, $meal, $car, $guide, $hotel, $articleId);
+        $Attraction->saveAttraction($title, $meal, $car, $guide, $hotel, $articleId, $materialId);
     }
 
     public function deleteAttraction($id) {
@@ -59,11 +59,19 @@ class Attraction extends Model {
         $Attraction->meal = '';
         $Attraction->car = '';
         $Attraction->guide = '';
+        $Attraction->material_id = '';
         return $Attraction;
     }
 
     public function getMaterial($id) {
         //返回关联的素材
-        return Material::get($id);
+        if(!is_null($id)) {
+            return Material::get($id);
+        } else {
+            $Material = new Material();
+            $Material->image = '';
+            $Material->designation = '未选择素材';
+            return $Material;
+        }
     }
 }
