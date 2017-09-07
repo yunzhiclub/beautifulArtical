@@ -1,6 +1,7 @@
 <?php
 namespace app\index\controller;
 
+use app\index\model\Material;
 use think\Request;
 use app\index\controller\IndexController;
 use app\index\service\Materialservice;
@@ -24,7 +25,14 @@ class MaterialController extends IndexController {
     }
     // 素材管理界面
     public function index() {
-    	// 
+    	//取出配置信息
+        $pageSize = config('paginate.var_page');
+        $materials = Material::order('id desc')->paginate($pageSize);
+
+        //将数据传给V层
+        $this->assign('materials', $materials);
+
+        //渲染
     	return $this->fetch();
     }
     // 添加界面
