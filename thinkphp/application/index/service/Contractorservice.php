@@ -57,5 +57,6 @@ class Contractorservice
 			$message['message'] = '数据未编辑！';
 			$message['route'] = 'index';
 		}
+		return $message;
 	} 
 }

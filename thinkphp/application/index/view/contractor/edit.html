@@ -1,4 +1,4 @@
-{extend name="index" /} {block name="title"}新增订制师 {/block}
+{extend name="index" /} {block name="title"}编辑订制师 {/block}
 
 <body>
     {block name="content"}
@@ -6,9 +6,9 @@
         <div class="row">
             <h2>
         <span class="glyphicon glyphicon-edit"></span>&nbsp;
-        新增订制师</h2>
+        编辑订制师</h2>
             <br>
-            <form action="{:url('update',['articleId'=>$articleId,'contractorId'=>$contractor->id])}" method="post">
+            <form action="{:url('update',['contractorId'=>$contractor->id])}" method="post">
                 <div class="form-group">
                     <label>姓名</label>
                     <input type="text" class="form-control" name="designation" placeholder="姓名..." value="{$contractor->designation}">
