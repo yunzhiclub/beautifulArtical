@@ -5,7 +5,9 @@ namespace app\index\controller;
 use app\index\model\AttractionModel;
 use app\index\model\Common;
 use app\index\model\HotelModel;
-use app\index\controller\IndexController;
+use app\index\model\Material;
+use app\index\service\Attractionservice;
+use app\index\service\Materialservice;
 use think\Request;
 use app\index\model\Hotel;
 use app\index\model\Attraction;
@@ -16,19 +18,27 @@ use app\index\model\Attraction;
  */
 
 class AttractionController extends IndexController {
-    
+    protected $attractionService = null;
+    protected $materialService = null;
+
+    function __construct(Request $request = null)
+    {
+        parent::__construct($request);
+        $this->attractionService = new Attractionservice();
+        $this->materialService = new Materialservice();
+    }
+
     public function add() {
         $articleId = Request::instance()->param('articleId');
         $this->assign('articleId',$articleId);
         $this->assign('attraction',Attraction::getNullAttraction());
         $this->assign('hotel',Hotel::getNullHotel());
+        $this->assign('materials', $this->materialService->getAll());
         return $this->fetch();
     }
 
     public function save() {
         $title = Request::instance()->post('title');
-        $content = Request::instance()->post('content');
-        $designation = Request::instance()->post('designation');
         $meal = Request::instance()->post('meal');
         $car = Request::instance()->post('car');
         $guide = Request::instance()->post('guide');
@@ -40,6 +50,8 @@ class AttractionController extends IndexController {
 
         $articleId = Request::instance()->param('articleId');
 
+        $materialId = Request::instance()->post('materialId');
+
         // 酒店处理
         if($hotelName || $hotelCity || $hotelStarLevel || $hotelRemark) {
             $Hotel = new Hotel();
@@ -48,16 +60,9 @@ class AttractionController extends IndexController {
             $Hotel = null;
         }
 
-        // 图片处理
-        $file = request()->file('image');
-        if(is_null($file)) {
-            return $this->error('请上传图片', url('add?articleId='.$articleId));
-        }
-        $image = Common::uploadImage($file);
-
         // 景点处理
         $Attraction = new Attraction();
-        if(!$Attraction->saveAttraction($title, $content, $designation, $meal, $car, $guide, $image, $Hotel, $articleId)) {
+        if(!$Attraction->saveAttraction($title, $meal, $car, $guide, $Hotel, $articleId, $materialId)) {
             return $this->error('保存失败', url('add?articleId='.$articleId));
         } else {
             return $this->success('保存成功', url('Article/secondadd?articleId='.$articleId));
@@ -91,8 +96,6 @@ class AttractionController extends IndexController {
 
         // 获取数据
         $title = Request::instance()->post('title');
-        $content = Request::instance()->post('content');
-        $name = Request::instance()->post('name');
         $meal = Request::instance()->post('meal');
         $car = Request::instance()->post('car');
         $guide = Request::instance()->post('guide');
@@ -118,17 +121,10 @@ class AttractionController extends IndexController {
 
         // 图片处理
         $Attraction = Attraction::get($attractionId);
-        $file = request()->file('image');
-        if(!is_null($file)) {
-            Common::deleteImage('upload/'.$Attraction->image);
-            $image = Common::uploadImage($file);
-        } else {
-            $image = $Attraction->image;
-        }
 
         // 景点处理
         $Attraction = Attraction::getNullAttraction();
-        $Attraction->updateAttraction($title, $content, $name, $meal, $car, $guide, $image, $Hotel, $articleId, $attractionId);
+        $Attraction->updateAttraction($title, $meal, $car, $guide, $Hotel, $articleId, $attractionId);
 
         return $this->success('更新成功',url('article/secondadd?articleId='.$articleId));
     }

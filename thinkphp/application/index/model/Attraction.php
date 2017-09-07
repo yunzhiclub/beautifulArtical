@@ -11,16 +11,14 @@ use think\Model;
  */
 
 class Attraction extends Model {
-    public function saveAttraction($title, $content, $designation, $meal, $car, $guide, $image, $hotel, $articleId) {
+    public function saveAttraction($title, $meal, $car, $guide, $hotel, $articleId, $materialId) {
         $this->title = $title;
-        $this->description = $content;
-        $this->designation = $designation;
         $this->meal = $meal;
         $this->car = $car;
         $this->guide = $guide;
-        $this->image = $image;
         $this->weight = Attraction::where('article_id', '=', $articleId)->count()+1;
         $this->article_id = $articleId;
+        $this->material_id = $materialId;
 
         if(!is_null($hotel)){
             $this->hotel_id = $hotel->id;
@@ -33,16 +31,15 @@ class Attraction extends Model {
         }
     }
 
-    public function updateAttraction($title, $content, $designation, $meal, $car, $guide, $image, $hotel, $articleId, $id) {
+    public function updateAttraction($title, $meal, $car, $guide, $hotel, $articleId, $id) {
         $Attraction = Attraction::get($id);
-        $Attraction->saveAttraction($title, $content, $designation, $meal, $car, $guide, $image, $hotel, $articleId);
+        $Attraction->saveAttraction($title, $meal, $car, $guide, $hotel, $articleId);
     }
 
     public function deleteAttraction($id) {
         $Attraction = Attraction::get($id);
         $hotelId = $Attraction->hotel_id;
 
-        Common::deleteImage('upload/'.$Attraction->image);
         if(!$Attraction->delete()) {
             return false;
         }
@@ -55,24 +52,13 @@ class Attraction extends Model {
         return true;
     }
 
-    public function checkImageIsNull() {
-        if(is_null($this->image)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     public static function getNullAttraction() {
         $Attraction = new Attraction();
         $Attraction->id = null;
         $Attraction->title = '';
-        $Attraction->description = '';
-        $Attraction->designation = '';
         $Attraction->meal = '';
         $Attraction->car = '';
         $Attraction->guide = '';
-        $Attraction->image = null;
         return $Attraction;
     }
 }

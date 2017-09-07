@@ -23,6 +23,7 @@ public class Attraction {
     private String meal;
     private String car;
     private String guide;
+    private String title;
     private int weight;
 
 
@@ -93,6 +94,15 @@ public class Attraction {
         this.material = material;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+
     @Override
     public String toString() {
         return "Attraction{" +
@@ -103,6 +113,7 @@ public class Attraction {
                 ", meal='" + meal + '\'' +
                 ", car='" + car + '\'' +
                 ", guide='" + guide + '\'' +
+                ", title='" + title + '\'' +
                 ", weight=" + weight +
                 '}';
     }
