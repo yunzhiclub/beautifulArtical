@@ -61,6 +61,8 @@ class Articleservice
                 $message['status'] = 'error';
                 $message['message'] = '请上传图片';
                 $message['route'] = 'firstadd';
+
+                return $message;
             }
         }
         
@@ -137,18 +139,16 @@ class Articleservice
         $message['length'] = $length;
         // 将文章中的各个景点的酒店合并到一个对象组中
         $Hotels = [];
-        $TempHotel = new Hotel();
 
         foreach ($Attraction as $key => $value) {
             $hotelId = $value->hotel_id;
             if(!is_null($hotelId)) {
-                $TempHotel = Hotel::where('id', $hotelId)->find();
+                $tempHotel = Hotel::where('id', $hotelId)->find();
+                if (!is_null($tempHotel)) {
+                    array_push($Hotels, $tempHotel);
+                }
             }
-            if (!is_null($TempHotel)) {
-                //如果酒店不为空
-                array_push($Hotels, $TempHotel);
-            }
-            $TempHotel = null;
+            $tempHotel = null;
         }
         // 将段落按在景点的上下顺序分成两个类，并根据权重排序
         $paragraphUp = Paragraph::where('is_before_attraction',1)->where('article_id',$articleId)->order('weight')->select();
