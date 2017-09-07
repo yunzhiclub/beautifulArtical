@@ -1,0 +1,58 @@
+{extend name="index" /} {block name="title"}订制师管理{/block}
+{block name="content"}
+<div class="row">
+    <br>
+    <div class="container">
+        <div class="text-right">
+            <a class="btn btn-primary" href="{:url('contractor/add')}"><i class="glyphicon glyphicon-plus"></i>&nbsp;&nbsp;添加定制师</a>
+        </div>
+    </div>
+    <div class="container">
+        <hr>
+    </div>
+
+    <ul class="container list-unstyled" style="height: 570px;">
+        {volist name="contractors" id="contractor" key="key"}
+
+        <li class="col-md-4" style="height: 275px;margin: 5px 0;">
+            <div style="border:#F8F8F8 solid 1px;margin: 2px -8px;">
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
+                        <h3 style="overflow: hidden;white-space:nowrap;text-overflow: ellipsis;">{$contractor->designation}</h3>
+                    </div>
+                </div>
+
+                <hr />
+
+                <div class="row" style="height: 125px;">
+                    <div class="col-md-11 col-md-offset-1">
+                        <p>电话：{$contractor->phone}</p>
+                        <p>传真：{$contractor->fax}</p>
+                        <p>手机：{$contractor->mobile}</p>
+                        <p>电子邮箱：{$contractor->email}</p>
+                    </div>
+                </div>
+
+                <div class="row" style="margin-top: 5px;margin-bottom: 5px;">
+                    <div class="col-md-1 col-md-offset-1">
+                        <a href="" class="btn btn-info btn-sm"><i class="glyphicon glyphicon-pencil"></i>&nbsp;编辑</a>
+                    </div>
+                    <div class="col-md-1 col-md-offset-2">
+                        <a href="" class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i>&nbsp;删除</a>
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        {/volist}
+    </ul>
+
+    <div class="container text-right" style="height: 79px;">
+        {$contractors->render()}
+    </div>
+</div>
+
+<div class="container">
+    <hr>
+</div>
+{/block}
