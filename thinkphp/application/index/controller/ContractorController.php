@@ -21,34 +21,29 @@ class ContractorController extends IndexController
 		$this->contractorService = new Contractorservice();
 	}
 
+	public function index() {
+        $pageSize = config('paginate.var_page');
+	    $contractors = Contractor::order('id desc')->paginate($pageSize);
+	    $this->assign('contractors', $contractors);
+	    return $this->fetch();
+    }
+
 	public function add()
 	{
-		// 获取文章id
-		$articleId = Request::instance()->param('articleId/d');
-
-		// 连接v层
-		$this->assign('articleId', $articleId);
-
-		// 返回添加界面
 		return $this->fetch();
 	}
 
 	public function save()
 	{
-		// 接收数据
 		$param = Request::instance();
 
 		// 调用Service层保存方法
 		$message = $this->contractorService->saveOrUpdateContractor($param);
 
-		// 返回相应的界面
 		if ($message['status'] === 'success') {
-			// 返回保存成功界面
-			return $this->success($message['message'], url($message['route'], ['articleId'=>$message['articleId']]));
-
+			return $this->success($message['message'], url($message['route']));
 		} else {
-			// 返回保存失败界面
-			return $this->error($message['message'], url($message['route'], ['articleId'=>$message['articleId']]));
+			return $this->error($message['message'], url($message['route']));
 		}
 	}
 	// 编辑订制师信息
