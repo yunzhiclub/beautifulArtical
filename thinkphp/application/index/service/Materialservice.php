@@ -51,6 +51,86 @@ class Materialservice  {
         }
         return $message;
     }
+    public function materialUpdate($parma)  {
+        // 初始化信息
+        $message = [];
+        $message['status'] = 'success';
+        $message['route'] = 'index';
+        $message['message'] = '景点素材编辑成功';
+
+        // 接受传来的素材id
+        $materialId = $parma->param('materialId/d');
+
+        // 未获取到素材id
+        if (is_null($materialId) || $materialId === 0) {
+            $message['status'] = 'error';
+            $message['message'] = '未获取到素材';
+
+        } else {
+            // 获取素材对象
+            $Material = Material::get($materialId);
+
+            // 获取对象为空
+            if (is_null($Material)) {
+                $message['status'] = 'error';
+                $message['message'] = '未获取到素材';
+
+            } else {
+                // 更新数据
+                $Material->content = $parma->post('content');
+                $Material->designation = $parma->post('designation');
+                $file = request()->file('image');
+
+                if(!is_null($file)){
+                    // 删除原有图片
+                    Common::deleteImage('upload/'.$Material->image);
+                    $imagePath = Common::uploadImage($file);
+                    // 保存新加图片
+                    $Material->image = $imagePath;
+                }
+
+                if(!$Material->save() ) {
+                    $message['status'] = 'error';
+                    $message['message'] = '景点素材没有改变';
+                } 
+            }
+        }       
+        return $message;
+    }
+    public function materialEdit($parma) {
+        // 初始化信息
+        $message = [];
+        $message['status'] = 'success';
+        $message['route'] = 'index';
+        $message['message'] = '景点素材添加成功';
+
+        // 接受传来的素材id
+        $materialId = $parma->param('materialId/d');
+
+        // 未获取到素材id
+        if (is_null($materialId) || $materialId === 0) {
+            $message['status'] = 'error';
+            $message['message'] = '未获取到素材';
+
+        } else {
+            // 获取素材对象
+            $Material = Material::get($materialId);
+
+            // 素材对象为空
+            if (is_null($Material)) {
+                $message['status'] = 'error';
+                $message['message'] = '未获取到素材';
+
+            } else {
+                // 编辑素材
+                $message['content'] = $Material->content;
+                $message['designation'] = $Material->designation;
+                $message['image'] = $Material->image;
+                $message['materialId'] = $materialId;
+            }
+        }
+        return $message;
+    } 
 
     public function deleteMaterial($param)
     {
