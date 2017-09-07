@@ -7,7 +7,7 @@ use app\index\model\Contractor;
 use app\index\service\Contractorservice;
 
 /**
- * @author 朴世超
+ * @author 朴世超 朱晨澍
  */
 class ContractorController extends IndexController
 {
@@ -46,7 +46,32 @@ class ContractorController extends IndexController
 			return $this->error($message['message'], url($message['route']));
 		}
 	}
+	// 编辑订制师信息
+	public function edit() {
+		// 从v层传来数据
+		$param = Request::instance();
+		// 送到s层处理数据
+		$message = $this->contractorService->editContractor($param);
+		// 将文章信息返回到v层
+		$this->assign('contractor', $message['contractor']);
+		// 返回编辑界面
+		return $this->fetch();
+	}
+	// 更新订制师信息
+	public function update() {
+		// 从v层传来数据
+		$param = Request::instance();
+		// 送到s层处理数据
+		$message = $this->contractorService->updateContractor($param); 
+		// 返回相应的界面
+		if ($message['status'] === 'success') {
+			// 返回保存成功界面
+			return $this->success($message['message'], url($message['route']));
 
+		} else {
+			// 返回保存失败界面
+			return $this->error($message['message'], url($message['route']));
+		}
 	public function delete()
 	{
 		// 接收数据
@@ -59,7 +84,6 @@ class ContractorController extends IndexController
 		if ($message['status'] === 'success') {
 			// 返回成功界面
 			return $this->success($message['message'], url($message['route']));
-
 		} else {
 			// 返回失败界面
 			return $this->error($message['message'], url($message['route']));
