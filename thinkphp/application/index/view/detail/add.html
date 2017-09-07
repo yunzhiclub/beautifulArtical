@@ -1,137 +1,137 @@
-{extend name="index" /}
-{block name="title"} 添加方案报价 {/block}
-{block name="content"}
+{extend name="index" /} {block name="title"} 添加方案报价 {/block} {block name="content"}
 <div class="row-fluid">
-    
-        <h2><span class="glyphicon glyphicon-edit"></span>&nbsp;新增方案报价</h2>
-        <br>
+    <div class="col-md-8 col-md-offset-1" style="margin-top: 60px;margin-bottom: 100px;">
         <div class="row">
-            <div>
-                <ul id="myTab" class="nav nav-tabs">
-                    <li class="active">
-                        <a href="#firstform" data-toggle="tab">第一步</a>
-                    </li>
-                    <li>
-                        <a href="#secondform" data-toggle="tab">第二步</a>
-                    </li>
-                    <li>
-                        <a href="#thirdform" data-toggle="tab">第三步</a>
-                    </li>
-                </ul>
-                <form action="{:url('save', ['articleId' => $articleId])}" method="post">
-                    <div id="myTabContent" class="tab-content">
-                        <div class="tab-pane fade in active" id="firstform">
-                            <br>
-                            <h3>添加方案报价</h3>
-                            <div class="control-group">
-                                <label for="travelDate">出行日期</label>
-                                <div class="controls">
-                                    <input type="date" class="form-control" name="travelDate" placeholder="出行日期"  />
+            <h2><span class="glyphicon glyphicon-edit"></span>&nbsp;新增方案报价</h2>
+            <br>
+            <div class="row">
+                <div>
+                    <ul id="myTab" class="nav nav-tabs">
+                        <li class="active">
+                            <a href="#firstform" data-toggle="tab">第一步</a>
+                        </li>
+                        <li>
+                            <a href="#secondform" data-toggle="tab">第二步</a>
+                        </li>
+                        <li>
+                            <a href="#thirdform" data-toggle="tab">第三步</a>
+                        </li>
+                    </ul>
+                    <form action="{:url('save', ['articleId' => $articleId])}" method="post">
+                        <div id="myTabContent" class="tab-content">
+                            <div class="tab-pane fade in active" id="firstform">
+                                <br>
+                                <h3>添加方案报价</h3>
+                                <div class="control-group">
+                                    <label for="travelDate">出行日期</label>
+                                    <div class="controls">
+                                        <input type="date" class="form-control" name="travelDate" placeholder="出行日期" />
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label class="control-label" for="peopleNum">出行人数</label>
+                                    <div class="controls">
+                                        <input type="text" class="form-control" name="peopleNum" placeholder="出行人数" />
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label for="currency">币种</label>
+                                    <div class="controls">
+                                        <input type="text" class="form-control" name="currency" placeholder="币种" />
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label for="totalCost">总费用</label>
+                                    <div class="controls">
+                                        <input type="text" class="form-control" name="totalCost" placeholder="总费用" />
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label for="lastPayTime">最晚付款时间</label>
+                                    <div class="controls">
+                                        <input type="date" class="form-control" name="lastPayTime" placeholder="最晚付款时间" />
+                                    </div>
+                                </div>
+                                <br>
+                            </div>
+                            <div class="tab-pane fade" id="secondform">
+                                <br>
+                                <h3>添加地接类型</h3>
+                                <div class="control-group">
+                                    <label for="number">数量</label>
+                                    <div class="controls">
+                                        <input type="number" class="form-control" name="dijie_number" placeholder="数量" />
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label for="frequency">频次</label>
+                                    <div class="controls">
+                                        <input type="number" class="form-control" name="dijie_frequency" placeholder="频次" />
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label for="unitPrice">单价</label>
+                                    <div class="controls">
+                                        <input type="number" class="form-control" name="dijie_unitPrice" placeholder="单价" />
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label for="totalPrice">总价</label>
+                                    <div class="controls">
+                                        <input type="number" class="form-control" name="dijie_totalPrice" placeholder="总价" />
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label for="remark">备注</label>
+                                    <div class="controls">
+                                        <input type="text" class="form-control" name="dijie_remark" placeholder="备注" />
+                                    </div>
+                                </div>
+                                <br>
+                            </div>
+                            <div class="tab-pane fade" id="thirdform">
+                                <br>
+                                <h3>添加住宿类型</h3>
+                                <div class="control-group">
+                                    <label for="number">数量</label>
+                                    <div class="controls">
+                                        <input type="number" class="form-control" name="zhusu_number" placeholder="数量" />
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label for="frequency">频次</label>
+                                    <div class="controls">
+                                        <input type="number" class="form-control" name="zhusu_frequency" placeholder="频次" />
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label for="unitPrice">单价</label>
+                                    <div class="controls">
+                                        <input type="number" class="form-control" name="zhusu_unitPrice" placeholder="单价" />
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label for="totalPrice">总价</label>
+                                    <div class="controls">
+                                        <input type="number" class="form-control" name="zhusu_totalPrice" placeholder="总价" />
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label for="remark">备注</label>
+                                    <div class="controls">
+                                        <input type="text" class="form-control" name="zhusu_remark" placeholder="备注" />
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="control-group">
+                                    <button type="submit" class="btn btn-primary" href="#"><span class="glyphicon glyphicon-ok"></span>&nbsp;提交</button>
                                 </div>
                             </div>
-                            <div class="control-group">
-                                <label class="control-label" for="peopleNum">出行人数</label>
-                                <div class="controls">
-                                    <input type="text" class="form-control" name="peopleNum" placeholder="出行人数"  />
-                                </div>
-                            </div>
-                            <div class="control-group">
-                                <label for="currency">币种</label>
-                                <div class="controls">
-                                    <input type="text" class="form-control" name="currency" placeholder="币种"  />
-                                </div>
-                            </div>
-                            <div class="control-group">
-                                <label for="totalCost">总费用</label>
-                                <div class="controls">
-                                    <input type="text" class="form-control" name="totalCost" placeholder="总费用" />
-                                </div>
-                            </div>
-                            <div class="control-group">
-                                <label for="lastPayTime">最晚付款时间</label>
-                                <div class="controls">
-                                    <input type="date" class="form-control" name="lastPayTime" placeholder="最晚付款时间"  />
-                                </div>
-                            </div>
-                            <br>
                         </div>
-                        <div class="tab-pane fade" id="secondform">
-                            <br>
-                            <h3>添加地接类型</h3>
-                            <div class="control-group">
-                                <label for="number">数量</label>
-                                <div class="controls">
-                                    <input type="number" class="form-control" name="dijie_number" placeholder="数量"  />
-                                </div>
-                            </div>
-                            <div class="control-group">
-                                <label for="frequency">频次</label>
-                                <div class="controls">
-                                    <input type="number" class="form-control" name="dijie_frequency" placeholder="频次"  />
-                                </div>
-                            </div>
-                            <div class="control-group">
-                                <label for="unitPrice">单价</label>
-                                <div class="controls">
-                                    <input type="number" class="form-control" name="dijie_unitPrice" placeholder="单价" />
-                                </div>
-                            </div>
-                            <div class="control-group">
-                                <label for="totalPrice">总价</label>
-                                <div class="controls">
-                                    <input type="number" class="form-control" name="dijie_totalPrice" placeholder="总价" />
-                                </div>
-                            </div>
-                            <div class="control-group">
-                                <label for="remark">备注</label>
-                                <div class="controls">
-                                    <input type="text" class="form-control" name="dijie_remark" placeholder="备注"  />
-                                </div>
-                            </div>
-                            <br>
-                        </div>
-                        <div class="tab-pane fade" id="thirdform">
-                            <br>
-                            <h3>添加住宿类型</h3>
-                            <div class="control-group">
-                                <label for="number">数量</label>
-                                <div class="controls">
-                                    <input type="number" class="form-control" name="zhusu_number" placeholder="数量" />
-                                </div>
-                            </div>
-                            <div class="control-group">
-                                <label for="frequency">频次</label>
-                                <div class="controls">
-                                    <input type="number" class="form-control" name="zhusu_frequency" placeholder="频次"  />
-                                </div>
-                            </div>
-                            <div class="control-group">
-                                <label for="unitPrice">单价</label>
-                                <div class="controls">
-                                    <input type="number" class="form-control" name="zhusu_unitPrice" placeholder="单价" />
-                                </div>
-                            </div>
-                            <div class="control-group">
-                                <label for="totalPrice">总价</label>
-                                <div class="controls">
-                                    <input type="number" class="form-control" name="zhusu_totalPrice" placeholder="总价" />
-                                </div>
-                            </div>
-                            <div class="control-group">
-                                <label for="remark">备注</label>
-                                <div class="controls">
-                                    <input type="text" class="form-control" name="zhusu_remark" placeholder="备注"  />
-                                </div>
-                            </div>
-                            <br>
-                            <div class="control-group">
-                                <button type="submit" class="btn btn-primary" href="#"><span class="glyphicon glyphicon-ok"></span>&nbsp;提交</button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
-    
+    </div>
 </div>
 {/block}
