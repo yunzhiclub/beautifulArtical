@@ -1,180 +1,185 @@
-{extend name="index"} {block name="title"}文章编辑{/block} {block name="content"}
-<div class="col-md-8 col-md-offset-1" style="margin-top: 60px;margin-bottom: 100px;">
-    <div class="row">
-        <h2><span class="glyphicon glyphicon-edit"></span>&nbsp;文章编辑</h2>
-        <br>
-        <form method="post" action="{:url ('addsecond',['articleId'=>$articleId])}" enctype="multipart/form-data">
-            <div class="form-group">
-                <label for="TitleInput">标题</label>
-                <input type="text" class="form-control" id="TitleInput" placeholder="标题" name="title" value="{$title}">
-            </div>
-            <div class="form-group">
-                <label for="SummaryInput">摘要</label>
-                <input type="text" class="form-control" id="SummaryInput" placeholder="摘要" name="summary" value="{$summery}">
-            </div>
-            <div class="form-group">
-                <label for="exampleInputFile">封面</label>
-                <img src="{:__ROOT__}/upload/{$cover}" style="height: 100px; width: 180px; " alt="无图">
-                <a class="btn btn-default" href="{:url('firstadd?articleId=' . $articleId)}">更改</a>
-            </div>
-            <div class="form-group">
-                <label for="TextInput">正文</label>
-                <span class="col-md-offset-1">
-                <a class="btn btn-primary btn-sm" href="{:url('Paragraph/index', ['articleId'=>$articleId,'id'=>''])}"><span class="glyphicon glyphicon-plus"></span>&nbsp;段落</a>&nbsp;&nbsp;
-                <a class="btn btn-primary btn-sm" href="{:url('Attraction/add?articleId='.$articleId)}"><span class="glyphicon glyphicon-plus"></span>&nbsp;景点</a>&nbsp;&nbsp;
-                <a class="btn btn-primary btn-sm" href="{:url('Detail/add', ['articleId'=>$articleId])}"><span class="glyphicon glyphicon-plus"></span>&nbsp;方案报价</a>&nbsp;&nbsp;
-                <a class="btn btn-primary btn-sm" href="{:url('Contractor/add', ['articleId'=>$articleId])}"><span class="glyphicon glyphicon-plus"></span>&nbsp;订制师</a>
-                </span>
-            </div>
-            <ul style="list-style-type: none;">
-                {volist name="paragraphUp" id="paragraph"}
-                <li>
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <h4>{$paragraph->title}</h4>
-                            <div class="row">
-                                <div class="col-md-3" style="height: 100px;">
-                                    <img src="{:__ROOT__}/upload/{$paragraph->image}" style="height: 100px; width: 180px;">
-                                </div>
-                                <div class="col-md-6 col-md-offset-1" style="height: 100px;  display:-webkit-box;overflow:hidden;text-overflow:ellipsis;-webkit-line-clamp:2;-webkit-box-orient:vertical; ">
-                                    {$paragraph->content}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12" style="height: 40px; margin-top: 10px;">
-                                <a class="btn btn-info btn-sm" href="{:url('Paragraph/edit',['articleId'=>$articleId,'id'=>$paragraph->id])}"><span class="glyphicon glyphicon-pencil"></span>&nbsp;编辑</a>
-                                <a class="btn btn-danger btn-sm" href="{:url('Paragraph/delete', ['articleId'=>$articleId,'id'=>$paragraph->id])}"><span class="glyphicon glyphicon-trash"></span>&nbsp;删除</a>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                {/volist} {volist name="attraction" id="attractions"}
-                <li>
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <h4>{$attractions->title}</h4>
-                            <div class="row">
-                                <div class="col-md-3" style="height: 100px;">
-                                    <img src="{:__ROOT__}/upload/{$attractions->image}" style="height: 100px; width: 180px;">
-                                </div>
-                                <div class="col-md-6 col-md-offset-1" style="height: 100px;  display:-webkit-box;overflow:hidden;text-overflow:ellipsis;-webkit-line-clamp:2;-webkit-box-orient:vertical; ">
-                                    {$attractions->description}
-                                </div>
-                                <div class="col-md-2">
-                                    {eq name="$i" value="1"} {else /}<a class="btn btn-default" href="{:url('upAttraction',['articleId'=>$articleId,'attractionId'=>$attractions->id,'number'=>$i])}"><span class="glyphicon glyphicon-arrow-up" ></span></a>{/eq}
-                                    <br> {eq name="$i" value="$length"} {else /}<a class="btn btn-default" href="{:url('downAttraction',['articleId'=>$articleId,'attractionId'=>$attractions->id,'number'=>$i])}"><span class="glyphicon glyphicon-arrow-down"></span></a>{/eq}
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12" style="height: 40px; margin-top: 10px;">
-                                    <a class="btn btn-info btn-sm" href="{:url('attraction/edit' ,['articleId'=>$articleId,'attractionId'=>$attractions->id] )}"><span class="glyphicon glyphicon-pencil"></span>&nbsp;编辑</a>
-                                    <a class="btn btn-danger btn-sm" href="{:url('attraction/delete' ,['articleId'=>$articleId,'attractionId'=>$attractions->id] )}"><span class="glyphicon glyphicon-trash"></span>&nbsp;删除</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                {/volist} {volist name="paragraphDown" id="paragraph"}
-                <li>
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <h4>{$paragraph->title}</h4>
-                            <div class="row">
-                                <div class="col-md-3" style="height: 100px;">
-                                    <img src="{:__ROOT__}/upload/{$paragraph->image}" style="height: 100px; width: 180px;">
-                                </div>
-                                <div class="col-md-6 col-md-offset-1" style="height: 100px;  display:-webkit-box;overflow:hidden;text-overflow:ellipsis;-webkit-line-clamp:2;-webkit-box-orient:vertical; ">
-                                    {$paragraph->content}
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12" style="height: 40px; margin-top: 10px;">
-                                    <a class="btn btn-info btn-sm" href="{:url('Paragraph/edit',['articleId'=>$articleId,'id'=>$paragraph->id])}"><span class="glyphicon glyphicon-pencil"></span>&nbsp;编辑</a>
-                                    <a class="btn btn-danger btn-sm" href="{:url('Paragraph/delete', ['articleId'=>$articleId,'id'=>$paragraph->id])}"><span class="glyphicon glyphicon-trash"></span>&nbsp;删除</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                {/volist}
-                <li>
-                    <div>
-                        <table class="table table-hover table-responsive">
-                            {eq name="$judgeHotel" value="0"} {else/}
-                            <tr class="warning">
-                                <th>名称</th>
-                                <th>城市</th>
-                                <th>星级</th>
-                                <th>备注</th>
-                            </tr>
-                            {/eq} {volist name="hotel" id="hotel"}
-                            <tr>
-                                <th>{$hotel->designation}</th>
-                                <th>{$hotel->city}</th>
-                                <th>{$hotel->star_level}</th>
-                                <th>{$hotel->remark}</th>
-                            </tr>
-                            {/volist}
-                        </table>
-                    </div>
-                </li>
-                <!--方案报价-->
-                {volist name="plans" id="plan"}
-                <li>
-                    <div class="panel panel-default">
-                        <div class="panel-body">
-                            <h4>方案报价</h4>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <p>出发日期：{$plan->travel_date}</p>
-                                    <p>出行人数：{$plan->people_num}</p>
-                                    <p>币种：{$plan->currency}</p>
-                                    <p>总费用：{$plan->total_cost}</p>
-                                    <p>最晚付款时间：{$plan->last_pay_time}</p>
-                                    <table class="table table-hover table-bordered">
-                                        <tr class="info">
-                                            <th>类型</th>
-                                            <th>数量</th>
-                                            <th>频次</th>
-                                            <th>单价</th>
-                                            <th>总价</th>
-                                            <th>备注</th>
-                                        </tr>
-                                        <tr>
-                                            <td>地接</td>
-                                            <td>{$plan->getDetailByType('dijie')->number}</td>
-                                            <td>{$plan->getDetailByType('dijie')->frequency}</td>
-                                            <td>{$plan->getDetailByType('dijie')->unit_price}</td>
-                                            <td>{$plan->getDetailByType('dijie')->total_price}</td>
-                                            <td>{$plan->getDetailByType('dijie')->remark}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>住宿</td>
-                                            <td>{$plan->getDetailByType('zhusu')->number}</td>
-                                            <td>{$plan->getDetailByType('zhusu')->frequency}</td>
-                                            <td>{$plan->getDetailByType('zhusu')->unit_price}</td>
-                                            <td>{$plan->getDetailByType('zhusu')->total_price}</td>
-                                            <td>{$plan->getDetailByType('zhusu')->remark}</td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12" style="height: 40px; margin-top: 10px;">
-                                    <a class="btn btn-info btn-sm" href="{:url('Detail/edit',['planId'=>$plan->id,'article_id'=>$articleId])}"><span class="glyphicon glyphicon-pencil"></span>&nbsp;编辑</a>
-                                    <a class="btn btn-danger btn-sm" href="{:url('Detail/delete',['planId'=>$plan->id,'article_id'=>$articleId])}"><span class="glyphicon glyphicon-trash"></span>&nbsp;删除</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                {/volist}
-            </ul>
-            <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-ok"></span>&nbsp;完成</button>
-            <br>
-            <br>
-        </form>
-    </div>
+{extend name="index"}
+{block name="title"}文章编辑{/block}
+{block name="content"}
+<div class="col-md-8 col-md-offset-1" style="margin-top: 60px;" >
+	<h2><span class="glyphicon glyphicon-edit"></span>&nbsp;文章编辑</h2>
+	<br>
+	<form method="post" action="{:url ('addsecond',['articleId'=>$articleId])}" enctype="multipart/form-data">
+		<div class="form-group">
+			<label for="TitleInput">标题</label>
+			<input type="text" class="form-control" id="TitleInput" placeholder="标题" name="title" value="{$title}">
+		</div>
+		<div class="form-group">
+			<label for="SummaryInput">摘要</label>
+			<input type="text" class="form-control" id="SummaryInput" placeholder="摘要" name="summary" value="{$summery}">
+		</div>
+		<div class="form-group">
+			<label for="exampleInputFile">封面</label>
+			<img src="{:__ROOT__}/upload/{$cover}" style="height: 100px; width: 180px; " alt="无图" >
+				<a class="btn btn-default" href="{:url('firstadd?articleId=' . $articleId)}">更改</a>
+		</div>
+		<div class="form-group">
+			<label for="TextInput">正文</label>
+			<span class="col-md-offset-1">
+				<a class="btn btn-primary btn-sm" href="{:url('Paragraph/index', ['articleId'=>$articleId,'id'=>''])}"><span class="glyphicon glyphicon-plus"></span>&nbsp;段落</a>&nbsp;&nbsp;
+				<a class="btn btn-primary btn-sm" href="{:url('Attraction/add?articleId='.$articleId)}"><span class="glyphicon glyphicon-plus"></span>&nbsp;景点</a>&nbsp;&nbsp;
+				<a class="btn btn-primary btn-sm" href="{:url('Detail/add', ['articleId'=>$articleId])}"><span class="glyphicon glyphicon-plus"></span>&nbsp;方案报价</a>&nbsp;&nbsp;
+				<a class="btn btn-primary btn-sm" href="{:url('Contractor/add', ['articleId'=>$articleId])}"><span class="glyphicon glyphicon-plus"></span>&nbsp;订制师</a>
+			</span>
+		</div>
+		<ul style="list-style-type: none;">
+		{volist name="paragraphUp" id="paragraph"}
+		<li>
+			<div class="panel panel-default">
+					<div class="panel-body">
+						<h4>{$paragraph->title}</h4>
+						<div class="row">
+							<div class="col-md-3" style="height: 100px;">
+								<img src="{:__ROOT__}/upload/{$paragraph->image}" style="height: 100px; width: 180px;">
+							</div>
+							<div class="col-md-6 col-md-offset-1" style="height: 100px;  display:-webkit-box;overflow:hidden;text-overflow:ellipsis;-webkit-line-clamp:2;-webkit-box-orient:vertical; ">
+							{$paragraph->content}
+							</div>
+							
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12" style="height: 40px; margin-top: 10px;">
+							<a class="btn btn-info btn-sm" href="{:url('Paragraph/edit',['articleId'=>$articleId,'id'=>$paragraph->id])}"><span class="glyphicon glyphicon-pencil"></span>&nbsp;编辑</a>
+							<a class="btn btn-danger btn-sm" href="{:url('Paragraph/delete', ['articleId'=>$articleId,'id'=>$paragraph->id])}"><span class="glyphicon glyphicon-trash"></span>&nbsp;删除</a>
+						</div>
+					</div>
+			</div>
+		</li>
+		{/volist}
+			{volist name="attraction" id="_attraction"}
+			<li>
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<h4>{$_attraction->title}</h4>
+						<div class="row">
+							<div class="col-md-3" style="height: 100px;">
+								<img src="{:__ROOT__}/upload/{$_attraction->getMaterial($_attraction->material_id)->image}" alt="" style="height: 100px; width: 180px;">
+							</div>
+							<div class="col-md-6 col-md-offset-1" style="height: 100px;  display:-webkit-box;overflow:hidden;text-overflow:ellipsis;-webkit-line-clamp:2;-webkit-box-orient:vertical; ">
+								{$_attraction->getMaterial($_attraction->material_id)->designation}
+							</div>
+							<div class="col-md-2">
+								{eq name="$i" value="1"} {else /}<a class="btn btn-default" href="{:url('upAttraction',['articleId'=>$articleId,'attractionId'=>$_attraction->id,'number'=>$i])}"  ><span class="glyphicon glyphicon-arrow-up" ></span></a>{/eq}<br>
+								{eq name="$i" value="$length"} {else /}<a class="btn btn-default" href="{:url('downAttraction',['articleId'=>$articleId,'attractionId'=>$_attraction->id,'number'=>$i])}"  ><span class="glyphicon glyphicon-arrow-down"></span></a>{/eq}
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12" style="height: 40px; margin-top: 10px;">
+								<a class="btn btn-info btn-sm" href="{:url('attraction/edit' ,['articleId'=>$articleId,'attractionId'=>$_attraction->id] )}"><span class="glyphicon glyphicon-pencil"></span>&nbsp;编辑</a>
+								<a class="btn btn-danger btn-sm" href="{:url('attraction/delete' ,['articleId'=>$articleId,'attractionId'=>$_attraction->id] )}"><span class="glyphicon glyphicon-trash"></span>&nbsp;删除</a>
+							</div>
+						</div>
+				</div>
+			</div>
+		</li>
+		{/volist}
+		{volist name="paragraphDown" id="paragraph"}
+		<li>
+			<div class="panel panel-default">
+					<div class="panel-body">
+						<h4>{$paragraph->title}</h4>
+						<div class="row">
+							<div class="col-md-3" style="height: 100px;">
+								<img src="{:__ROOT__}/upload/{$paragraph->image}" style="height: 100px; width: 180px;">
+							</div>
+							<div class="col-md-6 col-md-offset-1" style="height: 100px;  display:-webkit-box;overflow:hidden;text-overflow:ellipsis;-webkit-line-clamp:2;-webkit-box-orient:vertical; ">
+							{$paragraph->content}
+							</div>
+							
+						</div>
+					<div class="row">
+						<div class="col-md-12" style="height: 40px; margin-top: 10px;">
+							<a class="btn btn-info btn-sm" href="{:url('Paragraph/edit',['articleId'=>$articleId,'id'=>$paragraph->id])}"><span class="glyphicon glyphicon-pencil"></span>&nbsp;编辑</a>
+							<a class="btn btn-danger btn-sm" href="{:url('Paragraph/delete', ['articleId'=>$articleId,'id'=>$paragraph->id])}"><span class="glyphicon glyphicon-trash"></span>&nbsp;删除</a>
+						</div>
+					</div>
+					</div>
+			</div>
+		</li>
+		{/volist}
+		<li>
+			<div>
+				<table class="table table-hover table-responsive table-bordered">
+				{eq name="$judgeHotel" value="0"} {else/}
+					<h3>酒店信息</h3>
+					<tr class="warning">
+							<th>名称</th>
+							<th>城市</th>
+							<th>星级</th>
+							<th>备注</th>
+					</tr>
+				{/eq}
+				{volist name="hotel" id="hotel"}
+					<tr>
+						<th>{$hotel->designation}</th>
+						<th>{$hotel->city}</th>
+						<th>{$hotel->star_level}</th>
+						<th>{$hotel->remark}</th>
+					</tr>
+				{/volist}
+				</table>
+			</div>
+		</li>
+			<!--方案报价-->
+		{volist name="plans" id="plan"}
+			<li>
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<h4>方案报价</h4>
+						<div class="row">
+							<div class="col-md-12">
+								<p>出发日期：{$plan->travel_date}</p>
+								<p>出行人数：{$plan->people_num}</p>
+								<p>币种：{$plan->currency}</p>
+								<p>总费用：{$plan->total_cost}</p>
+								<p>最晚付款时间：{$plan->last_pay_time}</p>
+								<table class="table table-hover table-bordered">
+									<tr class="info">
+										<th>类型</th>
+										<th>数量</th>
+										<th>频次</th>
+										<th>单价</th>
+										<th>总价</th>
+										<th>备注</th>
+									</tr>
+									<tr>
+										<td>地接</td>
+										<td>{$plan->getDetailByType('dijie')->number}</td>
+										<td>{$plan->getDetailByType('dijie')->frequency}</td>
+										<td>{$plan->getDetailByType('dijie')->unit_price}</td>
+										<td>{$plan->getDetailByType('dijie')->total_price}</td>
+										<td>{$plan->getDetailByType('dijie')->remark}</td>
+									</tr>
+									<tr>
+										<td>住宿</td>
+										<td>{$plan->getDetailByType('zhusu')->number}</td>
+										<td>{$plan->getDetailByType('zhusu')->frequency}</td>
+										<td>{$plan->getDetailByType('zhusu')->unit_price}</td>
+										<td>{$plan->getDetailByType('zhusu')->total_price}</td>
+										<td>{$plan->getDetailByType('zhusu')->remark}</td>
+									</tr>
+								</table>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12" style="height: 40px; margin-top: 10px;">
+								<a class="btn btn-info btn-sm" href="{:url('Detail/edit',['planId'=>$plan->id,'article_id'=>$articleId])}"><span class="glyphicon glyphicon-pencil"></span>&nbsp;编辑</a>
+								<a class="btn btn-danger btn-sm" href="{:url('Detail/delete',['planId'=>$plan->id,'article_id'=>$articleId])}"><span class="glyphicon glyphicon-trash"></span>&nbsp;删除</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</li>
+		{/volist}
+	</ul>
+	<button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-ok"></span>&nbsp;完成</button>
+	<br><br>
+</form>
 </div>
 {/block}

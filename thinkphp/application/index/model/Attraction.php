@@ -61,4 +61,9 @@ class Attraction extends Model {
         $Attraction->guide = '';
         return $Attraction;
     }
+
+    public function getMaterial($id) {
+        //返回关联的素材
+        return Material::get($id);
+    }
 }
