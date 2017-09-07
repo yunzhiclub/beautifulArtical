@@ -2,37 +2,39 @@
 
 <body>
     {block name="content"}
-    <div class="col-md-8 col-md-offset-1" style="margin-top: 60px;margin-bottom: 210px;">
-        <h2>
+    <div class="col-md-8 col-md-offset-1" style="margin-top: 60px;margin-bottom: 100px;">
+        <div class="row">
+            <h2>
         <span class="glyphicon glyphicon-edit"></span>&nbsp;
         新增订制师</h2>
-        <br>
-        <form action="{:url('save',['articleId'=>$articleId])}" method="post">
-            <div class="form-group">
-                <label>姓名</label>
-                <input type="text" class="form-control" name="designation" placeholder="姓名...">
-            </div>
-            <div class="form-group">
-                <label>电话</label>
-                <input type="text" class="form-control" name="phone" placeholder="电话...">
-            </div>
-            <div class="form-group">
-                <label>传真</label>
-                <input type="text" class="form-control" name="fax" placeholder="传真...">
-            </div>
-            <div class="form-group">
-                <label>手机</label>
-                <input type="text" class="form-control" name="mobile" placeholder="手机...">
-            </div>
-            <div class="form-group">
-                <label>电子邮箱</label>
-                <input type="email" class="form-control" name="email" placeholder="邮箱...">
-            </div>
             <br>
-            <div class="form-group">
-                <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-ok"></i>&nbsp;保存</button>
-            </div>
-        </form>
+            <form action="{:url('save',['articleId'=>$articleId])}" method="post">
+                <div class="form-group">
+                    <label>姓名</label>
+                    <input type="text" class="form-control" name="designation" placeholder="姓名...">
+                </div>
+                <div class="form-group">
+                    <label>电话</label>
+                    <input type="text" class="form-control" name="phone" placeholder="电话...">
+                </div>
+                <div class="form-group">
+                    <label>传真</label>
+                    <input type="text" class="form-control" name="fax" placeholder="传真...">
+                </div>
+                <div class="form-group">
+                    <label>手机</label>
+                    <input type="text" class="form-control" name="mobile" placeholder="手机...">
+                </div>
+                <div class="form-group">
+                    <label>电子邮箱</label>
+                    <input type="email" class="form-control" name="email" placeholder="邮箱...">
+                </div>
+                <br>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-ok"></i>&nbsp;保存</button>
+                </div>
+            </form>
+        </div>
     </div>
     {/block}
 </body>
