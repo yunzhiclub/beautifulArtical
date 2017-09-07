@@ -2,6 +2,7 @@
 namespace app\index\service;
 
 use app\index\model\Material;
+use app\index\model\Attraction;
 use app\index\model\Common;
 
 /**
@@ -149,26 +150,34 @@ class Materialservice  {
             $message['message'] = '未获取到素材';
 
         } else {
-            // 获取素材对象
-            $Material = Material::get($materialId);
-
-            // 素材对象为空
-            if (is_null($Material)) {
+            $Attraction = new Attraction();
+            $list = $Attraction->where('material_id', '=', $materialId)->select();
+            if (!is_null($list)) {
                 $message['status'] = 'error';
-                $message['message'] = '未获取到素材';
-
+                $message['message'] = '该素材已被使用，不能删除！';
             } else {
-                $image = $Material->image;
-                // 删除素材失败
-                if (!$Material->delete()) {
+                // 获取素材对象
+                $Material = Material::get($materialId);
+
+                // 素材对象为空
+                if (is_null($Material)) {
                     $message['status'] = 'error';
-                    $message['message'] = '删除失败';
+                    $message['message'] = '未获取到素材';
 
                 } else {
-                    // 删除照片
-                    Common::deleteImage('upload/'.$image);
+                    $image = $Material->image;
+                    // 删除素材失败
+                    if (!$Material->delete()) {
+                        $message['status'] = 'error';
+                        $message['message'] = '删除失败';
+
+                    } else {
+                        // 删除照片
+                        Common::deleteImage('upload/'.$image);
+                    }
                 }
             }
+            
         }
         return $message;
     }
