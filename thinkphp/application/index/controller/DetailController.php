@@ -77,8 +77,8 @@ class DetailController extends IndexController
         $articleId = Request::instance()->param('article_id/d');
         $message = $this->planService->deletePlan($Request);
         if($message){
-            $this->success('删除成功',url('article/secondadd',['id'=>$articleId]));
+            $this->success('删除成功',url('article/secondadd',['articleId'=>$articleId]));
         }
-        $this->error('删除失败',url('article/secondadd',['id'=>$articleId]));
+        $this->error('删除失败',url('article/secondadd',['articleId'=>$articleId]));
     }
 }
