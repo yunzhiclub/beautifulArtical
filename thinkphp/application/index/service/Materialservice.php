@@ -61,7 +61,7 @@ class Materialservice  {
         $message['route'] = 'index';
 
         // 接收数据
-        $materialId = $param->param('id/d');
+        $materialId = $param->param('materialId/d');
 
         // 素材id为空
         if (is_null($materialId) || $materialId === 0) {
