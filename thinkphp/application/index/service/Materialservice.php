@@ -131,4 +131,45 @@ class Materialservice  {
         }
         return $message;
     } 
+
+    public function deleteMaterial($param)
+    {
+        // 初始化返回信息
+        $message = [];
+        $message['status'] = 'success';
+        $message['message'] = '删除成功！';
+        $message['route'] = 'index';
+
+        // 接收数据
+        $materialId = $param->param('materialId/d');
+
+        // 素材id为空
+        if (is_null($materialId) || $materialId === 0) {
+            $message['status'] = 'error';
+            $message['message'] = '未获取到素材';
+
+        } else {
+            // 获取素材对象
+            $Material = Material::get($materialId);
+
+            // 素材对象为空
+            if (is_null($Material)) {
+                $message['status'] = 'error';
+                $message['message'] = '未获取到素材';
+
+            } else {
+                $image = $Material->image;
+                // 删除素材失败
+                if (!$Material->delete()) {
+                    $message['status'] = 'error';
+                    $message['message'] = '删除失败';
+
+                } else {
+                    // 删除照片
+                    Common::deleteImage('upload/'.$image);
+                }
+            }
+        }
+        return $message;
+    }
 }
