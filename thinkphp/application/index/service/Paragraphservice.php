@@ -77,7 +77,7 @@ class Paragraphservice
 		$message['articleId'] = $articleId;
 
 		// 获取段落id为空
-		if (is_null($id) || $id === 0) {
+		if (is_null($paragraphId) || $paragraphId === 0) {
 			$message['status'] = 'error';
 			$message['message'] = '未获取到id';
 
