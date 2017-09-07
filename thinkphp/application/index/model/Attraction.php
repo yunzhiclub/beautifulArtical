@@ -31,9 +31,9 @@ class Attraction extends Model {
         }
     }
 
-    public function updateAttraction($title, $meal, $car, $guide, $hotel, $articleId, $id) {
+    public function updateAttraction($title, $meal, $car, $guide, $hotel, $articleId, $id, $materialId) {
         $Attraction = Attraction::get($id);
-        $Attraction->saveAttraction($title, $meal, $car, $guide, $hotel, $articleId);
+        $Attraction->saveAttraction($title, $meal, $car, $guide, $hotel, $articleId, $materialId);
     }
 
     public function deleteAttraction($id) {
@@ -59,6 +59,7 @@ class Attraction extends Model {
         $Attraction->meal = '';
         $Attraction->car = '';
         $Attraction->guide = '';
+        $Attraction->material_id = '';
         return $Attraction;
     }
 
