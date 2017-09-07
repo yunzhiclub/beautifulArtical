@@ -1,7 +1,7 @@
 <?php
 namespace app\index\service;
 
-use app\index\Model\Contractor;
+use app\index\model\Contractor;
 
 class Contractorservice
 {
