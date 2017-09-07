@@ -50,4 +50,29 @@ class MaterialController extends IndexController {
         }
     }
     // 编辑操作
+    
+    /**
+     * 素材删除
+     */
+    public function delete()
+    {
+        // 接受参数
+        $param = Request::instance();
+
+        // 调用Service层的删除方法
+        $message = $this->materialService->deleteMaterial($param);
+
+        // 返回相应的结果
+        if ($message['status'] === 'success') {
+            // 跳转成功界面
+            $this->success($message['message'], url($message['route']));
+
+        } else {
+            // 跳转失败界面
+            $this->error($message['message'], url($message['route']));
+        }
+    }
+
+    
+
 }
