@@ -37,7 +37,7 @@ class Paragraphservice
 			} else {
 				// 更新失败
 				$message['status'] = 'error';
-				$message['message'] = '保存失败！';
+				$message['message'] = '段落信息未修改！';
 				$message['route'] = 'article/secondadd';
 			}
 
