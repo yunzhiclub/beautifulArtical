@@ -23,7 +23,7 @@
                     <strong>定制师选择</strong>
                 </span>
                 <span class="span6">
-                    <select name="contractor_id" id="contractor">
+                    <select name="contractorId" id="contractor">
                         {volist name="contractors" id="_Contractor"}
                             <option value="{$_Contractor->getData('id')}" {eq name="$_Contractor->id" value="$contractorId" }selected="true"{else /}{/eq}>{$_Contractor->getData('designation')}</option>
                         {/volist}
