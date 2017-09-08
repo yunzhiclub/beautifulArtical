@@ -1,0 +1,9 @@
+.overhidden{
+            position: relative; line-height: 20px; max-height: 110px;overflow: hidden;
+        }
+.overhidden::after{
+            content: "..."; position: absolute; bottom: 0; right: 0; padding-left: 40px;
+            background: -webkit-linear-gradient(left, transparent, #fff 55%);
+            background: -o-linear-gradient(left, transparent, #fff 55%);
+            background: linear-gradient(to right, transparent, #fff 55%);
+      	}
