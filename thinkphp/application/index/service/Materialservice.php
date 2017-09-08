@@ -84,7 +84,9 @@ class Materialservice  {
 
                 if(!is_null($file)){
                     // 删除原有图片
-                    Common::deleteImage('upload/'.$Material->image);
+                    if(!is_null($Material->image)) {
+                        Common::deleteImage('upload/'.$Material->image);
+                    }
                     $imagePath = Common::uploadImage($file);
                     // 保存新加图片
                     $Material->image = $imagePath;

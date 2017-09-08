@@ -16,7 +16,7 @@ class Attraction extends Model {
         $this->meal = $meal;
         $this->car = $car;
         $this->guide = $guide;
-        $this->weight = Attraction::where('article_id', '=', $articleId)->count()+1;
+        $this->weight = Attraction::where('article_id', '=', $articleId)->max("weight")+1;
         $this->article_id = $articleId;
         $this->material_id = $materialId;
 
