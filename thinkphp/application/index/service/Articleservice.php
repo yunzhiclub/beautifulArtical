@@ -34,7 +34,7 @@ class Articleservice
         $articleId = $parma->param('articleId/d');
         $title = $parma->post('title');
         $summery = $parma->post('summery');
-        $contractorId = $parma->post('contractorId');
+        $contractorId = $parma->post('contractorId/d');
         $file = request()->file('image');
 
         //实例化一个空文章
@@ -49,7 +49,7 @@ class Articleservice
                 $imagePath = PUBLIC_PATH . '/' . $Article->cover;
                 Common::deleteImage($imagePath);
             }
-            if( $Article->title == $title && $Article->summery == $summery && is_null($file)){
+            if( $Article->title == $title && $Article->summery == $summery && is_null($file) && $Article->contractor_id == $contractorId){
                 $message['status'] = 'success';
                 $message['message'] = '修改成功';
                 $message['route'] = 'secondadd';
