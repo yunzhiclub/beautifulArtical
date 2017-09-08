@@ -40,6 +40,7 @@ class ParagraphController extends IndexController {
 			$this->assign('Paragraph', $Paragraph);
 		}
         $this->assign('articleId',$articleId);
+        $this->assign('judge', 0);
 
         return $this->fetch();
 	}
@@ -97,6 +98,7 @@ class ParagraphController extends IndexController {
 		// 将对象传给v层
 		$this->assign('Paragraph', $Paragraph);
 		$this->assign('articleId', $articleId);
+		$this->assign('judge', 1);
 		// 就收返回数据
 		return $this->fetch('index');
 	}
