@@ -30,9 +30,10 @@ class Common
     // 删除指定文件夹下的图片
     public static function deleteImage($imagePath)
     {
-        if(file_exists($imagePath)){
-            unlink($imagePath);
+        if(!is_null($imagePath)) {
+            if(file_exists($imagePath)){
+                unlink($imagePath);
+            }
         }
-        
     }
 }
