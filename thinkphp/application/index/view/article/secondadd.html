@@ -36,7 +36,7 @@
 							<div class="col-md-3" style="height: 100px;">
 								<img src="{:__ROOT__}/upload/{$paragraph->image}" style="height: 100px; width: 180px;">
 							</div>
-							<div class="col-md-6 col-md-offset-1" style="height: 100px;  display:-webkit-box;-webkit-box-orient:vertical; word-wrap:break-word;">
+							<div class="col-md-6 col-md-offset-1 overhidden" >
 								{$paragraph->content}
 							</div>
 							
@@ -61,8 +61,13 @@
 							<div class="col-md-3" style="height: 100px;">
 								<img src="{:__ROOT__}/upload/{$_attraction->getMaterial($_attraction->material_id)->image}" alt="" style="height: 100px; width: 180px;">
 							</div>
+<<<<<<< HEAD
 							<div class="col-md-6 col-md-offset-1" style="height: 100px;  display:-webkit-box;overflow:hidden;text-overflow:ellipsis;-webkit-line-clamp:2;-webkit-box-orient:vertical; ">
 								{$_attraction->getMaterial($_attraction->material_id)->content}
+=======
+							<div class="col-md-6 col-md-offset-1 overhidden">
+								{$_attraction->getMaterial($_attraction->material_id)->designation}
+>>>>>>> refs/remotes/origin/development
 							</div>
 							<div class="col-md-2">
 								{eq name="$i" value="1"} {else /}<a class="btn btn-default" href="{:url('upAttraction',['articleId'=>$articleId,'attractionId'=>$_attraction->id,'number'=>$i])}"  ><span class="glyphicon glyphicon-arrow-up" ></span></a>{/eq}<br>
@@ -88,7 +93,7 @@
 							<div class="col-md-3" style="height: 100px;">
 								<img src="{:__ROOT__}/upload/{$paragraph->image}" style="height: 100px; width: 180px;">
 							</div>
-							<div class="col-md-6 col-md-offset-1" style="height: 100px;  display:-webkit-box;-webkit-box-orient:vertical; word-wrap:break-word;">
+							<div class="col-md-6 col-md-offset-1 overhidden" >
 							{$paragraph->content}
 							</div>
 						</div>
@@ -190,14 +195,14 @@
 		{/volist}
             <li>
                 <div>
-                    <table class="table table-hover table-responsive table-bordered">
+                    <table class="table table-hover table-responsive table-bordered" style="word-break:break-all;">
                         {eq name="$judgeHotel" value="0"} {else/}
                         <h3>酒店信息</h3>
                         <tr class="warning">
-                            <th>名称</th>
-                            <th>城市</th>
-                            <th>星级</th>
-                            <th>备注</th>
+                            <th width="20%">名称</th>
+                            <th width="20%">城市</th>
+                            <th width="20%">星级</th>
+                            <th width="40%">备注</th>
                         </tr>
                         {/eq}
                         {volist name="hotel" id="hotel"}
