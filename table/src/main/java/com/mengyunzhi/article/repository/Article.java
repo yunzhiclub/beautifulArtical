@@ -18,6 +18,7 @@ public class Article {
     // 文章标题
     private String title;
     // 文章摘要
+    @Column(length = 3000)
     private String summery;
     // 文章封面
     private String cover;

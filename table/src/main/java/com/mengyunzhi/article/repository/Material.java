@@ -1,16 +1,13 @@
 package com.mengyunzhi.article.repository;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Material {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-
+    @Column(length = 3000)
     private String content;         //描述
     private String designation;     //名称
     private String image;           //图片
