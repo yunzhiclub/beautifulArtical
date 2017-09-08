@@ -34,7 +34,7 @@ class Articleservice
         $articleId = $parma->param('articleId/d');
         $title = $parma->post('title');
         $summery = $parma->post('summery');
-        $contractorId = $parma->post('$contractorId');
+        $contractorId = $parma->post('contractorId');
         $file = request()->file('image');
 
         //实例化一个空文章
