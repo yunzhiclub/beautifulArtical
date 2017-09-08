@@ -36,7 +36,7 @@
 							<div class="col-md-3" style="height: 100px;">
 								<img src="{:__ROOT__}/upload/{$paragraph->image}" style="height: 100px; width: 180px;">
 							</div>
-							<div class="col-md-6 col-md-offset-1" style="height: 100px;  display:-webkit-box;-webkit-box-orient:vertical; word-wrap:break-word;">
+							<div class="col-md-6 col-md-offset-1 overhidden" >
 								{$paragraph->content}
 							</div>
 							
@@ -61,7 +61,7 @@
 							<div class="col-md-3" style="height: 100px;">
 								<img src="{:__ROOT__}/upload/{$_attraction->getMaterial($_attraction->material_id)->image}" alt="" style="height: 100px; width: 180px;">
 							</div>
-							<div class="col-md-6 col-md-offset-1" style="height: 100px;  display:-webkit-box;overflow:hidden;text-overflow:ellipsis;-webkit-line-clamp:2;-webkit-box-orient:vertical; ">
+							<div class="col-md-6 col-md-offset-1 overhidden">
 								{$_attraction->getMaterial($_attraction->material_id)->designation}
 							</div>
 							<div class="col-md-2">
@@ -88,7 +88,7 @@
 							<div class="col-md-3" style="height: 100px;">
 								<img src="{:__ROOT__}/upload/{$paragraph->image}" style="height: 100px; width: 180px;">
 							</div>
-							<div class="col-md-6 col-md-offset-1" style="height: 100px;  display:-webkit-box;-webkit-box-orient:vertical; word-wrap:break-word;">
+							<div class="col-md-6 col-md-offset-1 overhidden" >
 							{$paragraph->content}
 							</div>
 						</div>
