@@ -71,6 +71,7 @@ class Attraction extends Model {
             $Material = new Material();
             $Material->image = '';
             $Material->designation = '未选择素材';
+            $Material->content = '未选择素材';
             return $Material;
         }
     }
