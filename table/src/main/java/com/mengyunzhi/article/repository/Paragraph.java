@@ -15,6 +15,7 @@ public class Paragraph {
     private String title;
 
     // 内容
+    @Column(length = 3000)
     private String content;
 
     // 图片
