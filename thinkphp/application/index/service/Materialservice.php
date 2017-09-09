@@ -124,10 +124,7 @@ class Materialservice  {
 
             } else {
                 // 编辑素材
-                $message['content'] = $Material->content;
-                $message['designation'] = $Material->designation;
-                $message['image'] = $Material->image;
-                $message['materialId'] = $materialId;
+                $message['material'] = $Material;
             }
         }
         return $message;

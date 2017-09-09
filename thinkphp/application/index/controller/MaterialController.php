@@ -37,7 +37,16 @@ class MaterialController extends IndexController {
     }
     // 添加界面
     public function add() {
-    	return $this->fetch();
+        $Material = new Material;
+
+        $Material->id = 0;
+        $Material->designation = '';
+        $Material->content = '';
+        $Material->image = '';
+
+        $this->assign('material', $Material);
+
+    	return $this->fetch('edit');
     }
     // 添加操作
     public function addOperate() {
@@ -87,10 +96,8 @@ class MaterialController extends IndexController {
         // 调用service中的编辑方法
         $message =  $this->materialService->materialEdit($param);
         // 传递素材信息到v层
-        $this->assign('content', $message['content']);
-        $this->assign('designation', $message['designation']);
-        $this->assign('image', $message['image']);
-        $this->assign('materialId', $message['materialId']);
+        $this->assign('material', $message['material']);
+
         return $this->fetch();
     }
     // 更新操作

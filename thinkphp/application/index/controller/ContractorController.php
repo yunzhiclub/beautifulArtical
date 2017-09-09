@@ -30,7 +30,18 @@ class ContractorController extends IndexController
 
 	public function add()
 	{
-		return $this->fetch();
+		$Contractor = new Contractor;
+
+		$Contractor->designation = '';
+		$Contractor->phone = '';
+		$Contractor->fax = '';
+		$Contractor->mobile = '';
+		$Contractor->email = '';
+		$Contractor->id = 0;
+
+		$this->assign('contractor', $Contractor);
+
+		return $this->fetch('edit');
 	}
 
 	public function save()
