@@ -1,0 +1,408 @@
+{extend name="index" /}
+{block name="title"}预览{/block}
+
+{block name="content"}
+<div class="bg">
+    <div class="agile-main">
+        <div class="menu-wrap" id="style-1">
+            <nav class="top-nav">
+                <ul class="icon-list">
+                    <li class="menu-title">Fortune Estates</li>
+                    <li><a class="active" href="main.html"><i class="glyphicon glyphicon-home"></i> Home </a></li>
+                    <li><a href="about.html"><i class="glyphicon glyphicon-info-sign"></i> About </a></li>
+                    <li><a href="property.html"><i class="glyphicon glyphicon-briefcase"></i> properties </a></li>
+                    <li><a href="agents.html"><i class="glyphicon glyphicon-eye-open"></i> Agents </a></li>
+                    <li><a href="gallery.html"><i class="glyphicon glyphicon-picture"></i> Gallery</a></li>
+                    <li><a href="#" class="menu"><i class="glyphicon glyphicon-duplicate"></i> pages<span class="glyphicon glyphicon-menu-down"></span></a>
+                        <ul class="nav-sub">
+                            <li><a href="#small-dialog" class="sign-in popup-top-anim"><i class="glyphicon glyphicon-user"></i> login</a></li>
+                            <li><a href="#small-dialog1" class="sign-in popup-top-anim"><i class="glyphicon glyphicon-edit"></i> Sign Up</a></li>
+                            <li><a href="codes.html"><i class="glyphicon glyphicon-list-alt"></i> Short Codes</a></li>
+                        </ul>
+                        <div class="clearfix"> </div>
+                        <script>
+                        $("li a.menu").click(function() {
+                            $("ul.nav-sub").slideToggle(300, function() {
+                                // Animation complete.
+                            });
+                        });
+                        </script>
+                    </li>
+                    <li><a href="contact.html"><i class="glyphicon glyphicon-envelope"></i> Contact </a></li>
+                </ul>
+            </nav>
+            <button class="close-button" id="close-button">C</button>
+        </div>
+        <div class="content-wrap">
+            <!-- 紫色顶部 -->
+            <div class="header">
+                <div class="menu-icon">
+                    <button class="menu-button" id="open-button">O</button>
+                </div>
+                <div class="logo">
+                    <h2><a href="main.html">洛克</a></h2>
+                    <!-- 可以换成洛克酒店的logo -->
+                </div>
+                <div class="login">
+                    <a href="#small-dialog" class="sign-in popup-top-anim"><span class="glyphicon glyphicon-user"></span></a>
+                    <!-- 登录 -->
+                    <div id="small-dialog" class="mfp-hide">
+                        <div class="login-modal">
+                            <div class="booking-info">
+                                <h3><a href="main.html">Fortune Estates</a></h3>
+                            </div>
+                            <div class="login-form">
+                                <form action="#" method="post">
+                                    <div class="styled-input">
+                                        <input type="text" name="Username" required="" />
+                                        <label>Username</label>
+                                        <span></span>
+                                    </div>
+                                    <div class="styled-input">
+                                        <input type="password" name="Password" required="">
+                                        <label>Password</label>
+                                        <span></span>
+                                    </div>
+                                    <div class="wthree-text">
+                                        <ul>
+                                            <li>
+                                                <input type="checkbox" id="brand" value="">
+                                                <label for="brand"><span></span> Remember me ?</label>
+                                            </li>
+                                            <li> <a href="#">Forgot password?</a> </li>
+                                        </ul>
+                                        <div class="clear"> </div>
+                                    </div>
+                                    <input type="submit" value="Sign In">
+                                </form>
+                                <p>Don’t have an account ?<a href="#small-dialog1" class="sign-in popup-top-anim"> Sign Up</a></p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- //登录 -->
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+            <div class="content">
+                <!-- slider show -->
+                <div class="banner">
+                    <div id="kb" class="carousel kb_elastic animate_text kb_wrapper" data-ride="carousel" data-interval="6000" data-pause="hover">
+                        <!-- Wrapper-for-Slides -->
+                        <div class="carousel-inner" role="listbox">
+                            <!-- First-Slide -->
+                            <div class="item active">
+                                <div class="banner-img">
+                                    <div class="carousel-caption kb_caption">
+                                        <h3 data-animation="animated flipInX">图片一</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Second-Slide -->
+                            <div class="item">
+                                <div class="banner-img banner-img1">
+                                    <div class="carousel-caption kb_caption kb_caption_right">
+                                        <h3 data-animation="animated flipInX">图片二</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Third-Slide -->
+                            <div class="item">
+                                <div class="banner-img banner-img2">
+                                    <div class="carousel-caption kb_caption kb_caption_center">
+                                        <h3 data-animation="animated flipInX">图片三</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Left-Button -->
+                        <a class="left carousel-control kb_control_left" href="#kb" role="button" data-slide="prev">
+							<span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
+							<span class="sr-only">Previous</span>
+						</a>
+                        <!-- Right-Button -->
+                        <a class="right carousel-control kb_control_right" href="#kb" role="button" data-slide="next">
+							<span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
+							<span class="sr-only">Next</span>
+						</a>
+                    </div>
+                    <script src="/beautifulArtical/thinkphp/public/style/js/custom.js"></script>
+                </div>
+                <!-- //slider show -->
+                <!-- 洛克旅行介绍部分 -->
+                <div class="welcome">
+                    <h3 class="w3ls-title">尊敬的VIP顾客<br>您好</h3>
+                    <p class="w3title-text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;洛克旅行是欧洲当地旅游地接社。在英国伦敦，西班牙马德里，法国巴黎和德国慕尼黑均设有办事处。2006年成立以来，目前月接待中国赴欧洲旅游团队80-120团/月。我们有着丰富的旅游经验和众多的当地资源，用真正一手的报价避免您的订单被国内旅行社重重转手。首先感谢您对我们的信任和支持，根据您的旅行要求，我们认真地进行了团队核算，团队接待情况与服务报价如下，请您认真核对报价所含服务内容，有任何疑问请随时联系我们。</p>
+                    <br>
+                </div>
+                <!-- //洛克旅行介绍部分 -->
+                <!-- 九项服务，一价全包 -->
+                <div class="clearfix"> </div>
+                <h3 style="text-align: center;">九项服务，一价全包</h3>
+                <div class="brands-info">
+                    <div class="brand-grids">
+                        <a href="#"><img src="/beautifulArtical/thinkphp/public/style/images/b1.jpg" alt=""/></a>
+                    </div>
+                    <div class="brand-grids">
+                        <a href="#"><img src="/beautifulArtical/thinkphp/public/style/images/b2.jpg" alt=""/></a>
+                    </div>
+                    <div class="brand-grids">
+                        <a href="#"><img src="/beautifulArtical/thinkphp/public/style/images/b3.jpg" alt=""/></a>
+                    </div>
+                    <div class="brand-grids">
+                        <a href="#"><img src="/beautifulArtical/thinkphp/public/style/images/b4.jpg" alt=""/></a>
+                    </div>
+                    <div class="brand-grids">
+                        <a href="#"><img src="/beautifulArtical/thinkphp/public/style/images/b5.jpg" alt=""/></a>
+                    </div>
+                    <div class="brand-grids">
+                        <a href="#"><img src="/beautifulArtical/thinkphp/public/style/images/b6.jpg" alt=""/></a>
+                    </div>
+                    <div class="brand-grids">
+                        <a href="#"><img src="/beautifulArtical/thinkphp/public/style/images/b4.jpg" alt=""/></a>
+                    </div>
+                    <div class="brand-grids">
+                        <a href="#"><img src="/beautifulArtical/thinkphp/public/style/images/b5.jpg" alt=""/></a>
+                    </div>
+                    <div class="brand-grids">
+                        <a href="#"><img src="/beautifulArtical/thinkphp/public/style/images/b6.jpg" alt=""/></a>
+                    </div>
+                    <div class="clearfix"> </div>
+                </div>
+                <!-- //九项服务，一价全包 -->
+                <!-- 定制自由行，让出国旅行更简单 -->
+                <div class="about">
+                    <h3 style="text-align: center;">定制自由行<br>让出国旅行更简单</h3>
+                    <ul>
+                        <li><span class="glyphicon glyphicon-menu-right"></span> 更省心。不用你操心，机票酒店活动签证租车...麻烦事儿全都有人包办 </li>
+                        <li><span class="glyphicon glyphicon-menu-right"></span> 更个性。形成随便调，量身打造玩啥你说了算，满意再付全款 </li>
+                        <li><span class="glyphicon glyphicon-menu-right"></span> 更舒心。专业更靠谱，100+位资深专业订制师，让你的行程不留遗憾 </li>
+                        <li><span class="glyphicon glyphicon-menu-right"></span> 更自由。不再人挤人，定制专属路书，旅行团去不了的地方你能去 </li>
+                        <li><span class="glyphicon glyphicon-menu-right"></span> 更划算。不花冤枉钱。九项服务一价全包，定制的服务，跟团的价格 </li>
+                        <li><span class="glyphicon glyphicon-menu-right"></span> 更安全。全程有保障，专属行后保障团队，遇到问题有人管，出行不担心 </li>
+                    </ul>
+                </div>
+                <!-- //定制自由行，让出国旅行更简单 -->
+                <!-- 六大品质保证 -->
+                <div class="about">
+                    <h3 style="text-align: center;">6大品质保障<br>开启全新旅行体验</h3>
+                    <ul>
+                        <li><span class="glyphicon glyphicon-menu-right"></span> 全程商务专车，专业当地华人双语导游 </li>
+                        <li><span class="glyphicon glyphicon-menu-right"></span> 独立成团，不与陌生人拼团 </li>
+                        <li><span class="glyphicon glyphicon-menu-right"></span> 真正纯玩品质，承诺0购物0自费 </li>
+                        <li><span class="glyphicon glyphicon-menu-right"></span> 导游带您深入小众美景，去除不安全地带 </li>
+                        <li><span class="glyphicon glyphicon-menu-right"></span> 全程甄选酒店，安全舒适 </li>
+                        <li><span class="glyphicon glyphicon-menu-right"></span> 私家尊享，7* 24小时专属旅行管家 </li>
+                    </ul>
+                </div>
+                <!-- //六大品质保证 -->
+                <HR style="FILTER: progid:DXImageTransform.Microsoft.Shadow(color:#987cb9,direction:145,strength:15)" width="80%" color=#987cb9 SIZE=1>
+                <!-- 旅游行程 -->
+                <div class="w3agile properties">
+                    <h3 class="w3ls-title">行程路线</h3>
+                    <div class="properties-top">
+                        <br>
+                        <div class="properties-img">
+                            <img src="/beautifulArtical/thinkphp/public/style/images/route.png" alt="路线图">
+                        </div>
+                    </div>
+                    <div class="properties-bottom">
+                        <div class="properties-img">
+                            <img src="/beautifulArtical/thinkphp/public/style/images/3.jpg" alt="">
+                            <div class="view-caption">
+                                <h4><span class="glyphicon glyphicon-map-marker"></span> 上海-罗马 </h4>
+                            </div>
+                            <div class="w3ls-buy">
+                                <a href="single.html">Day1</a>
+                            </div>
+                        </div>
+                        <div class="w3ls-text">
+                            <h6>&bull;今天是出发日，请您至少于航班起飞前3小时到达机场，搭乘选定的航班，飞往【罗马】。<br>
+                            &bull;欢迎来到条条大道通往的罗马城。<br>&bull;我们为您安排了贴心的【接机服务】，您的专属司机将送您前往酒店办理入住。</h6>
+                            <p><b>景点 :</b> 许愿泉 </p>
+                            <p><b>酒店 :</b> 当地五星级酒店 </p>
+                            <p><b>用餐 :</b> 自理 </p>
+                            <p><b>用车 :</b> 7-9座位商务巴士 </p>
+                            <p><b>导游 :</b> 司机兼导游，当天无行程游览 </p>
+                        </div>
+                    </div>
+                    <div class="properties-bottom">
+                        <div class="properties-img">
+                            <img src="/beautifulArtical/thinkphp/public/style/images/2.jpg" alt="">
+                            <div class="view-caption rent-caption">
+                                <h4><span class="glyphicon glyphicon-map-marker"></span> 罗马 </h4>
+                            </div>
+                            <div class="w3ls-buy">
+                                <a href="single.html" class="rent">Day2</a>
+                            </div>
+                        </div>
+                        <div class="w3ls-text">
+                            <h6>&bull;全天：游览古老的罗马。罗马不是一天建成的等诸多华丽的语言也无法形容罗马城的繁华与历史。参观罗马斗兽场闻君千遍不如见君一面，纵使你看了一万张斗兽场的照片，当你走近它时你还是会深深震撼。每当人们来到这座古罗马象征的断垣残壁的“斗兽场”，似乎能听到了野兽的咆哮、角斗士的呐喊，又仿佛看到了刀光剑影，腥风血雨。<br>
+                            &bull;参观真理之口，先农庙。来到许愿泉许下三个美好愿望。</h6>
+                            <p><b>景点 :</b> 许愿泉 </p>
+                            <p><b>酒店 :</b> 当地五星级酒店 </p>
+                            <p><b>用餐 :</b> 自理 </p>
+                            <p><b>用车 :</b> 7-9座位商务巴士 </p>
+                            <p><b>导游 :</b> 司机兼导游，当天无行程游览 </p>
+                        </div>
+                    </div>
+                    <div class="properties-bottom">
+                        <div class="properties-img">
+                            <img src="/beautifulArtical/thinkphp/public/style/images/2.jpg" alt="">
+                            <div class="view-caption rent-caption">
+                                <h4><span class="glyphicon glyphicon-map-marker"></span> 罗马-佛罗伦萨 </h4>
+                            </div>
+                            <div class="w3ls-buy">
+                                <a href="single.html" class="rent">Day3</a>
+                            </div>
+                        </div>
+                        <div class="w3ls-text">
+                            <h6>&bull;早餐之后前往佛罗伦萨，佛罗伦萨素有“翡冷翠”之称，在意大利语中意为“鲜花之城”。有“西方雅典”之称。参观游览佛罗伦萨，漫步在佛罗伦萨老城区，大批的来自文艺复兴时期的雕像复制品随处可见。当然最吸引游客眼球的还属米开朗基罗的‘大卫像’尽管是复制品，但依旧是驻足观看人数最多的雕像。佛罗伦萨最值得参观当属——圣母百花大教堂，圣母百花大教堂和乔托钟塔，她们是佛罗伦萨的主座教堂，鲜艳的大理石块拼成几何图形，使整体建筑显得非常壮观；教堂的大圆顶及由文艺复兴大师乔托设计的钟塔，为巍峨的教堂带来更多的气势。</h6>
+                            <p><b>景点 :</b> 许愿泉 </p>
+                            <p><b>酒店 :</b> 当地五星级酒店 </p>
+                            <p><b>用餐 :</b> 自理 </p>
+                            <p><b>用车 :</b> 7-9座位商务巴士 </p>
+                            <p><b>导游 :</b> 司机兼导游，当天无行程游览 </p>
+                        </div>
+                    </div>
+                    <div class="clearfix"> </div>
+                </div>
+                <!-- //旅游行程 -->
+                <HR style="FILTER: progid:DXImageTransform.Microsoft.Shadow(color:#987cb9,direction:145,strength:15)" width="80%" color=#987cb9 SIZE=1>
+                <div class="w3agile contact">
+                    <!-- 定制师 -->
+                    <div class="contact-form">
+                        <h3 class="w3ls-title">定制师信息</h3>
+                        <p><b>名字 :</b> 张友蕾 </p>
+                        <p><b>电话号码 :</b> 028-68360953</p>
+                        <p><b>传真号码 :</b> 028-83390053</p>
+                        <p><b>手机号码 :</b> 13882118442</p>
+                        <p><b>电子邮件 :</b> <a href="mailto:example@mail.com">rayzhang@4u-travel.com</a></p>
+                    </div>
+                    <br>
+                    <!-- //定制师 -->
+                    <!-- 方案报价 -->
+                    <div class="contact-form">
+                        <h3 class="w3ls-title">方案报价</h3>
+                        <p><b>出发日期 :</b> 某年某月某日 </p>
+                        <p><b>出行人数 :</b> 4成人2儿童</p>
+                        <p><b>币种 :</b> CNY人民币</p>
+                        <p><b>总费用 :</b> ￥78800.0</p>
+                        <p><b>最晚付款时间 :</b> 2017-08-03 18:00:00|0800</p>
+                        <p><b>收费分类 :</b></p>
+                        <p><b>&bull;分类一 :</b></p>
+                        <p><b>名称：</b>地接</p>
+                        <p><b>数量：</b>1 &nbsp;&nbsp;&nbsp;&nbsp;<b>频次：</b>1</p>
+                        <p><b>单价：</b>31190.0 &nbsp;&nbsp;&nbsp;&nbsp;<b>总价：</b>31190.0</p>
+                        <p><b>备注：</b>包含司导住宿|用餐补贴|小费|保险</p>
+                        <p><b>&bull;分类二 :</b></p>
+                        <p><b>名称：</b>住宿</p>
+                        <p><b>数量：</b>6 &nbsp;&nbsp;&nbsp;&nbsp;<b>频次：</b>1</p>
+                        <p><b>单价：</b>7935.0 &nbsp;&nbsp;&nbsp;&nbsp;<b>总价：</b>47610.0</p>
+                        <p><b>备注：</b>全程4星级特色酒店住宿含早餐，三人间</p>
+                    </div>
+                    <br>
+                    <!-- //方案报价 -->
+                    <!-- 费用包含 -->
+                    <div class="contact-form">
+                        <h3 class="w3ls-title">费用包含</h3>
+                        <p><b>1.酒店星级 :</b> 酒店星级酒店星级酒店星级酒店星级酒店星级酒店星级酒店星级酒店星级酒店星级酒店星级酒店星级。</p>
+                        <p><b>2.全程晚数 :</b> 全程晚数全程全程晚数全程晚数全程晚数全程晚数全程晚数全程晚数晚数全程晚数全程晚数全程晚数全程晚数全程晚数全程晚数。</p>
+                        <p><b>3.用餐 :</b> 早餐中餐晚餐早餐中餐晚餐早餐中餐晚餐早餐中餐晚餐早餐中餐晚餐早餐中餐晚餐早餐中餐晚餐早餐中餐晚餐早餐中餐晚餐。</p>
+                        <p><b>4.交通 :</b> 交通交通交通交通交通交通交通交通交通交通交通交通交通交通交通交通交通交通交通交通交通交通交通。</p>
+                        <p><b>5.保险 :</b> 保险保险保险保险保险保险保险保险保险保险保险保险保险保险保险保险。</p>
+                        <p><b>6.司导全程小费。</b></p>
+                        <p><b>7.司导全程用餐补贴。</b></p>
+                        <p><b>8.司导全程住宿补贴。</b></p>
+                        <p><b>9.司导服务费，车辆燃油费、过路费、高速费、停车费、进城费。</b></p>
+                        <p><b>10.酒店安排。</b></p>
+                        <p><b>&bull;方案一 :</b></p>
+                        <p><b>酒店城市：</b>米兰</p>
+                        <p><b>酒店名字：</b>Hilton Garden Inn Milan North</p>
+                        <p><b>星级：</b>4星</p>
+                        <p><b>备注：</b>Triple Room</p>
+                        <p><b>&bull;方案二 :</b></p>
+                        <p><b>酒店城市：</b>尼斯</p>
+                        <p><b>酒店名字：</b>Villa Otero</p>
+                        <p><b>星级：</b>4星</p>
+                        <p><b>备注：</b>Triple Room</p>
+                        <p><b>&bull;方案三 :</b></p>
+                        <p><b>酒店城市：</b>巴黎</p>
+                        <p><b>酒店名字：</b>Golden Tulip Washington Opera</p>
+                        <p><b>星级：</b>4星</p>
+                        <p><b>备注：</b>Triple Room</p>
+                        <p>本报价按照欧元兑换人民币汇率7.98核算</p>
+                    </div>
+                    <br>
+                    <!-- //费用包含 -->
+                    <!-- 费用不包含 -->
+                    <div class="contact-form">
+                        <h3 class="w3ls-title">费用不包含</h3>
+                        <p><b>1.酒店星级 :</b> 酒店星级酒店星级酒店星级酒店星级酒店星级酒店星级酒店星级酒店星级酒店星级酒店星级酒店星级。</p>
+                        <p><b>2.全程晚数 :</b> 全程晚数全程全程晚数全程晚数全程晚数全程晚数全程晚数全程晚数晚数全程晚数全程晚数全程晚数全程晚数全程晚数全程晚数。</p>
+                        <p><b>3.用餐 :</b> 早餐中餐晚餐早餐中餐晚餐早餐中餐晚餐早餐中餐晚餐早餐中餐晚餐早餐中餐晚餐早餐中餐晚餐早餐中餐晚餐早餐中餐晚餐。</p>
+                        <p><b>4.交通 :</b> 交通交通交通交通交通交通交通交通交通交通交通交通交通交通交通交通交通交通交通交通交通交通交通。</p>
+                        <p><b>5.保险 :</b> 保险保险保险保险保险保险保险保险保险保险保险保险保险保险保险保险。</p>
+                        <p><b>6.司导全程小费。</b></p>
+                        <p><b>7.司导全程用餐补贴。</b></p>
+                        <p><b>8.司导全程住宿补贴。</b></p>
+                        <p><b>9.司导服务费，车辆燃油费、过路费、高速费、停车费、进城费。</b></p>
+                    </div>
+                    <br>
+                    <!-- //费用不包含 -->
+                    <!-- 报价说明 -->
+                    <div class="contact-form">
+                        <h3 class="w3ls-title">报价说明</h3>
+                        <p><b>1.酒店星级 :</b> 酒店星级酒店星级酒店星级酒店星级酒店星级酒店星级酒店星级酒店星级酒店星级酒店星级酒店星级。</p>
+                        <p><b>2.全程晚数 :</b> 全程晚数全程全程晚数全程晚数全程晚数全程晚数全程晚数全程晚数晚数全程晚数全程晚数全程晚数全程晚数全程晚数全程晚数。</p>
+                        <p><b>3.用餐 :</b> 早餐中餐晚餐早餐中餐晚餐早餐中餐晚餐早餐中餐晚餐早餐中餐晚餐早餐中餐晚餐早餐中餐晚餐早餐中餐晚餐早餐中餐晚餐。</p>
+                        <p><b>4.交通 :</b> 交通交通交通交通交通交通交通交通交通交通交通交通交通交通交通交通交通交通交通交通交通交通交通。</p>
+                        <p><b>5.保险 :</b> 保险保险保险保险保险保险保险保险保险保险保险保险保险保险保险保险。</p>
+                        <p><b>6.司导全程小费。</b></p>
+                        <p><b>7.司导全程用餐补贴。</b></p>
+                        <p><b>8.司导全程住宿补贴。</b></p>
+                        <p><b>9.司导服务费，车辆燃油费、过路费、高速费、停车费、进城费。</b></p>
+                    </div>
+                    <br>
+                    <!-- 报价说明 -->
+                </div>
+                <!-- footer -->
+                <div class="w3agile footer">
+                    <div class="social-icons">
+                        <ul>
+                            <li><a href="#"> </a></li>
+                            <li><a href="#" class="fb"> </a></li>
+                            <li><a href="#" class="gp"> </a></li>
+                            <li><a href="#" class="drb"> </a></li>
+                        </ul>
+                        <div class="clearfix"> </div>
+                    </div>
+                    <div class="footer-text">
+                        <p>&copy; 2016 洛克旅行 . All Rights Reserved | Design by 梦云智</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- menu-js -->
+    <script src="/beautifulArtical/thinkphp/public/style/js/classie.js"></script>
+    <script src="/beautifulArtical/thinkphp/public/style/js/main.js"></script>
+    <!-- //menu-js -->
+    <!-- nice scroll-js -->
+    <script src="/beautifulArtical/thinkphp/public/style/js/jquery.nicescroll.min.js"></script>
+    <script>
+    $(document).ready(function() {
+
+        var nice = $("html").niceScroll(); // The document page (body)
+
+        $("#div1").html($("#div1").html() + ' ' + nice.version);
+
+        $("#boxscroll").niceScroll({ cursorborder: "", cursorcolor: "#00F", boxzoom: true }); // First scrollable DIV
+    });
+    </script>
+    <!-- //nice scroll-js -->
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/beautifulArtical/thinkphp/public/style/js/bootstrap.js"></script>
+</div>
+{/block}

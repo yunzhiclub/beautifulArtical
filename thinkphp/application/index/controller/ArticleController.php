@@ -167,4 +167,9 @@ class ArticleController extends IndexController {
         $message =  $this->articleService->downAttraction($param); 
         $this->success('向下排序成功',url('secondadd',['articleId'=>$articleId]));
     }
+
+    //返回main界面
+    public function main() {
+        return $this->fetch();
+    }
 }
