@@ -7,7 +7,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 body{
 	margin:0;
 	font-family: 'Roboto', sans-serif; 
-	background:url(../images/bg.jpg)repeat 0px 0px;
+	/*background:url(../images/bg.jpg)repeat 0px 0px;*/
 	background-size:cover;
 } 
 body a{
@@ -58,7 +58,7 @@ body a:hover{
 .main-row h1 {
     text-align: center;
     font-size: 3.5em;
-	color: #fff;
+	color: #000;
     margin-bottom:0.4em;
 }
 .copy-right {
