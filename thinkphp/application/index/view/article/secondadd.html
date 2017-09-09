@@ -7,16 +7,16 @@
 	<form method="post" action="{:url ('addsecond',['articleId'=>$articleId])}" enctype="multipart/form-data">
 		<div class="form-group">
 			<label for="TitleInput">标题</label>
-			<input type="text" class="form-control" id="TitleInput" placeholder="标题" name="title" value="{$title}">
+			<input type="text" class="form-control" id="TitleInput" placeholder="标题" name="title" value="{$title}" readonly="readonly">
 		</div>
 		<div class="form-group">
 			<label for="SummaryInput">摘要</label>
-			<input type="text" class="form-control" id="SummaryInput" placeholder="摘要" name="summary" value="{$summery}">
+			<input type="text" class="form-control" id="SummaryInput" placeholder="摘要" name="summary" value="{$summery}" readonly="readonly">
 		</div>
 		<div class="form-group">
 			<label for="exampleInputFile">封面</label>
-			<img src="{:__ROOT__}/upload/{$cover}" style="height: 100px; width: 180px; " alt="无图" >
-				<a class="btn btn-default" href="{:url('firstadd?articleId=' . $articleId)}">更改</a>
+			<img src="{:__ROOT__}/upload/{$cover}" style="height: 100px; width: 180px; " alt="无图" ><br><br>
+				<a class="btn btn-default" href="{:url('firstadd?articleId=' . $articleId)}"><span class="glyphicon glyphicon-pencil"></span>&nbsp;更改文章及定制师</a>
 		</div>
 		<div class="form-group">
 			<label for="TextInput">正文</label>
@@ -34,7 +34,7 @@
 						<h4>{$paragraph->title}</h4>
 						<div class="row">
 							<div class="col-md-3" style="height: 100px;">
-								<img src="{:__ROOT__}/upload/{$paragraph->image}" style="height: 100px; width: 180px;">
+								<img src="{:__ROOT__}/upload/{$paragraph->image}" style="height: 100px; width: 180px;" alt="">
 							</div>
 							<div class="col-md-6 col-md-offset-1 overhidden" >
 								{$paragraph->content}
@@ -62,7 +62,7 @@
 								<img src="{:__ROOT__}/upload/{$_attraction->getMaterial($_attraction->material_id)->image}" alt="" style="height: 100px; width: 180px;">
 							</div>
 							<div class="col-md-6 col-md-offset-1 overhidden">
-								{$_attraction->getMaterial($_attraction->material_id)->designation}
+								{$_attraction->getMaterial($_attraction->material_id)->content}
 							</div>
 							<div class="col-md-2">
 								{eq name="$i" value="1"} {else /}<a class="btn btn-default" href="{:url('upAttraction',['articleId'=>$articleId,'attractionId'=>$_attraction->id,'number'=>$i])}"  ><span class="glyphicon glyphicon-arrow-up" ></span></a>{/eq}<br>
@@ -86,7 +86,7 @@
 						<h4>{$paragraph->title}</h4>
 						<div class="row">
 							<div class="col-md-3" style="height: 100px;">
-								<img src="{:__ROOT__}/upload/{$paragraph->image}" style="height: 100px; width: 180px;">
+								<img src="{:__ROOT__}/upload/{$paragraph->image}" style="height: 100px; width: 180px;" alt="">
 							</div>
 							<div class="col-md-6 col-md-offset-1 overhidden" >
 							{$paragraph->content}
@@ -150,14 +150,14 @@
 								<p>币种：{$plan->currency}</p>
 								<p>总费用：{$plan->total_cost}</p>
 								<p>最晚付款时间：{$plan->last_pay_time}</p>
-								<table class="table table-hover table-bordered">
+								<table class="table table-hover table-bordered" style="word-break:break-all;">
 									<tr class="info">
-										<th>类型</th>
-										<th>数量</th>
-										<th>频次</th>
-										<th>单价</th>
-										<th>总价</th>
-										<th>备注</th>
+										<th width="10%">类型</th>
+										<th width="10%">数量</th>
+										<th width="10%">频次</th>
+										<th width="10%">单价</th>
+										<th width="10%">总价</th>
+										<th width="50%">备注</th>
 									</tr>
 									<tr>
 										<td>地接</td>
