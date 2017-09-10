@@ -205,65 +205,27 @@
                             <img src="/beautifulArtical/thinkphp/public/style/images/route.png" alt="路线图">
                         </div>
                     </div>
+                    {volist name="attractions" id="attraction" key="key"}
                     <div class="properties-bottom">
                         <div class="properties-img">
-                            <img src="/beautifulArtical/thinkphp/public/style/images/3.jpg" alt="">
+                            <img src="{:__ROOT__}/upload/{$attraction->getMainMaterial()->image}" alt="">
                             <div class="view-caption">
-                                <h4><span class="glyphicon glyphicon-map-marker"></span> 上海-罗马 </h4>
+                                <h4><span class="glyphicon glyphicon-map-marker"></span> {$attraction->getMainMaterial()->designation} </h4>
                             </div>
                             <div class="w3ls-buy">
-                                <a href="single.html">Day1</a>
+                                <a href="single.html">Day{$key}</a>
                             </div>
                         </div>
                         <div class="w3ls-text">
-                            <h6>&bull;今天是出发日，请您至少于航班起飞前3小时到达机场，搭乘选定的航班，飞往【罗马】。<br>
-                            &bull;欢迎来到条条大道通往的罗马城。<br>&bull;我们为您安排了贴心的【接机服务】，您的专属司机将送您前往酒店办理入住。</h6>
-                            <p><b>景点 :</b> 许愿泉 </p>
-                            <p><b>酒店 :</b> 当地五星级酒店 </p>
-                            <p><b>用餐 :</b> 自理 </p>
-                            <p><b>用车 :</b> 7-9座位商务巴士 </p>
-                            <p><b>导游 :</b> 司机兼导游，当天无行程游览 </p>
+                            <h6>&bull;{$attraction->getMainMaterial()->content}</h6>
+                            <p><b>景点 :</b> {$attraction->title} </p>
+                            <p><b>酒店 :</b> {$attraction->getHotel()->designation} </p>
+                            <p><b>用餐 :</b> {$attraction->meal} </p>
+                            <p><b>用车 :</b> {$attraction->car} </p>
+                            <p><b>导游 :</b> {$attraction->guide}  </p>
                         </div>
                     </div>
-                    <div class="properties-bottom">
-                        <div class="properties-img">
-                            <img src="/beautifulArtical/thinkphp/public/style/images/2.jpg" alt="">
-                            <div class="view-caption rent-caption">
-                                <h4><span class="glyphicon glyphicon-map-marker"></span> 罗马 </h4>
-                            </div>
-                            <div class="w3ls-buy">
-                                <a href="single.html" class="rent">Day2</a>
-                            </div>
-                        </div>
-                        <div class="w3ls-text">
-                            <h6>&bull;全天：游览古老的罗马。罗马不是一天建成的等诸多华丽的语言也无法形容罗马城的繁华与历史。参观罗马斗兽场闻君千遍不如见君一面，纵使你看了一万张斗兽场的照片，当你走近它时你还是会深深震撼。每当人们来到这座古罗马象征的断垣残壁的“斗兽场”，似乎能听到了野兽的咆哮、角斗士的呐喊，又仿佛看到了刀光剑影，腥风血雨。<br>
-                            &bull;参观真理之口，先农庙。来到许愿泉许下三个美好愿望。</h6>
-                            <p><b>景点 :</b> 许愿泉 </p>
-                            <p><b>酒店 :</b> 当地五星级酒店 </p>
-                            <p><b>用餐 :</b> 自理 </p>
-                            <p><b>用车 :</b> 7-9座位商务巴士 </p>
-                            <p><b>导游 :</b> 司机兼导游，当天无行程游览 </p>
-                        </div>
-                    </div>
-                    <div class="properties-bottom">
-                        <div class="properties-img">
-                            <img src="/beautifulArtical/thinkphp/public/style/images/2.jpg" alt="">
-                            <div class="view-caption rent-caption">
-                                <h4><span class="glyphicon glyphicon-map-marker"></span> 罗马-佛罗伦萨 </h4>
-                            </div>
-                            <div class="w3ls-buy">
-                                <a href="single.html" class="rent">Day3</a>
-                            </div>
-                        </div>
-                        <div class="w3ls-text">
-                            <h6>&bull;早餐之后前往佛罗伦萨，佛罗伦萨素有“翡冷翠”之称，在意大利语中意为“鲜花之城”。有“西方雅典”之称。参观游览佛罗伦萨，漫步在佛罗伦萨老城区，大批的来自文艺复兴时期的雕像复制品随处可见。当然最吸引游客眼球的还属米开朗基罗的‘大卫像’尽管是复制品，但依旧是驻足观看人数最多的雕像。佛罗伦萨最值得参观当属——圣母百花大教堂，圣母百花大教堂和乔托钟塔，她们是佛罗伦萨的主座教堂，鲜艳的大理石块拼成几何图形，使整体建筑显得非常壮观；教堂的大圆顶及由文艺复兴大师乔托设计的钟塔，为巍峨的教堂带来更多的气势。</h6>
-                            <p><b>景点 :</b> 许愿泉 </p>
-                            <p><b>酒店 :</b> 当地五星级酒店 </p>
-                            <p><b>用餐 :</b> 自理 </p>
-                            <p><b>用车 :</b> 7-9座位商务巴士 </p>
-                            <p><b>导游 :</b> 司机兼导游，当天无行程游览 </p>
-                        </div>
-                    </div>
+                    {/volist}
                     <div class="clearfix"> </div>
                 </div>
                 <!-- //旅游行程 -->
@@ -272,39 +234,42 @@
                     <!-- 定制师 -->
                     <div class="contact-form">
                         <h3 class="w3ls-title">定制师信息</h3>
-                        <p><b>名字 :</b> 张友蕾 </p>
-                        <p><b>电话号码 :</b> 028-68360953</p>
-                        <p><b>传真号码 :</b> 028-83390053</p>
-                        <p><b>手机号码 :</b> 13882118442</p>
-                        <p><b>电子邮件 :</b> <a href="mailto:example@mail.com">rayzhang@4u-travel.com</a></p>
+                        <p><b>名字 :</b> {$contractor->designation} </p>
+                        <p><b>电话号码 :</b> {$contractor->phone}</p>
+                        <p><b>传真号码 :</b> {$contractor->fax}</p>
+                        <p><b>手机号码 :</b> {$contractor->mobile}</p>
+                        <p><b>电子邮件 :</b> <a href="mailto:{$contractor->email}">{$contractor->email}</a></p>
                     </div>
                     <br>
                     <!-- //定制师 -->
                     <!-- 方案报价 -->
+                    {volist name="plans" id="plan"}
                     <div class="contact-form">
                         <h3 class="w3ls-title">方案报价</h3>
-                        <p><b>出发日期 :</b> 某年某月某日 </p>
-                        <p><b>出行人数 :</b> 4成人2儿童</p>
-                        <p><b>币种 :</b> CNY人民币</p>
-                        <p><b>总费用 :</b> ￥78800.0</p>
-                        <p><b>最晚付款时间 :</b> 2017-08-03 18:00:00|0800</p>
+                        <p><b>出发日期 :</b> {$plan->travel_date} </p>
+                        <p><b>出行人数 :</b> {$plan->people_num}</p>
+                        <p><b>币种 :</b> {$plan->currency}</p>
+                        <p><b>总费用 :</b>{$plan->total_cost}</p>
+                        <p><b>最晚付款时间 :</b> {$plan->last_pay_time}</p>
                         <p><b>收费分类 :</b></p>
                         <p><b>&bull;分类一 :</b></p>
                         <p><b>名称：</b>地接</p>
-                        <p><b>数量：</b>1 &nbsp;&nbsp;&nbsp;&nbsp;<b>频次：</b>1</p>
-                        <p><b>单价：</b>31190.0 &nbsp;&nbsp;&nbsp;&nbsp;<b>总价：</b>31190.0</p>
-                        <p><b>备注：</b>包含司导住宿|用餐补贴|小费|保险</p>
+                        <p><b>数量：</b>{$plan->getDetailByType('dijie')->number} &nbsp;&nbsp;&nbsp;&nbsp;<b>频次：</b>{$plan->getDetailByType('dijie')->frequency}</p>
+                        <p><b>单价：</b>{$plan->getDetailByType('dijie')->unit_price} &nbsp;&nbsp;&nbsp;&nbsp;<b>总价：</b>{$plan->getDetailByType('dijie')->total_price}</p>
+                        <p><b>备注：</b>{$plan->getDetailByType('dijie')->remark}</p>
                         <p><b>&bull;分类二 :</b></p>
                         <p><b>名称：</b>住宿</p>
-                        <p><b>数量：</b>6 &nbsp;&nbsp;&nbsp;&nbsp;<b>频次：</b>1</p>
-                        <p><b>单价：</b>7935.0 &nbsp;&nbsp;&nbsp;&nbsp;<b>总价：</b>47610.0</p>
-                        <p><b>备注：</b>全程4星级特色酒店住宿含早餐，三人间</p>
+                        <p><b>数量：</b>{$plan->getDetailByType('zhusu')->number} &nbsp;&nbsp;&nbsp;&nbsp;<b>频次：</b>{$plan->getDetailByType('zhusu')->frequency}</p>
+                        <p><b>单价：</b>{$plan->getDetailByType('zhusu')->unit_price} &nbsp;&nbsp;&nbsp;&nbsp;<b>总价：</b>{$plan->getDetailByType('zhusu')->total_price}</p>
+                        <p><b>备注：</b>{$plan->getDetailByType('zhusu')->remark}</p>
                     </div>
+                    {/volist}
                     <br>
                     <!-- //方案报价 -->
                     <!-- 费用包含 -->
+                    {volist name="paragraphDown" id="paragraph"}
                     <div class="contact-form">
-                        <h3 class="w3ls-title">费用包含</h3>
+                        <h3 class="w3ls-title">{$paragraph->title}</h3>
                         <p><b>1.酒店星级 :</b> 酒店星级酒店星级酒店星级酒店星级酒店星级酒店星级酒店星级酒店星级酒店星级酒店星级酒店星级。</p>
                         <p><b>2.全程晚数 :</b> 全程晚数全程全程晚数全程晚数全程晚数全程晚数全程晚数全程晚数晚数全程晚数全程晚数全程晚数全程晚数全程晚数全程晚数。</p>
                         <p><b>3.用餐 :</b> 早餐中餐晚餐早餐中餐晚餐早餐中餐晚餐早餐中餐晚餐早餐中餐晚餐早餐中餐晚餐早餐中餐晚餐早餐中餐晚餐早餐中餐晚餐。</p>
@@ -332,6 +297,7 @@
                         <p><b>备注：</b>Triple Room</p>
                         <p>本报价按照欧元兑换人民币汇率7.98核算</p>
                     </div>
+                    {/volist}
                     <br>
                     <!-- //费用包含 -->
                     <!-- 费用不包含 -->

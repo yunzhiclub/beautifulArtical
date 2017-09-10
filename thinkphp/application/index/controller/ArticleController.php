@@ -148,6 +148,9 @@ class ArticleController extends IndexController {
     }
 
     public function preview() {
+        $articleId = Request::instance()->param('articleId/d');
+        $this->assign('articleId', $articleId);
+        $this->main();
         return $this->fetch();
     }
 
@@ -170,6 +173,20 @@ class ArticleController extends IndexController {
 
     //返回main界面
     public function main() {
+        $articleId = Request::instance()->param('articleId');
+        // 获取当前景点根据权重的排序
+        $Attractions = Attraction::order('weight')->where('article_id',$articleId)->select();
+
+        $Article = Article::get($articleId);
+        $contractorId = $Article->contractor_id;
+        $Contractor = Contractor::get($contractorId);
+        $this->assign('contractor',$Contractor);
+        $this->assign('attractions',$Attractions);
+
+        $Plans = Plan::where('article_id',$articleId)->select();
+        $this->assign('plans',$Plans);
+
+
         return $this->fetch();
     }
 }
