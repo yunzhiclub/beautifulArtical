@@ -19,7 +19,7 @@ use app\index\service\Articleservice;
  * @version $Id$
  */
 
-class ArticleController extends IndexController {
+class ArticleController {
 
     protected $articleService = null;
 
