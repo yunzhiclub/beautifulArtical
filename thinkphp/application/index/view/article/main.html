@@ -71,6 +71,48 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 <div class="clearfix"> </div>
             </div>
             <div class="content">
+            <!-- slider show -->
+                <div class="banner">
+                    <div id="kb" class="carousel kb_elastic animate_text kb_wrapper" data-ride="carousel" data-interval="6000" data-pause="hover">
+                        <!-- Wrapper-for-Slides -->
+                        <div class="carousel-inner" role="listbox">
+                            <!-- First-Slide -->
+                            <div class="item active">
+                                <div class="banner-img">
+                                    <div class="carousel-caption kb_caption">
+                                        <h3 data-animation="animated flipInX">图片一</h3>
+                                    </div>
+                                </div>
+                            </div>
+                               <div class="banner-img banner-img1">
+                                    <div class="carousel-caption kb_caption kb_caption_right">
+                                        <h3 data-animation="animated flipInX">图片二</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Third-Slide -->
+                           <div class="item">
+                                <div class="banner-img banner-img2">
+                                    <div class="carousel-caption kb_caption kb_caption_center">
+                                        <h3 data-animation="animated flipInX">图片三</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Left-Button -->
+                        <a class="left carousel-control kb_control_left" href="#kb" role="button" data-slide="prev">
+                           <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
+                           <span class="sr-only">Previous</span>
+                       </a>
+                        <!-- Right-Button -->
+                        <a class="right carousel-control kb_control_right" href="#kb" role="button" data-slide="next">
+                           <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
+                           <span class="sr-only">Next</span>
+                       </a>
+                    </div>
+                    <script src="/beautifulArtical/thinkphp/public/style/js/custom.js"></script>
+                </div>
+                <!-- //slider show -->
                 <!-- 洛克旅行介绍部分 -->
                 <div class="welcome">
                     <h3 class="w3ls-title">{$article->title}</h3>
@@ -117,16 +159,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 <div class="about">
                     <h3 style="text-align: center;">{$pragraph->title}</h3>
                     {$pragraph->content}
+                    <div class="properties-img">
+                            <img src="{:__ROOT__}/upload/{$pragraph->image}" alt="路线图">
+                    </div>
                 </div>
                 {/volist}
-                <div class="about">
-                    
-                </div>
-                <!-- //定制自由行，让出国旅行更简单 -->
-                <!-- 六大品质保证 -->
-                <div class="about">
-                    
-                </div>
+                
                 <!-- //六大品质保证 -->
                 <HR style="FILTER: progid:DXImageTransform.Microsoft.Shadow(color:#987cb9,direction:145,strength:15)" width="80%" color=#987cb9 SIZE=1>
                 <!-- 旅游行程 -->
