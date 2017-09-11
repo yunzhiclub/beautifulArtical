@@ -7,6 +7,7 @@ use app\index\model\Article;
 use app\index\model\Contractor;
 use app\index\model\Common;
 use app\index\model\Attraction;
+use app\index\model\Hotel;
 use app\index\model\Plan;
 use app\index\model\Paragraph;
 use app\index\service\Articleservice;
@@ -178,6 +179,8 @@ class ArticleController extends IndexController {
         $Attractions = Attraction::order('weight')->where('article_id',$articleId)->select();
 
         $Article = Article::get($articleId);
+        $this->assign('article',$Article);
+
         $contractorId = $Article->contractor_id;
         $Contractor = Contractor::get($contractorId);
         $this->assign('contractor',$Contractor);
@@ -186,6 +189,24 @@ class ArticleController extends IndexController {
         $Plans = Plan::where('article_id',$articleId)->select();
         $this->assign('plans',$Plans);
 
+        $paragraphUps = Paragraph::where('is_before_attraction',1)->where('article_id',$articleId)->order('weight')->select();
+        $paragraphDowns = Paragraph::where('is_before_attraction',0)->where('article_id',$articleId)->order('weight')->select();
+        $this->assign('paragraphUps',$paragraphUps);
+        $this->assign('paragraphDowns',$paragraphDowns);
+
+        $Hotels = [];
+
+        foreach ($Attractions as $key => $value) {
+            $hotelId = $value->hotel_id;
+            if(!is_null($hotelId)) {
+                $tempHotel = Hotel::where('id', $hotelId)->find();
+                if (!is_null($tempHotel)) {
+                    array_push($Hotels, $tempHotel);
+                }
+            }
+            $tempHotel = null;
+        }
+        $this->assign('hotels',$Hotels);
 
         return $this->fetch();
     }
