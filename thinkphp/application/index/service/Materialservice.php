@@ -184,7 +184,11 @@ class Materialservice  {
         if(!empty($materialName)) {
             $material->where('designation', 'like', '%'. $materialName. '%');
         }
-        $materials = $material->order('id desc')->paginate($pageSize);
+        $materials = $material->order('id desc')->paginate($pageSize, false, [
+            'query' => [
+                'materialName' => $materialName,
+            ],
+        ]);
         return $materials;
     }
 }
