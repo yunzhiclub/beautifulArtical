@@ -2,6 +2,7 @@
 namespace app\index\controller;
 
 use app\index\controller\IndexController;
+use think\Controller;
 use think\Request;
 use app\index\model\Article;
 use app\index\model\Contractor;
@@ -19,7 +20,7 @@ use app\index\service\Articleservice;
  * @version $Id$
  */
 
-class ArticleController {
+class ArticleController extends Controller {
 
     protected $articleService = null;
 
