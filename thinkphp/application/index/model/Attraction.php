@@ -3,6 +3,8 @@
 namespace app\index\model;
 
 use think\Model;
+use app\index\model\Material;
+use app\index\model\Hotel;
 /**
  * Created by PhpStorm.
  * User: zhangxishuo
@@ -74,5 +76,11 @@ class Attraction extends Model {
             $Material->content = '未选择素材';
             return $Material;
         }
+    }
+    public function getMainMaterial() {
+        return Material::get($this->material_id);
+    }
+    public function getHotel() {
+        return Hotel::get($this->hotel_id);
     }
 }

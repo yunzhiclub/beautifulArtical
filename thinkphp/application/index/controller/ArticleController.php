@@ -2,11 +2,13 @@
 namespace app\index\controller;
 
 use app\index\controller\IndexController;
+use think\Controller;
 use think\Request;
 use app\index\model\Article;
 use app\index\model\Contractor;
 use app\index\model\Common;
 use app\index\model\Attraction;
+use app\index\model\Hotel;
 use app\index\model\Plan;
 use app\index\model\Paragraph;
 use app\index\service\Articleservice;
@@ -18,7 +20,7 @@ use app\index\service\Articleservice;
  * @version $Id$
  */
 
-class ArticleController extends IndexController {
+class ArticleController extends Controller {
 
     protected $articleService = null;
 
@@ -148,6 +150,9 @@ class ArticleController extends IndexController {
     }
 
     public function preview() {
+        $articleId = Request::instance()->param('articleId/d');
+        $this->assign('articleId', $articleId);
+        $this->main();
         return $this->fetch();
     }
 
@@ -170,6 +175,40 @@ class ArticleController extends IndexController {
 
     //返回main界面
     public function main() {
+        $articleId = Request::instance()->param('articleId');
+        // 获取当前景点根据权重的排序
+        $Attractions = Attraction::order('weight')->where('article_id',$articleId)->select();
+
+        $Article = Article::get($articleId);
+        $this->assign('article',$Article);
+
+        $contractorId = $Article->contractor_id;
+        $Contractor = Contractor::get($contractorId);
+        $this->assign('contractor',$Contractor);
+        $this->assign('attractions',$Attractions);
+
+        $Plans = Plan::where('article_id',$articleId)->select();
+        $this->assign('plans',$Plans);
+
+        $paragraphUps = Paragraph::where('is_before_attraction',1)->where('article_id',$articleId)->order('weight')->select();
+        $paragraphDowns = Paragraph::where('is_before_attraction',0)->where('article_id',$articleId)->order('weight')->select();
+        $this->assign('paragraphUps',$paragraphUps);
+        $this->assign('paragraphDowns',$paragraphDowns);
+
+        $Hotels = [];
+
+        foreach ($Attractions as $key => $value) {
+            $hotelId = $value->hotel_id;
+            if(!is_null($hotelId)) {
+                $tempHotel = Hotel::where('id', $hotelId)->find();
+                if (!is_null($tempHotel)) {
+                    array_push($Hotels, $tempHotel);
+                }
+            }
+            $tempHotel = null;
+        }
+        $this->assign('hotels',$Hotels);
+
         return $this->fetch();
     }
 }

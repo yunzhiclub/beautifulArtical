@@ -176,7 +176,6 @@ ul.nav-sub li a {
 }
 .container, 
 .content-wrap {
-	overflow: hidden;
 	width: 100%;
 	height: 100%;
 }
@@ -222,16 +221,6 @@ ul.nav-sub li a {
     background: transparent;
     outline: none;
     margin: .5em 0;
-}
-.menu-button::before {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-	background: -webkit-linear-gradient(#ffffff 20%, transparent 20%, transparent 40%, #ffffff 40%, #ffffff 60%, transparent 60%, transparent 80%, #ffffff 80%);
-	background: linear-gradient(#ffffff 20%, transparent 20%, transparent 40%, #ffffff 40%, #ffffff 60%, transparent 60%, transparent 80%, #ffffff 80%);
-    content: '';
 } 
 
 /*-- Close Button --*/
@@ -432,15 +421,8 @@ ul.nav-sub {
 }
 /*-- banner--*/
 .banner-img {
-    background: url(../images/1.jpg)no-repeat center;
     background-size: cover;
     min-height: 370px;
-}
-.banner-img1{
-	background-image: url(../images/2.jpg);
-}
-.banner-img2{
-	background-image: url(../images/3.jpg);
 }
 .banner .carousel-control span.glyphicon {
     font-size: 1.5em;
@@ -885,18 +867,6 @@ p {
 	-webkit-transform: translateY(-10px);
 	-moz-transform: translateY(-10px);
     transform: translateY(-10px); 
-}
-.social-icons ul li a.fb {
-    background-position: 3px -32px;
-	background-color:#3b5998;
-}
-.social-icons ul li a.gp {
-    background-position: 5px -67px;
-	background-color:#dc4e41;
-}
-.social-icons ul li a.drb {
-    background-position: 3px -102px;
-	background-color:#ea4c89;
 }
 /*--//social-icons--*/
 .footer-nav {
