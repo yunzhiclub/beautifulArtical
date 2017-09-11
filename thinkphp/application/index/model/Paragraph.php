@@ -31,7 +31,11 @@ class Paragraph extends Model
     public function saveParagraph($data, $articleId)
     {
 		$this->title = $data['title'];
-		$this->content = $data['content'];
+        if (empty($data['content'])) {
+            $this->content = "无内容";
+        } else {
+            $this->content = $data['content'];
+        }
         $this->is_before_attraction = (boolean)$data['is_before_attraction'];
 		$this->article_id = $articleId;
 		$this->weight = $this->getWeight("weight", $this->article_id);
