@@ -27,7 +27,9 @@ class MaterialController extends IndexController {
     public function index() {
     	//取出配置信息
         $pageSize = config('paginate.var_page');
-        $materials = Material::order('id desc')->paginate($pageSize);
+        $materialName = Request::instance()->get('materialName');
+
+        $materials = $this->materialService->searchMaterial($materialName, $pageSize);
 
         //将数据传给V层
         $this->assign('materials', $materials);
