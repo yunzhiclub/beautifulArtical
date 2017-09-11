@@ -178,4 +178,13 @@ class Materialservice  {
         }
         return $message;
     }
+
+    public function searchMaterial($materialName, $pageSize) {
+        $material = new Material();
+        if(!empty($materialName)) {
+            $material->where('designation', 'like', '%'. $materialName. '%');
+        }
+        $materials = $material->order('id desc')->paginate($pageSize);
+        return $materials;
+    }
 }
