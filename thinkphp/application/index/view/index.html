@@ -6,7 +6,9 @@
     <title>{block name="title"}标题{/block}</title>
     <link rel="stylesheet" type="text/css" href="{:__ROOT__}/style/css/bootstrap-3.3.7-dist/css/bootstrap.min.css">
     <script src="{:__ROOT__}/style/js/jquery-2.1.1.min.js"></script>
+    <script src="{:__ROOT__}/style/css/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
     <script src="{:__ROOT__}/node_modules/share/dist/js/jquery.share.min.js"></script>
+    <script src="{:__ROOT__}/style/js/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="{:__ROOT__}/style/css/overhidden.css">
     <link rel="stylesheet" href="{:__ROOT__}/node_modules/share/dist/css/share.min.css">
     <link href="{:__ROOT__}/style/css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
@@ -25,6 +27,7 @@
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
                             <li {eq name=':request()->controller()' value="Material" } class="active" {/eq}><a href="{:url('Material/index')}">素材管理</a></li>
+                            <li {eq name=':request()->controller()' value="Hotel" } class="active" {/eq}><a href="{:url('Hotel/index')}">酒店管理</a></li>
                             <li {eq name=':request()->controller()' value="Contractor" } class="active" {/eq}><a href="{:url('Contractor/index')}">定制师管理</a></li>
                             <li {eq name=':request()->controller()' value="User" } class="active" {/eq}><a href="{:url('User/index')}">个人中心</a></li>
                         </ul>
