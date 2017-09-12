@@ -14,7 +14,7 @@ public class Attraction {
     @ManyToOne
     private Article article;
 
-    @OneToOne
+    @ManyToOne
     private Hotel hotel;
 
     @ManyToOne
