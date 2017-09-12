@@ -59,15 +59,26 @@ class Loginservice
 	 * 判断用户是否登录
 	 * @return boolean true/登录；false/未登录
 	 */
-	public function isLogin()
+	public function isLogin($param)
 	{
-		$userId = session('userId');
 
-		if (isset($userId)) {
-			return true;
-		} else {
-			return false;
-		}
+	    //获取当前的模块，控制器，方法
+        $url = $param->path();
+        //切割字符串
+        $urlArray = explode('/', $url);
+        //判断如果是预览界面则不需要登录
+        if ($urlArray[0] === "index" && $urlArray[1] === "article" && $urlArray[2] === "main") {
+            //用户不需要登录
+            return true;
+        }
+
+        $userId = session('userId');
+
+        if (isset($userId)) {
+            return true;
+        } else {
+            return false;
+        }
 	}
 
 	public function logOut()
