@@ -18,7 +18,8 @@ class Common
      */
     public static function uploadImage($file)
     {
-        $info = $file->move(PUBLIC_PATH);
+        $info = $file->validate(['size'=>2048000])->move(PUBLIC_PATH);
+
         if ($info) {
             return $info->getSaveName();
         } else {
