@@ -421,6 +421,7 @@ ul.nav-sub {
 }
 /*-- banner--*/
 .banner-img {
+    background: no-repeat center;
     background-size: cover;
     min-height: 370px;
 }
