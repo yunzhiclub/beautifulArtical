@@ -3,6 +3,8 @@
 namespace app\index\controller;
 
 use app\index\model\Hotel;
+use app\index\service\HotelService;
+use think\Request;
 
 /**
  * Created by PhpStorm.
@@ -12,14 +14,60 @@ use app\index\model\Hotel;
  */
 
 class HotelController extends IndexController {
+
+    function __construct(Request $request = null) {
+        parent::__construct($request);
+
+        $this->HotelService = new HotelService();
+    }
+
     public function index() {
         $pageSize = config('paginate.var_page');
         $hotels = Hotel::order('id desc')->paginate($pageSize);
+
         $this->assign('hotels', $hotels);
         return $this->fetch();
     }
 
     public function add() {
+        $hotel = $this->HotelService->getNullHotel();
+
+        $this->assign('hotel', $hotel);
         return $this->fetch();
+    }
+
+    public function save() {
+        $param = Request::instance();
+        $message = $this->HotelService->saveHotel($param);
+
+        if($message['status'] == 'success') {
+            return $this->success($message['message'], url('hotel/index'));
+        } else {
+            return $this->error($message['message'], url('hotel/index'));
+        }
+    }
+
+    public function edit() {
+        $hotelId = Request::instance()->param('hotelId');
+        $hotel = Hotel::get($hotelId);
+
+        $this->assign('hotel', $hotel);
+        return $this->fetch('add');
+    }
+
+    public function update() {
+        $param = Request::instance();
+        $message = $this->HotelService->updateHotel($param);
+
+        if($message['status'] == 'success') {
+            return $this->success($message['message'], url('hotel/index'));
+        } else {
+            return $this->error($message['message'], url('hotel/index'));
+        }
+    }
+
+    public function delete() {
+        $param = Request::instance();
+        $this->HotelService->deleteHotel($param);
     }
 }
