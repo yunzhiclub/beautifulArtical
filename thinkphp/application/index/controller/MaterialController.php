@@ -31,10 +31,7 @@ class MaterialController extends IndexController {
 
         $materials = $this->materialService->searchMaterial($materialName, $pageSize);
 
-        //将数据传给V层
         $this->assign('materials', $materials);
-
-        //渲染
     	return $this->fetch();
     }
     // 添加界面

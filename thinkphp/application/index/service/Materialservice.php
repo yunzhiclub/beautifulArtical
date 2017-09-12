@@ -188,6 +188,7 @@ class Materialservice  {
             'query' => [
                 'materialName' => $materialName,
             ],
+            'var_page' => 'page',
         ]);
         return $materials;
     }
