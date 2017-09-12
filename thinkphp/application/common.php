@@ -14,6 +14,7 @@ namespace app;
 
 //初始化
 use function PHPSTORM_META\elementType;
+use think\Request;
 
 Common::init();
 
@@ -25,6 +26,8 @@ class Common{
     public static function init() {
         //定义全局变量
         self::definePath();
+        //获取跟路由
+        self::defineRootWidthDomain();
     }
 
     /**
@@ -41,5 +44,15 @@ class Common{
         // 定义常量PUBLIC_PATH
         $publicPath = realpath(ROOT_PATH) . DS . 'public' . '/upload';
         define('PUBLIC_PATH' , $publicPath);
+    }
+
+    /**
+     * 定义相关的域名信息
+     */
+    static public function defineRootWidthDomain() {
+        $rootDoamin = Request::instance()->root(true);
+
+        //定义全局变量
+        define('ROOT_DOMAIN', $rootDoamin);
     }
 }

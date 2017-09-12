@@ -5,22 +5,10 @@
 <div class="main-row">
 		<h1>洛克旅行</h1>
 		<div class="main_frame">
-			<iframe class="frame-border scroll-pane" src="http://127.0.0.1/beautifulArtical/thinkphp/public/index/article/main?articleId={$articleId}" frameborder="0"></iframe>
+			<iframe class="frame-border scroll-pane" src="{:ROOT_DOMAIN}/index/article/main?articleId={$articleId}" frameborder="0"></iframe>
 		</div>
 	</div>
-	<script src="/beautifulArtical/thinkphp/public/style/js/jquery.nicescroll.min.js"></script> 
-	<script>
-	  $(document).ready(function() {
-	  
-		var nice = $("html").niceScroll();  // The document page (body)
-		
-		$("#div1").html($("#div1").html()+' '+nice.version);
-		
-		$("#boxscroll").niceScroll(); // First scrollable DIV
-		
-	  });
-	</script>
-<div style="min-height: 795px; text-align: center;">
+<div style="text-align: center;">
     <h1>分享微信功能</h1>
     <div class="social-share" data-sites="wechat"></div>
     <script>
