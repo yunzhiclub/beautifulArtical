@@ -1,190 +1,174 @@
-<!--
-Author: W3layouts
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
 <!DOCTYPE html>
 <html>
 
 <head>
     <title>洛克旅行</title>
     <!-- For-Mobile-Apps-and-Meta-Tags -->
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="keywords" content="Fortune Estates Widget Responsive, Login Form Web Template, Flat Pricing Tables, Flat Drop-Downs, Sign-Up Web Templates, Flat Web Templates, Login Sign-up Responsive Web Template, SmartPhone Compatible Web Template, Free Web Designs for Nokia, Samsung, LG, Sony Ericsson, Motorola Web Design" />
-    <script type="application/x-javascript">
-        addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
-
-        function hideURLbar() { window.scrollTo(0, 1); }
-    </script>
-    <!-- //For-Mobile-Apps-and-Meta-Tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="keywords" content=""/>
     <!-- Custom Theme files -->
-    <link href="/beautifulArtical/thinkphp/public/style/css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
-    <link href="/beautifulArtical/thinkphp/public/style/css/style.css" type="text/css" rel="stylesheet" media="all">
-    <link rel="stylesheet" href="/beautifulArtical/thinkphp/public/style/css/ken-burns.css" type="text/css" media="all" />
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link href="{:__ROOT__}/style/css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
+    <link href="{:__ROOT__}/style/css/style.css" type="text/css" rel="stylesheet" media="all">
+    <!-- Slider Show css-->
+    <link rel="stylesheet" href="{:__ROOT__}/style/css/ken-burns.css" type="text/css"
+          media="all"/>
     <!-- //Custom Theme files -->
-    <!-- js -->
-    <script src="/beautifulArtical/thinkphp/public/style/js/jquery-2.2.3.min.js"></script>
-    <script src="/beautifulArtical/thinkphp/public/style/js/jquery-2.2.3.min.js"></script>
-    <!-- //js -->
-    <!-- pop-up-box -->
-    <script src="/beautifulArtical/thinkphp/public/style/js/jquery.magnific-popup.js" type="text/javascript"></script>
+    <script src="{:__ROOT__}/style/js/jquery-2.2.3.min.js"></script>
+
+    <!-- nice scroll-js -->
+    <script src="{:__ROOT__}/style/js/jquery.nicescroll.min.js"></script>
     <script>
-        $(document).ready(function() {
-            $('.popup-top-anim').magnificPopup({
-                type: 'inline',
-                fixedContentPos: false,
-                fixedBgPos: true,
-                overflowY: 'auto',
-                closeBtnInside: true,
-                preloader: false,
-                midClick: true,
-                removalDelay: 300,
-                mainClass: 'my-mfp-zoom-in'
-            });
+        $(document).ready(function () {
+
+            var nice = $("html").niceScroll(); // The document page (body)
+
+            $("#div1").html($("#div1").html() + ' ' + nice.version);
+
+            $("#boxscroll").niceScroll({cursorborder: "", cursorcolor: "#00F", boxzoom: true}); // First scrollable DIV
         });
     </script>
-    <!--//pop-up-box -->
-    <!-- web-fonts -->
-    <link href='//fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
-    <link href='//fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
-    <!-- //web-fonts -->
+    <script src="{:__ROOT__}/style/js/bootstrap.js"></script>
+    <!-- nice scroll-js -->
+
 </head>
 
 <body class="bg">
-    <div class="agile-main">
-        <div class="content-wrap">
-            <!-- 紫色顶部 -->
-            <div class="header">
-                <div class="menu-icon">
-                    <button class="menu-button"></button>
-                </div>
-                <div class="logo">
-                    <h2><a>洛克</a></h2>
-                    <!-- 可以换成洛克酒店的logo -->
-                </div>
-                <div class="login">
-                    <span class="sign-in popup-top-anim glyphicon glyphicon-user menu-button"></span>
-                </div>
-                <div class="clearfix"> </div>
+<div class="agile-main">
+    <div class="content-wrap">
+        <!-- 紫色顶部 -->
+        <div class="header">
+            <div class="menu-icon">
+                <button class="menu-button"></button>
             </div>
-            <div class="content">
-                <!-- slider show -->
-                <div class="banner">
-                    <div id="kb" class="carousel kb_elastic animate_text kb_wrapper" data-ride="carousel" data-interval="6000" data-pause="hover">
-                        <!-- Wrapper-for-Slides -->
-                        <div class="carousel-inner" role="listbox">
-                            <!-- First-Slide -->
-                            <div class="item active">
-                                <div class="banner-img" style="background: url({:__ROOT__}/upload/{$article->cover})no-repeat center;">
-                                    <div class="carousel-caption kb_caption">
-                                    </div>
+            <div class="logo">
+                <h2><a>洛克</a></h2>
+                <!-- 可以换成洛克酒店的logo -->
+            </div>
+            <div class="login">
+                <span class="sign-in popup-top-anim glyphicon glyphicon-user menu-button"></span>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="content">
+            <!-- slider show -->
+            <div class="banner">
+                <div id="kb" class="carousel kb_elastic animate_text kb_wrapper" data-ride="carousel"
+                     data-interval="6000" data-pause="hover">
+                    <!-- Wrapper-for-Slides -->
+                    <div class="carousel-inner" role="listbox">
+                        <!-- First-Slide -->
+                        <div class="item active">
+                            <div class="banner-img"
+                                 style="background: url({:__ROOT__}/upload/{$article->cover})no-repeat center;">
+                                <div class="carousel-caption kb_caption">
                                 </div>
                             </div>
-                            <!-- Third-Slide -->
-                            {volist name="attractions" id="attraction" key="key"}
-                                <div class="item">
-                                    <div class="banner-img" style="background: url({:__ROOT__}/upload/{$attraction->getMainMaterial()->image})no-repeat center;">
-                                        <div class="carousel-caption kb_caption kb_caption_center">
-                                        </div>
-                                    </div>
-                                </div>
-                            {/volist}
                         </div>
-                        <!-- Left-Button -->
-                        <a class="left carousel-control kb_control_left" href="#kb" role="button" data-slide="prev">
-                           <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
-                           <span class="sr-only">Previous</span>
-                       </a>
-                        <!-- Right-Button -->
-                        <a class="right carousel-control kb_control_right" href="#kb" role="button" data-slide="next">
-                           <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
-                           <span class="sr-only">Next</span>
-                       </a>
+                        <!-- Third-Slide -->
+                        {volist name="attractions" id="attraction" key="key"}
+                        <div class="item">
+                            <div class="banner-img"
+                                 style="background: url({:__ROOT__}/upload/{$attraction->getMainMaterial()->image})no-repeat center;">
+                                <div class="carousel-caption kb_caption kb_caption_center">
+                                </div>
+                            </div>
+                        </div>
+                        {/volist}
                     </div>
-                    <script src="/beautifulArtical/thinkphp/public/style/js/custom.js"></script>
+                    <!-- Left-Button -->
+                    <a class="left carousel-control kb_control_left" href="#kb" role="button" data-slide="prev">
+                        <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <!-- Right-Button -->
+                    <a class="right carousel-control kb_control_right" href="#kb" role="button" data-slide="next">
+                        <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
                 </div>
-                <!-- //slider show -->
-                <!-- 洛克旅行介绍部分 -->
-                <div class="welcome">
-                    <h3 class="w3ls-title">{$article->title}</h3>
-                    <p class="w3title-text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$article->summery}</p>
-                    <br>
-                </div>
-                <!-- //洛克旅行介绍部分 -->
-                <!-- 九项服务，一价全包 -->
-                <div class="clearfix"> </div>
-                <h3 style="text-align: center;">九项服务，一价全包</h3>
-                <div class="brands-info">
-                    <div class="brand-grids">
-                        <a href="#"><img src="/beautifulArtical/thinkphp/public/style/images/b1.jpg" alt=""/></a>
-                    </div>
-                    <div class="brand-grids">
-                        <a href="#"><img src="/beautifulArtical/thinkphp/public/style/images/b2.jpg" alt=""/></a>
-                    </div>
-                    <div class="brand-grids">
-                        <a href="#"><img src="/beautifulArtical/thinkphp/public/style/images/b3.jpg" alt=""/></a>
-                    </div>
-                    <div class="brand-grids">
-                        <a href="#"><img src="/beautifulArtical/thinkphp/public/style/images/b4.jpg" alt=""/></a>
-                    </div>
-                    <div class="brand-grids">
-                        <a href="#"><img src="/beautifulArtical/thinkphp/public/style/images/b5.jpg" alt=""/></a>
-                    </div>
-                    <div class="brand-grids">
-                        <a href="#"><img src="/beautifulArtical/thinkphp/public/style/images/b6.jpg" alt=""/></a>
-                    </div>
-                    <div class="brand-grids">
-                        <a href="#"><img src="/beautifulArtical/thinkphp/public/style/images/b4.jpg" alt=""/></a>
-                    </div>
-                    <div class="brand-grids">
-                        <a href="#"><img src="/beautifulArtical/thinkphp/public/style/images/b5.jpg" alt=""/></a>
-                    </div>
-                    <div class="brand-grids">
-                        <a href="#"><img src="/beautifulArtical/thinkphp/public/style/images/b6.jpg" alt=""/></a>
-                    </div>
-                    <div class="clearfix"> </div>
-                </div>
-                <!-- //九项服务，一价全包 -->
-                <!-- 定制自由行，让出国旅行更简单 -->
-                <div class="about">
-                    <h3 style="text-align: center;">定制自由行<br>让出国旅行更简单</h3>
-                    <ul>
-                        <li><span class="glyphicon glyphicon-menu-right"></span> 更省心。不用你操心，机票酒店活动签证租车...麻烦事儿全都有人包办 </li>
-                        <li><span class="glyphicon glyphicon-menu-right"></span> 更个性。形成随便调，量身打造玩啥你说了算，满意再付全款 </li>
-                        <li><span class="glyphicon glyphicon-menu-right"></span> 更舒心。专业更靠谱，100+位资深专业订制师，让你的行程不留遗憾 </li>
-                        <li><span class="glyphicon glyphicon-menu-right"></span> 更自由。不再人挤人，定制专属路书，旅行团去不了的地方你能去 </li>
-                        <li><span class="glyphicon glyphicon-menu-right"></span> 更划算。不花冤枉钱。九项服务一价全包，定制的服务，跟团的价格 </li>
-                        <li><span class="glyphicon glyphicon-menu-right"></span> 更安全。全程有保障，专属行后保障团队，遇到问题有人管，出行不担心 </li>
-                    </ul>
-                </div>
-                <!-- //定制自由行，让出国旅行更简单 -->
-                <!-- 六大品质保证 -->
-                <div class="about">
-                    <h3 style="text-align: center;">6大品质保障<br>开启全新旅行体验</h3>
-                    <ul>
-                        <li><span class="glyphicon glyphicon-menu-right"></span> 全程商务专车，专业当地华人双语导游 </li>
-                        <li><span class="glyphicon glyphicon-menu-right"></span> 独立成团，不与陌生人拼团 </li>
-                        <li><span class="glyphicon glyphicon-menu-right"></span> 真正纯玩品质，承诺0购物0自费 </li>
-                        <li><span class="glyphicon glyphicon-menu-right"></span> 导游带您深入小众美景，去除不安全地带 </li>
-                        <li><span class="glyphicon glyphicon-menu-right"></span> 全程甄选酒店，安全舒适 </li>
-                        <li><span class="glyphicon glyphicon-menu-right"></span> 私家尊享，7* 24小时专属旅行管家 </li>
-                    </ul>
-                </div>
-                <!-- //六大品质保证 -->
-                <HR style="FILTER: progid:DXImageTransform.Microsoft.Shadow(color:#987cb9,direction:145,strength:15)" width="80%" color=#987cb9 SIZE=1>
-        <!-- 定制自由行，让出国旅行更简单 -->
-        {volist name="paragraphUps" id="pragraph"}
-        <div class="about">
-            <h3 style="text-align: center;" class="w3ls-title">{$pragraph->title}</h3>
-            {$pragraph->content}
-            <div class="properties-img">
-                <img src="{:__ROOT__}/upload/{$pragraph->image}" alt="路线图">
+                <script src="/beautifulArtical/thinkphp/public/style/js/custom.js"></script>
             </div>
-        </div>
-        {/volist}
+            <!-- //slider show -->
+            <!-- 洛克旅行介绍部分 -->
+            <div class="welcome">
+                <h3 class="w3ls-title">{$article->title}</h3>
+                <p class="w3title-text">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$article->summery}</p>
+                <br>
+            </div>
+            <!-- //洛克旅行介绍部分 -->
+            <!-- 九项服务，一价全包 -->
+            <div class="clearfix"></div>
+            <h3 style="text-align: center;">九项服务，一价全包</h3>
+            <div class="brands-info">
+                <div class="brand-grids">
+                    <a href="#"><img src="{:__ROOT__}/style/images/b1.jpg" alt=""/></a>
+                </div>
+                <div class="brand-grids">
+                    <a href="#"><img src="{:__ROOT__}/style/images/b2.jpg" alt=""/></a>
+                </div>
+                <div class="brand-grids">
+                    <a href="#"><img src="{:__ROOT__}/style/images/b3.jpg" alt=""/></a>
+                </div>
+                <div class="brand-grids">
+                    <a href="#"><img src="{:__ROOT__}/style/images/b4.jpg" alt=""/></a>
+                </div>
+                <div class="brand-grids">
+                    <a href="#"><img src="{:__ROOT__}/style/images/b5.jpg" alt=""/></a>
+                </div>
+                <div class="brand-grids">
+                    <a href="#"><img src="{:__ROOT__}/style/images/b6.jpg" alt=""/></a>
+                </div>
+                <div class="brand-grids">
+                    <a href="#"><img src="{:__ROOT__}/style/images/b4.jpg" alt=""/></a>
+                </div>
+                <div class="brand-grids">
+                    <a href="#"><img src="{:__ROOT__}/style/images/b5.jpg" alt=""/></a>
+                </div>
+                <div class="brand-grids">
+                    <a href="#"><img src="{:__ROOT__}/style/images/b6.jpg" alt=""/></a>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <!-- //九项服务，一价全包 -->
+            <!-- 定制自由行，让出国旅行更简单 -->
+            <div class="about">
+                <h3 style="text-align: center;">定制自由行<br>让出国旅行更简单</h3>
+                <ul>
+                    <li><span class="glyphicon glyphicon-menu-right"></span> 更省心。不用你操心，机票酒店活动签证租车...麻烦事儿全都有人包办</li>
+                    <li><span class="glyphicon glyphicon-menu-right"></span> 更个性。形成随便调，量身打造玩啥你说了算，满意再付全款</li>
+                    <li><span class="glyphicon glyphicon-menu-right"></span> 更舒心。专业更靠谱，100+位资深专业订制师，让你的行程不留遗憾</li>
+                    <li><span class="glyphicon glyphicon-menu-right"></span> 更自由。不再人挤人，定制专属路书，旅行团去不了的地方你能去</li>
+                    <li><span class="glyphicon glyphicon-menu-right"></span> 更划算。不花冤枉钱。九项服务一价全包，定制的服务，跟团的价格</li>
+                    <li><span class="glyphicon glyphicon-menu-right"></span> 更安全。全程有保障，专属行后保障团队，遇到问题有人管，出行不担心</li>
+                </ul>
+            </div>
+            <!-- //定制自由行，让出国旅行更简单 -->
+            <!-- 六大品质保证 -->
+            <div class="about">
+                <h3 style="text-align: center;">6大品质保障<br>开启全新旅行体验</h3>
+                <ul>
+                    <li><span class="glyphicon glyphicon-menu-right"></span> 全程商务专车，专业当地华人双语导游</li>
+                    <li><span class="glyphicon glyphicon-menu-right"></span> 独立成团，不与陌生人拼团</li>
+                    <li><span class="glyphicon glyphicon-menu-right"></span> 真正纯玩品质，承诺0购物0自费</li>
+                    <li><span class="glyphicon glyphicon-menu-right"></span> 导游带您深入小众美景，去除不安全地带</li>
+                    <li><span class="glyphicon glyphicon-menu-right"></span> 全程甄选酒店，安全舒适</li>
+                    <li><span class="glyphicon glyphicon-menu-right"></span> 私家尊享，7* 24小时专属旅行管家</li>
+                </ul>
+            </div>
+            <!-- //六大品质保证 -->
+            <HR style="FILTER: progid:DXImageTransform.Microsoft.Shadow(color:#987cb9,direction:145,strength:15)"
+                width="80%" color=#987cb9 SIZE=1>
+            <!-- 定制自由行，让出国旅行更简单 -->
+            {volist name="paragraphUps" id="pragraph"}
+            <div class="about">
+                <h3 style="text-align: center;" class="w3ls-title">{$pragraph->title}</h3>
+                {$pragraph->content}
+                <div class="properties-img">
+                    <img src="{:__ROOT__}/upload/{$pragraph->image}" alt="路线图">
+                </div>
+            </div>
+            {/volist}
 
             <!-- 旅游行程 -->
             <h3 style="text-align: center;" class="w3ls-title">旅游线路</h3>
@@ -194,7 +178,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     <div class="properties-img">
                         <img src="{:__ROOT__}/upload/{$attraction->getMainMaterial()->image}" alt="">
                         <div class="view-caption">
-                            <h4><span class="glyphicon glyphicon-map-marker"></span> {$attraction->getMainMaterial()->designation} </h4>
+                            <h4><span class="glyphicon glyphicon-map-marker"></span>
+                                {$attraction->getMainMaterial()->designation} </h4>
                         </div>
                         <div class="w3ls-buy">
                             <a href="single.html">Day{$key}</a>
@@ -206,81 +191,73 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                         <p><b>酒店 :</b> {$attraction->getHotel()->designation} </p>
                         <p><b>用餐 :</b> {$attraction->meal} </p>
                         <p><b>用车 :</b> {$attraction->car} </p>
-                        <p><b>导游 :</b> {$attraction->guide}  </p>
+                        <p><b>导游 :</b> {$attraction->guide} </p>
                     </div>
                 </div>
                 {/volist}
-                <div class="clearfix"> </div>
+                <div class="clearfix"></div>
             </div>
             <!-- //旅游行程 -->
-            <HR style="FILTER: progid:DXImageTransform.Microsoft.Shadow(color:#987cb9,direction:145,strength:15)" width="80%" color=#987cb9 SIZE=1>
-                <div class="w3agile contact">
-                    <!-- 定制师 -->
-                    <div class="contact-form">
-                        <h3 class="w3ls-title">定制师信息</h3>
-                        <p><b>名字 :</b> {$contractor->designation} </p>
-                        <p><b>电话号码 :</b> {$contractor->phone}</p>
-                        <p><b>传真号码 :</b> {$contractor->fax}</p>
-                        <p><b>手机号码 :</b> {$contractor->mobile}</p>
-                        <p><b>电子邮件 :</b> <a href="mailto:{$contractor->email}">{$contractor->email}</a></p>
-                    </div>
-                    <br>
-                    <!-- //定制师 -->
-                    <!-- 方案报价 -->
-                    {volist name="plans" id="plan"}
-                    <div class="contact-form">
-                        <h3 class="w3ls-title">方案报价</h3>
-                        <p><b>出发日期 :</b> {$plan->travel_date} </p>
-                        <p><b>出行人数 :</b> {$plan->people_num}</p>
-                        <p><b>币种 :</b> {$plan->currency}</p>
-                        <p><b>总费用 :</b>{$plan->total_cost}</p>
-                        <p><b>最晚付款时间 :</b> {$plan->last_pay_time}</p>
-                        <p><b>收费分类 :</b></p>
-                        <p><b>&bull;分类一 :</b></p>
-                        <p><b>名称：</b>地接</p>
-                        <p><b>数量：</b>{$plan->getDetailByType('dijie')->number} &nbsp;&nbsp;&nbsp;&nbsp;<b>频次：</b>{$plan->getDetailByType('dijie')->frequency}</p>
-                        <p><b>单价：</b>{$plan->getDetailByType('dijie')->unit_price} &nbsp;&nbsp;&nbsp;&nbsp;<b>总价：</b>{$plan->getDetailByType('dijie')->total_price}</p>
-                        <p><b>备注：</b>{$plan->getDetailByType('dijie')->remark}</p>
-                        <p><b>&bull;分类二 :</b></p>
-                        <p><b>名称：</b>住宿</p>
-                        <p><b>数量：</b>{$plan->getDetailByType('zhusu')->number} &nbsp;&nbsp;&nbsp;&nbsp;<b>频次：</b>{$plan->getDetailByType('zhusu')->frequency}</p>
-                        <p><b>单价：</b>{$plan->getDetailByType('zhusu')->unit_price} &nbsp;&nbsp;&nbsp;&nbsp;<b>总价：</b>{$plan->getDetailByType('zhusu')->total_price}</p>
-                        <p><b>备注：</b>{$plan->getDetailByType('zhusu')->remark}</p>
-                    </div>
+            <HR style="FILTER: progid:DXImageTransform.Microsoft.Shadow(color:#987cb9,direction:145,strength:15)"
+                width="80%" color=#987cb9 SIZE=1>
+            <div class="w3agile contact">
+                <!-- 定制师 -->
+                <div class="contact-form">
+                    <h3 class="w3ls-title">定制师信息</h3>
+                    <p><b>名字 :</b> {$contractor->designation} </p>
+                    <p><b>电话号码 :</b> {$contractor->phone}</p>
+                    <p><b>传真号码 :</b> {$contractor->fax}</p>
+                    <p><b>手机号码 :</b> {$contractor->mobile}</p>
+                    <p><b>电子邮件 :</b> <a href="mailto:{$contractor->email}">{$contractor->email}</a></p>
+                </div>
+                <br>
+                <!-- //定制师 -->
+                <!-- 方案报价 -->
+                {volist name="plans" id="plan"}
+                <div class="contact-form">
+                    <h3 class="w3ls-title">方案报价</h3>
+                    <p><b>出发日期 :</b> {$plan->travel_date} </p>
+                    <p><b>出行人数 :</b> {$plan->people_num}</p>
+                    <p><b>币种 :</b> {$plan->currency}</p>
+                    <p><b>总费用 :</b>{$plan->total_cost}</p>
+                    <p><b>最晚付款时间 :</b> {$plan->last_pay_time}</p>
+                    <p><b>收费分类 :</b></p>
+                    <p><b>&bull;分类一 :</b></p>
+                    <p><b>名称：</b>地接</p>
+                    <p><b>数量：</b>{$plan->getDetailByType('dijie')->number} &nbsp;&nbsp;&nbsp;&nbsp;<b>频次：</b>{$plan->getDetailByType('dijie')->frequency}
+                    </p>
+                    <p><b>单价：</b>{$plan->getDetailByType('dijie')->unit_price} &nbsp;&nbsp;&nbsp;&nbsp;<b>总价：</b>{$plan->getDetailByType('dijie')->total_price}
+                    </p>
+                    <p><b>备注：</b>{$plan->getDetailByType('dijie')->remark}</p>
+                    <p><b>&bull;分类二 :</b></p>
+                    <p><b>名称：</b>住宿</p>
+                    <p><b>数量：</b>{$plan->getDetailByType('zhusu')->number} &nbsp;&nbsp;&nbsp;&nbsp;<b>频次：</b>{$plan->getDetailByType('zhusu')->frequency}
+                    </p>
+                    <p><b>单价：</b>{$plan->getDetailByType('zhusu')->unit_price} &nbsp;&nbsp;&nbsp;&nbsp;<b>总价：</b>{$plan->getDetailByType('zhusu')->total_price}
+                    </p>
+                    <p><b>备注：</b>{$plan->getDetailByType('zhusu')->remark}</p>
+                </div>
+                {/volist}
+                <br>
+                <!-- //方案报价 -->
+                <!-- 费用包含 -->
+                {volist name="paragraphDowns" id="paragraph"}
+                <div class="contact-form">
+                    <h3 class="w3ls-title">{$paragraph->title}</h3>
+                    {$paragraph->content}
                     {/volist}
-                    <br>
-                    <!-- //方案报价 -->
-                    <!-- 费用包含 -->
-                    {volist name="paragraphDowns" id="paragraph"}
-                    <div class="contact-form">
-                        <h3 class="w3ls-title">{$paragraph->title}</h3>
-                        {$paragraph->content}
-                        {/volist}
-                        <h3 class="w3ls-title">酒店信息</h3>
-                        {volist name="hotels" id="hotel" key="key"}
-                        <p><b>&bull;酒店{$key} :</b></p>
-                        <p><b>酒店城市：</b>{$hotel->city}</p>
-                        <p><b>酒店名字：</b>{$hotel->designation}</p>
-                        <p><b>星级：</b>{$hotel->star_level}</p>
-                        <p><b>备注：</b>{$hotel->remark}</p>
-                        {/volist}
-                        <p>本报价按照欧元兑换人民币汇率7.98核算</p>
-                    </div>
-                    
-                    <br>
-                    <!-- //费用包含 -->
-                    
-                    <br>
-                    <!-- 报价说明 -->
+                    <h3 class="w3ls-title">酒店信息</h3>
+                    {volist name="hotels" id="hotel" key="key"}
+                    <p><b>&bull;酒店{$key} :</b></p>
+                    <p><b>酒店城市：</b>{$hotel->city}</p>
+                    <p><b>酒店名字：</b>{$hotel->designation}</p>
+                    <p><b>星级：</b>{$hotel->star_level}</p>
+                    <p><b>备注：</b>{$hotel->remark}</p>
+                    {/volist}
+                    <p>本报价按照欧元兑换人民币汇率7.98核算</p>
                 </div>
                 <!-- footer -->
                 <div class="w3agile footer">
-                    <!-- <div class="social-icons">
-                        <ul>
-                            <li><a href="#"> </a></li>
-                        </ul>
-                        <div class="clearfix"> </div>
-                    </div> -->
                     <div class="footer-text">
                         <p>&copy; 2016 洛克旅行 . All Rights Reserved | Design by 梦云智</p>
                     </div>
@@ -288,27 +265,8 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             </div>
         </div>
     </div>
-    <!-- menu-js -->
-    <script src="/beautifulArtical/thinkphp/public/style/js/classie.js"></script>
-    <script src="/beautifulArtical/thinkphp/public/style/js/main.js"></script>
-    <!-- //menu-js -->
-    <!-- nice scroll-js -->
-    <script src="/beautifulArtical/thinkphp/public/style/js/jquery.nicescroll.min.js"></script>
-    <script>
-        $(document).ready(function() {
+</div>
 
-        var nice = $("html").niceScroll(); // The document page (body)
-
-        $("#div1").html($("#div1").html() + ' ' + nice.version);
-
-        $("#boxscroll").niceScroll({ cursorborder: "", cursorcolor: "#00F", boxzoom: true }); // First scrollable DIV
-    });
-</script>
-<!-- //nice scroll-js -->
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="/beautifulArtical/thinkphp/public/style/js/bootstrap.js"></script>
 </body>
 
 </html>
