@@ -94,7 +94,7 @@ class ArticleController extends Controller {
         $this->assign('plans', $Plans);
 
         // 调用service中的保存方法
-        $message =  $this->articleService->secondAriticle($param);
+        $message = $this->articleService->secondAriticle($param);
         // 将serve中处理的数据传给前台
         // 标题
         $this->assign('title', $message['title']);

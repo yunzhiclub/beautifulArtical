@@ -68,6 +68,11 @@ class HotelController extends IndexController {
 
     public function delete() {
         $param = Request::instance();
-        $this->HotelService->deleteHotel($param);
+        $message = $this->HotelService->deleteHotel($param);
+        if($message['status'] == 'success') {
+            return $this->success($message['message'], url('hotel/index'));
+        } else {
+            return $this->error($message['message'], url('hotel/index'));
+        }
     }
 }

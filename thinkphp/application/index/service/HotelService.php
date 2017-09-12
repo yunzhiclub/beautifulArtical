@@ -1,6 +1,8 @@
 <?php
 
 namespace app\index\service;
+use app\index\model\Article;
+use app\index\model\Attraction;
 use app\index\model\Hotel;
 
 /**
@@ -71,9 +73,12 @@ class HotelService {
         $hotelId = $param->param('hotelId');
         $hotel = Hotel::get($hotelId);
 
-        // 注意：删除时要判断酒店是否已经被景点选中的情况。
-        // 注意：删除时要判断酒店是否已经被景点选中的情况。
-        // 注意：删除时要判断酒店是否已经被景点选中的情况。
+        $attractions = Attraction::where('hotel_id','=',$hotelId)->select();
+        if(sizeof($attractions) != 0) {
+            $message['message'] = '该酒店已经被景点选中，无法删除';
+            $message['status']  = 'error';
+            return $message;
+        }
 
         if(!$hotel->delete()) {
             $message['message'] = '删除失败';
