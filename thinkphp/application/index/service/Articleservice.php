@@ -262,4 +262,49 @@ class Articleservice
         }
         return false;
     }
+
+    public function MoneyFormate($Plans) {
+        $message = [];
+        $message['detailZhusuUnit'] = 0;
+        $message['detailZhusuTotal'] = 0;
+        $message['detailDijieUnit'] = 0;
+        $message['detailDijieTotal'] = 0;
+            
+        foreach ($Plans as $key => $value) {
+         if(!$value->total_cost){
+            $value->total_cost = 0;
+            }
+            $planTotalCost= number_format($value->total_cost,2);
+            $value->total_cost = $planTotalCost;
+            $ZhusuUnit = $value->getDetailByType('zhusu')->unit_price;
+            if(!$ZhusuUnit){
+            $ZhusuUnit = 0;
+            }
+            $detailZhusuUnit =  number_format($ZhusuUnit,2) ;
+            $ZhusuTotal = $value->getDetailByType('zhusu')->total_price;
+            if(!$ZhusuTotal){
+            $ZhusuTotal = 0;
+            }
+            $detailZhusuTotal =  number_format($ZhusuTotal,2);
+
+            $message['detailZhusuUnit'] = $detailZhusuUnit;
+            $message['detailZhusuTotal'] = $detailZhusuTotal;
+
+            
+            $DijieUnit = $value->getDetailByType('dijie')->unit_price;
+            if(!$DijieUnit){
+            $DijieUnit = 0;
+            }
+            $detailDijieUnit =  number_format($DijieUnit,2) ;
+            $DijieTotal = $value->getDetailByType('dijie')->total_price;
+            if(!$DijieTotal){
+            $DijieTotal = 0;
+            }
+            $detailDijieTotal =  number_format($DijieTotal,2);
+            $message['detailDijieUnit'] = $detailDijieUnit;
+            $message['detailDijieTotal'] = $detailDijieTotal;
+            
+        }
+        return $message;
+    }
 }
