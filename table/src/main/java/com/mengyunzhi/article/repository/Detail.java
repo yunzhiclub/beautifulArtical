@@ -1,6 +1,7 @@
 package com.mengyunzhi.article.repository;
 
 import javax.persistence.*;
+import java.text.DecimalFormat;
 
 /**
  * Created by Mr Chen on 2017/8/30.
@@ -13,13 +14,13 @@ public class Detail {
     private String type; // 类型
     private Integer number; // 数量
     private Integer frequency; // 频次
-    private Integer unitPrice; // 单价
-    private Integer totalPrice; //总价
+    private DecimalFormat unitPrice; // 单价
+    private DecimalFormat totalPrice; //总价
     private String remark; // 备注
     @ManyToOne
     private Plan plan;
 
-    public Detail(String type, Integer number, Integer frequency, Integer unitPrice, Integer totalPrice, String remark, Plan plan) {
+    public Detail(String type, Integer number, Integer frequency, DecimalFormat unitPrice, DecimalFormat totalPrice, String remark, Plan plan) {
         this.type = type;
         this.number = number;
         this.frequency = frequency;
@@ -64,19 +65,19 @@ public class Detail {
         this.frequency = frequency;
     }
 
-    public Integer getUnitPrice() {
+    public DecimalFormat getUnitPrice() {
         return unitPrice;
     }
 
-    public void setUnitPrice(Integer unitPrice) {
+    public void setUnitPrice(DecimalFormat unitPrice) {
         this.unitPrice = unitPrice;
     }
 
-    public Integer getTotalPrice() {
+    public DecimalFormat getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(Integer totalPrice) {
+    public void setTotalPrice(DecimalFormat totalPrice) {
         this.totalPrice = totalPrice;
     }
 
