@@ -32,7 +32,7 @@ class Paragraph extends Model
     {
 		$this->title = $data['title'];
         if (empty($data['content'])) {
-            $this->content = "无内容";
+            $this->content = "";
         } else {
             $this->content = $data['content'];
         }

@@ -421,15 +421,8 @@ ul.nav-sub {
 }
 /*-- banner--*/
 .banner-img {
-    background: url(../images/1.jpg)no-repeat center;
     background-size: cover;
     min-height: 370px;
-}
-.banner-img1{
-	background-image: url(../images/2.jpg);
-}
-.banner-img2{
-	background-image: url(../images/3.jpg);
 }
 .banner .carousel-control span.glyphicon {
     font-size: 1.5em;
