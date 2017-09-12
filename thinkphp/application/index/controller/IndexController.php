@@ -11,17 +11,13 @@ class IndexController extends Controller
 	function __construct(Request $request = null)
     {
     	 parent::__construct($request);
+
         //实例化服务层
         $this->loginService = new Loginservice();
 
         // 验证用户是否登陆
-        if (!$this->loginService->isLogin()) {
+        if (!$this->loginService->isLogin(Request::instance())) {
             return $this->error('请先登录！', url('Login/index'));
         }
-    }
-
-    public function index()
-    {
-        
     }
 }
