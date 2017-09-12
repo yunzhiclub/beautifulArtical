@@ -90,8 +90,15 @@ class ArticleController extends IndexController {
         $articleId = Request::instance()->param('articleId');
         $Plan = new Plan();
         $Plans = $Plan->getPlanByArticleId($articleId);
-        $this->assign('plans', $Plans);
+        // 使用number_format 格式化输入金额
+        $date = $this->articleService->MoneyFormate($Plans);
+        
+        $this->assign('detailZhusuUnit',$date['detailZhusuUnit']);
+        $this->assign('detailZhusuTotal',$date['detailZhusuTotal']);
+        $this->assign('detailDijieUnit',$date['detailDijieUnit']);
+        $this->assign('detailDijieTotal',$date['detailDijieTotal']);
 
+        $this->assign('plans', $Plans);
         // 调用service中的保存方法
         $message =  $this->articleService->secondAriticle($param);
         // 将serve中处理的数据传给前台

@@ -2,6 +2,7 @@ package com.mengyunzhi.article.repository;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.text.DecimalFormat;
 
 @Entity
 public class Plan {
@@ -13,11 +14,11 @@ public class Plan {
     private Date travelDate; // 出行日期
     private String peopleNum; // 出行人数
     private String currency; // 币种
-    private Integer totalCost; // 总费用
+    private DecimalFormat totalCost; // 总费用
     private Date lastPayTime; // 最晚付款时间
 
 
-    public Plan(Article article, Date travelDate, String peopleNum, String currency, Integer totalCost, Date lastPayTime) {
+    public Plan(Article article, Date travelDate, String peopleNum, String currency, DecimalFormat totalCost, Date lastPayTime) {
         this.article = article;
         this.travelDate = travelDate;
         this.peopleNum = peopleNum;
@@ -69,11 +70,11 @@ public class Plan {
         this.currency = currency;
     }
 
-    public Integer getTotalCost() {
+    public DecimalFormat getTotalCost() {
         return totalCost;
     }
 
-    public void setTotalCost(Integer totalCost) {
+    public void setTotalCost(DecimalFormat totalCost) {
         this.totalCost = totalCost;
     }
 
