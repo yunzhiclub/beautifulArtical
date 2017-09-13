@@ -2,6 +2,7 @@
 
 namespace app\index\controller;
 
+use app\index\model\Common;
 use app\index\model\Hotel;
 use app\index\service\HotelService;
 use think\Request;
@@ -25,6 +26,7 @@ class HotelController extends IndexController {
         $pageSize = config('paginate.var_page');
         $hotels = Hotel::order('id desc')->paginate($pageSize);
 
+        $this->assign('common', new Common());
         $this->assign('hotels', $hotels);
         return $this->fetch();
     }

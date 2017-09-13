@@ -2,6 +2,7 @@
 namespace app\index\controller;
 
 use app\index\controller\IndexController;
+use app\index\model\Common;
 use think\Request;
 use app\index\model\Article;
 use app\index\model\Contractor;
@@ -34,6 +35,7 @@ class ArticleController extends IndexController {
 	{
         $pageSize = config('paginate.var_page');
 	    $articles = Article::order('id desc')->paginate($pageSize);
+	    $this->assign('common', new Common());
 	    $this->assign('articles', $articles);
 		return $this->fetch();
 	}
