@@ -2,6 +2,7 @@
 namespace app\index\controller;
 
 use app\index\controller\IndexController;
+use app\index\model\Common;
 use think\Request;
 use app\index\model\Article;
 use app\index\model\Contractor;
@@ -34,6 +35,7 @@ class ArticleController extends IndexController {
 	{
         $pageSize = config('paginate.var_page');
 	    $articles = Article::order('id desc')->paginate($pageSize);
+	    $this->assign('common', new Common());
 	    $this->assign('articles', $articles);
 		return $this->fetch();
 	}
@@ -89,8 +91,15 @@ class ArticleController extends IndexController {
         $articleId = Request::instance()->param('articleId');
         $Plan = new Plan();
         $Plans = $Plan->getPlanByArticleId($articleId);
-        $this->assign('plans', $Plans);
+        // 使用number_format 格式化输入金额
+        $date = $this->articleService->MoneyFormate($Plans);
+        
+        $this->assign('detailZhusuUnit',$date['detailZhusuUnit']);
+        $this->assign('detailZhusuTotal',$date['detailZhusuTotal']);
+        $this->assign('detailDijieUnit',$date['detailDijieUnit']);
+        $this->assign('detailDijieTotal',$date['detailDijieTotal']);
 
+        $this->assign('plans', $Plans);
         // 调用service中的保存方法
         $message = $this->articleService->secondAriticle($param);
         // 将serve中处理的数据传给前台
@@ -186,6 +195,13 @@ class ArticleController extends IndexController {
         $this->assign('attractions',$Attractions);
 
         $Plans = Plan::where('article_id',$articleId)->select();
+        // 使用number_format 格式化输入金额
+        $date = $this->articleService->MoneyFormate($Plans);
+        
+        $this->assign('detailZhusuUnit',$date['detailZhusuUnit']);
+        $this->assign('detailZhusuTotal',$date['detailZhusuTotal']);
+        $this->assign('detailDijieUnit',$date['detailDijieUnit']);
+        $this->assign('detailDijieTotal',$date['detailDijieTotal']);
         $this->assign('plans',$Plans);
 
         $paragraphUps = Paragraph::where('is_before_attraction',1)->where('article_id',$articleId)->order('weight')->select();

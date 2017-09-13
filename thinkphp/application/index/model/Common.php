@@ -37,4 +37,12 @@ class Common
             }
         }
     }
+
+    public function limitWordNumber($str, $length) {
+        if(mb_strlen($str)<$length) {
+            return $str;
+        } else {
+            return mb_substr($str, 0, $length).'...';
+        }
+    }
 }
