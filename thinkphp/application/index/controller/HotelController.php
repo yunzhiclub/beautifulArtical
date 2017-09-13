@@ -2,6 +2,7 @@
 
 namespace app\index\controller;
 
+use app\index\model\Common;
 use app\index\model\Hotel;
 use app\index\service\HotelService;
 use think\Request;
@@ -22,9 +23,24 @@ class HotelController extends IndexController {
     }
 
     public function index() {
-        $pageSize = config('paginate.var_page');
-        $hotels = Hotel::order('id desc')->paginate($pageSize);
+        $city = Request::instance()->get('city');
 
+        $Hotel = new Hotel();
+
+        if (!empty($city)) {
+            $Hotel->where('city', 'like', '%' . $city . '%');
+        }
+        $pageSize = config('paginate.var_page');
+
+        // 按条件查询并调用分页
+        $hotels = $Hotel->order('id desc')->paginate($pageSize, false, [
+            'query' =>[
+                'city' => $city,
+                ],
+                'var_page' => 'page',
+            ]);
+
+        $this->assign('common', new Common());
         $this->assign('hotels', $hotels);
         return $this->fetch();
     }
