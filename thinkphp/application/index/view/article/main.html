@@ -226,14 +226,14 @@
                     <p><b>名称：</b>地接</p>
                     <p><b>数量：</b>{$plan->getDetailByType('dijie')->number} &nbsp;&nbsp;&nbsp;&nbsp;<b>频次：</b>{$plan->getDetailByType('dijie')->frequency}
                     </p>
-                    <p><b>单价：</b>{$plan->getDetailByType('dijie')->unit_price} &nbsp;&nbsp;&nbsp;&nbsp;<b>总价：</b>{$plan->getDetailByType('dijie')->total_price}
+                    <p><b>单价：</b>{$detailDijieUnit} &nbsp;&nbsp;&nbsp;&nbsp;<b>总价：</b>{$detailDijieTotal}
                     </p>
                     <p><b>备注：</b>{$plan->getDetailByType('dijie')->remark}</p>
                     <p><b>&bull;分类二 :</b></p>
                     <p><b>名称：</b>住宿</p>
                     <p><b>数量：</b>{$plan->getDetailByType('zhusu')->number} &nbsp;&nbsp;&nbsp;&nbsp;<b>频次：</b>{$plan->getDetailByType('zhusu')->frequency}
                     </p>
-                    <p><b>单价：</b>{$plan->getDetailByType('zhusu')->unit_price} &nbsp;&nbsp;&nbsp;&nbsp;<b>总价：</b>{$plan->getDetailByType('zhusu')->total_price}
+                    <p><b>单价：</b>{$detailZhusuUnit} &nbsp;&nbsp;&nbsp;&nbsp;<b>总价：</b>{$detailZhusuTotal}
                     </p>
                     <p><b>备注：</b>{$plan->getDetailByType('zhusu')->remark}</p>
                 </div>

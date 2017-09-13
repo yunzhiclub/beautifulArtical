@@ -265,46 +265,45 @@ class Articleservice
 
     public function MoneyFormate($Plans) {
         $message = [];
+        // 设置价格的初始值为0
         $message['detailZhusuUnit'] = 0;
         $message['detailZhusuTotal'] = 0;
         $message['detailDijieUnit'] = 0;
         $message['detailDijieTotal'] = 0;
-            
+        // 遍历传入的报价方案    
         foreach ($Plans as $key => $value) {
-         if(!$value->total_cost){
-            $value->total_cost = 0;
-            }
-            $planTotalCost= number_format($value->total_cost,2);
+            // 总金额
+            $planTotalCost = $this->fromate($value->total_cost);
             $value->total_cost = $planTotalCost;
-            $ZhusuUnit = $value->getDetailByType('zhusu')->unit_price;
-            if(!$ZhusuUnit){
-            $ZhusuUnit = 0;
-            }
-            $detailZhusuUnit =  number_format($ZhusuUnit,2) ;
-            $ZhusuTotal = $value->getDetailByType('zhusu')->total_price;
-            if(!$ZhusuTotal){
-            $ZhusuTotal = 0;
-            }
-            $detailZhusuTotal =  number_format($ZhusuTotal,2);
-
+            // 格式化住宿金额
+            $detailZhusuUnit = $this->fromate($value->getDetailByType('zhusu')->unit_price);
             $message['detailZhusuUnit'] = $detailZhusuUnit;
+
+            $detailZhusuTotal = $this->fromate($value->getDetailByType('zhusu')->total_price);
             $message['detailZhusuTotal'] = $detailZhusuTotal;
 
-            
-            $DijieUnit = $value->getDetailByType('dijie')->unit_price;
-            if(!$DijieUnit){
-            $DijieUnit = 0;
-            }
-            $detailDijieUnit =  number_format($DijieUnit,2) ;
-            $DijieTotal = $value->getDetailByType('dijie')->total_price;
-            if(!$DijieTotal){
-            $DijieTotal = 0;
-            }
-            $detailDijieTotal =  number_format($DijieTotal,2);
+            // 格式化地接金额
+            $detailDijieUnit = $this->fromate($value->getDetailByType('dijie')->unit_price);
             $message['detailDijieUnit'] = $detailDijieUnit;
+            
+            $detailDijieTotal = $this->fromate($value->getDetailByType('dijie')->total_price);
             $message['detailDijieTotal'] = $detailDijieTotal;
             
         }
         return $message;
     }
+    // 格式化金额函数
+    public function fromate($money){
+        // 强制转化成Int类型，非数字转化成0
+        $money = (int)$money;
+        if(!$money){
+                $money = 0;
+            }
+        // 格式化的结果为安千位分隔，保存小数点后两位
+        $cost= number_format($money,2);
+        return $cost;
+    }
 }
+ 
+
+
