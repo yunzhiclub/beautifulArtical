@@ -66,6 +66,9 @@ class Loginservice
         $url = $param->path();
         //切割字符串
         $urlArray = explode('/', $url);
+        if(sizeof($urlArray) < 3) {
+            $urlArray[2] = null;
+        }
         //判断如果是预览界面则不需要登录
         if ($urlArray[0] === "index" && $urlArray[1] === "article" && $urlArray[2] === "main") {
             //用户不需要登录
