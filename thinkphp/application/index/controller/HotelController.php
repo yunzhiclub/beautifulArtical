@@ -22,8 +22,21 @@ class HotelController extends IndexController {
     }
 
     public function index() {
+        $city = Request::instance()->get('city');
+
+        $Hotel = new Hotel();
+
+        if (!empty($city)) {
+            $Hotel->where('city', 'like', '%' . $city . '%');
+        }
         $pageSize = config('paginate.var_page');
-        $hotels = Hotel::order('id desc')->paginate($pageSize);
+
+        // 按条件查询并调用分页
+        $hotels = $Hotel->order('id desc')->paginate($pageSize, false, [
+            'query' =>[
+                'city' => $city,
+                ],
+            ]);
 
         $this->assign('hotels', $hotels);
         return $this->fetch();
