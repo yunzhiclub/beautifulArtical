@@ -50,7 +50,6 @@ class AttractionController extends IndexController {
         $articleId = Request::instance()->param('articleId');
 
         $materialId = Request::instance()->post('materialId');
-
         $hotelId = Request::instance()->post('hotelId');
 
         // 景点处理
@@ -77,28 +76,18 @@ class AttractionController extends IndexController {
     }
 
     public function update() {
-        // 获取URL
+
         $articleId = Request::instance()->param('articleId');
         $attractionId = Request::instance()->param('attractionId');
         $hotelId = Request::instance()->param('hotelId');
 
-        // 获取数据
         $title = Request::instance()->post('title');
         $meal = Request::instance()->post('meal');
         $car = Request::instance()->post('car');
         $guide = Request::instance()->post('guide');
-
         $materialId = Request::instance()->post('materialId');
-
         $hotelId = Request::instance()->post('hotelId');
 
-        // 酒店处理
-        $Hotel = Hotel::getNullHotel();
-
-        // 图片处理
-        $Attraction = Attraction::get($attractionId);
-
-        // 景点处理
         $Attraction = Attraction::getNullAttraction();
         $Attraction->updateAttraction($title, $meal, $car, $guide, $hotelId, $articleId, $attractionId , $materialId);
 
