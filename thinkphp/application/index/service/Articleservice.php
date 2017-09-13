@@ -146,14 +146,12 @@ class Articleservice
             if(!is_null($hotelId)) {
                 $tempHotel = Hotel::where('id', $hotelId)->find();
                 if (!is_null($tempHotel)) {
-                    foreach ($Hotels as $hotel) {
-
-                    }
+                    array_push($Hotels, $tempHotel);
                 }
             }
             $tempHotel = null;
         }
-
+        $Hotels = array_unique($Hotels);
         // 将段落按在景点的上下顺序分成两个类，并根据权重排序
         $paragraphUp = Paragraph::where('is_before_attraction',1)->where('article_id',$articleId)->order('weight')->select();
         $paragraphDown = Paragraph::where('is_before_attraction',0)->where('article_id',$articleId)->order('weight')->select();
