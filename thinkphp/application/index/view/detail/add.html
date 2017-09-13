@@ -1,4 +1,14 @@
 {extend name="index" /} {block name="title"} 添加方案报价 {/block} {block name="content"}
+<script type="text/javascript">
+function jisuan(){
+var dijie_number=document.getElementById("numberdijie").value;
+var dijie_unitPrice=document.getElementById("unitdijie").value;
+document.getElementById("totaldijie").value=parseFloat(dijie_number)*parseFloat(dijie_unitPrice);
+var zhusu_number=document.getElementById("numberzhusu").value;
+var zhusu_unitPrice=document.getElementById("unitzhusu").value;
+document.getElementById("totalzhusu").value=parseFloat(zhusu_number)*parseFloat(zhusu_unitPrice);
+}
+</script>
 <div class="row-fluid">
     <div class="col-md-8 col-md-offset-1" style="margin-top: 60px;min-height: 730px;">
         <div class="row">
@@ -60,7 +70,7 @@
                                 <div class="control-group">
                                     <label for="number">数量</label>
                                     <div class="controls">
-                                        <input type="number" class="form-control" name="dijie_number" placeholder="数量" />
+                                        <input  class="form-control number " name="dijie_number" placeholder="数量" onkeyup="jisuan();" id="numberdijie" />
                                     </div>
                                 </div>
                                 <div class="control-group">
@@ -72,13 +82,13 @@
                                 <div class="control-group">
                                     <label for="unitPrice">单价</label>
                                     <div class="controls">
-                                        <input type="text" class="form-control" name="dijie_unitPrice" placeholder="单价" />
+                                        <input  class="form-control unit" name="dijie_unitPrice" placeholder="单价" onkeyup="jisuan();" id="unitdijie" />
                                     </div>
                                 </div>
                                 <div class="control-group">
                                     <label for="totalPrice">总价</label>
                                     <div class="controls">
-                                        <input type="text" class="form-control" name="dijie_totalPrice" placeholder="总价" />
+                                        <input  class="form-control total" name="dijie_totalPrice" placeholder="总价" id="totaldijie" readonly />
                                     </div>
                                 </div>
                                 <div class="control-group">
@@ -95,7 +105,7 @@
                                 <div class="control-group">
                                     <label for="number">数量</label>
                                     <div class="controls">
-                                        <input type="number" class="form-control" name="zhusu_number" placeholder="数量" />
+                                        <input  class="form-control" name="zhusu_number" placeholder="数量" id="numberzhusu"  onkeyup="jisuan();"/>
                                     </div>
                                 </div>
                                 <div class="control-group">
@@ -107,13 +117,13 @@
                                 <div class="control-group">
                                     <label for="unitPrice">单价</label>
                                     <div class="controls">
-                                        <input type="text" class="form-control" name="zhusu_unitPrice" placeholder="单价" />
+                                        <input  class="form-control" name="zhusu_unitPrice" placeholder="单价" id="unitzhusu" onkeyup="jisuan();"/>
                                     </div>
                                 </div>
                                 <div class="control-group">
                                     <label for="totalPrice">总价</label>
                                     <div class="controls">
-                                        <input type="text" class="form-control" name="zhusu_totalPrice" placeholder="总价" />
+                                        <input  class="form-control" name="zhusu_totalPrice" placeholder="总价" id="totalzhusu" readonly />
                                     </div>
                                 </div>
                                 <div class="control-group">
