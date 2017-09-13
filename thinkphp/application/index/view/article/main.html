@@ -28,9 +28,10 @@
     </script>
     <script src="{:__ROOT__}/style/js/bootstrap.js"></script>
     <!-- nice scroll-js -->
+    <script src="{:__ROOT__}/style/js/custom.js"></script>
 </head>
 
-<body class="bg">
+<body class="bg" style="overflow-x: hidden;">
     <div class="agile-main">
         <div class="content-wrap">
             <!-- 紫色顶部 -->
@@ -47,83 +48,49 @@
                 </div>
                 <div class="clearfix"></div>
             </div>
-            <div class="content">
-                <!-- slider show -->
-                <div class="banner">
-                    <div id="kb" class="carousel kb_elastic animate_text kb_wrapper" data-ride="carousel" data-interval="6000" data-pause="hover">
-                        <!-- Wrapper-for-Slides -->
-                        <div class="carousel-inner" role="listbox">
-                            <!-- First-Slide -->
-                            <div class="item active">
-                                <div class="banner-img" style="background: url({:__ROOT__}/upload/{$article->cover})no-repeat center;">
-                                    <div class="carousel-caption kb_caption">
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Third-Slide -->
-                            {volist name="attractions" id="attraction" key="key"}
-                            <div class="item">
-                                <div class="banner-img" style="background: url({:__ROOT__}/upload/{$attraction->getMainMaterial()->image})no-repeat center;">
-                                    <div class="carousel-caption kb_caption kb_caption_center">
-                                    </div>
-                                </div>
-                            </div>
-                            {/volist}
-                        </div>
-                        <!-- Left-Button -->
-                        <a class="left carousel-control kb_control_left" href="#kb" role="button" data-slide="prev">
-                        <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </a>
-                        <!-- Right-Button -->
-                        <a class="right carousel-control kb_control_right" href="#kb" role="button" data-slide="next">
-                        <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </a>
-                    </div>
-                    <script src="/beautifulArtical/thinkphp/public/style/js/custom.js"></script>
-                </div>
-                <!-- //slider show -->
-                <!-- 洛克旅行介绍部分 -->
-                <div class="welcome">
-                    <h3 class="w3ls-title">{$article->title}</h3>
+            <div class="welcome">
+                    <h3 class="w3ls-title" style="color: #81be32;">{$article->title}</h3>
                     <br>
+                    <div>
+                        <img src="{:__ROOT__}/upload/{$article->cover}" height="150" width="97%">
+                    </div>
                     <p class="w3title-text" style="text-align: left;">&nbsp;&nbsp;{$article->summery}</p>
                     <br>
                 </div>
-                <!-- //洛克旅行介绍部分 -->
+            <div class="content">
+                <!-- //slider show -->
                 <!-- 九项服务，一价全包 -->
-                <div class="" style="background-color: #e6e6fa;">
+                <div style="background-color: #e6e6fa;">
                     <div class="clearfix"></div>
                     <br>
                     <h3 style="text-align: center;">九项服务，一价全包</h3>
                     <br>
                     <div class="brand-grids">
-                        <img src="{:__ROOT__}/style/images/b1.jpg" alt="" />
+                        <img src="{:__ROOT__}/style/images/9_01.gif" alt="" />
                     </div>
                     <div class="brand-grids">
-                        <img src="{:__ROOT__}/style/images/b2.jpg" alt="" />
+                        <img src="{:__ROOT__}/style/images/9_02.gif" alt="" />
                     </div>
                     <div class="brand-grids">
-                        <img src="{:__ROOT__}/style/images/b3.jpg" alt="" />
+                        <img src="{:__ROOT__}/style/images/9_03.gif" alt="" />
                     </div>
                     <div class="brand-grids">
-                        <img src="{:__ROOT__}/style/images/b4.jpg" alt="" />
+                        <img src="{:__ROOT__}/style/images/9_04.gif" alt="" />
                     </div>
                     <div class="brand-grids">
-                        <img src="{:__ROOT__}/style/images/b5.jpg" alt="" />
+                        <img src="{:__ROOT__}/style/images/9_05.gif" alt="" />
                     </div>
                     <div class="brand-grids">
-                        <img src="{:__ROOT__}/style/images/b6.jpg" alt="" />
+                        <img src="{:__ROOT__}/style/images/9_06.gif" alt="" />
                     </div>
                     <div class="brand-grids">
-                        <img src="{:__ROOT__}/style/images/b4.jpg" alt="" />
+                        <img src="{:__ROOT__}/style/images/9_07.gif" alt="" />
                     </div>
                     <div class="brand-grids">
-                        <img src="{:__ROOT__}/style/images/b5.jpg" alt="" />
+                        <img src="{:__ROOT__}/style/images/9_08.gif" alt="" />
                     </div>
                     <div class="brand-grids">
-                        <img src="{:__ROOT__}/style/images/b6.jpg" alt="" />
+                        <img src="{:__ROOT__}/style/images/9_09.gif" alt="" />
                     </div>
                     <div class="clearfix"></div>
                     <br><br>
@@ -131,7 +98,7 @@
                 <!-- //九项服务，一价全包 -->
                 <!-- 定制自由行，让出国旅行更简单 -->
                 <div class="about">
-                    <h3 style="text-align: center;">定制自由行<br>让出国旅行更简单</h3>
+                    <h3 style="text-align: center;color: #81be32;">定制自由行<br>让出国旅行更简单</h3>
                     <ul>
                         <li>
                             <p class="pfont6"><span class="glyphicon glyphicon-hand-right"></span>更省心。不用你操心，机票酒店活动签证租车...麻烦事儿全都有人包办</p>
@@ -191,7 +158,7 @@
                 <!-- 旅游行程 -->
                 <br><br>
                 <div class="w3agile properties">
-                    <h3 style="text-align: center;" class="w3ls-title">旅游线路</h3>
+                    <h3 class="w3ls-title" style="color: #8b008b;">旅游线路</h3>
                     {volist name="attractions" id="attraction" key="key"}
                     <div class="properties-bottom">
                         <div class="properties-img">
@@ -219,12 +186,12 @@
                 <!-- //旅游行程 -->
                 <div class="contact">
                     <!-- 定制师 -->
-                    <div class="contact-form">
+                    <div class="contact-form" >
                         <br>
-                        <h3 class="w3ls-title">定制师信息</h3>
+                        <p class="pcontact1">定制师信息</p>
                         <table class="table table-bordered">
                             <tr>
-                                <th>名字</th>
+                                <th>名&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;字</th>
                                 <td>{$contractor->designation}</td>
                             </tr>
                             <tr>
@@ -251,15 +218,14 @@
                     <!-- 方案报价 -->
                     {volist name="plans" id="plan"}
                     <div class="contact-form">
-                        <br>
-                        <h3 class="w3ls-title">方案报价</h3>
-                        <p class="pfont"><b>出发日期 :</b> {$plan->travel_date} </p>
-                        <p class="pfont"><b>出行人数 :</b> {$plan->people_num}</p>
-                        <p class="pfont"><b>币种 :</b> {$plan->currency}</p>
-                        <p class="pfont"><b>总费用 :</b>{$plan->total_cost}</p>
-                        <p class="pfont"><b>最晚付款时间 :</b> {$plan->last_pay_time}</p>
-                        <p class="pfont"><b>收费分类 :</b></p>
-                        <table class="table table-bordered" style="text-align: center;">
+                        <p class="pcontact2">方案报价</p>
+                        <p><b>出发日期 :</b> {$plan->travel_date} </p>
+                        <p><b>出行人数 :</b> {$plan->people_num}</p>
+                        <p><b>币种 :</b> {$plan->currency}</p>
+                        <p><b>总费用 :</b>{$plan->total_cost}</p>
+                        <p><b>最晚付款时间 :</b> {$plan->last_pay_time}</p>
+                        <p><b>收费分类 :</b></p>
+                        <table class="table table-bordered" style="text-align: right;">
                             <tr>
                                 <th>类型</th>
                                 <th>地接</th>
@@ -277,13 +243,13 @@
                             </tr>
                             <tr>
                                 <th>单价</th>
-                                <td>{$plan->getDetailByType('dijie')->unit_price}</td>
-                                <td>{$plan->getDetailByType('zhusu')->unit_price}</td>
+                                <td>{$detailDijieUnit}</td>
+                                <td>{$detailZhusuUnit}</td>
                             </tr>
                             <tr>
                                 <th>总价</th>
-                                <td>{$plan->getDetailByType('dijie')->total_price}</td>
-                                <td>{$plan->getDetailByType('zhusu')->total_price}</td>
+                                <td>{$detailDijieTotal}</td>
+                                <td>{$detailZhusuTotal}</td>
                             </tr>
                             <tr>
                                 <th>备注</th>
@@ -298,14 +264,14 @@
                     <!-- 费用包含 -->
                     <div class="contact-form">
                     <br>
-                        <h3 class="w3ls-title">酒店信息</h3> {volist name="hotels" id="hotel" key="key"}
-                        <p><b>&bull;酒店{$key} :</b></p>
+                        <p class="pcontact2">酒店信息</p> {volist name="hotels" id="hotel" key="key"}
+                        <p class="title"><b><i class="glyphicon glyphicon-glass"></i> {$hotel->designation} :</b></p>
                         <p><b>酒店城市：</b>{$hotel->city}</p>
-                        <p><b>酒店名字：</b>{$hotel->designation}</p>
                         <p><b>星级：</b>{$hotel->star_level}</p>
                         <p><b>备注：</b>{$hotel->remark}</p>
                         {/volist}
                         <p>本报价按照欧元兑换人民币汇率7.98核算</p>
+                        <br>
                     </div>
                     <!-- footer -->
                     <div class="w3agile footer">
