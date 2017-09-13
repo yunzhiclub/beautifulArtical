@@ -295,7 +295,7 @@ class Articleservice
     // 格式化金额函数
     public function fromate($money){
         // 强制转化成Int类型，非数字转化成0
-        $money = (int)$money;
+        $money = (float)$money;
         if(!$money){
                 $money = 0;
             }

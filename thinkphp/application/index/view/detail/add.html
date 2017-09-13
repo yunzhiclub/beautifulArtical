@@ -1,24 +1,5 @@
 {extend name="index" /} {block name="title"} 添加方案报价 {/block} {block name="content"}
-<script type="text/javascript">
-// 计算价格
-function jisuan(){
-var dijie_number=document.getElementById("numberdijie").value;
-var dijie_unitPrice=document.getElementById("unitdijie").value;
-// 判断是否由传入的数据为空
-if(isNaN(parseFloat(dijie_number)*parseFloat(dijie_unitPrice))){
-    document.getElementById("totaldijie").value=0;
-}else{
-    document.getElementById("totaldijie").value=parseFloat(dijie_number)*parseFloat(dijie_unitPrice);
-}
-var zhusu_number=document.getElementById("numberzhusu").value;
-var zhusu_unitPrice=document.getElementById("unitzhusu").value;
-if(isNaN(parseFloat(zhusu_number)*parseFloat(zhusu_unitPrice))){
-    document.getElementById("totalzhusu").value=0;
-}else{
-    document.getElementById("totalzhusu").value=parseFloat(zhusu_number)*parseFloat(zhusu_unitPrice);
-}
-}
-</script>
+<script type="text/javascript" src="{:__ROOT__}/style/js/Calculation.js"></script>
 <div class="row-fluid">
     <div class="col-md-8 col-md-offset-1" style="margin-top: 60px;min-height: 730px;">
         <div class="row">
@@ -80,7 +61,7 @@ if(isNaN(parseFloat(zhusu_number)*parseFloat(zhusu_unitPrice))){
                                 <div class="control-group">
                                     <label for="number">数量</label>
                                     <div class="controls">
-                                        <input  class="form-control number " name="dijie_number" placeholder="数量" onkeyup="jisuan();" id="numberdijie" />
+                                        <input type="number" class="form-control number " name="dijie_number" placeholder="数量" onkeyup="jisuan();" id="numberdijie" />
                                     </div>
                                 </div>
                                 <div class="control-group">
@@ -115,7 +96,7 @@ if(isNaN(parseFloat(zhusu_number)*parseFloat(zhusu_unitPrice))){
                                 <div class="control-group">
                                     <label for="number">数量</label>
                                     <div class="controls">
-                                        <input  class="form-control" name="zhusu_number" placeholder="数量" id="numberzhusu"  onkeyup="jisuan();"/>
+                                        <input type="number" class="form-control" name="zhusu_number" placeholder="数量" id="numberzhusu"  onkeyup="jisuan();"/>
                                     </div>
                                 </div>
                                 <div class="control-group">
@@ -127,7 +108,7 @@ if(isNaN(parseFloat(zhusu_number)*parseFloat(zhusu_unitPrice))){
                                 <div class="control-group">
                                     <label for="unitPrice">单价</label>
                                     <div class="controls">
-                                        <input  class="form-control" name="zhusu_unitPrice" placeholder="单价" id="unitzhusu" onkeyup="jisuan();"/>
+                                        <input type="text"  class="form-control" name="zhusu_unitPrice" placeholder="单价" id="unitzhusu" onkeyup="jisuan();"/>
                                     </div>
                                 </div>
                                 <div class="control-group">
