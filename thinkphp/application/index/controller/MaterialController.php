@@ -1,6 +1,7 @@
 <?php
 namespace app\index\controller;
 
+use app\index\model\Common;
 use app\index\model\Material;
 use think\Request;
 use app\index\controller\IndexController;
@@ -31,6 +32,7 @@ class MaterialController extends IndexController {
 
         $materials = $this->materialService->searchMaterial($materialName, $pageSize);
 
+        $this->assign('common', new Common());
         $this->assign('materials', $materials);
     	return $this->fetch();
     }

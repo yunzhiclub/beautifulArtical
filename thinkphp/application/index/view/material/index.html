@@ -34,7 +34,7 @@
                                 <img src="{:__ROOT__}/upload/{$material->image}" alt="" style="height: 100px; width: 180px;">
                             </div>
                             <div class="col-md-6 col-md-offset-1" style="height: 100px;  display:-webkit-box;overflow:hidden;text-overflow:ellipsis;-webkit-line-clamp:5;-webkit-box-orient:vertical; ">
-                                {$material->content}
+                                {$common->limitWordNumber($material->content, 324)}
                             </div>
                         </div>
                         <div class="row">
