@@ -2,6 +2,7 @@
 
 namespace app\index\controller;
 
+use app\index\model\Common;
 use app\index\model\Hotel;
 use app\index\service\HotelService;
 use think\Request;
@@ -39,6 +40,7 @@ class HotelController extends IndexController {
                 'var_page' => 'page',
             ]);
 
+        $this->assign('common', new Common());
         $this->assign('hotels', $hotels);
         return $this->fetch();
     }

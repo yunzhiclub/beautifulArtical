@@ -34,7 +34,7 @@
                     <div class="col-md-11 col-md-offset-1">
                         <p style="overflow: hidden;white-space:nowrap;text-overflow: ellipsis;">所在城市：{$hotel->city}</p>
                         <p style="overflow: hidden;white-space:nowrap;text-overflow: ellipsis;">星级：{$hotel->star_level}</p>
-                        <p style="overflow: hidden;white-space:nowrap;text-overflow: ellipsis;">备注：{$hotel->remark}</p>
+                        <p style="word-wrap:break-word;">备注：{$common->limitWordNumber($hotel->remark, 80)}</p>
                     </div>
                 </div>
                 <div class="row" style="margin-top: 5px;margin-bottom: 5px;">
