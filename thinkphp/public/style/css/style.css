@@ -20,10 +20,20 @@ body a{
 }
 h1,h2,h3,h4,h5,h6{
 	margin:0; 
-	font-family: 'Abel', sans-serif;
+	font-family: '微软雅黑';
 }
 p{
 	margin:0;
+    font-family: '楷体';
+}
+.pprice{
+    font-family: '微软雅黑';
+}
+.pfont{
+    font-family: '微软雅黑';
+}
+.pfont6{
+    font-size: 14px;
 }
 ul,label{
 	margin:0;
@@ -627,7 +637,7 @@ a.w3-search:hover {
 	background:#fff;
 }
 h3.w3ls-title {
-    font-size: 3.1em;
+    font-size: 2em;
     color: #1e9c95;
     margin-bottom: .2em;
     text-align: center;
@@ -821,12 +831,10 @@ p {
     width: 15.4%;
     margin: .5em .3em 0;
 }
-.brand-grids a{
-   display:block;
-}
 .brand-grids img {
     width: 100%;
 	border: 1px solid rgba(139, 0, 139, 0.19);
+    border-radius: 50%;
 }
 /*-- //brands --*/
 /*-- footer --*/
@@ -1610,6 +1618,7 @@ p.w3-text{
     outline: none;
     padding: .8em;
     border: solid 1px #ccc;
+    margin-left: 6em;
     min-height: 10em;
     -webkit-appearance: none;
     border-radius: 3px;
@@ -1624,7 +1633,7 @@ p.w3-text{
     color: #fff;
     padding: 0.8em 3em;
     font-size: 0.9em;
-    margin: 0.5em 0 0 0;
+    margin: 1em;
     -webkit-appearance: none;
     background: #1e9c95;
     border: solid 1px #1e9c95;
@@ -1657,6 +1666,7 @@ p.w3-text{
 }
 .contact-form p {
     margin-top: 0.5em;
+    margin-left: 1em;
 }
 .contact-form p a {
     color: #1e9c95;
