@@ -38,7 +38,9 @@ class DetailService
         $zhusu_totalPrice = $param->post('zhusu_totalPrice');
         // 如果是编辑执行update否则执行save
         if(!is_null($planid)){
-            if($this->update($plandijieId,$dijie_remark, $planId, 'dijie', $dijie_number, $dijie_frequency, $dijie_unitPrice, $dijie_totalPrice) || $this->update($planzhusuId,$zhusu_remark, $planId, 'zhusu', $zhusu_number, $zhusu_frequency, $zhusu_unitPrice, $zhusu_totalPrice)) {
+            $dijieupdate = $this->update($plandijieId,$dijie_remark, $planId, 'dijie', $dijie_number, $dijie_frequency, $dijie_unitPrice, $dijie_totalPrice) ;
+            $zhusuupdate = $this->update($planzhusuId,$zhusu_remark, $planId, 'zhusu', $zhusu_number, $zhusu_frequency, $zhusu_unitPrice, $zhusu_totalPrice) ;
+            if($dijieupdate||$zhusuupdate ) {
                    return true;
                 }
                    return false;
