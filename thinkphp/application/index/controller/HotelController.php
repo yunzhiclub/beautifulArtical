@@ -36,6 +36,7 @@ class HotelController extends IndexController {
             'query' =>[
                 'city' => $city,
                 ],
+                'var_page' => 'page',
             ]);
 
         $this->assign('hotels', $hotels);
