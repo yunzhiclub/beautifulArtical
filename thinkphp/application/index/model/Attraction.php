@@ -37,16 +37,9 @@ class Attraction extends Model {
 
     public function deleteAttraction($id) {
         $Attraction = Attraction::get($id);
-        $hotelId = $Attraction->hotel_id;
 
         if(!$Attraction->delete()) {
             return false;
-        }
-        if(!is_null($hotelId)) {
-            $Hotel = new Hotel();
-            if(!$Hotel->deleteHotel($hotelId)){
-                return false;
-            }
         }
         return true;
     }
