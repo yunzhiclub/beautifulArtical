@@ -146,7 +146,9 @@ class Articleservice
             if(!is_null($hotelId)) {
                 $tempHotel = Hotel::where('id', $hotelId)->find();
                 if (!is_null($tempHotel)) {
-                    array_push($Hotels, $tempHotel);
+                    foreach ($Hotels as $hotel) {
+
+                    }
                 }
             }
             $tempHotel = null;

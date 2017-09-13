@@ -13,7 +13,7 @@ use app\index\model\Hotel;
  */
 
 class Attraction extends Model {
-    public function saveAttraction($title, $meal, $car, $guide, $hotel, $articleId, $materialId) {
+    public function saveAttraction($title, $meal, $car, $guide, $hotelId, $articleId, $materialId) {
         $this->title = $title;
         $this->meal = $meal;
         $this->car = $car;
@@ -21,10 +21,7 @@ class Attraction extends Model {
         $this->weight = Attraction::where('article_id', '=', $articleId)->max("weight")+1;
         $this->article_id = $articleId;
         $this->material_id = $materialId;
-
-        if(!is_null($hotel)){
-            $this->hotel_id = $hotel->id;
-        }
+        $this->hotel_id = $hotelId;
 
         if(!$this->save()) {
             return false;
@@ -33,9 +30,9 @@ class Attraction extends Model {
         }
     }
 
-    public function updateAttraction($title, $meal, $car, $guide, $hotel, $articleId, $id, $materialId) {
+    public function updateAttraction($title, $meal, $car, $guide, $hotelId, $articleId, $id, $materialId) {
         $Attraction = Attraction::get($id);
-        $Attraction->saveAttraction($title, $meal, $car, $guide, $hotel, $articleId, $materialId);
+        $Attraction->saveAttraction($title, $meal, $car, $guide, $hotelId, $articleId, $materialId);
     }
 
     public function deleteAttraction($id) {
@@ -62,6 +59,7 @@ class Attraction extends Model {
         $Attraction->car = '';
         $Attraction->guide = '';
         $Attraction->material_id = '';
+        $Attraction->hotel_id = '';
         return $Attraction;
     }
 

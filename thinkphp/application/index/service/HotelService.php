@@ -98,4 +98,9 @@ class HotelService {
         $hotel->remark = '';
         return $hotel;
     }
+
+    public function getAll() {
+        $hotel = new Hotel();
+        return $hotel->select();
+    }
 }

@@ -1,7 +1,6 @@
 <?php
 namespace app\index\controller;
 
-use app\index\controller\IndexController;
 use think\Request;
 use app\index\model\Article;
 use app\index\model\Contractor;
