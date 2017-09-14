@@ -45,7 +45,7 @@ class Paragraphservice
 			// 新增段落是没有上传图片
 			if (is_null($file)) {
 				$message['status'] = 'error';
-				$message['message'] = '请上传图片！';
+				$message['message'] = '提示：此段落没有图片！';
 				$message['route'] = 'article/secondadd';
 			}
 
