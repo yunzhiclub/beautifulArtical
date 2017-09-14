@@ -190,11 +190,13 @@ class Articleservice
         $Paragraphs = Paragraph::where('article_id',$articleId)->select();
         if(!is_null($Paragraphs)) {
             foreach ($Paragraphs as $Paragraph) {
-                Common::deleteImage('upload/'.$Paragraph->image);
+                $image = $Paragraph->image;
                 if(!$Paragraph->delete()) {
                     $message['message'] = '删除段落失败';
                     $message['status'] = 'error';
+                    return $message;
                 }
+                Common::deleteImage('upload/'.$image);
             }
         }
 
@@ -229,20 +231,13 @@ class Articleservice
         }
 
         // 删除文章
-        Common::deleteImage('upload/'.$Article->cover);
+        $cover = $Article->cover;
         if(!$Article->delete()) {
             $message['message'] = '删除文章失败';
             $message['status'] = 'error';
+            return $message;
         }
-
-        // 删除定制师
-//        $Contractor = Contractor::get($Article->contractor_id);
-//        if(!is_null($Contractor)) {
-//            if(!$Contractor->delete()) {
-//                $message['message'] = '删除定制师失败';
-//                $message['status'] = 'error';
-//            }
-//        }
+        Common::deleteImage('upload/'.$cover);
 
         return $message;
     }
