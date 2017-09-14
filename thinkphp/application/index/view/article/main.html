@@ -151,7 +151,7 @@
                 <div class="about">
                     <h3 style="text-align: center;" class="w3ls-title">{$pragraph->title}</h3> {$pragraph->content}
                     <div class="properties-img" {eq name="$pragraph->image" value="" }style="display: none"{/eq}>
-                        <img src="{:__ROOT__}/upload/{$pragraph->image}" {eq name="$_pragraph->image" value="" }style="display: none"{/eq}>
+                        <img src="{:__ROOT__}/upload/{$pragraph->image}" {eq name="$pragraph->image" value="" }style="display: none"{/eq}>
                     </div>
                 </div>
                 {/volist}
@@ -172,7 +172,7 @@
                             </div>
                         </div>
                         <div class="w3ls-text">
-                            <p>&bull;&nbsp;{$attraction->getMainMaterial()->content}</p>
+                            <p>&nbsp;{$attraction->getMainMaterial()->content}</p>
                             <p><b class="pfont">景点 :</b> {$attraction->title} </p>
                             <p><b class="pfont">酒店 :</b> {$attraction->getHotel()->designation} </p>
                             <p><b class="pfont">用餐 :</b> {$attraction->meal} </p>
