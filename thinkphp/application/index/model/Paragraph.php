@@ -48,7 +48,7 @@ class Paragraph extends Model
             $image = Common::uploadImage($file);
             // 保存图片路径
             $this->image = $image;
-        } 
+        }
     	
     	if ($this->save()) {
             return true;
