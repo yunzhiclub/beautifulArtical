@@ -2,6 +2,7 @@
 
 namespace app\index\controller;
 
+use app\index\model\Attraction;
 use app\index\model\AttractionModel;
 use app\index\model\Common;
 use app\index\model\Hotel;
@@ -31,15 +32,33 @@ class AttractionController extends IndexController {
         $this->assign('materials', $materials);
         $this->assign('hotels', $hotels);
         $this->assign('articleId', $articleId);
+        $this->assign('attraction', $this->attractionService->getNullAttraction());
         return $this->fetch();
     }
 
     public function save() {
         $param = Request::instance();
+        $articleId = Request::instance()->param('articleId');
         $message = $this->attractionService->saveAttraction($param);
+        if($message['status'] == 'success') {
+            return $this->success($message['message'], url('article/secondadd', ['articleId' => $articleId]));
+        } else {
+            return $this->error($message['message'], url('article/secondadd', ['articleId' => $articleId]));
+        }
     }
 
     public function edit() {
+        $articleId = Request::instance()->param('articleId');
+        $attractionId = Request::instance()->param('attractionId');
+        $attraction = Attraction::get($attractionId);
+        $materials = Material::all();
+        $hotels = Hotel::all();
+
+        $this->assign('materials', $materials);
+        $this->assign('hotels', $hotels);
+        $this->assign('articleId', $articleId);
+        $this->assign('attraction', $attraction);
+        return $this->fetch('add');
     }
 
     public function update() {

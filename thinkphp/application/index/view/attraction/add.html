@@ -8,31 +8,31 @@
         <form method="post" action="{:url($action, ['articleId' => $articleId])}" enctype="multipart/form-data">
             <div class="form-group">
                 <label>当日总行程</label>
-                <input type="text" class="form-control" name="trip" placeholder="行程" value="">
+                <input type="text" class="form-control" name="trip" placeholder="行程" value="{$attraction->trip}">
             </div>
             <div class="form-group">
                 <label>当日日期</label>
-                <input type="date" class="form-control" name="date" placeholder="日期" value="">
+                <input type="date" class="form-control" name="date" placeholder="日期" value="{$attraction->date}">
             </div>
             <div class="form-group">
                 <label>导游</label>
-                <input type="text" class="form-control" name="guide" placeholder="导游" value="">
+                <input type="text" class="form-control" name="guide" placeholder="导游" value="{$attraction->guide}">
             </div>
             <div class="form-group">
                 <label>描述</label>
-                <textarea class="form-control" name="description" rows="3" placeholder="描述"></textarea>
+                <textarea class="form-control" name="description" rows="3" placeholder="描述">{$attraction->description}</textarea>
             </div>
             <div class="form-group">
                 <label>用餐</label>
                 <div>
                     <label class="radio-inline">
-                        <input type="radio" name="meal" value="breakfast" checked> 早餐
+                        <input type="radio" name="meal" value="breakfast" {eq name="$attraction->meal" value="breakfast"}checked{/eq}> 早餐
                     </label>
                     <label class="radio-inline">
-                        <input type="radio" name="meal" value="lunch"> 午餐
+                        <input type="radio" name="meal" value="lunch" {eq name="$attraction->meal" value="lunch"}checked{/eq}> 午餐
                     </label>
                     <label class="radio-inline">
-                        <input type="radio" name="meal" value="supper"> 晚餐
+                        <input type="radio" name="meal" value="supper" {eq name="$attraction->meal" value="supper"}checked{/eq}> 晚餐
                     </label>
                 </div>
             </div>
@@ -40,30 +40,30 @@
                 <label>用车</label>
                 <div>
                     <label class="radio-inline">
-                        <input type="radio" name="car" value="sevenToNineBusinessCar" checked> 7-9座商务车
+                        <input type="radio" name="car" value="sevenToNineBusinessCar" {eq name="$attraction->car" value="sevenToNineBusinessCar"}checked{/eq}> 7-9座商务车
                     </label>
                     <label class="radio-inline">
-                        <input type="radio" name="car" value="fiveToSevenBusinessCar"> 5-7座商务车
+                        <input type="radio" name="car" value="fiveToSevenBusinessCar" {eq name="$attraction->car" value="fiveToSevenBusinessCar"}checked{/eq}> 5-7座商务车
                     </label>
                 </div>
             </div>
             <div class="form-group">
-                <label>素材&nbsp;&nbsp;&nbsp;</label>
+                <label>素材</label>
                 <div>
                     {volist name="materials" id="material"}
                     <label class="checkbox-inline">
-                        <input type="checkbox" name="materialId[]" value="{$material->id}">
+                        <input type="checkbox" name="materialId[]" value="{$material->id}" {eq name="$material->getIsChecked($attraction->id)" value="true"}checked{/eq}>
                         {$material->designation}
                     </label>
                     {/volist}
                 </div>
             </div>
             <div class="form-group">
-                <label>酒店&nbsp;&nbsp;&nbsp;</label>
+                <label>酒店</label>
                 <div>
                     {volist name="hotels" id="hotel"}
                     <label>
-                        <input type="radio" name="hotelId" value="{$hotel->id}">
+                        <input type="radio" name="hotelId" value="{$hotel->id}" {eq name="$attraction->hotel_id" value="$hotel->id"}checked{/eq}>
                         {$hotel->designation}
                     </label>
                     {/volist}

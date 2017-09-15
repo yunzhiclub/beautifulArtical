@@ -12,6 +12,20 @@ namespace app\index\service;
 use app\index\model\Attraction;
 
 class AttractionService {
+
+    public function getNullAttraction() {
+        $attraction = new Attraction();
+        $attraction->trip = '';
+        $attraction->date = '';
+        $attraction->guide = '';
+        $attraction->description = '';
+        $attraction->meal = 'breakfast';
+        $attraction->car = 'sevenToNineBusinessCar';
+        $attraction->id = 0;
+        $attraction->hotel_id = '';
+        return $attraction;
+    }
+
     public function saveAttraction($param) {
         $message = [];
         $message['status'] = 'success';
