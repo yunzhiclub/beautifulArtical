@@ -89,12 +89,13 @@ class Articleservice
         // firstadd界面传入行程路线图片
         $routes = request()->file('routes');
         $judge = request()->post('optionsRadios');
-
-        
         $Paragraph = Paragraph::where('title',"行程路线")->where('article_id',$articleId)->find();
         // 判断是否为编辑图片
         if(empty($Paragraph)){
             $Paragraph = new Paragraph();
+        }else{
+            $imagePath = PUBLIC_PATH . '/' . $Paragraph->image;
+            Common::deleteImage($imagePath);
         }
         // 判断是否添加图片
         if($judge==1){
