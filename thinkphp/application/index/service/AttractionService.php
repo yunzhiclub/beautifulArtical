@@ -20,6 +20,7 @@ class AttractionService {
         $trip = $param->post('trip');
         $date = $param->post('date');
         $guide = $param->post('guide');
+        $description = $param->post('description');
         $meal = $param->post('meal');
         $car = $param->post('car');
         $materialIds = $param->post('materialId/a');
@@ -30,14 +31,23 @@ class AttractionService {
         $Attraction->trip = $trip;
         $Attraction->date = $date;
         $Attraction->guide = $guide;
+        $Attraction->description = $description;
         $Attraction->meal = $meal;
         $Attraction->car = $car;
         $Attraction->hotel_id = $hotelId;
         $Attraction->article_id = $articleId;
+        $Attraction->weight = Attraction::where('article_id', '=', $articleId)->max("weight")+1;
 
         if(!$Attraction->save()) {
             $message['status'] = 'error';
             $message['message'] = '保存失败';
+        }
+
+        if(!is_null($materialIds)) {
+            if(!$Attraction->Materials()->saveAll($materialIds)) {
+                $message['status'] = 'error';
+                $message['message'] = '保存失败';
+            }
         }
 
         return $message;
