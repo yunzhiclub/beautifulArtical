@@ -41,7 +41,7 @@ public class AttractionRepositoryTest {
         Article article = new Article(plan,contractor,"我的一天","美好的一天","url");
         articleRepository.save(article);
         //酒店数据
-        Hotel hotel = new Hotel("zxc","zxc","zxc","zxc");
+        Hotel hotel = new Hotel("zxc","zxc","zxc","zxc","sasa");
         hotelRepository.save(hotel);
         Attraction attraction = new Attraction();
         attraction.setArticle(article);
