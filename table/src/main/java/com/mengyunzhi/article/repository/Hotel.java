@@ -19,15 +19,27 @@ public class Hotel {
 
     // 酒店备注
     private String remark;
+    private String country;
 
-    public Hotel() {
-    }
-
-    public Hotel(String designation, String city, String starLevel, String remark) {
+    public Hotel(String designation, String city, String starLevel, String remark, String country) {
         this.designation = designation;
         this.city = city;
         this.starLevel = starLevel;
         this.remark = remark;
+        this.country = country;
+    }
+
+    public Hotel() {
+    }
+
+
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 
     public Long getId() {
@@ -78,6 +90,7 @@ public class Hotel {
                 ", city='" + city + '\'' +
                 ", starLevel='" + starLevel + '\'' +
                 ", remark='" + remark + '\'' +
+                ", country='" + country + '\'' +
                 '}';
     }
 }

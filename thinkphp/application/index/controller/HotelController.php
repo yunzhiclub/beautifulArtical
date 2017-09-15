@@ -49,6 +49,8 @@ class HotelController extends IndexController {
         $hotel = $this->HotelService->getNullHotel();
 
         $this->assign('hotel', $hotel);
+        $hotels = Hotel::all();
+        $this->assign('hotels', $hotels);
         return $this->fetch();
     }
 
@@ -68,6 +70,8 @@ class HotelController extends IndexController {
         $hotel = Hotel::get($hotelId);
 
         $this->assign('hotel', $hotel);
+        $hotels = Hotel::all();
+        $this->assign('hotels', $hotels);
         return $this->fetch('add');
     }
 
