@@ -28,6 +28,7 @@ public class Attraction {
     private Date date;
     private String meal;
     private String car;
+    private String guide;
     private int weight;
 
     public Attraction() {
