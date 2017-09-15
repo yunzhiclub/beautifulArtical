@@ -11,39 +11,60 @@
         <br> {php}$action = request()->action() === 'add' ? 'save' : 'update';{/php}
         <form method="post" action="{:url($action, ['articleId' => $articleId, 'attractionId' => $attraction->id])}" enctype="multipart/form-data">
             <div class="form-group">
-                <label>标题</label>
-                <input type="text" class="form-control" name="title" placeholder="标题" value="{$attraction->title}">
+                <label>当日总行程</label>
+                <input type="text" class="form-control" name="" placeholder="行程" value="">
             </div>
             <div class="form-group">
-                <label>用餐</label>
-                <input type="text" class="form-control" name="meal" placeholder="用餐" value="{$attraction->meal}">
-            </div>
-            <div class="form-group">
-                <label>用车</label>
-                <input type="text" class="form-control" name="car" placeholder="用车" value="{$attraction->car}">
+                <label>当日日期</label>
+                <input type="date" class="form-control" name="" placeholder="日期" value="">
             </div>
             <div class="form-group">
                 <label>导游</label>
                 <input type="text" class="form-control" name="guide" placeholder="导游" value="{$attraction->guide}">
             </div>
             <div class="form-group">
-                <label>酒店选择&nbsp;&nbsp;&nbsp;</label>
+                <label>用餐</label>
                 <div>
-                    {volist name="hotels" id="_hotel"}
-                    <label style="margin-right: 15px;">
-                        <input type="radio" name="hotelId" value="{$_hotel->id}" {eq name="_hotel->id" value="$attraction->hotel_id"}checked="checked"{/eq} style="border:1px solid rgba(0,0,0,0.15);border-radius:100%;display:inline-block;height:16px;margin-right:3px;margin-top:-1px;vertical-align:middle;width:16px;line-height:1;">
-                        {$_hotel->designation}
+                    <label class="radio-inline">
+                        <input type="radio" name="mealOptions" value="breakfast" checked> 早餐
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="mealOptions" value="lunch"> 午餐
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="mealOptions" value="supper"> 晚餐
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>用车</label>
+                <div>
+                    <label class="radio-inline">
+                        <input type="radio" name="carOptions" value="sevenToNineBusinessCar" checked> 7-9座商务车
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="carOptions" value="fiveToSevenBusinessCar"> 5-7座商务车
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>素材&nbsp;&nbsp;&nbsp;</label>
+                <div>
+                    {volist name="materials" id="_material"}
+                    <label class="checkbox-inline">
+                        <input type="checkbox" name="materialId" value="{$_material->id}">
+                        {$_material->designation}
                     </label>
                     {/volist}
                 </div>
             </div>
             <div class="form-group">
-                <label>素材选择&nbsp;&nbsp;&nbsp;</label>
+                <label>酒店&nbsp;&nbsp;&nbsp;</label>
                 <div>
-                    {volist name="materials" id="_material"}
+                    {volist name="hotels" id="_hotel"}
                     <label style="margin-right: 15px;">
-                        <input type="radio" name="materialId" value="{$_material->id}" {eq name="_material->id" value="$attraction->material_id"}checked="checked"{/eq} style="border:1px solid rgba(0,0,0,0.15);border-radius:100%;display:inline-block;height:16px;margin-right:3px;margin-top:-1px;vertical-align:middle;width:16px;line-height:1;">
-                        {$_material->designation}
+                        <input type="radio" name="hotelId" value="{$_hotel->id}" {eq name="_hotel->id" value="$attraction->hotel_id"}checked="checked"{/eq} style="border:1px solid rgba(0,0,0,0.15);border-radius:100%;display:inline-block;height:16px;margin-right:3px;margin-top:-1px;vertical-align:middle;width:16px;line-height:1;">
+                        {$_hotel->designation}
                     </label>
                     {/volist}
                 </div>
