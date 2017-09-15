@@ -22,7 +22,6 @@ public class DetailRepositoryTest {
         assertThat(plan.getId()).isNotNull();
         Detail detail = new Detail();
         detail.setPlan(plan);
-        detail.setNumber(10);
         detailRepository.save(detail);
         assertThat(detail.getId()).isNotNull();
     }
