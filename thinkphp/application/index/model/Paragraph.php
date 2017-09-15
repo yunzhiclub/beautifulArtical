@@ -71,7 +71,11 @@ class Paragraph extends Model
         $Paragraph = $this->ifedit($id,$file);
         $this->id = $id;
         $this->title = $data['title'];
-        $this->content = $data['content'];
+        if(empty($data['content'])){
+            $this->content = '';
+        }else{
+            $this->content = $data['content'];
+        }
         $this->is_before_attraction = (boolean)$data['is_before_attraction'];
 
         // 获取文件 
