@@ -1,108 +1,104 @@
-{extend name="index"}
-{block name="title"}文章编辑{/block}
-{block name="content"}
-<div class="col-md-8 col-md-offset-1" style="margin-top: 60px;min-height: 730px;" >
-	<h2><span class="glyphicon glyphicon-edit"></span>&nbsp;文章编辑</h2>
-	<br>
-	<form method="post" action="{:url ('addsecond',['articleId'=>$articleId])}" enctype="multipart/form-data">
-		<div class="form-group">
-			<label for="TitleInput">标题</label>
-			<input type="text" class="form-control" id="TitleInput" placeholder="标题" name="title" value="{$title}" readonly="readonly">
-		</div>
-		<div class="form-group">
-			<label>摘要</label>
-			<textarea rows="5" cols="30" class="form-control" id="SummaryInput" placeholder="摘要" name="summary" readonly="readonly">{$summery} </textarea>
-		</div>
-		<div class="form-group">
-			<label for="exampleInputFile">封面</label>
-			<img src="{:__ROOT__}/upload/{$cover}" style="height: 100px; width: 180px; " alt="无图" ><br><br>
-				<a class="btn btn-default" href="{:url('firstadd?articleId=' . $articleId)}"><span class="glyphicon glyphicon-pencil"></span>&nbsp;更改文章及定制师</a>
-		</div>
-		<div class="form-group">
-			<label for="TextInput">正文</label>
-			<span class="col-md-offset-1">
+{extend name="index"} {block name="title"}文章编辑{/block} {block name="content"}
+<div class="col-md-8 col-md-offset-1" style="margin-top: 60px;min-height: 730px;">
+    <h2><span class="glyphicon glyphicon-edit"></span>&nbsp;文章编辑</h2>
+    <br>
+    <form method="post" action="{:url ('addsecond',['articleId'=>$articleId])}" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="TitleInput">标题</label>
+            <input type="text" class="form-control" id="TitleInput" placeholder="标题" name="title" value="{$title}" readonly="readonly">
+        </div>
+        <div class="form-group">
+            <label>摘要</label>
+            <textarea rows="5" cols="30" class="form-control" id="SummaryInput" placeholder="摘要" name="summary" readonly="readonly">{$summery} </textarea>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputFile">封面</label>
+            <img src="{:__ROOT__}/upload/{$cover}" style="height: 100px; width: 180px; " alt="无图">
+            <br>
+            <br>
+            <a class="btn btn-default" href="{:url('firstadd?articleId=' . $articleId)}"><span class="glyphicon glyphicon-pencil"></span>&nbsp;更改文章及定制师</a>
+        </div>
+        <div class="form-group">
+            <label for="TextInput">正文</label>
+            <span class="col-md-offset-1">
 				<a class="btn btn-primary btn-sm" href="{:url('Paragraph/index', ['articleId'=>$articleId,'id'=>''])}"><span class="glyphicon glyphicon-plus"></span>&nbsp;段落</a>&nbsp;&nbsp;
-				<a class="btn btn-primary btn-sm" href="{:url('Attraction/add?articleId='.$articleId)}"><span class="glyphicon glyphicon-plus"></span>&nbsp;景点</a>&nbsp;&nbsp;
-				<a class="btn btn-primary btn-sm" href="{:url('Detail/add', ['articleId'=>$articleId])}"><span class="glyphicon glyphicon-plus"></span>&nbsp;方案报价</a>&nbsp;&nbsp;
-			</span>
-		</div>
-		<ul style="list-style-type: none;">
-		{volist name="paragraphUp" id="paragraph"}
-		<li>
-			<div class="panel panel-default">
-					<div class="panel-body">
-						<h4>{$paragraph->title}</h4>
-						<div class="row">
-							<div class="col-md-3" style="height: 100px;">
-								<img src="{:__ROOT__}/upload/{$paragraph->image}" style="height: 100px; width: 180px;" alt="">
-							</div>
-							<div class="col-md-6 col-md-offset-1 overhidden" >
-								{$paragraph->content}
-							</div>
-							
-						</div>
-
-					<div class="row">
-						<div class="col-md-12" style="height: 40px; margin-top: 10px;">
-							<a class="btn btn-info btn-sm" href="{:url('Paragraph/edit',['articleId'=>$articleId,'id'=>$paragraph->id])}"><span class="glyphicon glyphicon-pencil"></span>&nbsp;编辑</a>
-							<a class="btn btn-danger btn-sm" href="{:url('Paragraph/delete', ['articleId'=>$articleId,'id'=>$paragraph->id])}"><span class="glyphicon glyphicon-trash"></span>&nbsp;删除</a>
-						</div>
-					</div>
-					</div>
-			</div>
-		</li>
-		{/volist}
-			{volist name="attraction" id="_attraction"}
-			<li>
-				<div class="panel panel-default">
-					<div class="panel-body">
-						<h4>{$_attraction->title}</h4>
-						<div class="row">
-							<div class="col-md-3" style="height: 100px;">
-								<img src="{:__ROOT__}/upload/{$_attraction->getMaterial($_attraction->material_id)->image}" alt="" style="height: 100px; width: 180px;">
-							</div>
-							<div class="col-md-6 col-md-offset-1 overhidden">
-								{$_attraction->getMaterial($_attraction->material_id)->content}
-							</div>
-							<div class="col-md-2">
-								{eq name="$i" value="1"} {else /}<a class="btn btn-default" href="{:url('upAttraction',['articleId'=>$articleId,'attractionId'=>$_attraction->id,'number'=>$i])}"  ><span class="glyphicon glyphicon-arrow-up" ></span></a>{/eq}<br>
-								{eq name="$i" value="$length"} {else /}<a class="btn btn-default" href="{:url('downAttraction',['articleId'=>$articleId,'attractionId'=>$_attraction->id,'number'=>$i])}"  ><span class="glyphicon glyphicon-arrow-down"></span></a>{/eq}
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-12" style="height: 40px; margin-top: 10px;">
-								<a class="btn btn-info btn-sm" href="{:url('attraction/edit' ,['articleId'=>$articleId,'attractionId'=>$_attraction->id] )}"><span class="glyphicon glyphicon-pencil"></span>&nbsp;编辑</a>
-								<a class="btn btn-danger btn-sm" href="{:url('attraction/delete' ,['articleId'=>$articleId,'attractionId'=>$_attraction->id] )}"><span class="glyphicon glyphicon-trash"></span>&nbsp;删除</a>
-							</div>
-						</div>
-				</div>
-			</div>
-		</li>
-		{/volist}
-		{volist name="paragraphDown" id="paragraph"}
-		<li>
-			<div class="panel panel-default">
-					<div class="panel-body">
-						<h4>{$paragraph->title}</h4>
-						<div class="row">
-							<div class="col-md-3" style="height: 100px;">
-								<img src="{:__ROOT__}/upload/{$paragraph->image}" style="height: 100px; width: 180px;" alt="">
-							</div>
-							<div class="col-md-6 col-md-offset-1 overhidden" >
-							{$paragraph->content}
-							</div>
-						</div>
-					<div class="row">
-						<div class="col-md-12" style="height: 40px; margin-top: 10px;">
-							<a class="btn btn-info btn-sm" href="{:url('Paragraph/edit',['articleId'=>$articleId,'id'=>$paragraph->id])}"><span class="glyphicon glyphicon-pencil"></span>&nbsp;编辑</a>
-							<a class="btn btn-danger btn-sm" href="{:url('Paragraph/delete', ['articleId'=>$articleId,'id'=>$paragraph->id])}"><span class="glyphicon glyphicon-trash"></span>&nbsp;删除</a>
-						</div>
-					</div>
-					</div>
-			</div>
-		</li>
-		{/volist}
-        <!-- 定制师 -->
+            <a class="btn btn-primary btn-sm" href="{:url('Attraction/add?articleId='.$articleId)}"><span class="glyphicon glyphicon-plus"></span>&nbsp;景点</a>&nbsp;&nbsp;
+            <a class="btn btn-primary btn-sm" href="{:url('Detail/add', ['articleId'=>$articleId])}"><span class="glyphicon glyphicon-plus"></span>&nbsp;方案报价</a>&nbsp;&nbsp;
+            </span>
+        </div>
+        <ul style="list-style-type: none;">
+            {volist name="paragraphUp" id="paragraph"}
+            <li>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h4>{$paragraph->title}</h4>
+                        <div class="row">
+                            <div class="col-md-3" style="height: 100px;">
+                                <img src="{:__ROOT__}/upload/{$paragraph->image}" style="height: 100px; width: 180px;" alt="">
+                            </div>
+                            <div class="col-md-6 col-md-offset-1 overhidden">
+                                {$paragraph->content}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12" style="height: 40px; margin-top: 10px;">
+                                <a class="btn btn-info btn-sm" href="{:url('Paragraph/edit',['articleId'=>$articleId,'id'=>$paragraph->id])}"><span class="glyphicon glyphicon-pencil"></span>&nbsp;编辑</a>
+                                <a class="btn btn-danger btn-sm" href="{:url('Paragraph/delete', ['articleId'=>$articleId,'id'=>$paragraph->id])}"><span class="glyphicon glyphicon-trash"></span>&nbsp;删除</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            {/volist} {volist name="attraction" id="_attraction"}
+            <li>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h4>{$_attraction->title}</h4>
+                        <div class="row">
+                            <div class="col-md-3" style="height: 100px;">
+                                <img src="{:__ROOT__}/upload/{$_attraction->getMaterial($_attraction->material_id)->image}" alt="" style="height: 100px; width: 180px;">
+                            </div>
+                            <div class="col-md-6 col-md-offset-1 overhidden">
+                                {$_attraction->getMaterial($_attraction->material_id)->content}
+                            </div>
+                            <div class="col-md-2">
+                                {eq name="$i" value="1"} {else /}<a class="btn btn-default" href="{:url('upAttraction',['articleId'=>$articleId,'attractionId'=>$_attraction->id,'number'=>$i])}"><span class="glyphicon glyphicon-arrow-up" ></span></a>{/eq}
+                                <br> {eq name="$i" value="$length"} {else /}<a class="btn btn-default" href="{:url('downAttraction',['articleId'=>$articleId,'attractionId'=>$_attraction->id,'number'=>$i])}"><span class="glyphicon glyphicon-arrow-down"></span></a>{/eq}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12" style="height: 40px; margin-top: 10px;">
+                                <a class="btn btn-info btn-sm" href="{:url('attraction/edit' ,['articleId'=>$articleId,'attractionId'=>$_attraction->id] )}"><span class="glyphicon glyphicon-pencil"></span>&nbsp;编辑</a>
+                                <a class="btn btn-danger btn-sm" href="{:url('attraction/delete' ,['articleId'=>$articleId,'attractionId'=>$_attraction->id] )}"><span class="glyphicon glyphicon-trash"></span>&nbsp;删除</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            {/volist} {volist name="paragraphDown" id="paragraph"}
+            <li>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h4>{$paragraph->title}</h4>
+                        <div class="row">
+                            <div class="col-md-3" style="height: 100px;">
+                                <img src="{:__ROOT__}/upload/{$paragraph->image}" style="height: 100px; width: 180px;" alt="">
+                            </div>
+                            <div class="col-md-6 col-md-offset-1 overhidden">
+                                {$paragraph->content}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12" style="height: 40px; margin-top: 10px;">
+                                <a class="btn btn-info btn-sm" href="{:url('Paragraph/edit',['articleId'=>$articleId,'id'=>$paragraph->id])}"><span class="glyphicon glyphicon-pencil"></span>&nbsp;编辑</a>
+                                <a class="btn btn-danger btn-sm" href="{:url('Paragraph/delete', ['articleId'=>$articleId,'id'=>$paragraph->id])}"><span class="glyphicon glyphicon-trash"></span>&nbsp;删除</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            {/volist}
+            <!-- 定制师 -->
             <li>
                 <div class="panel panel-default">
                     <div class="panel-body">
@@ -137,57 +133,57 @@
                     </div>
                 </div>
             </li>
-			<!--方案报价-->
-		{volist name="plans" id="plan"}
-			<li>
-				<div class="panel panel-default">
-					<div class="panel-body">
-						<h4>方案报价</h4>
-						<div class="row">
-							<div class="col-md-12">
-								<p>出发日期：{$plan->travel_date}</p>
-								<p>出行人数：{$plan->people_num}</p>
-								<p>币种：{$plan->currency}</p>
-								<p>总费用：{$plan->total_cost}</p>
-								<p>最晚付款时间：{$plan->last_pay_time}</p>
-								<table class="table table-hover table-bordered" style="word-break:break-all;">
-									<tr class="info">
-										<th width="10%">类型</th>
-										<th width="10%">数量</th>
-										<th width="10%">频次</th>
-										<th width="15%">单价</th>
-										<th width="15%">总价</th>
-										<th width="40%">备注</th>
-									</tr>
-									<tr>
-										<td>地接</td>
-										<td>{$plan->getDetailByType('dijie')->number}</td>
-										<td>{$plan->getDetailByType('dijie')->frequency}</td>
-										<td align="right">{$detailDijieUnit}</td>
-										<td align="right">{$detailDijieTotal}</td>
-										<td>{$plan->getDetailByType('dijie')->remark}</td>
-									</tr>
-									<tr>
-										<td>住宿</td>
-										<td>{$plan->getDetailByType('zhusu')->number}</td>
-										<td>{$plan->getDetailByType('zhusu')->frequency}</td>
-										<td align="right">{$detailZhusuUnit}</td>
-										<td align="right">{$detailZhusuTotal}</td>
-										<td>{$plan->getDetailByType('zhusu')->remark}</td>
-									</tr>
-								</table>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-12" style="height: 40px; margin-top: 10px;">
-								<a class="btn btn-info btn-sm" href="{:url('Detail/edit',['planId'=>$plan->id,'article_id'=>$articleId])}"><span class="glyphicon glyphicon-pencil"></span>&nbsp;编辑</a>
-								<a class="btn btn-danger btn-sm" href="{:url('Detail/delete',['planId'=>$plan->id,'article_id'=>$articleId])}"><span class="glyphicon glyphicon-trash"></span>&nbsp;删除</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</li>
-		{/volist}
+            <!--方案报价-->
+            {volist name="plans" id="plan"}
+            <li>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h4>方案报价</h4>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p>出发日期：{$plan->travel_date}</p>
+                                <p>出行人数：{$plan->people_num}</p>
+                                <p>币种：{$plan->currency}</p>
+                                <p>总费用：{$plan->total_cost}</p>
+                                <p>最晚付款时间：{$plan->last_pay_time}</p>
+                                <table class="table table-hover table-bordered" style="word-break:break-all;">
+                                    <tr class="info">
+                                        <th width="10%">类型</th>
+                                        <th width="10%">数量</th>
+                                        <th width="10%">频次</th>
+                                        <th width="15%">单价</th>
+                                        <th width="15%">总价</th>
+                                        <th width="40%">备注</th>
+                                    </tr>
+                                    <tr>
+                                        <td>地接</td>
+                                        <td>{$plan->getDetailByType('dijie')->number}</td>
+                                        <td>{$plan->getDetailByType('dijie')->frequency}</td>
+                                        <td align="right">{$detailDijieUnit}</td>
+                                        <td align="right">{$detailDijieTotal}</td>
+                                        <td>{$plan->getDetailByType('dijie')->remark}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>住宿</td>
+                                        <td>{$plan->getDetailByType('zhusu')->number}</td>
+                                        <td>{$plan->getDetailByType('zhusu')->frequency}</td>
+                                        <td align="right">{$detailZhusuUnit}</td>
+                                        <td align="right">{$detailZhusuTotal}</td>
+                                        <td>{$plan->getDetailByType('zhusu')->remark}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12" style="height: 40px; margin-top: 10px;">
+                                <a class="btn btn-info btn-sm" href="{:url('Detail/edit',['planId'=>$plan->id,'article_id'=>$articleId])}"><span class="glyphicon glyphicon-pencil"></span>&nbsp;编辑</a>
+                                <a class="btn btn-danger btn-sm" href="{:url('Detail/delete',['planId'=>$plan->id,'article_id'=>$articleId])}"><span class="glyphicon glyphicon-trash"></span>&nbsp;删除</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            {/volist}
             <li>
                 <div>
                     <table class="table table-hover table-responsive table-bordered" style="word-break:break-all;">
@@ -199,8 +195,7 @@
                             <th width="20%">星级</th>
                             <th width="40%">备注</th>
                         </tr>
-                        {/eq}
-                        {volist name="hotel" id="hotel"}
+                        {/eq} {volist name="hotel" id="hotel"}
                         <tr>
                             <th>{$hotel->designation}</th>
                             <th>{$hotel->city}</th>
@@ -211,9 +206,141 @@
                     </table>
                 </div>
             </li>
-	</ul>
-	<button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-ok"></span>&nbsp;完成</button>
-	<br><br>
-</form>
+        </ul>
+        <script type="text/javascript" src="{:__ROOT__}/style/js/Calculation.js"></script>
+        <div class="row-fluid">
+            <div style="margin-top: 60px;">
+                <div class="row">
+                    <h2><span class="glyphicon glyphicon-edit"></span>&nbsp;新增方案报价</h2>
+                    <br>
+                    <div class="row">
+                        <div>
+                            <div id="myTabContent" class="tab-content">
+                                <div class="tab-pane fade in active" id="firstform">
+                                    <br>
+                                    <div class="control-group col-md-12">
+                                        <label class="control-label">出行人数</label>
+                                        <hr>
+                                        <div class="form-group col-md-3">
+                                            <label>成人数</label>
+                                            <input type="number" class="form-control" id="adultNum" placeholder="成人...">
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label>儿童数</label>
+                                            <input type="number" class="form-control" id="childNum" placeholder="儿童...">
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label>机票</label>
+                                        <hr>
+                                        <div class="form-group col-md-3">
+                                            <label>成人单价</label>
+                                            <input type="text" class="form-control" id="adultUnitPrice" placeholder="成人单价...">
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label>儿童单价</label>
+                                            <input type="text" class="form-control" id="childUnitPrice" placeholder="儿童单价...">
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label>总价</label>
+                                            <input type="text" class="form-control" id="totalCost" placeholder="总价...">
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label>备注</label>
+                                            <input type="text" class="form-control" id="remark" placeholder="备注...">
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label>签证</label>
+                                        <hr>
+                                        <div class="form-group col-md-3">
+                                            <label>成人单价</label>
+                                            <input type="text" class="form-control" id="adultUnitPrice" placeholder="成人单价...">
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label>儿童单价</label>
+                                            <input type="text" class="form-control" id="childUnitPrice" placeholder="儿童单价...">
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label>总价</label>
+                                            <input type="text" class="form-control" id="totalCost" placeholder="总价...">
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label>备注</label>
+                                            <input type="text" class="form-control" id="remark" placeholder="备注...">
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label>旅游</label>
+                                        <hr>
+                                        <div class="form-group col-md-3">
+                                            <label>成人单价</label>
+                                            <input type="text" class="form-control" id="adultUnitPrice" placeholder="成人单价...">
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label>儿童单价</label>
+                                            <input type="text" class="form-control" id="childUnitPrice" placeholder="儿童单价...">
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label>总价</label>
+                                            <input type="text" class="form-control" id="totalCost" placeholder="总价...">
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label>备注</label>
+                                            <input type="text" class="form-control" id="remark" placeholder="备注...">
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label>保险</label>
+                                        <hr>
+                                        <div class="form-group col-md-3">
+                                            <label>成人单价</label>
+                                            <input type="text" class="form-control" id="adultUnitPrice" placeholder="成人单价...">
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label>儿童单价</label>
+                                            <input type="text" class="form-control" id="childUnitPrice" placeholder="儿童单价...">
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label>总价</label>
+                                            <input type="text" class="form-control" id="totalCost" placeholder="总价...">
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label>备注</label>
+                                            <input type="text" class="form-control" id="remark" placeholder="备注...">
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label for="currency">币种</label>
+                                        <div class="controls">
+                                            <input type="text" class="form-control" name="currency" placeholder="币种..." />
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="control-group">
+                                        <label for="totalCost">总费用</label>
+                                        <div class="controls">
+                                            <input type="text" class="form-control" name="totalCost" placeholder="总费用..." />
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="control-group">
+                                        <label for="lastPayTime">最晚付款时间</label>
+                                        <div class="controls">
+                                            <input type="date" class="form-control" name="lastPayTime" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-ok"></span>&nbsp;完成</button>
+        <br>
+        <br>
+    </form>
 </div>
 {/block}
