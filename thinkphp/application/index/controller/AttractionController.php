@@ -6,7 +6,7 @@ use app\index\model\AttractionModel;
 use app\index\model\Common;
 use app\index\model\HotelModel;
 use app\index\model\Material;
-use app\index\service\AttractionService;
+use app\index\service\Attraction;
 use app\index\service\HotelService;
 use app\index\service\Materialservice;
 use think\Request;
@@ -22,7 +22,7 @@ class AttractionController extends IndexController {
     function __construct(Request $request = null)
     {
         parent::__construct($request);
-        $this->attractionService = new AttractionService();
+        $this->attractionService = new Attraction();
         $this->materialService = new Materialservice();
         $this->hotelService = new HotelService();
     }
