@@ -11,26 +11,24 @@ public class Detail {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String type; // 类型
-    private Integer number; // 数量
-    private Integer frequency; // 频次
-    private DecimalFormat unitPrice; // 单价
+    private String type; // 类型：机票，签证，旅游，保险
+    private DecimalFormat adultUnitPrice;   // 成人单价
+    private DecimalFormat childUnitPrice;   // 儿童单价
     private DecimalFormat totalPrice; //总价
     private String remark; // 备注
     @ManyToOne
     private Plan plan;
 
-    public Detail(String type, Integer number, Integer frequency, DecimalFormat unitPrice, DecimalFormat totalPrice, String remark, Plan plan) {
+    public Detail(String type, DecimalFormat adultUnitPrice, DecimalFormat childUnitPrice, DecimalFormat totalPrice, String remark, Plan plan) {
         this.type = type;
-        this.number = number;
-        this.frequency = frequency;
-        this.unitPrice = unitPrice;
+        this.adultUnitPrice = adultUnitPrice;
+        this.childUnitPrice = childUnitPrice;
         this.totalPrice = totalPrice;
         this.remark = remark;
         this.plan = plan;
     }
-    public Detail(){
 
+    public Detail() {
     }
 
     public Long getId() {
@@ -49,28 +47,20 @@ public class Detail {
         this.type = type;
     }
 
-    public Integer getNumber() {
-        return number;
+    public DecimalFormat getAdultUnitPrice() {
+        return adultUnitPrice;
     }
 
-    public void setNumber(Integer number) {
-        this.number = number;
+    public void setAdultUnitPrice(DecimalFormat adultUnitPrice) {
+        this.adultUnitPrice = adultUnitPrice;
     }
 
-    public Integer getFrequency() {
-        return frequency;
+    public DecimalFormat getChildUnitPrice() {
+        return childUnitPrice;
     }
 
-    public void setFrequency(Integer frequency) {
-        this.frequency = frequency;
-    }
-
-    public DecimalFormat getUnitPrice() {
-        return unitPrice;
-    }
-
-    public void setUnitPrice(DecimalFormat unitPrice) {
-        this.unitPrice = unitPrice;
+    public void setChildUnitPrice(DecimalFormat childUnitPrice) {
+        this.childUnitPrice = childUnitPrice;
     }
 
     public DecimalFormat getTotalPrice() {
@@ -102,9 +92,8 @@ public class Detail {
         return "Detail{" +
                 "id=" + id +
                 ", type='" + type + '\'' +
-                ", number=" + number +
-                ", frequency=" + frequency +
-                ", unitPrice=" + unitPrice +
+                ", adultUnitPrice=" + adultUnitPrice +
+                ", childUnitPrice=" + childUnitPrice +
                 ", totalPrice=" + totalPrice +
                 ", remark='" + remark + '\'' +
                 ", plan=" + plan +

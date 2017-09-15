@@ -11,23 +11,22 @@ public class Plan {
     private Long id;
     @OneToOne
     private Article article; //文章实体
-    private Date travelDate; // 出行日期
-    private String peopleNum; // 出行人数
+    private Integer adultNum;   // 成人数
+    private Integer childNum;   // 儿童数
     private String currency; // 币种
     private DecimalFormat totalCost; // 总费用
     private Date lastPayTime; // 最晚付款时间
 
-
-    public Plan(Article article, Date travelDate, String peopleNum, String currency, DecimalFormat totalCost, Date lastPayTime) {
+    public Plan(Article article, Integer adultNum, Integer childNum, String currency, DecimalFormat totalCost, Date lastPayTime) {
         this.article = article;
-        this.travelDate = travelDate;
-        this.peopleNum = peopleNum;
+        this.adultNum = adultNum;
+        this.childNum = childNum;
         this.currency = currency;
         this.totalCost = totalCost;
         this.lastPayTime = lastPayTime;
     }
-    public Plan(){
 
+    public Plan() {
     }
 
     public Long getId() {
@@ -46,20 +45,20 @@ public class Plan {
         this.article = article;
     }
 
-    public Date getTravelDate() {
-        return travelDate;
+    public Integer getAdultNum() {
+        return adultNum;
     }
 
-    public void setTravelDate(Date travelDate) {
-        this.travelDate = travelDate;
+    public void setAdultNum(Integer adultNum) {
+        this.adultNum = adultNum;
     }
 
-    public String getPeopleNum() {
-        return peopleNum;
+    public Integer getChildNum() {
+        return childNum;
     }
 
-    public void setPeopleNum(String peopleNum) {
-        this.peopleNum = peopleNum;
+    public void setChildNum(Integer childNum) {
+        this.childNum = childNum;
     }
 
     public String getCurrency() {
@@ -91,8 +90,8 @@ public class Plan {
         return "Plan{" +
                 "id=" + id +
                 ", article=" + article +
-                ", travelDate=" + travelDate +
-                ", peopleNum=" + peopleNum +
+                ", adultNum=" + adultNum +
+                ", childNum=" + childNum +
                 ", currency='" + currency + '\'' +
                 ", totalCost=" + totalCost +
                 ", lastPayTime=" + lastPayTime +
