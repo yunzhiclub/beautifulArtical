@@ -1,6 +1,9 @@
 package com.mengyunzhi.article.repository;
 
 import javax.persistence.*;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by Mr Chen on 2017/8/30.
@@ -17,17 +20,29 @@ public class Attraction {
     @ManyToOne
     private Hotel hotel;
 
-    @ManyToOne
-    private Material material;          //素材
+    @ManyToMany
+    private Set<Material> material = new HashSet<Material>();
 
+    private String trip;
+    private String description;
+    private Date date;
     private String meal;
     private String car;
-    private String guide;
-    private String title;
     private int weight;
 
-
     public Attraction() {
+    }
+
+    public Attraction(Article article, Hotel hotel, Set<Material> material, String trip, String description, Date date, String meal, String car, int weight) {
+        this.article = article;
+        this.hotel = hotel;
+        this.material = material;
+        this.trip = trip;
+        this.description = description;
+        this.date = date;
+        this.meal = meal;
+        this.car = car;
+        this.weight = weight;
     }
 
     public Long getId() {
@@ -54,6 +69,38 @@ public class Attraction {
         this.hotel = hotel;
     }
 
+    public Set<Material> getMaterial() {
+        return material;
+    }
+
+    public void setMaterial(Set<Material> material) {
+        this.material = material;
+    }
+
+    public String getTrip() {
+        return trip;
+    }
+
+    public void setTrip(String trip) {
+        this.trip = trip;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
     public String getMeal() {
         return meal;
     }
@@ -70,14 +117,6 @@ public class Attraction {
         this.car = car;
     }
 
-    public String getGuide() {
-        return guide;
-    }
-
-    public void setGuide(String guide) {
-        this.guide = guide;
-    }
-
     public int getWeight() {
         return weight;
     }
@@ -86,23 +125,6 @@ public class Attraction {
         this.weight = weight;
     }
 
-    public Material getMaterial() {
-        return material;
-    }
-
-    public void setMaterial(Material material) {
-        this.material = material;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-
     @Override
     public String toString() {
         return "Attraction{" +
@@ -110,10 +132,11 @@ public class Attraction {
                 ", article=" + article +
                 ", hotel=" + hotel +
                 ", material=" + material +
+                ", trip='" + trip + '\'' +
+                ", description='" + description + '\'' +
+                ", date=" + date +
                 ", meal='" + meal + '\'' +
                 ", car='" + car + '\'' +
-                ", guide='" + guide + '\'' +
-                ", title='" + title + '\'' +
                 ", weight=" + weight +
                 '}';
     }
