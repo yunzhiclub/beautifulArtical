@@ -9,7 +9,7 @@
 namespace app\index\service;
 
 
-class AttractionService {
+class Attraction {
     public function saveAttraction($param) {
         $message = [];
         $message['status'] = 'success';
