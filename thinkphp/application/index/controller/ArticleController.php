@@ -52,6 +52,7 @@ class ArticleController extends IndexController {
             $this->assign('cover', '');
             $this->assign('articleId', '');
             $this->assign('contractorId', '');
+            $this->assign('route','');
             return $this->fetch();
         }else{
             $Article = Article::get($articleId);
@@ -60,6 +61,9 @@ class ArticleController extends IndexController {
             $this->assign('cover', $Article->cover);
             $this->assign('articleId', $articleId);
             $this->assign('contractorId', $Article->contractor_id);
+            $Paragraph = Paragraph::where('title',"行程路线")->where('article_id',$articleId)->find();
+            $this->assign('route',$Paragraph->image);
+            
             return $this->fetch();
         }
     }
