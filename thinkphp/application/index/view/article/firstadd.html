@@ -44,16 +44,18 @@
             <div class="form-group">
                 <label for="torvelRoutes">路线图</label>
                 <input type="file" id="torvelRoutes" name="routes" >
-                {eq name="$route" value=""} {else /}
-                <img src="{:__ROOT__}/upload/{$route}" style="height: 100px; width: 180px; " alt="">{/eq}
             </div>
-
+            {else /} 
+            <label for="torvelRoutes">路线图</label>
+            <input type="file" id="torvelRoutes" name="routes" >
+            <img src="{:__ROOT__}/upload/{$route}" style="height: 100px; width: 180px; " alt="">
+            {/eq}
             <div class="form-group">
                 <label for="judgeRoute">是否添加路线图</label>
                 <input type="radio" name="optionsRadios" id="optionsRadios1" value="1">是
                 <input type="radio" name="optionsRadios" id="optionsRadios1" value="0" checked>否
             </div>
-            {else /} {/eq}
+            
             <br>
             <div class="form-group">
                 <span class="span6">

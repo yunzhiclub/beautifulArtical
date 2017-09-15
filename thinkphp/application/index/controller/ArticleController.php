@@ -62,8 +62,9 @@ class ArticleController extends IndexController {
             $this->assign('articleId', $articleId);
             $this->assign('contractorId', $Article->contractor_id);
             $Paragraph = Paragraph::where('title',"行程路线")->where('article_id',$articleId)->find();
-            $this->assign('route',$Paragraph->image);
-            
+            if(!empty($Paragraph)){
+                $this->assign('route',$Paragraph->image);
+            }
             return $this->fetch();
         }
     }

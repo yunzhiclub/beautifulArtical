@@ -89,6 +89,7 @@ class Articleservice
         // firstadd界面传入行程路线图片
         $routes = request()->file('routes');
         $judge = request()->post('optionsRadios');
+        if(!is_null($routes)){
         if($judge==1){
             // 按段落保存
             $Paragraph = new Paragraph();
@@ -102,6 +103,13 @@ class Articleservice
                 $Paragraph->image = $imagePath;
             }
             $Paragraph->save();
+            }else{
+                $Paragraph = Paragraph::where('title',"行程路线")->where('article_id',$articleId)->find();
+                if(!empty($Paragraph)){
+                    $Paragraph->delete();
+                }
+        }
+        
         }
 
         return $message;
