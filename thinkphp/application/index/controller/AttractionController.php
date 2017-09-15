@@ -6,7 +6,7 @@ use app\index\model\AttractionModel;
 use app\index\model\Common;
 use app\index\model\HotelModel;
 use app\index\model\Material;
-use app\index\service\Attractionservice;
+use app\index\service\AttractionService;
 use app\index\service\HotelService;
 use app\index\service\Materialservice;
 use think\Request;
@@ -19,14 +19,10 @@ use app\index\model\Attraction;
  */
 
 class AttractionController extends IndexController {
-    protected $attractionService = null;
-    protected $materialService = null;
-    protected $hotelService = null;
-
     function __construct(Request $request = null)
     {
         parent::__construct($request);
-        $this->attractionService = new Attractionservice();
+        $this->attractionService = new AttractionService();
         $this->materialService = new Materialservice();
         $this->hotelService = new HotelService();
     }
@@ -42,23 +38,8 @@ class AttractionController extends IndexController {
     }
 
     public function save() {
-        $title = Request::instance()->post('title');
-        $meal = Request::instance()->post('meal');
-        $car = Request::instance()->post('car');
-        $guide = Request::instance()->post('guide');
-
-        $articleId = Request::instance()->param('articleId');
-
-        $materialId = Request::instance()->post('materialId');
-        $hotelId = Request::instance()->post('hotelId');
-
-        // 景点处理
-        $Attraction = new Attraction();
-        if(!$Attraction->saveAttraction($title, $meal, $car, $guide, $hotelId, $articleId, $materialId)) {
-            return $this->error('保存失败', url('add?articleId='.$articleId));
-        } else {
-            return $this->success('保存成功', url('Article/secondadd?articleId='.$articleId));
-        }
+        $param = Request::instance();
+        $message = $this->attractionService->saveAttraction($param);
     }
 
     public function edit() {

@@ -9,7 +9,13 @@
 namespace app\index\service;
 
 
-class Attractionservice
-{
+class AttractionService {
+    public function saveAttraction($param) {
+        $message = [];
+        $message['status'] = 'success';
+        $message['message'] = '保存成功';
 
+        $trip = $param->post('trip');
+        $date = $param->post('date');
+    }
 }

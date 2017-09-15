@@ -12,11 +12,11 @@
         <form method="post" action="{:url($action, ['articleId' => $articleId, 'attractionId' => $attraction->id])}" enctype="multipart/form-data">
             <div class="form-group">
                 <label>当日总行程</label>
-                <input type="text" class="form-control" name="" placeholder="行程" value="">
+                <input type="text" class="form-control" name="trip" placeholder="行程" value="">
             </div>
             <div class="form-group">
                 <label>当日日期</label>
-                <input type="date" class="form-control" name="" placeholder="日期" value="">
+                <input type="date" class="form-control" name="date" placeholder="日期" value="">
             </div>
             <div class="form-group">
                 <label>导游</label>
