@@ -63,7 +63,7 @@
                 <div>
                     {volist name="hotels" id="_hotel"}
                     <label style="margin-right: 15px;">
-                        <input type="radio" name="hotelId" value="{$_hotel->id}" {eq name="_hotel->id" value="$attraction->hotel_id"}checked="checked"{/eq} style="border:1px solid rgba(0,0,0,0.15);border-radius:100%;display:inline-block;height:16px;margin-right:3px;margin-top:-1px;vertical-align:middle;width:16px;line-height:1;">
+                        <input type="radio" name="hotelId" value="{$_hotel->id}" {eq name="_hotel->id" value="$attraction->hotel_id"}checked="checked"{/eq} >
                         {$_hotel->designation}
                     </label>
                     {/volist}
