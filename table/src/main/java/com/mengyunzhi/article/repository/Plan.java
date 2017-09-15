@@ -9,25 +9,36 @@ public class Plan {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     @OneToOne
     private Article article; //文章实体
-    private Date travelDate; // 出行日期
-    private String peopleNum; // 出行人数
+
+    private Integer adultNum;   // 成人数
+    private Integer childNum;   // 儿童数
     private String currency; // 币种
+    private String type; // 类型：机票，签证，旅游，保险
+    private DecimalFormat adultUnitPrice;   // 成人单价
+    private DecimalFormat childUnitPrice;   // 儿童单价
+    private DecimalFormat totalPrice; //总价
+    private String remark; // 备注
     private DecimalFormat totalCost; // 总费用
     private Date lastPayTime; // 最晚付款时间
 
-
-    public Plan(Article article, Date travelDate, String peopleNum, String currency, DecimalFormat totalCost, Date lastPayTime) {
+    public Plan(Article article, Integer adultNum, Integer childNum, String currency, String type, DecimalFormat adultUnitPrice, DecimalFormat childUnitPrice, DecimalFormat totalPrice, String remark, DecimalFormat totalCost, Date lastPayTime) {
         this.article = article;
-        this.travelDate = travelDate;
-        this.peopleNum = peopleNum;
+        this.adultNum = adultNum;
+        this.childNum = childNum;
         this.currency = currency;
+        this.type = type;
+        this.adultUnitPrice = adultUnitPrice;
+        this.childUnitPrice = childUnitPrice;
+        this.totalPrice = totalPrice;
+        this.remark = remark;
         this.totalCost = totalCost;
         this.lastPayTime = lastPayTime;
     }
-    public Plan(){
 
+    public Plan() {
     }
 
     public Long getId() {
@@ -46,20 +57,20 @@ public class Plan {
         this.article = article;
     }
 
-    public Date getTravelDate() {
-        return travelDate;
+    public Integer getAdultNum() {
+        return adultNum;
     }
 
-    public void setTravelDate(Date travelDate) {
-        this.travelDate = travelDate;
+    public void setAdultNum(Integer adultNum) {
+        this.adultNum = adultNum;
     }
 
-    public String getPeopleNum() {
-        return peopleNum;
+    public Integer getChildNum() {
+        return childNum;
     }
 
-    public void setPeopleNum(String peopleNum) {
-        this.peopleNum = peopleNum;
+    public void setChildNum(Integer childNum) {
+        this.childNum = childNum;
     }
 
     public String getCurrency() {
@@ -68,6 +79,46 @@ public class Plan {
 
     public void setCurrency(String currency) {
         this.currency = currency;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public DecimalFormat getAdultUnitPrice() {
+        return adultUnitPrice;
+    }
+
+    public void setAdultUnitPrice(DecimalFormat adultUnitPrice) {
+        this.adultUnitPrice = adultUnitPrice;
+    }
+
+    public DecimalFormat getChildUnitPrice() {
+        return childUnitPrice;
+    }
+
+    public void setChildUnitPrice(DecimalFormat childUnitPrice) {
+        this.childUnitPrice = childUnitPrice;
+    }
+
+    public DecimalFormat getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(DecimalFormat totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 
     public DecimalFormat getTotalCost() {
@@ -91,9 +142,14 @@ public class Plan {
         return "Plan{" +
                 "id=" + id +
                 ", article=" + article +
-                ", travelDate=" + travelDate +
-                ", peopleNum=" + peopleNum +
+                ", adultNum=" + adultNum +
+                ", childNum=" + childNum +
                 ", currency='" + currency + '\'' +
+                ", type='" + type + '\'' +
+                ", adultUnitPrice=" + adultUnitPrice +
+                ", childUnitPrice=" + childUnitPrice +
+                ", totalPrice=" + totalPrice +
+                ", remark='" + remark + '\'' +
                 ", totalCost=" + totalCost +
                 ", lastPayTime=" + lastPayTime +
                 '}';
