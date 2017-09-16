@@ -22,6 +22,7 @@ class HotelService {
         $hotel = new Hotel();
         $hotel->designation = $param->post('designation');
         $hotel->city = $param->post('city');
+        $hotel->country = $param->post('country');
         $hotel->star_level = $param->post('star_level');
         $hotel->remark = $param->post('remark');
 
@@ -42,6 +43,7 @@ class HotelService {
         $hotel = Hotel::get($param->param('hotelId'));
         $designation = $param->post('designation');
         $city = $param->post('city');
+        $country = $param->post('country');
         $star_level = $param->post('star_level');
         $remark = $param->post('remark');
 
@@ -52,6 +54,7 @@ class HotelService {
 
         $hotel->designation = $designation;
         $hotel->city = $city;
+        $hotel->country = $country;
         $hotel->star_level = $star_level;
         $hotel->remark = $remark;
 
@@ -94,6 +97,7 @@ class HotelService {
         $hotel->id = null;
         $hotel->designation = '';
         $hotel->city = '';
+        $hotel->country = '';
         $hotel->star_level = '';
         $hotel->remark = '';
         return $hotel;
