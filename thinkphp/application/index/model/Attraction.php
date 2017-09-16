@@ -14,20 +14,6 @@ use app\index\model\Hotel;
 
 class Attraction extends Model {
 
-    public function updateAttraction($title, $meal, $car, $guide, $hotelId, $articleId, $id, $materialId) {
-        $Attraction = Attraction::get($id);
-        $Attraction->saveAttraction($title, $meal, $car, $guide, $hotelId, $articleId, $materialId);
-    }
-
-    public function deleteAttraction($id) {
-        $Attraction = Attraction::get($id);
-
-        if(!$Attraction->delete()) {
-            return false;
-        }
-        return true;
-    }
-
     public function getMaterial($id) {
         //返回关联的素材
         if(!is_null($id)) {
