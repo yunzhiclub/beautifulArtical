@@ -17,6 +17,9 @@ public class MaterialRepositoryTest {
     @Test
     public void save() {
         Material material = new Material();
+        material.setDesignation("测试素材");
+        material.setContent("测试内容");
+        material.setImages("测试图片");
         materialRepository.save(material);
 
         assertThat(material.getId()).isNotNull();
