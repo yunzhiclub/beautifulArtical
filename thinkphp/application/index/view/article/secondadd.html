@@ -139,35 +139,14 @@
                         <h4>方案报价</h4>
                         <div class="row">
                             <div class="col-md-12">
-                                <p>出发日期：{$plan->travel_date}</p>
-                                <p>出行人数：{$plan->people_num}</p>
                                 <p>币种：{$plan->currency}</p>
                                 <p>总费用：{$plan->total_cost}</p>
                                 <p>最晚付款时间：{$plan->last_pay_time}</p>
                                 <table class="table table-hover table-bordered" style="word-break:break-all;">
                                     <tr class="info">
                                         <th width="10%">类型</th>
-                                        <th width="10%">数量</th>
-                                        <th width="10%">频次</th>
-                                        <th width="15%">单价</th>
                                         <th width="15%">总价</th>
                                         <th width="40%">备注</th>
-                                    </tr>
-                                    <tr>
-                                        <td>地接</td>
-                                        <td>{$plan->getDetailByType('dijie')->number}</td>
-                                        <td>{$plan->getDetailByType('dijie')->frequency}</td>
-                                        <td align="right">{$detailDijieUnit}</td>
-                                        <td align="right">{$detailDijieTotal}</td>
-                                        <td>{$plan->getDetailByType('dijie')->remark}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>住宿</td>
-                                        <td>{$plan->getDetailByType('zhusu')->number}</td>
-                                        <td>{$plan->getDetailByType('zhusu')->frequency}</td>
-                                        <td align="right">{$detailZhusuUnit}</td>
-                                        <td align="right">{$detailZhusuTotal}</td>
-                                        <td>{$plan->getDetailByType('zhusu')->remark}</td>
                                     </tr>
                                 </table>
                             </div>

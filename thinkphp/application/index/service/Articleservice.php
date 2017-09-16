@@ -302,19 +302,19 @@ class Articleservice
             // 总金额
             $planTotalCost = $this->fromate($value->total_cost);
             $value->total_cost = $planTotalCost;
-            // 格式化住宿金额
-            $detailZhusuUnit = $this->fromate($value->getDetailByType('zhusu')->unit_price);
-            $message['detailZhusuUnit'] = $detailZhusuUnit;
+            // // 格式化住宿金额
+            // $detailZhusuUnit = $this->fromate($value->getDetailByType('zhusu')->unit_price);
+            // $message['detailZhusuUnit'] = $detailZhusuUnit;
 
-            $detailZhusuTotal = $this->fromate($value->getDetailByType('zhusu')->total_price);
-            $message['detailZhusuTotal'] = $detailZhusuTotal;
+            // $detailZhusuTotal = $this->fromate($value->getDetailByType('zhusu')->total_price);
+            // $message['detailZhusuTotal'] = $detailZhusuTotal;
 
-            // 格式化地接金额
-            $detailDijieUnit = $this->fromate($value->getDetailByType('dijie')->unit_price);
-            $message['detailDijieUnit'] = $detailDijieUnit;
+            // // 格式化地接金额
+            // $detailDijieUnit = $this->fromate($value->getDetailByType('dijie')->unit_price);
+            // $message['detailDijieUnit'] = $detailDijieUnit;
             
-            $detailDijieTotal = $this->fromate($value->getDetailByType('dijie')->total_price);
-            $message['detailDijieTotal'] = $detailDijieTotal;
+            // $detailDijieTotal = $this->fromate($value->getDetailByType('dijie')->total_price);
+            // $message['detailDijieTotal'] = $detailDijieTotal;
             
         }
         return $message;
