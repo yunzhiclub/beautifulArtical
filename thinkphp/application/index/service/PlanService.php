@@ -9,38 +9,25 @@ use think\Request;
 class PlanService
 {
 
-	public function save($param)
+	static public function save($param)
 	{
         // 初始化返回信息
         $message = [];
         $message['status'] = 'success';
-        $message['message'] = '保存成功！';
+        $message['message'] = '文章编辑成功！';
+        $message['route'] = 'article/index';
 
         //获取到参数
         $articleId = $param->param('articleId/d');
-        $travelDate = $param->post('travelDate');
-        $peopleNum = $param->post('peopleNum');
-        $currency = $param->post('currency');
-        $totalCost = $param->post('totalCost');
-        $lastPayTime = $param->post('lastPayTime');
-
-
-        // 实例化一个空的方案报价
-        $Plan = new Plan();
-        $Plan->article_id = $articleId;
-		$Plan->travel_date = $travelDate;
-        $Plan->people_num = $peopleNum;
-        $Plan->currency = $currency;
-        $Plan->total_cost = $totalCost;
-        $Plan->last_pay_time = $lastPayTime;
+        $data = $param->post();
 
         // 添加数据
-        if (!$Plan->save()) {
-            $message['message'] = '方案报价未保存成功！';;
-        }
+        if (PlanService::saveByType('plain',$articleId, $data, $data['plainAdultUnitPrice'], $data['plainChildUnitPrice'], $data['plainTotalPrice'], $data['plainRemark']) && PlanService::saveByType('visa', $articleId, $data, $data['visaAdultUnitPrice'], $data['childUnitPrice'], $data['visaTotalPrice'], $data['visaRemark']) && PlanService::saveByType('travel', $articleId, $data, $data['travelAdultUnitPrice'], $data['travelChildUnitPrice'], $data['travelTotalPrice'], $data['travelRemark']) && PlanService::saveByType('insurance', $articleId, $data, $data['insuranceAdultUnitPrice'], $data['insuranceChildUnitPrice'], $data['insuranceTotalPrice'], $data['insuranceRemark'])) {
+            return $message;
+        } 
 
-        $message['planId'] = $Plan->id;
-        $message['articleId'] = $articleId;
+        $message['status'] = 'error';
+        $message['message'] = '保存失败！';
 
         return $message;
 	}
@@ -107,5 +94,26 @@ class PlanService
             return true;
         }
             return false;
+    }
+
+    static public function saveByType($type, $articleId, $data, $adultUnitPrice, $childUnitPrice, $totalPrice, $remark) {
+        $Plan = new Plan();
+        $Plan->article_id = $articleId;
+        $Plan->adult_num = $data['adultNum'];
+        $Plan->child_num = $data['childNum'];
+        $Plan->currency = $data['currency'];
+        $Plan->total_cost = $data['totalCost'];
+        $Plan->last_pay_time = $data['lastPayTime'];
+        $Plan->type = $type;
+        $Plan->adult_unit_price = $adultUnitPrice;
+        $Plan->child_unit_price = $childUnitPrice;
+        $Plan->total_price = $totalPrice;
+        $Plan->remark = $remark;
+
+        if ($Plan->save()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
