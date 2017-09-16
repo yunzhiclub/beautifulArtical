@@ -29,14 +29,14 @@
             <div class="form-group">
                 <label>用餐</label>
                 <div>
-                    <label class="radio-inline">
-                        <input type="radio" name="meal" value="breakfast" {eq name="$attraction->meal" value="breakfast"}checked{/eq}> 早餐
+                    <label class="checkbox-inline">
+                        <input type="checkbox" name="meal[]" value="breakfast"> 早餐
                     </label>
-                    <label class="radio-inline">
-                        <input type="radio" name="meal" value="lunch" {eq name="$attraction->meal" value="lunch"}checked{/eq}> 午餐
+                    <label class="checkbox-inline">
+                        <input type="checkbox" name="meal[]" value="lunch"> 午餐
                     </label>
-                    <label class="radio-inline">
-                        <input type="radio" name="meal" value="supper" {eq name="$attraction->meal" value="supper"}checked{/eq}> 晚餐
+                    <label class="checkbox-inline">
+                        <input type="checkbox" name="meal[]" value="supper"> 晚餐
                     </label>
                 </div>
             </div>
