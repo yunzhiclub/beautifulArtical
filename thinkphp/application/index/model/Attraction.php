@@ -26,6 +26,19 @@ class Attraction extends Model {
             return $Material;
         }
     }
+
+    public function getMealIsChecked($checkMeal) {
+        $meals = json_decode($this->meal);
+        if(!is_null($meals)) {
+            foreach ($meals as $meal) {
+                if($meal == $checkMeal) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     public function getMainMaterial() {
         return Material::get($this->material_id);
     }

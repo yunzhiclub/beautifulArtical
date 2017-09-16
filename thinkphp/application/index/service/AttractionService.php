@@ -77,7 +77,7 @@ class AttractionService {
         $date = $param->post('date');
         $guide = $param->post('guide');
         $description = $param->post('description');
-        $meal = $param->post('meal');
+        $meals = $param->post('meal/a');
         $car = $param->post('car');
         $materialIds = $param->post('materialId/a');
         $articleId = $param->param('articleId');
@@ -89,7 +89,7 @@ class AttractionService {
         $Attraction->date = $date;
         $Attraction->guide = $guide;
         $Attraction->description = $description;
-        $Attraction->meal = $meal;
+        $Attraction->meal = json_encode($meals);
         $Attraction->car = $car;
         $Attraction->hotel_id = $hotelId;
         $Attraction->article_id = $articleId;
