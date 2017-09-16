@@ -47,19 +47,24 @@
                     </div>
                 </div>
             </li>
-            {/volist} {volist name="attraction" id="_attraction"}
+            {/volist} {volist name="attraction" id="_attraction" key="key"}
             <li>
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <h4>{$_attraction->title}</h4>
+                        <h4>Day{$key}</h4>
+                        <br>
                         <div class="row">
-                            <div class="col-md-3" style="height: 100px;">
-                                <img src="{:__ROOT__}/upload/{$_attraction->getMaterial($_attraction->material_id)->image}" alt="" style="height: 100px; width: 180px;">
+                            <div class="col-md-11">
+                                总行程：{$_attraction->trip}<br>
+                                日期：{$_attraction->date}<br>
+                                导游：{$_attraction->guide}<br>
+                                描述：{$_attraction->description}<br>
+                                用餐：{$_attraction->meal}<br>
+                                用车：{$_attraction->getCar()}<br>
+                                素材：<br>
+                                酒店：{$_attraction->getHotel()->designation}<br>
                             </div>
-                            <div class="col-md-6 col-md-offset-1 overhidden">
-                                {$_attraction->getMaterial($_attraction->material_id)->content}
-                            </div>
-                            <div class="col-md-2">
+                            <div class="col-md-1">
                                 {eq name="$i" value="1"} {else /}<a class="btn btn-default" href="{:url('upAttraction',['articleId'=>$articleId,'attractionId'=>$_attraction->id,'number'=>$i])}"><span class="glyphicon glyphicon-arrow-up" ></span></a>{/eq}
                                 <br> {eq name="$i" value="$length"} {else /}<a class="btn btn-default" href="{:url('downAttraction',['articleId'=>$articleId,'attractionId'=>$_attraction->id,'number'=>$i])}"><span class="glyphicon glyphicon-arrow-down"></span></a>{/eq}
                             </div>

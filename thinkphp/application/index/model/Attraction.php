@@ -33,6 +33,19 @@ class Attraction extends Model {
         return Hotel::get($this->hotel_id);
     }
 
+    public function getCar() {
+        $car = $this->car;
+        if($car == 'sevenToNineBusinessCar') {
+            return '7-9座商务车';
+        } else if($car == 'train') {
+            return '火车';
+        } else if($car == 'car') {
+            return '汽车';
+        } else if($car == 'plane') {
+            return '飞机';
+        }
+    }
+
     public function Materials() {
         return $this->belongsToMany('Material', 'attraction_material');
     }
