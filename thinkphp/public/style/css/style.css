@@ -2277,3 +2277,8 @@ h3.w3ls-title {
 }
 }
 /*-- //responsive-design --*/ 
+
+/* my new css*/
+.radio-check {
+    border:1px solid rgba(0,0,0,0.15);border-radius:100%;display:inline-block;height:16px;margin-right:3px;margin-top:-1px;vertical-align:middle;width:16px;line-height:1;
+}
