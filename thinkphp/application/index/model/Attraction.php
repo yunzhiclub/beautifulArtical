@@ -35,6 +35,10 @@ class Attraction extends Model {
                     return true;
                 }
             }
+        } else {
+            if($checkMeal == 'breakfast') {
+                return true;
+            }
         }
         return false;
     }
