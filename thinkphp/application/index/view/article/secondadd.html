@@ -132,22 +132,39 @@
                 </div>
             </li>
             <!--方案报价-->
-            {volist name="plans" id="plan"}
             <li>
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <h4>方案报价</h4>
                         <div class="row">
                             <div class="col-md-12">
-                                <p>币种：{$plan->currency}</p>
-                                <p>总费用：{$plan->total_cost}</p>
-                                <p>最晚付款时间：{$plan->last_pay_time}</p>
+                                <p>成人数：{$adultNum}</p>
+                                <p>儿童数：{$childNum}</p>
+                                <p>币种：{$currency}</p>
+                                <p>总费用：{$totalCost}</p>
+                                <p>最晚付款时间：{$lastPayTime}</p>
                                 <table class="table table-hover table-bordered" style="word-break:break-all;">
                                     <tr class="info">
                                         <th width="10%">类型</th>
-                                        <th width="15%">总价</th>
-                                        <th width="40%">备注</th>
+                                        <th width="20%">成人单价</th>
+                                        <th width="20%">儿童单价</th>
+                                        <th width="20%">总价</th>
+                                        <th width="30%">备注</th>
                                     </tr>
+                                    {volist name="plans" id="plan"}
+                                    <tr>
+                                        <td>
+                                            {eq name="$plan->type" value="plain"}机票{/eq}
+                                            {eq name="$plan->type" value="visa"}签证{/eq}
+                                            {eq name="$plan->type" value="travel"}旅游{/eq}
+                                            {eq name="$plan->type" value="insurance"}保险{/eq}
+                                        </td>
+                                        <td>{$plan->adult_unit_price}</td>
+                                        <td>{$plan->child_unit_price}</td>
+                                        <td>{$plan->total_price}</td>
+                                        <td>{$plan->remark}</td>
+                                    </tr>
+                                    {/volist}
                                 </table>
                             </div>
                         </div>
@@ -160,7 +177,6 @@
                     </div>
                 </div>
             </li>
-            {/volist}
             <li>
                 <div>
                     <table class="table table-hover table-responsive table-bordered" style="word-break:break-all;">

@@ -102,6 +102,17 @@ class ArticleController extends IndexController {
         // 使用number_format 格式化输入金额
         $date = $this->articleService->MoneyFormate($Plans);
 
+        // 获取报价方案相同的字段并传入前台
+        $adultNum = $Plans[0]->adult_num;
+        $childNum = $Plans[0]->child_num;
+        $currency = $Plans[0]->currency;
+        $totalCost = $Plans[0]->total_cost;
+        $lastPayTime = $Plans[0]->last_pay_time;
+        $this->assign('adultNum', $adultNum);
+        $this->assign('childNum', $childNum);
+        $this->assign('currency', $currency);
+        $this->assign('totalCost', $totalCost);
+        $this->assign('lastPayTime', $lastPayTime);
         $this->assign('plans', $Plans);
         // 调用service中的保存方法
         $message = $this->articleService->secondAriticle($param);
