@@ -11,6 +11,7 @@ use app\index\model\Hotel;
 use app\index\model\Plan;
 use app\index\model\Paragraph;
 use app\index\service\Articleservice;
+use app\index\service\PlanService;
 
 /**
  * 
@@ -52,6 +53,7 @@ class ArticleController extends IndexController {
             $this->assign('cover', '');
             $this->assign('articleId', '');
             $this->assign('contractorId', '');
+            $this->assign('route','');
             return $this->fetch();
         }else{
             $Article = Article::get($articleId);
@@ -60,6 +62,12 @@ class ArticleController extends IndexController {
             $this->assign('cover', $Article->cover);
             $this->assign('articleId', $articleId);
             $this->assign('contractorId', $Article->contractor_id);
+            $Paragraph = Paragraph::where('title',"行程路线")->where('article_id',$articleId)->find();
+            if(!empty($Paragraph)){
+                $this->assign('route',$Paragraph->image);
+            }else{
+                $this->assign('route',1);
+            }
             return $this->fetch();
         }
     }
@@ -88,16 +96,11 @@ class ArticleController extends IndexController {
         $param = Request::instance();
 
         // 获取并传输plan
-        $articleId = Request::instance()->param('articleId');
+        $articleId = $param->param('articleId');
         $Plan = new Plan();
         $Plans = $Plan->getPlanByArticleId($articleId);
         // 使用number_format 格式化输入金额
         $date = $this->articleService->MoneyFormate($Plans);
-        
-        $this->assign('detailZhusuUnit',$date['detailZhusuUnit']);
-        $this->assign('detailZhusuTotal',$date['detailZhusuTotal']);
-        $this->assign('detailDijieUnit',$date['detailDijieUnit']);
-        $this->assign('detailDijieTotal',$date['detailDijieTotal']);
 
         $this->assign('plans', $Plans);
         // 调用service中的保存方法
@@ -141,6 +144,21 @@ class ArticleController extends IndexController {
 
     }
     public function addsecond(){
+        // 接受参数
+        $param = Request::instance();
+
+        // 调用Service层保存操作
+        $message = PlanService::save($param);
+
+        // 返回相应信息
+        if ($message['status'] === 'success') {
+            // 返回成功信息
+            return $this->success($message['message'], url($message['route']));
+
+        } else {
+            // 返回失败信息
+            return $this->error($message['message']);
+        }
         $this->success('文章编辑成功',url('index'));
     }
     public function delete() {

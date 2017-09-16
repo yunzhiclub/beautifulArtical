@@ -36,9 +36,10 @@ class Articleservice
         $summery = $parma->post('summery');
         $contractorId = $parma->post('contractorId/d');
         $file = request()->file('image');
-
         //实例化一个空文章
         $Article = new Article();
+
+        
 
         if(!is_null($articleId)) {
             //编辑文章
@@ -85,6 +86,37 @@ class Articleservice
             $message['message'] = '没有添加成功，请重新添加';
             $message['route'] = 'firstadd';
         }
+        // firstadd界面传入行程路线图片
+        $routes = request()->file('routes');
+        $judge = request()->post('optionsRadios');
+        $Paragraph = Paragraph::where('title',"行程路线")->where('article_id',$articleId)->find();
+        // 判断是否为编辑图片
+        if(empty($Paragraph)){
+            $Paragraph = new Paragraph();
+        }else{
+            $imagePath = PUBLIC_PATH . '/' . $Paragraph->image;
+            Common::deleteImage($imagePath);
+        }
+        // 判断是否添加图片
+        if($judge==1){
+            // 按段落保存
+            $Paragraph->content = '';
+            $Paragraph->title = "行程路线";
+            $Paragraph->article_id = $Article->id;
+            $Paragraph->is_before_attraction = 1;
+            // 保存文件，返回路径
+            if(!is_null($routes)){
+                $imagePath = Common::uploadImage($routes);
+                $Paragraph->image = $imagePath;
+            }
+            $Paragraph->save();
+            }else{
+                $Paragraph = Paragraph::where('title',"行程路线")->where('article_id',$articleId)->find();
+                if(!empty($Paragraph)){
+                    $Paragraph->delete();
+                }
+        }
+        
 
         return $message;
     }
