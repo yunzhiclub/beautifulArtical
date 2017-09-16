@@ -50,4 +50,8 @@ class Attraction extends Model {
     public function Materials() {
         return $this->belongsToMany('Material', 'attraction_material');
     }
+
+    public function AttractionMaterials() {
+        return $this->hasMany('AttractionMaterial');
+    }
 }
