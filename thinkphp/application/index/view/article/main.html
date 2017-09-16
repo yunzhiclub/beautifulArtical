@@ -180,9 +180,9 @@
                         <div class="w3ls-text">
                             <p>&nbsp;{$attraction->getMainMaterial()->content}</p>
                             <p><b class="pfont">景点 :</b>
-                                
-                                <button class="btn btn-default btn-xs dropdown-toggle"> {$attraction->title} </button>
-
+                                {volist name="materials" id="_material"}
+                                    <button class="btn btn-default btn-xs dropdown-toggle" onclick="showDetail({$key})"> {$_material->designation} </button>
+                                {/volist}
                             </p>
                             <p><b class="pfont">酒店 :</b> {$attraction->getHotel()->designation} </p>
                             <p><b class="pfont">用餐 :</b> {$attraction->meal} </p>
@@ -303,11 +303,11 @@
     </div>
     <button></button>
     <script>
-        var a = function () {
+        var showDetail = function (index) {
             swal({
-                title: 'Sweet!',                            //景点的标题
-                text: 'Modal with a custom image.',         //这里将会写入景点的描述
-                imageUrl: 'https://unsplash.it/400/200',            //图片的地址
+                title: $materials[index]->designation,                            //景点的标题
+                text: $materials[index]->content,         //这里将会写入景点的描述
+                imageUrl: {:__ROOT__}/upload/$materials[index]->images[0],            //图片的地址
                 imageWidth: 400,                    //图片大小的设置
                 imageHeight: 200,                   //图片高度的设置
                 imageAlt: '',
