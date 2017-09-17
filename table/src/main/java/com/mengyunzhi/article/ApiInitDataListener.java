@@ -1,5 +1,7 @@
 package com.mengyunzhi.article;
 
+import com.mengyunzhi.article.repository.Paragraph;
+import com.mengyunzhi.article.repository.ParagraphRepository;
 import com.mengyunzhi.article.repository.User;
 import com.mengyunzhi.article.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,10 +27,14 @@ public class ApiInitDataListener implements ApplicationListener<ContextRefreshed
     @Autowired
     protected UserRepository userRepository;
 
+    @Autowired
+    protected ParagraphRepository paragraphRepository;
+
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
         logger.info("初始化系统管理员");
         addUser();
+        addParagraph();
     }
 
     /**
@@ -46,5 +52,35 @@ public class ApiInitDataListener implements ApplicationListener<ContextRefreshed
         user.setUsername("admin");
         user.setPassword("admin");
         userRepository.save(user);
+    }
+
+    public void addParagraph() {
+        //增加九大服务
+        Paragraph paragraph = new Paragraph();
+        paragraph.setTitle("九大服务");
+        paragraph.setContent("");
+        paragraph.setBeforeAttraction(true);
+        paragraphRepository.save(paragraph);
+        //六大品质
+        Paragraph paragraph1 = new Paragraph();
+        paragraph1.setTitle("六大品质");
+        paragraph1.setBeforeAttraction(true);
+        paragraph1.setContent("");
+        paragraphRepository.save(paragraph1);
+        Paragraph paragraph2 = new Paragraph();
+        paragraph2.setTitle("报价说明");
+        paragraph2.setContent("");
+        paragraph2.setBeforeAttraction(false);
+        paragraphRepository.save(paragraph2);
+        Paragraph paragraph3 = new Paragraph();
+        paragraph3.setTitle("费用包括");
+        paragraph3.setContent("");
+        paragraph3.setBeforeAttraction(false);
+        paragraphRepository.save(paragraph3);
+        Paragraph paragraph4 = new Paragraph();
+        paragraph4.setTitle("费用不包括");
+        paragraph4.setContent("");
+        paragraph4.setBeforeAttraction(false);
+        paragraphRepository.save(paragraph4);
     }
 }

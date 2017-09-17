@@ -15,6 +15,17 @@ public class Material {
     public Material() {
     }
 
+
+    @Override
+    public String toString() {
+        return "Material{" +
+                "id=" + id +
+                ", content='" + content + '\'' +
+                ", designation='" + designation + '\'' +
+                ", image='" + image + '\'' +
+                '}';
+    }
+
     public Long getId() {
         return id;
     }
@@ -47,13 +58,4 @@ public class Material {
         this.image = image;
     }
 
-    @Override
-    public String toString() {
-        return "Material{" +
-                "id=" + id +
-                ", content='" + content + '\'' +
-                ", designation='" + designation + '\'' +
-                ", image='" + image + '\'' +
-                '}';
-    }
 }

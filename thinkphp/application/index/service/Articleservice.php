@@ -9,6 +9,7 @@ use app\index\model\Paragraph;
 use app\index\model\Hotel;
 use app\index\model\Plan;
 use app\index\model\Contractor;
+use app\index\model\Material;
 use app\index\model\Detail;
 /**
  *
@@ -22,7 +23,7 @@ class Articleservice
      * @param param 用来穿参数
      * @param $controler 用来跳转用的
      */
-    public function addOrEditAriticle($parma)
+    public function addAriticle($parma)
     {
         //初始化返回信息
         $message = [];
@@ -30,8 +31,7 @@ class Articleservice
         $message['route'] = 'secondadd';
         $message['message'] = '添加成功，请继续完善文章详情';
 
-        //获取到参数
-        $articleId = $parma->param('articleId/d');
+        
         $title = $parma->post('title');
         $summery = $parma->post('summery');
         $contractorId = $parma->post('contractorId/d');
@@ -39,17 +39,98 @@ class Articleservice
         //实例化一个空文章
         $Article = new Article();
 
+        // 新增的时候有没有上传图片
+        if(is_null($file)) {
+            $message['status'] = 'error';
+            $message['message'] = '请上传图片';
+            $message['route'] = 'firstadd';
+            return $message;
+        }
+        
+        $Article->title = $title;
+        $Article->summery = $summery;
+        $Article->contractor_id = $contractorId;
+
+        $imagePath = Common::uploadImage($file);
+        $Article->cover = $imagePath;
+        
+        if($Article->save()) {
+            //保存成功
+            $message['param']['articleId'] = $Article->id;
+        } else {
+            //保存失败
+            $message['status'] = 'error';
+            $message['message'] = '没有添加成功，请重新添加';
+            $message['route'] = 'firstadd';
+        }
+        // firstadd界面传入行程路线图片
+        $routes = request()->file('routes');
+        $judge = request()->post('optionsRadios');
+        $Paragraph = new Paragraph();
+        
+        // 判断是否添加图片
+        if($judge==1){
+            // 按段落保存
+            $Paragraph->content = '';
+            $Paragraph->title = "行程路线";
+            $Paragraph->article_id = $Article->id;
+            $Paragraph->is_before_attraction = 1;
+            // 保存文件，返回路径
+            if(!is_null($routes)){
+                $imagePath = Common::uploadImage($routes);
+                $Paragraph->image = $imagePath;
+            }
+            $Paragraph->save();
+            }
         
 
-        if(!is_null($articleId)) {
-            //编辑文章
-            $Article = Article::get($articleId);
-            // 判断图片是否更改
-            if(!is_null($file)) {
-                // 删除之前保存的图片,这样写是有问题的有待改进(增加附件列表上传后进行sha1加密，比较两个文件时候相同后再进行删除)
-                $imagePath = PUBLIC_PATH . '/' . $Article->cover;
-                Common::deleteImage($imagePath);
-            }
+        $especialMassageService = $parma->post('especialMassageService');
+        $especialMassageQuality = $parma->post('especialMassageQuality');
+        $especialMassageQuotes = $parma->post('especialMassageQuotes');
+        $especialMassageCost = $parma->post('especialMassageCost');
+        $especialMassageNoCost = $parma->post('especialMassageNoCost');
+        // 将默认的段落添加到景点中
+        if(!empty($especialMassageService)){
+            $this->especialName($especialMassageService,$Article->id);
+        }
+        if(!empty($especialMassageQuality)){
+            $this->especialName($especialMassageQuality,$Article->id);
+        }
+        if(!empty($especialMassageQuotes)){
+            $this->especialName($especialMassageQuotes,$Article->id);
+        }
+        if(!empty($especialMassageCost)){
+            $this->especialName($especialMassageCost,$Article->id);
+        }
+        if(!empty($especialMassageNoCost)){
+            $this->especialName($especialMassageNoCost,$Article->id);
+        }
+        
+        return $message;
+    }
+    public function EditAriticle($parma)
+    {
+        //初始化返回信息
+        $message = [];
+        $message['status'] = 'success';
+        $message['route'] = 'secondadd';
+        $message['message'] = '添加成功，请继续完善文章详情';
+        //获取到参数
+        $articleId = $parma->param('articleId/d');
+        $title = $parma->post('title');
+        $summery = $parma->post('summery');
+        $contractorId = $parma->post('contractorId/d');
+        $file = request()->file('image');
+        //实例化一个空文章
+
+        //编辑文章
+        $Article = Article::get($articleId);
+        // 判断图片是否更改
+        if(!is_null($file)) {
+            // 删除之前保存的图片,这样写是有问题的有待改进(增加附件列表上传后进行sha1加密，比较两个文件时候相同后再进行删除)
+            $imagePath = PUBLIC_PATH . '/' . $Article->cover;
+            Common::deleteImage($imagePath);
+        }
             if( $Article->title == $title && $Article->summery == $summery && is_null($file) && $Article->contractor_id == $contractorId){
                 $message['status'] = 'success';
                 $message['message'] = '修改成功';
@@ -57,15 +138,7 @@ class Articleservice
                 $message['param']['articleId'] = $Article->id;
                 return $message;
             }
-        } else {
-            // 新增的时候有没有上传图片
-            if(is_null($file)) {
-                $message['status'] = 'error';
-                $message['message'] = '请上传图片';
-                $message['route'] = 'firstadd';
-                return $message;
-            }
-        }
+        
         
         $Article->title = $title;
         $Article->summery = $summery;
@@ -80,20 +153,15 @@ class Articleservice
         if($Article->save()) {
             //保存成功
             $message['param']['articleId'] = $Article->id;
-        } else {
-            //保存失败
-            $message['status'] = 'error';
-            $message['message'] = '没有添加成功，请重新添加';
-            $message['route'] = 'firstadd';
         }
         // firstadd界面传入行程路线图片
         $routes = request()->file('routes');
         $judge = request()->post('optionsRadios');
         $Paragraph = Paragraph::where('title',"行程路线")->where('article_id',$articleId)->find();
-        // 判断是否为编辑图片
         if(empty($Paragraph)){
-            $Paragraph = new Paragraph();
-        }else{
+            $Paragraph = new Paragraph;
+        }
+        if(!empty( $Paragraph->image)){
             $imagePath = PUBLIC_PATH . '/' . $Paragraph->image;
             Common::deleteImage($imagePath);
         }
@@ -116,9 +184,23 @@ class Articleservice
                     $Paragraph->delete();
                 }
         }
-        
-
         return $message;
+    }
+    public function especialName($especialmassage,$articleId) {
+        $Paragraph = Paragraph::where('title',$especialmassage)->where('article_id',null)->find();
+
+        $newParagraph = new Paragraph;
+        $newParagraph->title = $Paragraph->title;
+        $newParagraph->content = $Paragraph->content;
+        var_dump($Paragraph->is_before_attraction);
+        if($Paragraph->is_before_attraction == 0){
+            $newParagraph->is_before_attraction = false;
+        }else{
+            $newParagraph->is_before_attraction = true;
+        }      
+        $newParagraph->article_id = $articleId;
+
+        $newParagraph->save();
     }
     public function upAttraction($param) {
         // 获取参数
