@@ -172,7 +172,8 @@ class ArticleController extends IndexController {
         $param = Request::instance();
 
         // 调用Service层保存操作
-        $message = PlanService::save($param);
+        $planService = new PlanService();
+        $message = $planService->save($param);
 
         // 返回相应信息
         if ($message['status'] === 'success') {
