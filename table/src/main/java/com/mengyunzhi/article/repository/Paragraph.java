@@ -27,6 +27,19 @@ public class Paragraph {
     // 是否景点前
     private boolean isBeforeAttraction;
 
+    @Override
+    public String toString() {
+        return "Paragraph{" +
+                "id=" + id +
+                ", article=" + article +
+                ", title='" + title + '\'' +
+                ", content='" + content + '\'' +
+                ", image='" + image + '\'' +
+                ", weight=" + weight +
+                ", isBeforeAttraction=" + isBeforeAttraction +
+                '}';
+    }
+
     public Paragraph() {
     }
 
@@ -93,19 +106,6 @@ public class Paragraph {
 
     public void setBeforeAttraction(boolean beforeAttraction) {
         isBeforeAttraction = beforeAttraction;
-    }
-
-    @Override
-    public String toString() {
-        return "Paragraph{" +
-                "id=" + id +
-                ", article=" + article +
-                ", title='" + title + '\'' +
-                ", content='" + content + '\'' +
-                ", image='" + image + '\'' +
-                ", weight=" + weight +
-                ", isBeforeAttraction=" + isBeforeAttraction +
-                '}';
     }
 
 }
