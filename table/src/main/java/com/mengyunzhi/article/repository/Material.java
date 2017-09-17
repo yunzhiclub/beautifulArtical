@@ -10,7 +10,7 @@ public class Material {
     @Column(length = 3000)
     private String content;         //描述
     private String designation;     //名称
-    private String image;           //图片
+    private String images;          //图片
 
     public Material() {
     }
@@ -22,7 +22,7 @@ public class Material {
                 "id=" + id +
                 ", content='" + content + '\'' +
                 ", designation='" + designation + '\'' +
-                ", image='" + image + '\'' +
+                ", image='" + images + '\'' +
                 '}';
     }
 
@@ -50,12 +50,12 @@ public class Material {
         this.designation = designation;
     }
 
-    public String getImage() {
-        return image;
+    public String getImages() {
+        return images;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setImages(String images) {
+        this.images = images;
     }
-
+    
 }

@@ -373,33 +373,25 @@ class Articleservice
     }
 
     public function MoneyFormate($Plans) {
-        $message = [];
-        // 设置价格的初始值为0
-        $message['detailZhusuUnit'] = 0;
-        $message['detailZhusuTotal'] = 0;
-        $message['detailDijieUnit'] = 0;
-        $message['detailDijieTotal'] = 0;
+                
         // 遍历传入的报价方案    
         foreach ($Plans as $key => $value) {
-            // 总金额
-            $planTotalCost = $this->fromate($value->total_cost);
-            $value->total_cost = $planTotalCost;
-            // 格式化住宿金额
-            $detailZhusuUnit = $this->fromate($value->getDetailByType('zhusu')->unit_price);
-            $message['detailZhusuUnit'] = $detailZhusuUnit;
+            // 格式化总金额
+            $TotalCost = $this->fromate($value->total_cost);
+            $value->total_cost = $TotalCost;
 
-            $detailZhusuTotal = $this->fromate($value->getDetailByType('zhusu')->total_price);
-            $message['detailZhusuTotal'] = $detailZhusuTotal;
+            // 格式化成人单价
+            $adultUnitPrice = $this->fromate($value->adult_unit_price);
+            $value->adult_unit_price = $adultUnitPrice;
 
-            // 格式化地接金额
-            $detailDijieUnit = $this->fromate($value->getDetailByType('dijie')->unit_price);
-            $message['detailDijieUnit'] = $detailDijieUnit;
-            
-            $detailDijieTotal = $this->fromate($value->getDetailByType('dijie')->total_price);
-            $message['detailDijieTotal'] = $detailDijieTotal;
-            
+            // 格式化儿童单价
+            $childUnitPrice = $this->fromate($value->child_unit_price);
+            $value->child_unit_price = $childUnitPrice;
+
+            // 格式化总价
+            $totalPrice = $this->fromate($value->total_price);
+            $value->total_price = $totalPrice;    
         }
-        return $message;
     }
     // 格式化金额函数
     public function fromate($money){
