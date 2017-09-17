@@ -20,34 +20,32 @@
     <div class="container">
         <hr>
     </div>
-    <ul class="container list-unstyled" style="min-height: 570px;">
-        {volist name="hotels" id="hotel"}
-        <li class="col-md-4" style="height: 275px;margin: 5px 0;">
-            <div style="border:#F8F8F8 solid 1px;margin: 2px -8px;">
-                <div class="row">
-                    <div class="col-md-10 col-md-offset-1">
-                        <h3 style="overflow: hidden;white-space:nowrap;text-overflow: ellipsis;">{$hotel->designation}</h3>
-                    </div>
-                </div>
-                <hr />
-                <div class="row" style="height: 125px;">
-                    <div class="col-md-11 col-md-offset-1">
-                        <p style="overflow: hidden;white-space:nowrap;text-overflow: ellipsis;">所在城市：{$hotel->city}</p>
-                        <p style="overflow: hidden;white-space:nowrap;text-overflow: ellipsis;">星级：{$hotel->star_level}</p>
-                        <p style="word-wrap:break-word;">备注：{$common->limitWordNumber($hotel->remark, 80)}</p>
-                    </div>
-                </div>
-                <div class="row" style="margin-top: 5px;margin-bottom: 5px;">
+    <ul class="container list-unstyled" style="min-height: 300px;">
+        <table class="table table-hover table-bordered">
+            <tr class="info">
+                <th>目的城市</th>
+                <th>目的国家</th>
+                <th>星级</th>
+                <th>备注</th>
+                <th>操作</th>
+            </tr>
+            {volist name="hotels" id="hotel"}
+            <tr>
+                <td>{$hotel->city}</td>
+                <td>{$hotel->country}</td>
+                <td>{$hotel->star_level}</td>
+                <td>{$common->limitWordNumber($hotel->remark, 80)}</td>
+                <td>
                     <div class="col-md-1 col-md-offset-1">
                         <a href="{:url('hotel/edit', ['hotelId' => $hotel->id])}" class="btn btn-info btn-sm"><i class="glyphicon glyphicon-pencil"></i>&nbsp;编辑</a>
                     </div>
                     <div class="col-md-1 col-md-offset-2">
                         <a href="{:url('hotel/delete', ['hotelId' => $hotel->id])}" class="btn btn-danger btn-sm"><i class="glyphicon glyphicon-trash"></i>&nbsp;删除</a>
                     </div>
-                </div>
-            </div>
-        </li>
-        {/volist}
+                </td>
+            </tr>
+            {/volist}
+        </table>       
     </ul>
     <div class="container text-right" style="height: 79px;">
         {$hotels->render()}

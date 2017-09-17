@@ -57,5 +57,5 @@ public class Material {
     public void setImages(String images) {
         this.images = images;
     }
-    
+
 }
