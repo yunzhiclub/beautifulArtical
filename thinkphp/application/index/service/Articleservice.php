@@ -22,6 +22,7 @@ class Articleservice
     /*
      * @param param 用来穿参数
      * @param $controler 用来跳转用的
+     * firstadd界面的内容增加
      */
     public function addAriticle($parma)
     {
@@ -31,7 +32,6 @@ class Articleservice
         $message['route'] = 'secondadd';
         $message['message'] = '添加成功，请继续完善文章详情';
 
-        
         $title = $parma->post('title');
         $summery = $parma->post('summery');
         $contractorId = $parma->post('contractorId/d');
@@ -81,9 +81,7 @@ class Articleservice
                 $Paragraph->image = $imagePath;
             }
             $Paragraph->save();
-            }
-        
-
+        }
         $especialMassageService = $parma->post('especialMassageService');
         $especialMassageQuality = $parma->post('especialMassageQuality');
         $especialMassageQuotes = $parma->post('especialMassageQuotes');
@@ -108,6 +106,7 @@ class Articleservice
         
         return $message;
     }
+    // firstadd的界面編輯
     public function EditAriticle($parma)
     {
         //初始化返回信息
@@ -121,7 +120,6 @@ class Articleservice
         $summery = $parma->post('summery');
         $contractorId = $parma->post('contractorId/d');
         $file = request()->file('image');
-        //实例化一个空文章
 
         //编辑文章
         $Article = Article::get($articleId);
@@ -131,15 +129,13 @@ class Articleservice
             $imagePath = PUBLIC_PATH . '/' . $Article->cover;
             Common::deleteImage($imagePath);
         }
-            if( $Article->title == $title && $Article->summery == $summery && is_null($file) && $Article->contractor_id == $contractorId){
+        if( $Article->title == $title && $Article->summery == $summery && is_null($file) && $Article->contractor_id == $contractorId){
                 $message['status'] = 'success';
                 $message['message'] = '修改成功';
                 $message['route'] = 'secondadd';
                 $message['param']['articleId'] = $Article->id;
                 return $message;
-            }
-        
-        
+        }
         $Article->title = $title;
         $Article->summery = $summery;
         $Article->contractor_id = $contractorId;
@@ -149,7 +145,6 @@ class Articleservice
             $imagePath = Common::uploadImage($file);
             $Article->cover = $imagePath;
         }
-        
         if($Article->save()) {
             //保存成功
             $message['param']['articleId'] = $Article->id;
@@ -186,13 +181,13 @@ class Articleservice
         }
         return $message;
     }
+    // 添加文章的固定内容
     public function especialName($especialmassage,$articleId) {
         $Paragraph = Paragraph::where('title',$especialmassage)->where('article_id',null)->find();
 
         $newParagraph = new Paragraph;
         $newParagraph->title = $Paragraph->title;
         $newParagraph->content = $Paragraph->content;
-        var_dump($Paragraph->is_before_attraction);
         if($Paragraph->is_before_attraction == 0){
             $newParagraph->is_before_attraction = false;
         }else{
