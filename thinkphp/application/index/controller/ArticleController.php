@@ -111,13 +111,20 @@ class ArticleController extends IndexController {
             $currency = $Plans[0]->currency;
             $totalCost = $Plans[0]->total_cost;
             $lastPayTime = $Plans[0]->last_pay_time;
-
         } else {
             $adultNum = '';
             $childNum = '';
             $currency = '';
             $totalCost = '';
             $lastPayTime = '';
+            for ($i=0; $i<4; $i++) {
+                $Plans[$i] = new Plan();
+                $Plans[$i]->adult_unit_price = '';
+                $Plans[$i]->child_unit_price = '';
+                $Plans[$i]->total_price = '';
+                $Plans[$i]->remark = '';
+                $this->assign('plans[$i]', $Plans[$i]);
+            }
         }
         
         // 方案报价字段传向前台
