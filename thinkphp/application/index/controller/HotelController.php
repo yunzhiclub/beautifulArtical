@@ -44,6 +44,34 @@ class HotelController extends IndexController {
         $this->assign('hotels', $hotels);
         return $this->fetch();
     }
+    // 以国家显示
+    public function country()
+    {
+    	$pageSize = config('paginate.var_page');
+    	$Hotels = Hotel::order('id desc')->paginate($pageSize);
+    	$countrys = [];
+        $this->assign('common', new Common());
+    	$this->assign('hotels',$Hotels);
+        return $this->fetch('index'); 
+    }
+    // 以城市显示
+    public function city()
+    {
+    	$pageSize = config('paginate.var_page');
+    	$hotels = Hotel::order('city desc')->paginate($pageSize);    
+        $this->assign('common', new Common());
+    	$this->assign('hotels',$hotels);
+        return $this->fetch('index');    
+    }
+    //以星级显示
+    public function starlevel()
+    { 
+        $pageSize = config('paginate.var_page');
+    	$hotels = Hotel::order('star_level desc')->paginate($pageSize);
+        $this->assign('common', new Common());
+    	$this->assign('hotels',$hotels);
+        return $this->fetch('index');   
+    }
 
     public function add() {
         $hotel = $this->HotelService->getNullHotel();
