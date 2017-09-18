@@ -15,10 +15,15 @@ public class Material {
     public Material() {
     }
 
-    public Material(String content, String designation, String images) {
-        this.content = content;
-        this.designation = designation;
-        this.images = images;
+
+    @Override
+    public String toString() {
+        return "Material{" +
+                "id=" + id +
+                ", content='" + content + '\'' +
+                ", designation='" + designation + '\'' +
+                ", image='" + images + '\'' +
+                '}';
     }
 
     public Long getId() {
@@ -53,13 +58,4 @@ public class Material {
         this.images = images;
     }
 
-    @Override
-    public String toString() {
-        return "Material{" +
-                "id=" + id +
-                ", content='" + content + '\'' +
-                ", designation='" + designation + '\'' +
-                ", images='" + images + '\'' +
-                '}';
-    }
 }

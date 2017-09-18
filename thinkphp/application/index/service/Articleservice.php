@@ -9,6 +9,7 @@ use app\index\model\Paragraph;
 use app\index\model\Hotel;
 use app\index\model\Plan;
 use app\index\model\Contractor;
+use app\index\model\Material;
 use app\index\model\Detail;
 /**
  *
@@ -21,8 +22,9 @@ class Articleservice
     /*
      * @param param 用来穿参数
      * @param $controler 用来跳转用的
+     * firstadd界面的内容增加
      */
-    public function addOrEditAriticle($parma)
+    public function addAriticle($parma)
     {
         //初始化返回信息
         $message = [];
@@ -30,8 +32,6 @@ class Articleservice
         $message['route'] = 'secondadd';
         $message['message'] = '添加成功，请继续完善文章详情';
 
-        //获取到参数
-        $articleId = $parma->param('articleId/d');
         $title = $parma->post('title');
         $summery = $parma->post('summery');
         $contractorId = $parma->post('contractorId/d');
@@ -39,43 +39,20 @@ class Articleservice
         //实例化一个空文章
         $Article = new Article();
 
-        
-
-        if(!is_null($articleId)) {
-            //编辑文章
-            $Article = Article::get($articleId);
-            // 判断图片是否更改
-            if(!is_null($file)) {
-                // 删除之前保存的图片,这样写是有问题的有待改进(增加附件列表上传后进行sha1加密，比较两个文件时候相同后再进行删除)
-                $imagePath = PUBLIC_PATH . '/' . $Article->cover;
-                Common::deleteImage($imagePath);
-            }
-            if( $Article->title == $title && $Article->summery == $summery && is_null($file) && $Article->contractor_id == $contractorId){
-                $message['status'] = 'success';
-                $message['message'] = '修改成功';
-                $message['route'] = 'secondadd';
-                $message['param']['articleId'] = $Article->id;
-                return $message;
-            }
-        } else {
-            // 新增的时候有没有上传图片
-            if(is_null($file)) {
-                $message['status'] = 'error';
-                $message['message'] = '请上传图片';
-                $message['route'] = 'firstadd';
-                return $message;
-            }
+        // 新增的时候有没有上传图片
+        if(is_null($file)) {
+            $message['status'] = 'error';
+            $message['message'] = '请上传图片';
+            $message['route'] = 'firstadd';
+            return $message;
         }
         
         $Article->title = $title;
         $Article->summery = $summery;
         $Article->contractor_id = $contractorId;
 
-        if(!is_null($file)) {
-            // 保存文件，返回路径
-            $imagePath = Common::uploadImage($file);
-            $Article->cover = $imagePath;
-        }
+        $imagePath = Common::uploadImage($file);
+        $Article->cover = $imagePath;
         
         if($Article->save()) {
             //保存成功
@@ -89,11 +66,97 @@ class Articleservice
         // firstadd界面传入行程路线图片
         $routes = request()->file('routes');
         $judge = request()->post('optionsRadios');
+        $Paragraph = new Paragraph();
+        
+        // 判断是否添加图片
+        if($judge==1){
+            // 按段落保存
+            $Paragraph->content = '';
+            $Paragraph->title = "行程路线";
+            $Paragraph->article_id = $Article->id;
+            $Paragraph->is_before_attraction = 1;
+            // 保存文件，返回路径
+            if(!is_null($routes)){
+                $imagePath = Common::uploadImage($routes);
+                $Paragraph->image = $imagePath;
+            }
+            $Paragraph->save();
+        }
+        $especialMassageService = $parma->post('especialMassageService');
+        $especialMassageQuality = $parma->post('especialMassageQuality');
+        $especialMassageQuotes = $parma->post('especialMassageQuotes');
+        $especialMassageCost = $parma->post('especialMassageCost');
+        $especialMassageNoCost = $parma->post('especialMassageNoCost');
+        // 将默认的段落添加到景点中
+        if(!empty($especialMassageService)){
+            $this->especialName($especialMassageService,$Article->id);
+        }
+        if(!empty($especialMassageQuality)){
+            $this->especialName($especialMassageQuality,$Article->id);
+        }
+        if(!empty($especialMassageQuotes)){
+            $this->especialName($especialMassageQuotes,$Article->id);
+        }
+        if(!empty($especialMassageCost)){
+            $this->especialName($especialMassageCost,$Article->id);
+        }
+        if(!empty($especialMassageNoCost)){
+            $this->especialName($especialMassageNoCost,$Article->id);
+        }
+        
+        return $message;
+    }
+    // firstadd的界面編輯
+    public function EditAriticle($parma)
+    {
+        //初始化返回信息
+        $message = [];
+        $message['status'] = 'success';
+        $message['route'] = 'secondadd';
+        $message['message'] = '添加成功，请继续完善文章详情';
+        //获取到参数
+        $articleId = $parma->param('articleId/d');
+        $title = $parma->post('title');
+        $summery = $parma->post('summery');
+        $contractorId = $parma->post('contractorId/d');
+        $file = request()->file('image');
+
+        //编辑文章
+        $Article = Article::get($articleId);
+        // 判断图片是否更改
+        if(!is_null($file)) {
+            // 删除之前保存的图片,这样写是有问题的有待改进(增加附件列表上传后进行sha1加密，比较两个文件时候相同后再进行删除)
+            $imagePath = PUBLIC_PATH . '/' . $Article->cover;
+            Common::deleteImage($imagePath);
+        }
+        if( $Article->title == $title && $Article->summery == $summery && is_null($file) && $Article->contractor_id == $contractorId){
+                $message['status'] = 'success';
+                $message['message'] = '修改成功';
+                $message['route'] = 'secondadd';
+                $message['param']['articleId'] = $Article->id;
+                return $message;
+        }
+        $Article->title = $title;
+        $Article->summery = $summery;
+        $Article->contractor_id = $contractorId;
+
+        if(!is_null($file)) {
+            // 保存文件，返回路径
+            $imagePath = Common::uploadImage($file);
+            $Article->cover = $imagePath;
+        }
+        if($Article->save()) {
+            //保存成功
+            $message['param']['articleId'] = $Article->id;
+        }
+        // firstadd界面传入行程路线图片
+        $routes = request()->file('routes');
+        $judge = request()->post('optionsRadios');
         $Paragraph = Paragraph::where('title',"行程路线")->where('article_id',$articleId)->find();
-        // 判断是否为编辑图片
         if(empty($Paragraph)){
-            $Paragraph = new Paragraph();
-        }else{
+            $Paragraph = new Paragraph;
+        }
+        if(!empty( $Paragraph->image)){
             $imagePath = PUBLIC_PATH . '/' . $Paragraph->image;
             Common::deleteImage($imagePath);
         }
@@ -116,9 +179,23 @@ class Articleservice
                     $Paragraph->delete();
                 }
         }
-        
-
         return $message;
+    }
+    // 添加文章的固定内容
+    public function especialName($especialmassage,$articleId) {
+        $Paragraph = Paragraph::where('title',$especialmassage)->where('article_id',null)->find();
+
+        $newParagraph = new Paragraph;
+        $newParagraph->title = $Paragraph->title;
+        $newParagraph->content = $Paragraph->content;
+        if($Paragraph->is_before_attraction == 0){
+            $newParagraph->is_before_attraction = false;
+        }else{
+            $newParagraph->is_before_attraction = true;
+        }      
+        $newParagraph->article_id = $articleId;
+
+        $newParagraph->save();
     }
     public function upAttraction($param) {
         // 获取参数
@@ -291,33 +368,25 @@ class Articleservice
     }
 
     public function MoneyFormate($Plans) {
-        $message = [];
-        // 设置价格的初始值为0
-        $message['detailZhusuUnit'] = 0;
-        $message['detailZhusuTotal'] = 0;
-        $message['detailDijieUnit'] = 0;
-        $message['detailDijieTotal'] = 0;
+                
         // 遍历传入的报价方案    
         foreach ($Plans as $key => $value) {
-            // 总金额
-            $planTotalCost = $this->fromate($value->total_cost);
-            $value->total_cost = $planTotalCost;
-            // 格式化住宿金额
-            $detailZhusuUnit = $this->fromate($value->getDetailByType('zhusu')->unit_price);
-            $message['detailZhusuUnit'] = $detailZhusuUnit;
+            // 格式化总金额
+            $TotalCost = $this->fromate($value->total_cost);
+            $value->total_cost = $TotalCost;
 
-            $detailZhusuTotal = $this->fromate($value->getDetailByType('zhusu')->total_price);
-            $message['detailZhusuTotal'] = $detailZhusuTotal;
+            // 格式化成人单价
+            $adultUnitPrice = $this->fromate($value->adult_unit_price);
+            $value->adult_unit_price = $adultUnitPrice;
 
-            // 格式化地接金额
-            $detailDijieUnit = $this->fromate($value->getDetailByType('dijie')->unit_price);
-            $message['detailDijieUnit'] = $detailDijieUnit;
-            
-            $detailDijieTotal = $this->fromate($value->getDetailByType('dijie')->total_price);
-            $message['detailDijieTotal'] = $detailDijieTotal;
-            
+            // 格式化儿童单价
+            $childUnitPrice = $this->fromate($value->child_unit_price);
+            $value->child_unit_price = $childUnitPrice;
+
+            // 格式化总价
+            $totalPrice = $this->fromate($value->total_price);
+            $value->total_price = $totalPrice;    
         }
-        return $message;
     }
     // 格式化金额函数
     public function fromate($money){

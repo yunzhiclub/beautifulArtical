@@ -42,43 +42,63 @@ class ArticleController extends IndexController {
 	}
     // 返回firstadd界面
     public function firstadd(){
-        $articleId = Request::instance()->param('articleId/d');
         // 获取所有定制师
         $contractors = Contractor::all();
         $this->assign('contractors',$contractors);
         // 判断是否为重写界面
-        if( is_null($articleId)){
             $this->assign('title', '');
             $this->assign('summery', '');
             $this->assign('cover', '');
             $this->assign('articleId', '');
             $this->assign('contractorId', '');
             $this->assign('route','');
-            return $this->fetch();
-        }else{
-            $Article = Article::get($articleId);
-            $this->assign('title', $Article->title);
-            $this->assign('summery', $Article->summery);
-            $this->assign('cover', $Article->cover);
-            $this->assign('articleId', $articleId);
-            $this->assign('contractorId', $Article->contractor_id);
-            $Paragraph = Paragraph::where('title',"行程路线")->where('article_id',$articleId)->find();
-            if(!empty($Paragraph)){
-                $this->assign('route',$Paragraph->image);
-            }else{
-                $this->assign('route',1);
-            }
-            return $this->fetch();
-        }
+            return $this->fetch();  
     }
-    // firstadd界面完成后触发时间
-    public function addfirst(){
+     // firstadd界面完成后触发时间
+    public function savefirstadd(){
 
         //接受参数
         $param = Request::instance();
 
         //调用service中的保存方法
-        $message =  $this->articleService->addOrEditAriticle($param);
+        $message =  $this->articleService->addAriticle($param);
+
+        //返回相应的界面
+        if ($message['status'] === 'success') {
+            //跳转成功的界面
+            $this->success($message['message'], url($message['route'], ['articleId' => $message['param']['articleId']]));
+
+        } else {
+            //跳转失败的界面
+            $this->error($message['message']);
+        }
+    }
+    // 编辑firstadd界面 
+    public function editfirstadd() {
+        $articleId = Request::instance()->param('articleId/d');
+        // 获取所有定制师
+        $contractors = Contractor::all();
+        $this->assign('contractors',$contractors);
+        $Article = Article::get($articleId);
+        $this->assign('title', $Article->title);
+        $this->assign('summery', $Article->summery);
+        $this->assign('cover', $Article->cover);
+        $this->assign('articleId', $articleId);
+        $this->assign('contractorId', $Article->contractor_id);
+        $Paragraph = Paragraph::where('title',"行程路线")->where('article_id',$articleId)->find();
+        if(!empty($Paragraph)){
+            $this->assign('route',$Paragraph->image);
+        }else{
+            $this->assign('route',1);
+        }
+        return $this->fetch('firstadd');
+    }
+    public function updatefirstadd(){
+        //接受参数
+        $param = Request::instance();
+
+        //调用service中的保存方法
+        $message =  $this->articleService->EditAriticle($param);
 
         //返回相应的界面
         if ($message['status'] === 'success') {
@@ -99,9 +119,40 @@ class ArticleController extends IndexController {
         $articleId = $param->param('articleId');
         $Plan = new Plan();
         $Plans = $Plan->getPlanByArticleId($articleId);
-        // 使用number_format 格式化输入金额
-        $date = $this->articleService->MoneyFormate($Plans);
 
+        // 报价方案为空
+        if (!empty($Plans)) {
+            // 使用number_format 格式化输入金额
+            $date = $this->articleService->MoneyFormate($Plans);
+
+            // 获取报价方案相同的字段
+            $adultNum = $Plans[0]->adult_num;
+            $childNum = $Plans[0]->child_num;
+            $currency = $Plans[0]->currency;
+            $totalCost = $Plans[0]->total_cost;
+            $lastPayTime = $Plans[0]->last_pay_time;
+        } else {
+            $adultNum = '';
+            $childNum = '';
+            $currency = '';
+            $totalCost = '';
+            $lastPayTime = '';
+            for ($i=0; $i<4; $i++) {
+                $Plans[$i] = new Plan();
+                $Plans[$i]->adult_unit_price = '';
+                $Plans[$i]->child_unit_price = '';
+                $Plans[$i]->total_price = '';
+                $Plans[$i]->remark = '';
+                $this->assign('plans[$i]', $Plans[$i]);
+            }
+        }
+        
+        // 方案报价字段传向前台
+        $this->assign('adultNum', $adultNum);
+        $this->assign('childNum', $childNum);
+        $this->assign('currency', $currency);
+        $this->assign('totalCost', $totalCost);
+        $this->assign('lastPayTime', $lastPayTime);
         $this->assign('plans', $Plans);
         // 调用service中的保存方法
         $message = $this->articleService->secondAriticle($param);
@@ -148,7 +199,8 @@ class ArticleController extends IndexController {
         $param = Request::instance();
 
         // 调用Service层保存操作
-        $message = PlanService::save($param);
+        $planService = new PlanService();
+        $message = $planService->save($param);
 
         // 返回相应信息
         if ($message['status'] === 'success') {

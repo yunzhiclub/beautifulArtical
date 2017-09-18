@@ -13,8 +13,8 @@ class Plan extends Model
         return $this->where('article_id','=',$articleId)->select();
     }
 
-    public function getDetailByType($type) {
-        $map = ['type' => $type, 'plan_id' => $this->id];
-        return Detail::get($map);
+    public function getPlanByType($type) {
+    	$Plan = $this->get($type);
+    	return $Plan;
     }
 }
