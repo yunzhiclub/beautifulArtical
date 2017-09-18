@@ -137,7 +137,7 @@
                 </div>
             </li>
             <!--方案报价-->
-            {eq name="$totalCost" value=""}
+            <!-- {eq name="$totalCost" value=""}
             {else /}
             <li>
                 <div class="panel panel-default">
@@ -184,7 +184,7 @@
                     </div>
                 </div>
             </li>
-            {/eq}
+            {/eq} -->
             <li>
                 <div>
                     <table class="table table-hover table-responsive table-bordered" style="word-break:break-all;">
@@ -224,11 +224,11 @@
                                         <hr>
                                         <div class="form-group col-md-3">
                                             <label>成人数</label>
-                                            <input type="number" class="form-control" id="adultNum" name="adultNum" placeholder="成人...">
+                                            <input type="number" class="form-control" id="adultNum" name="adultNum" placeholder="成人..." value="{$adultNum}">
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label>儿童数</label>
-                                            <input type="number" class="form-control" id="childNum" name="childNum" placeholder="儿童...">
+                                            <input type="number" class="form-control" id="childNum" name="childNum" placeholder="儿童..." value="{$childNum}">
                                         </div>
                                     </div>
                                     <div class="control-group">
@@ -236,19 +236,19 @@
                                         <hr>
                                         <div class="form-group col-md-3">
                                             <label>成人单价</label>
-                                            <input type="text" class="form-control" id="adultUnitPrice" name="plainAdultUnitPrice" placeholder="成人单价...">
+                                            <input type="text" class="form-control" id="adultUnitPrice" name="plainAdultUnitPrice" placeholder="成人单价..." value="{$plans[0]->adult_unit_price}">
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label>儿童单价</label>
-                                            <input type="text" class="form-control" id="childUnitPrice" name="plainChildUnitPrice" placeholder="儿童单价...">
+                                            <input type="text" class="form-control" id="childUnitPrice" name="plainChildUnitPrice" placeholder="儿童单价..." value="{$plans[0]->child_unit_price}">
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label>总价</label>
-                                            <input type="text" class="form-control" id="totalPrice" name="plainTotalPrice" placeholder="总价...">
+                                            <input type="text" class="form-control" id="totalPrice" name="plainTotalPrice" placeholder="总价..." value="{$plans[0]->total_price}">
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label>备注</label>
-                                            <input type="text" class="form-control" id="remark" name="plainRemark" placeholder="备注...">
+                                            <input type="text" class="form-control" id="remark" name="plainRemark" placeholder="备注..." value="{$plans[0]->remark}">
                                         </div>
                                     </div>
                                     <div class="control-group">
@@ -256,19 +256,19 @@
                                         <hr>
                                         <div class="form-group col-md-3">
                                             <label>成人单价</label>
-                                            <input type="text" class="form-control" id="adultUnitPrice" name="visaAdultUnitPrice" placeholder="成人单价...">
+                                            <input type="text" class="form-control" id="adultUnitPrice" name="visaAdultUnitPrice" placeholder="成人单价..." value="{$plans[1]->adult_unit_price}">
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label>儿童单价</label>
-                                            <input type="text" class="form-control" id="visaChildUnitPrice" name="childUnitPrice" placeholder="儿童单价...">
+                                            <input type="text" class="form-control" id="visaChildUnitPrice" name="childUnitPrice" placeholder="儿童单价..." value="{$plans[1]->child_unit_price}">
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label>总价</label>
-                                            <input type="text" class="form-control" id="totalPrice" name="visaTotalPrice" placeholder="总价...">
+                                            <input type="text" class="form-control" id="totalPrice" name="visaTotalPrice" placeholder="总价..." value="{$plans[1]->total_price}">
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label>备注</label>
-                                            <input type="text" class="form-control" id="remark" name="visaRemark" placeholder="备注...">
+                                            <input type="text" class="form-control" id="remark" name="visaRemark" placeholder="备注..." value="{$plans[1]->remark}">
                                         </div>
                                     </div>
                                     <div class="control-group">
@@ -276,19 +276,19 @@
                                         <hr>
                                         <div class="form-group col-md-3">
                                             <label>成人单价</label>
-                                            <input type="text" class="form-control" id="adultUnitPrice" name="travelAdultUnitPrice" placeholder="成人单价...">
+                                            <input type="text" class="form-control" id="adultUnitPrice" name="travelAdultUnitPrice" placeholder="成人单价..." value="{$plans[2]->adult_unit_price}">
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label>儿童单价</label>
-                                            <input type="text" class="form-control" id="childUnitPrice" name="travelChildUnitPrice" placeholder="儿童单价...">
+                                            <input type="text" class="form-control" id="childUnitPrice" name="travelChildUnitPrice" placeholder="儿童单价..." value="{$plans[2]->child_unit_price}">
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label>总价</label>
-                                            <input type="text" class="form-control" id="totalPrice" name="travelTotalPrice" placeholder="总价...">
+                                            <input type="text" class="form-control" id="totalPrice" name="travelTotalPrice" placeholder="总价..." value="{$plans[2]->total_price}">
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label>备注</label>
-                                            <input type="text" class="form-control" id="remark" name="travelRemark" placeholder="备注...">
+                                            <input type="text" class="form-control" id="remark" name="travelRemark" placeholder="备注..." value="{$plans[2]->remark}">
                                         </div>
                                     </div>
                                     <div class="control-group">
@@ -296,39 +296,39 @@
                                         <hr>
                                         <div class="form-group col-md-3">
                                             <label>成人单价</label>
-                                            <input type="text" class="form-control" id="adultUnitPrice" name="insuranceAdultUnitPrice" placeholder="成人单价...">
+                                            <input type="text" class="form-control" id="adultUnitPrice" name="insuranceAdultUnitPrice" placeholder="成人单价..." value="{$plans[3]->adult_unit_price}">
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label>儿童单价</label>
-                                            <input type="text" class="form-control" id="childUnitPrice" name="insuranceChildUnitPrice" placeholder="儿童单价...">
+                                            <input type="text" class="form-control" id="childUnitPrice" name="insuranceChildUnitPrice" placeholder="儿童单价..." value="{$plans[3]->child_unit_price}">
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label>总价</label>
-                                            <input type="text" class="form-control" id="totalPrice" name="insuranceTotalPrice" placeholder="总价...">
+                                            <input type="text" class="form-control" id="totalPrice" name="insuranceTotalPrice" placeholder="总价..." value="{$plans[3]->total_price}">
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label>备注</label>
-                                            <input type="text" class="form-control" id="remark" name="insuranceRemark" placeholder="备注...">
+                                            <input type="text" class="form-control" id="remark" name="insuranceRemark" placeholder="备注..." value="{$plans[3]->remark}">
                                         </div>
                                     </div>
                                     <div class="control-group">
                                         <label for="currency">币种</label>
                                         <div class="controls">
-                                            <input type="text" class="form-control" name="currency" placeholder="币种..." />
+                                            <input type="text" class="form-control" name="currency" placeholder="币种..." value="{$currency}" />
                                         </div>
                                     </div>
                                     <hr>
                                     <div class="control-group">
                                         <label for="totalCost">总费用</label>
                                         <div class="controls">
-                                            <input type="text" class="form-control" name="totalCost" placeholder="总费用..." />
+                                            <input type="text" class="form-control" name="totalCost" placeholder="总费用..." value="{$totalCost}" />
                                         </div>
                                     </div>
                                     <hr>
                                     <div class="control-group">
                                         <label for="lastPayTime">最晚付款时间</label>
                                         <div class="controls">
-                                            <input type="date" class="form-control" name="lastPayTime" />
+                                            <input type="date" class="form-control" name="lastPayTime" value="{$lastPayTime}" />
                                         </div>
                                     </div>
                                 </div>

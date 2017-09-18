@@ -12,4 +12,9 @@ class Plan extends Model
     public function getPlanByArticleId($articleId) {
         return $this->where('article_id','=',$articleId)->select();
     }
+
+    public function getPlanByType($type) {
+    	$Plan = $this->get($type);
+    	return $Plan;
+    }
 }
