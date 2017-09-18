@@ -14,19 +14,6 @@ use app\index\model\Hotel;
 
 class Attraction extends Model {
 
-    public function getMaterial($id) {
-        //返回关联的素材
-        if(!is_null($id)) {
-            return Material::get($id);
-        } else {
-            $Material = new Material();
-            $Material->image = '';
-            $Material->designation = '未选择素材';
-            $Material->content = '未选择素材';
-            return $Material;
-        }
-    }
-
     public function getMealIsChecked($checkMeal) {
         $meals = json_decode($this->meal);
         if(!is_null($meals)) {
@@ -43,11 +30,54 @@ class Attraction extends Model {
         return false;
     }
 
-    public function getMainMaterial() {
-        return Material::get($this->material_id);
+    public function getCheckedMaterial() {
+        $map = ['attraction_id' => $this->id];
+        $AttractionMaterials = AttractionMaterial::where($map)->select();
+        $str = '';
+        if(!is_null($AttractionMaterials)) {
+            foreach ($AttractionMaterials as $AttractionMaterial) {
+                $materialId = $AttractionMaterial->material_id;
+                $material = Material::get($materialId);
+                $str = $str.$material->designation.' ';
+            }
+        }
+        return $str;
     }
-    public function getHotel() {
-        return Hotel::get($this->hotel_id);
+
+    public function getHotelDesignation() {
+        if(!is_null($this->hotel_id)) {
+            return Hotel::get($this->hotel_id)->designation;
+        } else {
+            return '';
+        }
+    }
+
+    public function getCar() {
+        $car = $this->car;
+        if($car == 'sevenToNineBusinessCar') {
+            return '7-9座商务车';
+        } else if($car == 'train') {
+            return '火车';
+        } else if($car == 'car') {
+            return '汽车';
+        } else if($car == 'plane') {
+            return '飞机';
+        }
+    }
+
+    public function getMeals() {
+        $meals = json_decode($this->meal);
+        $str = null;
+        foreach ($meals as $meal) {
+            if ($meal == 'breakfast') {
+                $str = $str.'早餐 ';
+            } else if ($meal == 'lunch') {
+                $str = $str.'午餐 ';
+            } else if ($meal == 'supper') {
+                $str = $str.'晚餐';
+            }
+        }
+        return $str;
     }
 
     public function Materials() {
@@ -56,5 +86,9 @@ class Attraction extends Model {
 
     public function AttractionMaterials() {
         return $this->hasMany('AttractionMaterial');
+    }
+
+    public function getMainMaterial() {
+        return Material::get($this->material_id);
     }
 }
