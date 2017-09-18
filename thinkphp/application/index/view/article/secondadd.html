@@ -65,8 +65,11 @@
                                 酒店：{$_attraction->getHotelDesignation()}<br>
                             </div>
                             <div class="col-md-2">
-                                {eq name="$i" value="1"} {else /}<a class="btn btn-default" href="{:url('upAttraction',['articleId'=>$articleId,'attractionId'=>$_attraction->id,'number'=>$i])}"><span class="glyphicon glyphicon-arrow-up" ></span></a>{/eq}
-                                <br> {eq name="$i" value="$length"} {else /}<a class="btn btn-default" href="{:url('downAttraction',['articleId'=>$articleId,'attractionId'=>$_attraction->id,'number'=>$i])}"><span class="glyphicon glyphicon-arrow-down"></span></a>{/eq}
+                                <br>
+                                <br>
+                                {eq name="$key" value="1"} {else /}<a class="btn btn-default" href="{:url('upAttraction',['articleId'=>$articleId,'attractionId'=>$_attraction->id,'number'=>$i])}"><span class="glyphicon glyphicon-arrow-up" ></span></a>{/eq}
+                                <br>
+                                {eq name="$key" value="$length"} {else /}<a class="btn btn-default" href="{:url('downAttraction',['articleId'=>$articleId,'attractionId'=>$_attraction->id,'number'=>$i])}"><span class="glyphicon glyphicon-arrow-down"></span></a>{/eq}
                             </div>
                         </div>
                         <div class="row">
