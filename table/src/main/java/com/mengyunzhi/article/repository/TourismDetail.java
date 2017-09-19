@@ -1,9 +1,9 @@
 package com.mengyunzhi.article.repository;
 
-import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 @Entity
-@DiscriminatorColumn(name = "tourism")
+@DiscriminatorValue("tourism")
 public class TourismDetail extends Detail {
 }
