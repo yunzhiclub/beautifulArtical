@@ -1,9 +1,9 @@
 package com.mengyunzhi.article.repository;
 
-import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 @Entity
-@DiscriminatorColumn(name = "plane")
+@DiscriminatorValue("plane")
 public class PlaneDetail extends Detail {
 }
