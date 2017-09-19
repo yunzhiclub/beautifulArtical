@@ -118,42 +118,17 @@ class ArticleController extends IndexController {
         // 获取并传输plan
         $articleId = $param->param('articleId');
         $Plan = new Plan();
-        $Plans = $Plan->getPlanByArticleId($articleId);
+        $Plan = $Plan->getPlanByArticleId($articleId);
+        $date = $this->articleService->MoneyFormate($Plan);
 
-        // 报价方案为空
-        if (!empty($Plans)) {
-            // 使用number_format 格式化输入金额
-            $date = $this->articleService->MoneyFormate($Plans);
-
-            // 获取报价方案相同的字段
-            $adultNum = $Plans[0]->adult_num;
-            $childNum = $Plans[0]->child_num;
-            $currency = $Plans[0]->currency;
-            $totalCost = $Plans[0]->total_cost;
-            $lastPayTime = $Plans[0]->last_pay_time;
-        } else {
-            $adultNum = '';
-            $childNum = '';
-            $currency = '';
-            $totalCost = '';
-            $lastPayTime = '';
-            for ($i=0; $i<4; $i++) {
-                $Plans[$i] = new Plan();
-                $Plans[$i]->adult_unit_price = '';
-                $Plans[$i]->child_unit_price = '';
-                $Plans[$i]->total_price = '';
-                $Plans[$i]->remark = '';
-                $this->assign('plans[$i]', $Plans[$i]);
-            }
+        // 方案报价为空，添加方案报价
+        if (empty($Plan)) {
+            $planService = new PlanService();
+            $Plan = $planService->addPlan();
         }
-        
-        // 方案报价字段传向前台
-        $this->assign('adultNum', $adultNum);
-        $this->assign('childNum', $childNum);
-        $this->assign('currency', $currency);
-        $this->assign('totalCost', $totalCost);
-        $this->assign('lastPayTime', $lastPayTime);
-        $this->assign('plans', $Plans);
+
+        $this->assign('plan', $Plan);
+
         // 调用service中的保存方法
         $message = $this->articleService->secondAriticle($param);
         // 将serve中处理的数据传给前台

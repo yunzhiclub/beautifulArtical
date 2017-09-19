@@ -8,6 +8,19 @@ use think\Request;
 
 class PlanService
 {
+    public function addPlan()
+    {
+        $Plan = new Plan();
+
+        // 为方案报价所有字段置空
+        $Plan->adult_num = '';
+        $Plan->child_num = '';
+        $Plan->currency = '';
+        $Plan->last_pay_time = '';
+        $Plan->total_cost = '';
+
+        return $Plan;
+    }
 
 	public function save($param)
 	{
@@ -20,14 +33,6 @@ class PlanService
         //获取到参数
         $articleId = $param->param('articleId/d');
         $data = $param->post();
-
-        // $Plans = Plan::where('article_id','=',$articleId)->select();
-
-        // if (!empty($Plans)) {
-        //     // 更新
-        //     if (PlanService::updateByType('plain',$articleId, $data, $data['plainAdultUnitPrice'], $data['plainChildUnitPrice'], $data['plainTotalPrice'], $data['plainRemark']) && PlanService::updateByType('visa', $articleId, $data, $data['visaAdultUnitPrice'], $data['childUnitPrice'], $data['visaTotalPrice'], $data['visaRemark']) && PlanService::updateByType('travel', $articleId, $data, $data['travelAdultUnitPrice'], $data['travelChildUnitPrice'], $data['travelTotalPrice'], $data['travelRemark']) && PlanService::updateByType('insurance', $articleId, $data, $data['insuranceAdultUnitPrice'], $data['insuranceChildUnitPrice'], $data['insuranceTotalPrice'], $data['insuranceRemark']))
-        //         return $message;
-        // }
 
         // 添加数据
         if (PlanService::saveOrUpdateByType('plain',$articleId, $data, $data['plainAdultUnitPrice'], $data['plainChildUnitPrice'], $data['plainTotalPrice'], $data['plainRemark']) && PlanService::saveOrUpdateByType('visa', $articleId, $data, $data['visaAdultUnitPrice'], $data['childUnitPrice'], $data['visaTotalPrice'], $data['visaRemark']) && PlanService::saveOrUpdateByType('travel', $articleId, $data, $data['travelAdultUnitPrice'], $data['travelChildUnitPrice'], $data['travelTotalPrice'], $data['travelRemark']) && PlanService::saveOrUpdateByType('insurance', $articleId, $data, $data['insuranceAdultUnitPrice'], $data['insuranceChildUnitPrice'], $data['insuranceTotalPrice'], $data['insuranceRemark'])) {
