@@ -17,6 +17,12 @@ class Materialservice  {
         $material = new Material();
         return $material->select();
     }
+
+    /**
+     * @param $parma
+     * @return array
+     * 多张图片同时上传的过程
+     */
     public function materialAdd($parma) {
     	//初始化返回信息
         $message = [];
@@ -27,15 +33,23 @@ class Materialservice  {
         //获取到参数
         $content = $parma->post('content');
         $designation = $parma->post('designation');
-        $file = request()->file('image');
+        //接收到多张图片
+        $files = request()->file('images');
 
         // 新建素材实体
-        $Material = new Material;
+        $Material = new Material();
 
-        if(!is_null($file)) {
-            // 保存文件，返回路径
-            $imagePath = Common::uploadImage($file);
-            $Material->image = $imagePath;
+        //新建一个保存上传文件路径的数组
+        $imagePaths = [];
+        if(!empty($files)) {
+            //开始保存图片的路径数据
+            foreach ($files as $key => $value) {
+                $imagePath = Common::uploadImage($value);
+                array_push($imagePaths, $imagePath);
+            }
+
+            //将图片数组保存到实体中
+            $Material->images = json_encode($imagePaths);
         }
 
         $Material->content = $content;
