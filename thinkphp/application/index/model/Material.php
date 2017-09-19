@@ -23,4 +23,9 @@ class Material extends Model
             return false;
         }
     }
+
+    public function getMaterialImages() {
+        $images = json_decode($this->images);
+        return $images;
+    }
 }
