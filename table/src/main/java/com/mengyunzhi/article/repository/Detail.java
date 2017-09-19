@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.text.DecimalFormat;
 
 @Entity
-@DiscriminatorColumn(name="dtype")
+@DiscriminatorColumn(name="db_type")
 public class Detail {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
