@@ -4,7 +4,7 @@ namespace app\index\service;
 use app\index\model\Common;
 use app\index\model\Plan;
 use think\Request;
-
+use app\index\service\DetailService;
 
 class PlanService
 {
@@ -34,13 +34,27 @@ class PlanService
         $articleId = $param->param('articleId/d');
         $data = $param->post();
 
-        // 添加数据
-        if (PlanService::saveOrUpdateByType('plain',$articleId, $data, $data['plainAdultUnitPrice'], $data['plainChildUnitPrice'], $data['plainTotalPrice'], $data['plainRemark']) && PlanService::saveOrUpdateByType('visa', $articleId, $data, $data['visaAdultUnitPrice'], $data['childUnitPrice'], $data['visaTotalPrice'], $data['visaRemark']) && PlanService::saveOrUpdateByType('travel', $articleId, $data, $data['travelAdultUnitPrice'], $data['travelChildUnitPrice'], $data['travelTotalPrice'], $data['travelRemark']) && PlanService::saveOrUpdateByType('insurance', $articleId, $data, $data['insuranceAdultUnitPrice'], $data['insuranceChildUnitPrice'], $data['insuranceTotalPrice'], $data['insuranceRemark'])) {
-            return $message;
-        } 
+        // 给plan的字段赋值
+        $Plan = new Plan();
+        $Plan->article_id = $articleId;
+        $Plan->adult_num = $data['adultNum'];
+        $Plan->child_num = $data['childNum'];
+        $Plan->currency = $data['currency'];
+        $Plan->last_pay_time = $data['lastPayTime'];
+        $Plan->total_cost = $data['totalCost'];
 
-        $message['status'] = 'error';
-        $message['message'] = '保存失败！';
+        // 保存
+        if (!$Plan->save()) {
+            $message['status'] = 'error';
+            $message['message'] = '保存失败！';
+
+        } else {
+            $plan = $Plan->get('articleId');
+            $planId = $plan->id;
+
+            $detailService = new DetailService();
+            $detailService->saveDetail($planId, $data);
+        }
 
         return $message;
 	}
