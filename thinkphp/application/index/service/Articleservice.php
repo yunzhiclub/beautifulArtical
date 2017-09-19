@@ -375,17 +375,17 @@ class Articleservice
             $TotalCost = $this->fromate($value->total_cost);
             $value->total_cost = $TotalCost;
 
-            // 格式化成人单价
-            $adultUnitPrice = $this->fromate($value->adult_unit_price);
-            $value->adult_unit_price = $adultUnitPrice;
-
-            // 格式化儿童单价
-            $childUnitPrice = $this->fromate($value->child_unit_price);
-            $value->child_unit_price = $childUnitPrice;
-
-            // 格式化总价
-            $totalPrice = $this->fromate($value->total_price);
-            $value->total_price = $totalPrice;    
+//            // 格式化成人单价
+//            $adultUnitPrice = $this->fromate($value->adult_unit_price);
+//            $value->adult_unit_price = $adultUnitPrice;
+//
+//            // 格式化儿童单价
+//            $childUnitPrice = $this->fromate($value->child_unit_price);
+//            $value->child_unit_price = $childUnitPrice;
+//
+//            // 格式化总价
+//            $totalPrice = $this->fromate($value->total_price);
+//            $value->total_price = $totalPrice;
         }
     }
     // 格式化金额函数

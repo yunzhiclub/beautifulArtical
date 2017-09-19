@@ -2,6 +2,7 @@
 namespace app\index\model;
 
 use think\Model;
+use app\index\model\Detail;
 
 /**
  * 方案报价
@@ -13,8 +14,21 @@ class Plan extends Model
         return $this->where('article_id','=',$articleId)->select();
     }
 
-    public function getPlanByType($type) {
-    	$Plan = $this->get($type);
-    	return $Plan;
+    public function getDetail($type, $plan) {
+        $Detail = new Detail();
+
+        if (empty($plan->id)) {
+            // 不存在id，细节字段置空
+            $Detail->adult_unit_price = '';
+            $Detail->child_unit_price = '';
+            $Detail->total_price = '';
+            $Detail->remark = '';
+
+        } else {
+            // 根据id和db_type获取细节
+            $Detail = $Detail->where('plan_id', $plan->id)->where('db_type', $type)->find();
+        }
+
+        return $Detail;
     }
 }

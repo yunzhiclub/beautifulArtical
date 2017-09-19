@@ -124,10 +124,11 @@ class ArticleController extends IndexController {
         // 方案报价为空，添加方案报价
         if (empty($Plan)) {
             $planService = new PlanService();
-            $Plan = $planService->addPlan();
+            $plan = $planService->addPlan();
+            $this->assign('plan', $plan);
+        } else {
+            $this->assign('plan', $Plan[0]);
         }
-
-        $this->assign('plan', $Plan);
 
         // 调用service中的保存方法
         $message = $this->articleService->secondAriticle($param);
