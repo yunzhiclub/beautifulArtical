@@ -186,7 +186,6 @@ class ArticleController extends IndexController {
             // 返回失败信息
             return $this->error($message['message']);
         }
-        $this->success('文章编辑成功',url('index'));
     }
     public function delete() {
         // 接收参数

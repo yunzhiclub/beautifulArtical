@@ -49,11 +49,11 @@ class PlanService
             $message['message'] = '保存失败！';
 
         } else {
-            $plan = $Plan->get('articleId');
+            $plan = $Plan->where('article_id', $articleId)->find();
             $planId = $plan->id;
 
             $detailService = new DetailService();
-            $detailService->saveDetail($planId, $data);
+            $message = $detailService->saveDetail($planId, $data);
         }
 
         return $message;
@@ -123,51 +123,4 @@ class PlanService
             return false;
     }
 
-    static public function saveOrUpdateByType($type, $articleId, $data, $adultUnitPrice, $childUnitPrice, $totalPrice, $remark) {
-        $Plan = Plan::where('article_id', $articleId)->where('type', $type)->find();
-        
-        if (is_null($Plan)) {
-            $Plan = new Plan();
-        }
-        $Plan->article_id = $articleId;
-        $Plan->adult_num = $data['adultNum'];
-        $Plan->child_num = $data['childNum'];
-        $Plan->currency = $data['currency'];
-        $Plan->total_cost = $data['totalCost'];
-        $Plan->last_pay_time = $data['lastPayTime'];
-        $Plan->type = $type;
-        $Plan->adult_unit_price = $adultUnitPrice;
-        $Plan->child_unit_price = $childUnitPrice;
-        $Plan->total_price = $totalPrice;
-        $Plan->remark = $remark;
-
-        if ($Plan->save()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    static public function updateByType($type, $articleId, $data, $adultUnitPrice, $childUnitPrice, $totalPrice, $remark) {
-        // 根据article_id和type获取plan对象
-        $Plan = Plan::where('article_id', $articleId)->where('type', $type)->find();
-        
-        $Plan->article_id = $articleId;
-        $Plan->adult_num = (int)$data['adultNum'];
-        $Plan->child_num = (int)$data['childNum'];
-        $Plan->currency = $data['currency'];
-        $Plan->total_cost = $data['totalCost'];
-        $Plan->last_pay_time = $data['lastPayTime'];
-        $Plan->type = $type;
-        $Plan->adult_unit_price = $adultUnitPrice;
-        $Plan->child_unit_price = $childUnitPrice;
-        $Plan->total_price = $totalPrice;
-        $Plan->remark = $remark;
-
-        if ($Plan->save()) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 }

@@ -11,6 +11,7 @@ class DetailService
 	    $message = [];
 	    $message['status'] = 'success';
 	    $message['message'] = '保存成功';
+	    $message['route'] = 'article/index';
 
 	    // 保存机票
 		if (!$this->saveDetailByType($planId, 'plane', $data['planeAdultUnitPrice'], $data['planeChildUnitPrice'], $data['planeTotalPrice'], $data['planeRemark'])) {
@@ -27,14 +28,14 @@ class DetailService
         }
 
         // 保存旅游
-        if (!$this->$this->saveDetailByType($planId, 'tourism', $data['tourismAdultUnitPrice'], $data['tourismChildUnitPrice'], $data['tourismTotalPrice'], $data['tourismRemark'])) {
+        if (!$this->saveDetailByType($planId, 'tourism', $data['tourismAdultUnitPrice'], $data['tourismChildUnitPrice'], $data['tourismTotalPrice'], $data['tourismRemark'])) {
             $message['status'] = 'error';
             $message['message'] = '旅游保存失败';
             return $message;
         }
 
         // 保存保险
-        if (!$this->$this->saveDetailByType($planId, 'insurance', $data['insuranceAdultUnitPrice'], $data['insuranceChildUnitPrice'], $data['insuranceTotalPrice'], $data['insuranceRemark'])) {
+        if (!$this->saveDetailByType($planId, 'insurance', $data['insuranceAdultUnitPrice'], $data['insuranceChildUnitPrice'], $data['insuranceTotalPrice'], $data['insuranceRemark'])) {
             $message['status'] = 'error';
             $message['message'] = '保险保存失败';
             return $message;
