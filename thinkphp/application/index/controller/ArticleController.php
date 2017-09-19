@@ -154,6 +154,7 @@ class ArticleController extends IndexController {
         $this->assign('totalCost', $totalCost);
         $this->assign('lastPayTime', $lastPayTime);
         $this->assign('plans', $Plans);
+        $this->assign('common', new Common());
         // 调用service中的保存方法
         $message = $this->articleService->secondAriticle($param);
         // 将serve中处理的数据传给前台
