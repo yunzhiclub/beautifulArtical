@@ -14,28 +14,32 @@ class DetailService
 	    $message['route'] = 'article/index';
 
 	    // 保存机票
-		if (!$this->saveDetailByType($planId, 'plane', $data['planeAdultUnitPrice'], $data['planeChildUnitPrice'], $data['planeTotalPrice'], $data['planeRemark'])) {
+        $result = $this->saveDetailByType($planId, 'plane', $data['planeAdultUnitPrice'], $data['planeChildUnitPrice'], $data['planeTotalPrice'], $data['planeRemark']);
+		if (!$result) {
 		    $message['status'] = 'error';
 		    $message['message'] = '机票保存失败';
 		    return $message;
         }
 
         // 保存签证
-        if (!$this->saveDetailByType($planId, 'visa', $data['visaAdultUnitPrice'], $data['visaChildUnitPrice'], $data['visaTotalPrice'], $data['visaRemark'])) {
+        $result = $this->saveDetailByType($planId, 'visa', $data['visaAdultUnitPrice'], $data['visaChildUnitPrice'], $data['visaTotalPrice'], $data['visaRemark']);
+        if (!$result) {
             $message['status'] = 'error';
             $message['message'] = '签证保存失败';
             return $message;
         }
 
         // 保存旅游
-        if (!$this->saveDetailByType($planId, 'tourism', $data['tourismAdultUnitPrice'], $data['tourismChildUnitPrice'], $data['tourismTotalPrice'], $data['tourismRemark'])) {
+        $result = $this->saveDetailByType($planId, 'tourism', $data['tourismAdultUnitPrice'], $data['tourismChildUnitPrice'], $data['tourismTotalPrice'], $data['tourismRemark']);
+        if (!$result) {
             $message['status'] = 'error';
             $message['message'] = '旅游保存失败';
             return $message;
         }
 
         // 保存保险
-        if (!$this->saveDetailByType($planId, 'insurance', $data['insuranceAdultUnitPrice'], $data['insuranceChildUnitPrice'], $data['insuranceTotalPrice'], $data['insuranceRemark'])) {
+        $result = $this->saveDetailByType($planId, 'insurance', $data['insuranceAdultUnitPrice'], $data['insuranceChildUnitPrice'], $data['insuranceTotalPrice'], $data['insuranceRemark']);
+        if (!$result) {
             $message['status'] = 'error';
             $message['message'] = '保险保存失败';
             return $message;
