@@ -130,6 +130,7 @@ class ArticleController extends IndexController {
             $this->assign('plan', $Plan[0]);
         }
 
+        $this->assign('common', new Common());
         // 调用service中的保存方法
         $message = $this->articleService->secondAriticle($param);
         // 将serve中处理的数据传给前台

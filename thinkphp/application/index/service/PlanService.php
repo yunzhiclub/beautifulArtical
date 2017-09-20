@@ -39,6 +39,7 @@ class PlanService
         if (empty($Plan)) {
             $Plan = new Plan();
         }
+
         // 给plan的字段赋值
         $Plan->article_id = $articleId;
         $Plan->adult_num = $data['adultNum'];
@@ -48,7 +49,7 @@ class PlanService
         $Plan->total_cost = $data['totalCost'];
 
         // 保存
-        if (!$Plan->save()) {
+        if ($Plan->save() === false) {
             $message['status'] = 'error';
             $message['message'] = '保存失败！';
 

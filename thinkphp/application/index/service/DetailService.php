@@ -46,7 +46,7 @@ class DetailService
 
 	public function saveDetailByType($planId, $type, $adultUnitPrice, $childUnitPrice, $totalPrice, $remark)
 	{
-	    $Detail = Detail::where('plan_id', $planId)->find();
+	    $Detail = Detail::where('plan_id', $planId)->where('db_type', $type)->find();
 	    if (empty($Detail)) {
 	        $Detail = new Detail();
         }
@@ -57,10 +57,10 @@ class DetailService
 		$Detail->total_price = $totalPrice;
 		$Detail->remark = $remark;
 
-        if ($Detail->save()) {
-            return true;
-        } else {
+        if ($Detail->save() === false) {
             return false;
+        } else {
+            return true;
         }
 	}
 }
