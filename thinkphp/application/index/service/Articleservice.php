@@ -198,36 +198,58 @@ class Articleservice
         $newParagraph->save();
     }
     public function upAttraction($param) {
-        // 获取参数
+        $message = [];
+        $message['message'] = '向上排序成功';
+        $message['status']  = 'success';
+
         $articleId = $param->param('articleId/d');
-        // 获取要改变位置的序列号
+        // 获取位置
         $number = $param->param('number/d');
-        // 获取当前景点根据权重的排序
-        $Attractions = Attraction::order('weight')->where('article_id',$articleId)->select();
-        $number=$number-1;
-        // 当前景点与上一个景点的权重交换
-        $median = $Attractions[$number]->weight;
-        $Attractions[$number]->weight = $Attractions[$number-1]->weight;
-        $Attractions[$number-1]->weight = $median;
-        // 保存交换后的景点
-        $Attractions[$number]->save();
-        $Attractions[$number-1]->save();
+        // 获取排序景点
+        $Attractions = Attraction::order('weight')->where('article_id', $articleId)->select();
+        $number --;
+        // 交换权重
+        $tempWeight = $Attractions[$number]->weight;
+        $Attractions[$number]->weight   = $Attractions[$number-1]->weight;
+        $Attractions[$number-1]->weight = $tempWeight;
+        // 交换时间
+        $tempDate = $Attractions[$number]->date;
+        $Attractions[$number]->date   = $Attractions[$number-1]->date;
+        $Attractions[$number-1]->date = $tempDate;
+
+        if(!$Attractions[$number]->save() || !$Attractions[$number-1]->save()) {
+            $message['message'] = '排序失败';
+            $message['status']  = 'error';
+        }
+
+        return $message;
     }
     public function downAttraction($param){
-        // 获取参数
+        $message = [];
+        $message['message'] = '向下排序成功';
+        $message['status']  = 'success';
+
         $articleId = $param->param('articleId/d');
-        // 获取要改变位置的序列号
+        // 获取位置
         $number = $param->param('number/d');
-        // 获取当前景点根据权重的排序
-        $Attractions = Attraction::order('weight')->where('article_id',$articleId)->select();
-        $number=$number-1;
-        // 当前景点与下一个景点的权重交换
-        $median = $Attractions[$number]->weight;
-        $Attractions[$number]->weight = $Attractions[$number+1]->weight;
-        $Attractions[$number+1]->weight = $median;
-        // 保存交换后的景点
-        $Attractions[$number]->save();
-        $Attractions[$number+1]->save();
+        // 获取排序景点
+        $Attractions = Attraction::order('weight')->where('article_id', $articleId)->select();
+        $number --;
+        // 交换权重
+        $tempWeight = $Attractions[$number]->weight;
+        $Attractions[$number]->weight   = $Attractions[$number+1]->weight;
+        $Attractions[$number+1]->weight = $tempWeight;
+        // 交换时间
+        $tempDate = $Attractions[$number]->date;
+        $Attractions[$number]->date   = $Attractions[$number+1]->date;
+        $Attractions[$number+1]->date = $tempDate;
+
+        if(!$Attractions[$number]->save() || !$Attractions[$number+1]->save()) {
+            $message['message'] = '排序失败';
+            $message['status']  = 'error';
+        }
+
+        return $message;
     }
     public function secondAriticle($param) {
         // 传入文章id

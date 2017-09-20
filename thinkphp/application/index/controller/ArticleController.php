@@ -235,20 +235,27 @@ class ArticleController extends IndexController {
     }
 
     public function upAttraction() {
-        // 接收参数
         $param = Request::instance();
         $articleId = Request::instance()->param('articleId/d');
-        //调用service中的方法
+
         $message =  $this->articleService->upAttraction($param); 
-        $this->success('向上排序成功',url('secondadd',['articleId'=>$articleId]));
+        if ($message['status'] == 'success') {
+            $this->success($message['message'], url('secondadd',['articleId'=>$articleId]));
+        } else {
+            $this->error($message['message'], url('secondadd',['articleId'=>$articleId]));
+        }
     }
     public function downAttraction() {
         // 接收参数
         $param = Request::instance();
         $articleId = Request::instance()->param('articleId/d');
         //调用service中的方法
-        $message =  $this->articleService->downAttraction($param); 
-        $this->success('向下排序成功',url('secondadd',['articleId'=>$articleId]));
+        $message =  $this->articleService->downAttraction($param);
+        if ($message['status'] == 'success') {
+            $this->success($message['message'], url('secondadd',['articleId'=>$articleId]));
+        } else {
+            $this->error($message['message'], url('secondadd',['articleId'=>$articleId]));
+        }
     }
 
     //返回main界面
