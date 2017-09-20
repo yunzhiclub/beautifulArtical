@@ -3,6 +3,7 @@ namespace app\index\model;
 
 use think\Model;
 use app\index\model\Detail;
+use app\index\model\Common;
 
 /**
  * 方案报价
@@ -28,6 +29,11 @@ class Plan extends Model
             // 根据id和db_type获取细节
             $Detail = $Detail->where('plan_id', $plan->id)->where('db_type', $type)->find();
         }
+
+        // 格式化显示价钱
+        $Detail->adult_unit_price = Common::fromate($Detail->adult_unit_price);
+        $Detail->child_unit_price = Common::fromate($Detail->child_unit_price);
+        $Detail->total_price = Common::fromate($Detail->total_price);
 
         return $Detail;
     }

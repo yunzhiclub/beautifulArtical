@@ -394,7 +394,7 @@ class Articleservice
         // 遍历传入的报价方案    
         foreach ($Plans as $key => $value) {
             // 格式化总金额
-            $TotalCost = $this->fromate($value->total_cost);
+            $TotalCost = Common::fromate($value->total_cost);
             $value->total_cost = $TotalCost;
 
             // 根据方案报价获取所有detail
@@ -404,26 +404,14 @@ class Articleservice
 
             // 遍历，格式化
             foreach ($Details as $key => $value) {
-                $adultUnitPrice = $this->fromate($value->adult_unit_price);
+                $adultUnitPrice = Common::fromate($value->adult_unit_price);
                 $value->adult_unit_price = $adultUnitPrice;
-                $childUnitPrice = $this->fromate($value->child_unit_price);
+                $childUnitPrice = Common::fromate($value->child_unit_price);
                 $value->child_unit_price = $childUnitPrice;
-                $totalPrice = $this->fromate($value->total_price);
+                $totalPrice = Common::fromate($value->total_price);
                 $value->total_price = $totalPrice;
-                $value->save();
             }
         }
-    }
-    // 格式化金额函数
-    public function fromate($money){
-        // 强制转化成Int类型，非数字转化成0
-        $money = (float)$money;
-        if(!$money){
-                $money = 0;
-            }
-        // 格式化的结果为安千位分隔，保存小数点后两位
-        $cost= number_format($money,2);
-        return $cost;
     }
 }
  
