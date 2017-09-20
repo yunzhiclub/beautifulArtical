@@ -1,6 +1,7 @@
 <?php
 namespace app\index\service;
 
+use app\index\model\AttractionMaterial;
 use app\index\model\Material;
 use app\index\model\Attraction;
 use app\index\model\Common;
@@ -159,10 +160,9 @@ class Materialservice  {
         if (is_null($materialId) || $materialId === 0) {
             $message['status'] = 'error';
             $message['message'] = '未获取到素材';
-
         } else {
-            $Attraction = new Attraction();
-            $list = $Attraction->where('material_id', '=', $materialId)->select();
+            $AttractionMaterial = new AttractionMaterial();
+            $list = $AttractionMaterial->where('material_id', '=', $materialId)->select();
             if (!empty($list)) {
                 $message['status'] = 'error';
                 $message['message'] = '该素材已被使用，不能删除！';
@@ -176,7 +176,7 @@ class Materialservice  {
                     $message['message'] = '未获取到素材';
 
                 } else {
-                    $image = $Material->image;
+                    $images = json_decode($Material->images);
                     // 删除素材失败
                     if (!$Material->delete()) {
                         $message['status'] = 'error';
@@ -184,7 +184,9 @@ class Materialservice  {
 
                     } else {
                         // 删除照片
-                        Common::deleteImage('upload/'.$image);
+                        foreach ($images as $key => $value) {
+                            Common::deleteImage('upload/'.$value);
+                        }
                     }
                 }
             }
