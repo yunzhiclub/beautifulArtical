@@ -1,5 +1,4 @@
-{extend name="index" /} {block name="title"}订制师管理{/block}
-{block name="content"}
+{extend name="index" /} {block name="title"}订制师管理{/block} {block name="content"}
 <div class="row">
     <br>
     <div class="container">
@@ -10,10 +9,10 @@
     <div class="container">
         <hr>
     </div>
-
     <ul class="container list-unstyled" style="min-height: 570px;">
         <table class="table table-hover table-bordered">
             <tr class="info">
+                <th width="1%">姓名</th>
                 <th width="1%">电话</th>
                 <th width="1%">传真</th>
                 <th width="1%">手机</th>
@@ -22,6 +21,7 @@
             </tr>
             {volist name="contractors" id="contractor" key="key"}
             <tr>
+                <td style="word-wrap: break-word">{$contractor->designation}</td>
                 <td style="word-wrap: break-word">{$contractor->phone}</td>
                 <td style="word-wrap: break-word">{$contractor->fax}</td>
                 <td style="word-wrap: break-word">{$contractor->mobile}</td>
@@ -36,13 +36,12 @@
                 </td>
             </tr>
             {/volist}
-        </table>       
+        </table>
     </ul>
     <div class="container text-right" style="height: 79px;">
         {$contractors->render()}
     </div>
 </div>
-
 <div class="container">
     <hr>
 </div>
