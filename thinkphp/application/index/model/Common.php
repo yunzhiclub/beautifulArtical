@@ -38,6 +38,14 @@ class Common
         }
     }
 
+    public static function deleteManyImages($imagePaths) {
+        $imagePaths = json_decode($imagePaths);
+        foreach ($imagePaths as $imagePath) {
+            $imagePath = PUBLIC_PATH . '/' .$imagePath;
+            self::deleteImage($imagePath);
+        }
+    }
+
     public function limitWordNumber($str, $length) {
         $str = strip_tags($str);
         if (mb_strlen($str) < $length) {
