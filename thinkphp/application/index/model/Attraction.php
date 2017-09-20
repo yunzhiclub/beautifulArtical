@@ -91,4 +91,8 @@ class Attraction extends Model {
     public function getMainMaterial() {
         return Material::get($this->material_id);
     }
+
+    public function getMaterials() {
+        
+    }
 }
