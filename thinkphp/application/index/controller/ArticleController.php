@@ -119,7 +119,7 @@ class ArticleController extends IndexController {
         $articleId = $param->param('articleId');
         $Plan = new Plan();
         $Plan = $Plan->getPlanByArticleId($articleId);
-        $date = $this->articleService->MoneyFormate($Plan);
+        $this->articleService->MoneyFormate($Plan);
 
         // 方案报价为空，添加方案报价
         if (empty($Plan)) {

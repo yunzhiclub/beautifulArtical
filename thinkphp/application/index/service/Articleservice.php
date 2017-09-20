@@ -410,6 +410,7 @@ class Articleservice
                 $value->child_unit_price = $childUnitPrice;
                 $totalPrice = $this->fromate($value->total_price);
                 $value->total_price = $totalPrice;
+                $value->save();
             }
         }
     }
