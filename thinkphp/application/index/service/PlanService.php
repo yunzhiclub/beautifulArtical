@@ -35,8 +35,11 @@ class PlanService
         $articleId = $param->param('articleId/d');
         $data = $param->post();
 
+        $Plan = Plan::where('article_id', $articleId)->find();
+        if (empty($Plan)) {
+            $Plan = new Plan();
+        }
         // 给plan的字段赋值
-        $Plan = new Plan();
         $Plan->article_id = $articleId;
         $Plan->adult_num = $data['adultNum'];
         $Plan->child_num = $data['childNum'];

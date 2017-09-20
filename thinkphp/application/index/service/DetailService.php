@@ -46,7 +46,10 @@ class DetailService
 
 	public function saveDetailByType($planId, $type, $adultUnitPrice, $childUnitPrice, $totalPrice, $remark)
 	{
-		$Detail = new Detail();
+	    $Detail = Detail::where('plan_id', $planId)->find();
+	    if (empty($Detail)) {
+	        $Detail = new Detail();
+        }
 		$Detail->db_type = $type;
 		$Detail->plan_id = $planId;
 		$Detail->adult_unit_price = $adultUnitPrice;
