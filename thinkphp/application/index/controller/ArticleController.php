@@ -118,42 +118,18 @@ class ArticleController extends IndexController {
         // 获取并传输plan
         $articleId = $param->param('articleId');
         $Plan = new Plan();
-        $Plans = $Plan->getPlanByArticleId($articleId);
+        $Plan = $Plan->getPlanByArticleId($articleId);
+        $this->articleService->MoneyFormate($Plan);
 
-        // 报价方案为空
-        if (!empty($Plans)) {
-            // 使用number_format 格式化输入金额
-            $date = $this->articleService->MoneyFormate($Plans);
-
-            // 获取报价方案相同的字段
-            $adultNum = $Plans[0]->adult_num;
-            $childNum = $Plans[0]->child_num;
-            $currency = $Plans[0]->currency;
-            $totalCost = $Plans[0]->total_cost;
-            $lastPayTime = $Plans[0]->last_pay_time;
+        // 方案报价为空，添加方案报价
+        if (empty($Plan)) {
+            $planService = new PlanService();
+            $plan = $planService->addPlan();
+            $this->assign('plan', $plan);
         } else {
-            $adultNum = '';
-            $childNum = '';
-            $currency = '';
-            $totalCost = '';
-            $lastPayTime = '';
-            for ($i=0; $i<4; $i++) {
-                $Plans[$i] = new Plan();
-                $Plans[$i]->adult_unit_price = '';
-                $Plans[$i]->child_unit_price = '';
-                $Plans[$i]->total_price = '';
-                $Plans[$i]->remark = '';
-                $this->assign('plans[$i]', $Plans[$i]);
-            }
+            $this->assign('plan', $Plan[0]);
         }
-        
-        // 方案报价字段传向前台
-        $this->assign('adultNum', $adultNum);
-        $this->assign('childNum', $childNum);
-        $this->assign('currency', $currency);
-        $this->assign('totalCost', $totalCost);
-        $this->assign('lastPayTime', $lastPayTime);
-        $this->assign('plans', $Plans);
+
         $this->assign('common', new Common());
         // 调用service中的保存方法
         $message = $this->articleService->secondAriticle($param);
@@ -212,7 +188,6 @@ class ArticleController extends IndexController {
             // 返回失败信息
             return $this->error($message['message']);
         }
-        $this->success('文章编辑成功',url('index'));
     }
     public function delete() {
         // 接收参数
@@ -235,27 +210,20 @@ class ArticleController extends IndexController {
     }
 
     public function upAttraction() {
+        // 接收参数
         $param = Request::instance();
         $articleId = Request::instance()->param('articleId/d');
-
+        //调用service中的方法
         $message =  $this->articleService->upAttraction($param); 
-        if ($message['status'] == 'success') {
-            $this->success($message['message'], url('secondadd',['articleId'=>$articleId]));
-        } else {
-            $this->error($message['message'], url('secondadd',['articleId'=>$articleId]));
-        }
+        $this->success('向上排序成功',url('secondadd',['articleId'=>$articleId]));
     }
     public function downAttraction() {
         // 接收参数
         $param = Request::instance();
         $articleId = Request::instance()->param('articleId/d');
         //调用service中的方法
-        $message =  $this->articleService->downAttraction($param);
-        if ($message['status'] == 'success') {
-            $this->success($message['message'], url('secondadd',['articleId'=>$articleId]));
-        } else {
-            $this->error($message['message'], url('secondadd',['articleId'=>$articleId]));
-        }
+        $message =  $this->articleService->downAttraction($param); 
+        $this->success('向下排序成功',url('secondadd',['articleId'=>$articleId]));
     }
 
     //返回main界面

@@ -1,8 +1,9 @@
 {extend name="index"} {block name="title"}素材管理{/block} {block name="content"}
+
 <div class="col-md-8 col-md-offset-1" style="margin-top: 60px;min-height: 730px;">
     <h2><span class="glyphicon glyphicon-edit"></span>&nbsp;素材编辑</h2>
     <br>
-    {php}$action = request()->action() === 'add' ? 'addOperate' : 'update';{/php}
+    {php}$action = request()->action() === 'add' ? 'save' : 'update';{/php}
     <form method="post" action="{:url ($action,['materialId'=>$material->id])}" enctype="multipart/form-data">
         <div class="form-group">
             <label for="TitleInput">名称</label>
@@ -30,11 +31,19 @@
         </div>
         <div class="form-group">
             <label>请一次性选择多张图片</label>
-            <input type="file" name="images[]" multiple="multiple">
+            <input type="file" name="images[]" id="files" multiple="multiple" onchange="showFile()">
+            <input type="text" id="file" value="" name="number" style="display: none;">
         </div>
     <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-ok"></span>&nbsp;完成</button>
     <br>
     <br>
 </form>
+    <script>
+        function showFile(){
+            var files = document.getElementById("files").files;
+            var i = files.length;
+            document.getElementById("file").value = i;
+        }
+    </script>
 </div>
 {/block}

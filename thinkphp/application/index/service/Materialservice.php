@@ -34,9 +34,17 @@ class Materialservice  {
         //获取到参数
         $content = $parma->post('content');
         $designation = $parma->post('designation');
+        $action = request()->action() === 'save' ? 'add' : 'edit';
         //接收到多张图片
+        $number = $parma->post('number');
         $files = request()->file('images');
 
+        if (sizeof($files) != $number || empty($files) ) {
+            $message['status'] = 'error';
+            $message['route'] = $action;
+            $message['message'] = '图片太大无法上传';
+            return $message;
+        }
         // 新建素材实体
         $Material = new Material();
 
