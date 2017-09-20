@@ -17,6 +17,12 @@ class Materialservice  {
         $material = new Material();
         return $material->select();
     }
+
+    /**
+     * @param $parma
+     * @return array
+     * 多张图片同时上传的过程
+     */
     public function materialAdd($parma) {
     	//初始化返回信息
         $message = [];
@@ -27,15 +33,23 @@ class Materialservice  {
         //获取到参数
         $content = $parma->post('content');
         $designation = $parma->post('designation');
-        $file = request()->file('image');
+        //接收到多张图片
+        $files = request()->file('images');
 
         // 新建素材实体
-        $Material = new Material;
+        $Material = new Material();
 
-        if(!is_null($file)) {
-            // 保存文件，返回路径
-            $imagePath = Common::uploadImage($file);
-            $Material->image = $imagePath;
+        //新建一个保存上传文件路径的数组
+        $imagePaths = [];
+        if(!empty($files)) {
+            //开始保存图片的路径数据
+            foreach ($files as $key => $value) {
+                $imagePath = Common::uploadImage($value);
+                array_push($imagePaths, $imagePath);
+            }
+
+            //将图片数组保存到实体中
+            $Material->images = json_encode($imagePaths);
         }
 
         $Material->content = $content;
@@ -53,49 +67,54 @@ class Materialservice  {
         return $message;
     }
     public function materialUpdate($parma)  {
-        // 初始化信息
         $message = [];
         $message['status'] = 'success';
-        $message['route'] = 'index';
         $message['message'] = '景点素材编辑成功';
 
-        // 接受传来的素材id
         $materialId = $parma->param('materialId/d');
 
-        // 未获取到素材id
         if (is_null($materialId) || $materialId === 0) {
             $message['status'] = 'error';
             $message['message'] = '未获取到素材';
+            return $message;
+        }
 
-        } else {
-            // 获取素材对象
-            $Material = Material::get($materialId);
+        $Material = Material::get($materialId);
+        if (is_null($Material)) {
+            $message['status'] = 'error';
+            $message['message'] = '未获取到素材';
+            return $message;
+        }
 
-            // 获取对象为空
-            if (is_null($Material)) {
-                $message['status'] = 'error';
-                $message['message'] = '未获取到素材';
+        $content = $parma->post('content');
+        $designation = $parma->post('designation');
+        $files = request()->file('images');
 
-            } else {
-                // 更新数据
-                $Material->content = $parma->post('content');
-                $Material->designation = $parma->post('designation');
-                $file = request()->file('image');
-
-                if(!is_null($file)){
-                    // 删除原有图片
-                        Common::deleteImage('upload/'.$Material->image);
-                    $imagePath = Common::uploadImage($file);
-                    // 保存新加图片
-                    $Material->image = $imagePath;
-                }
-
-                if(!$Material->save() ) {
-                    $message['status'] = 'error';
-                    $message['message'] = '景点素材没有改变';
-                } 
+        $oldImagePaths = $Material->images;
+        $imagePaths = [];
+        if(!empty($files)) {
+            foreach ($files as $key => $value) {
+                $imagePath = Common::uploadImage($value);
+                array_push($imagePaths, $imagePath);
             }
-        }       
+            $Material->images = json_encode($imagePaths);
+            Common::deleteManyImages($oldImagePaths);
+        }
+
+        if($Material->content == $content && $Material->designation == $designation && empty($files)) {
+            $message['message'] = '素材信息未改变';
+            $message['status'] = 'error';
+            return $message;
+        }
+
+        $Material->content = $content;
+        $Material->designation = $designation;
+
+        if(!$Material->save() ) {
+            $message['status'] = 'error';
+            $message['message'] = '保存失败';
+        }
+
         return $message;
     }
     public function materialEdit($parma) {

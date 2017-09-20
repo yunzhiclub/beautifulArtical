@@ -38,11 +38,20 @@ class Common
         }
     }
 
+    public static function deleteManyImages($imagePaths) {
+        $imagePaths = json_decode($imagePaths);
+        foreach ($imagePaths as $imagePath) {
+            $imagePath = PUBLIC_PATH . '/' .$imagePath;
+            self::deleteImage($imagePath);
+        }
+    }
+
     public function limitWordNumber($str, $length) {
-        if(mb_strlen($str)<$length) {
+        $str = strip_tags($str);
+        if (mb_strlen($str) < $length) {
             return $str;
         } else {
-            return mb_substr($str, 0, $length).'...';
+            return mb_substr($str, 0, $length) . '...';
         }
     }
 }

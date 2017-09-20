@@ -5,16 +5,11 @@
     <form method="post" action="{:url ('addsecond',['articleId'=>$articleId])}" enctype="multipart/form-data">
         <div class="form-group">
             <label for="TitleInput">标题</label>
-            <input type="text" class="form-control" id="TitleInput" placeholder="标题" name="title" value="{$title}" readonly="readonly">
+            <input type="text" class="form-control" id="TitleInput" placeholder="标题" name="title" value="{$title}" readonly>
         </div>
         <div class="form-group">
             <label>摘要</label>
-            <!-- 如果使用textarea标签会连$summary中的标签一同显示 -->
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    {$summery} 
-                </div>
-            </div>
+            <textarea class="form-control" rows="3" readonly>{$common->limitWordNumber($summery, 254)}</textarea>
         </div>
         <div class="form-group">
             <label for="exampleInputFile">封面</label>
@@ -39,8 +34,8 @@
                             <div class="col-md-3" style="height: 100px;">
                                 <img src="{:__ROOT__}/upload/{$paragraph->image}" style="height: 100px; width: 180px;" alt="">
                             </div>
-                            <div class="col-md-6 col-md-offset-1 overhidden">
-                                {$paragraph->content}
+                            <div class="col-md-6 col-md-offset-1" style="word-wrap: break-word;">
+                                {$common->limitWordNumber($paragraph->content, 245)}
                             </div>
                         </div>
                         <div class="row">
@@ -63,7 +58,7 @@
                                 总行程：{$_attraction->trip}<br>
                                 日期：{$_attraction->date}<br>
                                 导游：{$_attraction->guide}<br>
-                                描述：{$_attraction->description}<br>
+                                描述：{$common->limitWordNumber($_attraction->description, 136)}<br>
                                 用餐：{$_attraction->getMeals()}<br>
                                 用车：{$_attraction->getCar()}<br>
                                 素材：{$_attraction->getCheckedMaterial()}<br>
@@ -72,9 +67,9 @@
                             <div class="col-md-2">
                                 <br>
                                 <br>
-                                {eq name="$key" value="1"} {else /}<a class="btn btn-default" href="{:url('upAttraction',['articleId'=>$articleId,'attractionId'=>$_attraction->id,'number'=>$i])}"><span class="glyphicon glyphicon-arrow-up" ></span></a>{/eq}
+                                {eq name="$key" value="1"} {else /}<a class="btn btn-default" href="{:url('upAttraction',['articleId'=>$articleId,'attractionId'=>$_attraction->id,'number'=>$key])}"><span class="glyphicon glyphicon-arrow-up" ></span></a>{/eq}
                                 <br>
-                                {eq name="$key" value="$length"} {else /}<a class="btn btn-default" href="{:url('downAttraction',['articleId'=>$articleId,'attractionId'=>$_attraction->id,'number'=>$i])}"><span class="glyphicon glyphicon-arrow-down"></span></a>{/eq}
+                                {eq name="$key" value="$length"} {else /}<a class="btn btn-default" href="{:url('downAttraction',['articleId'=>$articleId,'attractionId'=>$_attraction->id,'number'=>$key])}"><span class="glyphicon glyphicon-arrow-down"></span></a>{/eq}
                             </div>
                         </div>
                         <div class="row">
@@ -95,8 +90,8 @@
                             <div class="col-md-3" style="height: 100px;">
                                 <img src="{:__ROOT__}/upload/{$paragraph->image}" style="height: 100px; width: 180px;" alt="">
                             </div>
-                            <div class="col-md-6 col-md-offset-1 overhidden">
-                                {$paragraph->content}
+                            <div class="col-md-6 col-md-offset-1" style="word-wrap: break-word;">
+                                {$common->limitWordNumber($paragraph->content, 245)}
                             </div>
                         </div>
                         <div class="row">

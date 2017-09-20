@@ -49,7 +49,7 @@ class MaterialController extends IndexController {
 
     	return $this->fetch('edit');
     }
-    // 添加操作
+
     public function addOperate() {
     	//接受参数
         $param = Request::instance();
@@ -90,7 +90,6 @@ class MaterialController extends IndexController {
         }
     }
 
-    // 编辑操作
     public function edit() {
         // 接受参数
         $param = Request::instance();
@@ -101,20 +100,15 @@ class MaterialController extends IndexController {
 
         return $this->fetch();
     }
-    // 更新操作
-    public function update() {
-        // 接收参数
-        $param = Request::instance();
-        // 传入s层执行更新
-        $message = $this->materialService->materialUpdate($param);
-        // 传回执行信息
-        if ($message['status'] === 'success') {
-            //跳转成功的界面
-            $this->success($message['message'], url($message['route']));
 
+    public function update() {
+        $param = Request::instance();
+        $message = $this->materialService->materialUpdate($param);
+
+        if ($message['status'] === 'success') {
+            $this->success($message['message'], url('material/index'));
         } else {
-            //跳转失败的界面
-            $this->error($message['message'], url($message['route']));
+            $this->error($message['message'], url('material/index'));
         }
     }
 }
