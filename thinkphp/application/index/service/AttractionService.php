@@ -93,7 +93,6 @@ class AttractionService {
         $Attraction->car = $car;
         $Attraction->hotel_id = $hotelId;
         $Attraction->article_id = $articleId;
-        $Attraction->weight = Attraction::where('article_id', '=', $articleId)->max("weight")+1;
 
         if(!$Attraction->save()) {
             $message['status'] = 'error';
