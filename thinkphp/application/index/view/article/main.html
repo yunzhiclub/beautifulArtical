@@ -13,7 +13,7 @@
     <!-- Slider Show css-->
     <link rel="stylesheet" href="{:__ROOT__}/style/css/ken-burns.css" type="text/css" media="all" />
     <!-- //Custom Theme files -->
-    <script src="{:__ROOT__}/style/js/jquery-2.2.3.min.js"></script>
+    <script src="{:__ROOT__}/style/js/jquery-2.1.1.min.js"></script>
     <!-- nice scroll-js -->
     <script src="{:__ROOT__}/style/js/jquery.nicescroll.min.js"></script>
     <script>
@@ -178,18 +178,18 @@
                             <p><b class="pfont">酒店 :</b> {$attraction->getHotelDesignation()} </p>
                         </div>
                         {volist name="$attraction->getMaterials()" id="material" key="i"}
-                        <div class="properties-img">
+                        <div class="properties-img" style="height: 167px;">
                             <div id="carousel-example-generic-{$i}" class="carousel slide" data-ride="carousel" style="height:150px;width:300px;">
                                 <ol class="carousel-indicators">
                                     {volist name="$material->getMaterialImages()" id="image" key="key"}
-                                    <li data-target="#carousel-example-generic-{$i}" data-slide-to="{$key}"></li>
+                                    <li data-target="#carousel-example-generic-{$i}" data-slide-to="{$key}" class="{eq name="$key" value="1"}active{/eq}"></li>
                                     {/volist}
                                 </ol>
 
-                                <div class="carousel-inner" role="listbox" style="width: 281px">
+                                <div class="carousel-inner" role="listbox">
                                     {volist name="$material->getMaterialImages()" id="image" key="key"}
                                     <div class="item {eq name="$key" value="1"}active{/eq}">
-                                        <img src="{:__ROOT__}/upload/{$image}" alt="">
+                                        <img src="{:__ROOT__}/upload/{$image}" alt="" style="width: 298px;height: 167px;">
                                         <div class="carousel-caption">
                                         </div>
                                     </div>
