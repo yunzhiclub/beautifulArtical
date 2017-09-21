@@ -28,6 +28,7 @@
     <ul class="container list-unstyled" style="min-height: 300px;">
         <table class="table table-hover table-bordered">
             <tr class="info">
+                <th width="1%">酒店名称</th>
                 <th width="1%">目的城市</th>
                 <th width="1%">目的国家</th>
                 <th width="1%">星级</th>
@@ -36,6 +37,7 @@
             </tr>
             {volist name="hotels" id="hotel"}
             <tr>
+                <td style="word-wrap: break-word">{$hotel->designation}</td>
                 <td style="word-wrap: break-word">{$hotel->city}</td>
                 <td style="word-wrap: break-word">{$hotel->country}</td>
                 <td style="word-wrap: break-word">{$hotel->star_level}</td>
