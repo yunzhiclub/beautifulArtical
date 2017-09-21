@@ -13,7 +13,7 @@
     <!-- Slider Show css-->
     <link rel="stylesheet" href="{:__ROOT__}/style/css/ken-burns.css" type="text/css" media="all" />
     <!-- //Custom Theme files -->
-    <script src="{:__ROOT__}/style/js/jquery-2.2.3.min.js"></script>
+    <script src="{:__ROOT__}/style/js/jquery-2.1.1.min.js"></script>
     <!-- nice scroll-js -->
     <script src="{:__ROOT__}/style/js/jquery.nicescroll.min.js"></script>
     <script>
@@ -57,96 +57,8 @@
                     <p class="w3title-text" style="text-align: left;">&nbsp;&nbsp;{$article->summery}</p>
                     <br>
                 </div>
+
             <div class="content">
-                <!-- //slider show -->
-                <!-- 九项服务，一价全包 -->
-                <div style="background-color: #e6e6fa;">
-                    <div class="clearfix"></div>
-                    <br>
-                    <h3 style="text-align: center;">九项服务，一价全包</h3>
-                    <br>
-                    <div class="brand-grids">
-                        <img src="{:__ROOT__}/style/images/9_01.gif" alt="" />
-                    </div>
-                    <div class="brand-grids">
-                        <img src="{:__ROOT__}/style/images/9_02.gif" alt="" />
-                    </div>
-                    <div class="brand-grids">
-                        <img src="{:__ROOT__}/style/images/9_03.gif" alt="" />
-                    </div>
-                    <div class="brand-grids">
-                        <img src="{:__ROOT__}/style/images/9_04.gif" alt="" />
-                    </div>
-                    <div class="brand-grids">
-                        <img src="{:__ROOT__}/style/images/9_05.gif" alt="" />
-                    </div>
-                    <div class="brand-grids">
-                        <img src="{:__ROOT__}/style/images/9_06.gif" alt="" />
-                    </div>
-                    <div class="brand-grids">
-                        <img src="{:__ROOT__}/style/images/9_07.gif" alt="" />
-                    </div>
-                    <div class="brand-grids">
-                        <img src="{:__ROOT__}/style/images/9_08.gif" alt="" />
-                    </div>
-                    <div class="brand-grids">
-                        <img src="{:__ROOT__}/style/images/9_09.gif" alt="" />
-                    </div>
-                    <div class="clearfix"></div>
-                    <br><br>
-                </div>
-                <!-- //九项服务，一价全包 -->
-                <!-- 定制自由行，让出国旅行更简单 -->
-                <div class="about">
-                    <h3 style="text-align: center;color: #81be32;">定制自由行<br>让出国旅行更简单</h3>
-                    <ul>
-                        <li>
-                            <p class="pfont6"><span class="glyphicon glyphicon-hand-right"></span>更省心。不用你操心，机票酒店活动签证租车...麻烦事儿全都有人包办</p>
-                        </li>
-                        <li>
-                            <p class="pfont6"><span class="glyphicon glyphicon-hand-right"></span>更个性。形成随便调，量身打造玩啥你说了算，满意再付全款</p>
-                        </li>
-                        <li>
-                            <p class="pfont6"><span class="glyphicon glyphicon-hand-right"></span>更舒心。专业更靠谱，100+位资深专业订制师，让你的行程不留遗憾</p>
-                        </li>
-                        <li>
-                            <p class="pfont6"><span class="glyphicon glyphicon-hand-right"></span>更自由。不再人挤人，定制专属路书，旅行团去不了的地方你能去</p>
-                        </li>
-                        <li>
-                            <p class="pfont6"><span class="glyphicon glyphicon-hand-right"></span>更划算。不花冤枉钱。九项服务一价全包，定制的服务，跟团的价格</p>
-                        </li>
-                        <li>
-                            <p class="pfont6"><span class="glyphicon glyphicon-hand-right"></span>更安全。全程有保障，专属行后保障团队，遇到问题有人管，出行不担心</p>
-                        </li>
-                    </ul>
-                </div>
-                <!-- //定制自由行，让出国旅行更简单 -->
-                <!-- 六大品质保证 -->
-                <div class="about" style="background-color:  #e6e6fa;">
-                    <h3 style="text-align: center;">6大品质保障<br>开启全新旅行体验</h3>
-                    <ul>
-                        <li>
-                            <p class="pfont6"><span class="glyphicon glyphicon-leaf"></span>全程商务专车，专业当地华人双语导游</p>
-                        </li>
-                        <li>
-                            <p class="pfont6"><span class="glyphicon glyphicon-leaf"></span>独立成团，不与陌生人拼团</p>
-                        </li>
-                        <li>
-                            <p class="pfont6"><span class="glyphicon glyphicon-leaf"></span>真正纯玩品质，承诺0购物0自费</p>
-                        </li>
-                        <li>
-                            <p class="pfont6"><span class="glyphicon glyphicon-leaf"></span>导游带您深入小众美景，去除不安全地带</p>
-                        </li>
-                        <li>
-                            <p class="pfont6"><span class="glyphicon glyphicon-leaf"></span>全程甄选酒店，安全舒适</p>
-                        </li>
-                        <li>
-                            <p class="pfont6"><span class="glyphicon glyphicon-leaf"></span>私家尊享，7* 24小时专属旅行管家</p>
-                        </li>
-                    </ul>
-                </div>
-                <!-- //六大品质保证 -->
-                <!-- 定制自由行，让出国旅行更简单 -->
                 {volist name="paragraphUps" id="pragraph"}
                 <div class="about">
                     <h3 style="text-align: center;" class="w3ls-title">{$pragraph->title}</h3> {$pragraph->content}
@@ -155,6 +67,7 @@
                     </div>
                 </div>
                 {/volist}
+
                 <!-- 旅游行程 -->
                 <br><br>
                 <div class="w3agile properties">
@@ -162,23 +75,46 @@
                     {volist name="attractions" id="attraction" key="key"}
                     <div class="properties-bottom">
                         <div class="properties-img">
-                            <img src="{:__ROOT__}/upload/{$attraction->getMainMaterial()->image}" alt="">
-                            <div class="view-caption">
-                                <h4><span class="glyphicon glyphicon-map-marker"></span>
-                                {$attraction->getMainMaterial()->designation} </h4>
-                            </div>
                             <div class="w3ls-buy">
                                 <a href="single.html">Day{$key}</a>
                             </div>
+                            <div class="view-caption">
+                                <h4><span class="glyphicon glyphicon-map-marker"></span>{$attraction->trip} </h4>
+                            </div>
                         </div>
                         <div class="w3ls-text">
-                            <p>&nbsp;{$attraction->getMainMaterial()->content}</p>
-                            <p><b class="pfont">景点 :</b> {$attraction->title} </p>
-                            <p><b class="pfont">酒店 :</b> {$attraction->getHotel()->designation} </p>
-                            <p><b class="pfont">用餐 :</b> {$attraction->meal} </p>
-                            <p><b class="pfont">用车 :</b> {$attraction->car} </p>
+                            <p><b class="pfont">日期 :</b> {$attraction->date} </p>
                             <p><b class="pfont">导游 :</b> {$attraction->guide} </p>
+                            <p><b class="pfont">描述 :</b> {$attraction->description} </p>
+                            <p><b class="pfont">用餐 :</b> {$attraction->getMeals()} </p>
+                            <p><b class="pfont">用车 :</b> {$attraction->getCar()} </p>
+                            <p><b class="pfont">酒店 :</b> {$attraction->getHotelDesignation()} </p>
                         </div>
+                        {volist name="$attraction->getMaterials()" id="material" key="i"}
+                        <div class="properties-img" style="height: 167px;">
+                            <div id="carousel-example-generic-{$i}" class="carousel slide" data-ride="carousel" style="height:150px;width:300px;">
+                                <ol class="carousel-indicators">
+                                    {volist name="$material->getMaterialImages()" id="image" key="key"}
+                                    <li data-target="#carousel-example-generic-{$i}" data-slide-to="{$key}" class="{eq name="$key" value="1"}active{/eq}"></li>
+                                    {/volist}
+                                </ol>
+
+                                <div class="carousel-inner" role="listbox">
+                                    {volist name="$material->getMaterialImages()" id="image" key="key"}
+                                    <div class="item {eq name="$key" value="1"}active{/eq}">
+                                        <img src="{:__ROOT__}/upload/{$image}" alt="" style="width: 298px;height: 167px;">
+                                        <div class="carousel-caption">
+                                        </div>
+                                    </div>
+                                    {/volist}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w3ls-text">
+                            <p><b class="pfont">名称 :</b> {$material->designation}  </p>
+                            <p><b class="pfont">描述 :</b> {$material->content} </p>
+                        </div>
+                        {/volist}
                     </div>
                     {/volist}
                     <div class="clearfix"></div>
@@ -192,8 +128,9 @@
                 </div>
                 {/volist}
                 <!-- //旅游行程 -->
+
                 <div class="contact">
-                    <!-- 定制师 -->
+                    <!-- 定制师信息 -->
                     {eq name="$contractor" value=""} {else/}
                     <div class="contact-form" >
                         <br>
@@ -224,54 +161,60 @@
                     </div>
                     {/eq}
                     <br>
-                    <!-- //定制师 -->
+                    <!-- 定制师信息 -->
+
                     <!-- 方案报价 -->
                     {volist name="plans" id="plan"}
                     <div class="contact-form">
                         <p class="pcontact2">方案报价</p>
-                        <p><b>出发日期 :</b> {$plan->travel_date} </p>
-                        <p><b>出行人数 :</b> {$plan->people_num}</p>
-                        <p><b>币种 :</b> {$plan->currency}</p>
-                        <p><b>总费用 :</b>{$plan->total_cost}</p>
-                        <p><b>最晚付款时间 :</b> {$plan->last_pay_time}</p>
+                        <p><b>出行人数 :</b> {$plan->adult_num}成人 {$plan->child_num}儿童 </p>
+                        <p><b>币种 :</b> {$plan->currency} </p>
+                        <p><b>总费用 :</b> {$plan->total_cost} </p>
+                        <p><b>最晚付款时间 :</b> {$plan->last_pay_time} </p>
                         <p><b>收费分类 :</b></p>
                         <table class="table table-bordered" style="text-align: right;">
                             <tr>
                                 <th>类型</th>
-                                <th>地接</th>
-                                <th>住宿</th>
+                                <th>机票</th>
+                                <th>签证</th>
+                                <th>旅游</th>
+                                <th>保险</th>
                             </tr>
                             <tr>
-                                <th>数量</th>
-                                <td>{$plan->getDetailByType('dijie')->number}</td>
-                                <td>{$plan->getDetailByType('zhusu')->number}</td>
+                                <th>成人单价</th>
+                                <td>{$plan->getDetail('plane', $plan)->adult_unit_price}</td>
+                                <td>{$plan->getDetail('visa', $plan)->adult_unit_price}</td>
+                                <td>{$plan->getDetail('tourism', $plan)->adult_unit_price}</td>
+                                <td>{$plan->getDetail('insurance', $plan)->adult_unit_price}</td>
                             </tr>
                             <tr>
-                                <th>频次</th>
-                                <td>{$plan->getDetailByType('dijie')->frequency}</td>
-                                <td>{$plan->getDetailByType('zhusu')->frequency}</td>
-                            </tr>
-                            <tr>
-                                <th>单价</th>
-                                <td>{$detailDijieUnit}</td>
-                                <td>{$detailZhusuUnit}</td>
+                                <th>儿童单价</th>
+                                <td>{$plan->getDetail('plane', $plan)->child_unit_price}</td>
+                                <td>{$plan->getDetail('visa', $plan)->child_unit_price}</td>
+                                <td>{$plan->getDetail('tourism', $plan)->child_unit_price}</td>
+                                <td>{$plan->getDetail('insurance', $plan)->child_unit_price}</td>
                             </tr>
                             <tr>
                                 <th>总价</th>
-                                <td>{$detailDijieTotal}</td>
-                                <td>{$detailZhusuTotal}</td>
+                                <td>{$plan->getDetail('plane', $plan)->total_price}</td>
+                                <td>{$plan->getDetail('visa', $plan)->total_price}</td>
+                                <td>{$plan->getDetail('tourism', $plan)->total_price}</td>
+                                <td>{$plan->getDetail('insurance', $plan)->total_price}</td>
                             </tr>
                             <tr>
                                 <th>备注</th>
-                                <td>{$plan->getDetailByType('dijie')->remark}</td>
-                                <td>{$plan->getDetailByType('zhusu')->remark}</td>
+                                <td>{$plan->getDetail('plane', $plan)->remark}</td>
+                                <td>{$plan->getDetail('visa', $plan)->remark}</td>
+                                <td>{$plan->getDetail('tourism', $plan)->remark}</td>
+                                <td>{$plan->getDetail('insurance', $plan)->remark}</td>
                             </tr>
                         </table>
                     </div>
                     {/volist}
                     <br>
-                    <!-- //方案报价 -->
-                    <!-- 费用包含 -->
+                    <!-- 方案报价 -->
+                    
+                    <!--酒店信息-->
                     <div class="contact-form">
                     <br>
                         <p class="pcontact2">酒店信息</p> {volist name="hotels" id="hotel" key="key"}
@@ -283,6 +226,8 @@
                         <p>本报价按照欧元兑换人民币汇率7.98核算</p>
                         <br>
                     </div>
+                    <!--酒店信息-->
+
                     <!-- footer -->
                     <div class="w3agile footer">
                         <div class="footer-text">

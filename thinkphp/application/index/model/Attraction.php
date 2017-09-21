@@ -91,4 +91,16 @@ class Attraction extends Model {
     public function getMainMaterial() {
         return Material::get($this->material_id);
     }
+
+    public function getMaterials() {
+        $attractionMaterials = AttractionMaterial::where('attraction_id', '=', $this->id)->select();
+        $materials = [];
+        foreach ($attractionMaterials as $attractionMaterial) {
+            if (!is_null($attractionMaterial->material_id)) {
+                $material = Material::get($attractionMaterial->material_id);
+                array_push($materials, $material);
+            }
+        }
+        return $materials;
+    }
 }

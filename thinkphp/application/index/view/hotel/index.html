@@ -39,7 +39,7 @@
                 <td style="word-wrap: break-word">{$hotel->city}</td>
                 <td style="word-wrap: break-word">{$hotel->country}</td>
                 <td style="word-wrap: break-word">{$hotel->star_level}</td>
-                <td style="word-wrap: break-word">{$common->limitWordNumber($hotel->remark, 80)}</td>
+                <td style="word-wrap: break-word">{$hotel->remark | $filter->limitWordNumber}</td>
                 <td style="word-wrap: break-word">
                     <div class="col-md-1 col-md-offset-1">
                         <a href="{:url('hotel/edit', ['hotelId' => $hotel->id])}" class="btn btn-info btn-xs"><i class="glyphicon glyphicon-pencil"></i>&nbsp;编辑</a>
