@@ -3,6 +3,7 @@ namespace app\index\controller;
 
 use app\index\controller\IndexController;
 use app\index\model\Common;
+use app\index\service\Paragraphservice;
 use think\Request;
 use app\index\model\Article;
 use app\index\model\Contractor;
@@ -117,7 +118,7 @@ class ArticleController extends IndexController {
 
         // 获取并传输plan
         $articleId = $param->param('articleId');
-        $Plan = new Plan();
+        $Plan  = new Plan();
         $Plans = $Plan->getPlanByArticleId($articleId);
 
         // 报价方案为空
@@ -265,25 +266,26 @@ class ArticleController extends IndexController {
         $Attractions = Attraction::order('weight')->where('article_id',$articleId)->select();
 
         $Article = Article::get($articleId);
-        $this->assign('article',$Article);
 
         $contractorId = $Article->contractor_id;
         $Contractor = Contractor::get($contractorId);
-        $this->assign('contractor',$Contractor);
-        $this->assign('attractions',$Attractions);
 
         $Plans = Plan::where('article_id',$articleId)->select();
+
         // 使用number_format 格式化输入金额
         $date = $this->articleService->MoneyFormate($Plans);
         
+        $paragraphUps = Paragraph::where('is_before_attraction',1)->where('article_id',$articleId)->order('weight')->select();
+        $paragraphDowns = Paragraph::where('is_before_attraction',0)->where('article_id',$articleId)->order('weight')->select();
+
+        $this->assign('article',$Article);
+        $this->assign('contractor',$Contractor);
+        $this->assign('attractions',$Attractions);
         $this->assign('detailZhusuUnit',$date['detailZhusuUnit']);
         $this->assign('detailZhusuTotal',$date['detailZhusuTotal']);
         $this->assign('detailDijieUnit',$date['detailDijieUnit']);
         $this->assign('detailDijieTotal',$date['detailDijieTotal']);
         $this->assign('plans',$Plans);
-
-        $paragraphUps = Paragraph::where('is_before_attraction',1)->where('article_id',$articleId)->order('weight')->select();
-        $paragraphDowns = Paragraph::where('is_before_attraction',0)->where('article_id',$articleId)->order('weight')->select();
         $this->assign('paragraphUps',$paragraphUps);
         $this->assign('paragraphDowns',$paragraphDowns);
 
