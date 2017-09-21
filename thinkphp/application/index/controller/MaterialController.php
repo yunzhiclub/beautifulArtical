@@ -46,7 +46,7 @@ class MaterialController extends IndexController {
         $Material->image = '';
 
         $this->assign('material', $Material);
-
+        $this->assign('images', '');
     	return $this->fetch('edit');
     }
 
@@ -97,7 +97,7 @@ class MaterialController extends IndexController {
         $message =  $this->materialService->materialEdit($param);
         // 传递素材信息到v层
         $this->assign('material', $message['material']);
-
+        $this->assign('images', $message['images']);
         return $this->fetch();
     }
 
