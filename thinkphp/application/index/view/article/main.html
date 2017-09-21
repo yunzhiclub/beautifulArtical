@@ -167,11 +167,10 @@
                     {volist name="plans" id="plan"}
                     <div class="contact-form">
                         <p class="pcontact2">方案报价</p>
-                        <p><b>出发日期 :</b> {$plan->travel_date} </p>
-                        <p><b>出行人数 :</b> {$plan->people_num}</p>
-                        <p><b>币种 :</b> {$plan->currency}</p>
-                        <p><b>总费用 :</b>{$plan->total_cost}</p>
-                        <p><b>最晚付款时间 :</b> {$plan->last_pay_time}</p>
+                        <p><b>出行人数 :</b> </p>
+                        <p><b>币种 :</b> </p>
+                        <p><b>总费用 :</b></p>
+                        <p><b>最晚付款时间 :</b> </p>
                         <p><b>收费分类 :</b></p>
                         <table class="table table-bordered" style="text-align: right;">
                             <tr>
@@ -181,28 +180,28 @@
                             </tr>
                             <tr>
                                 <th>数量</th>
-                                <td>{$plan->getDetailByType('dijie')->number}</td>
-                                <td>{$plan->getDetailByType('zhusu')->number}</td>
+                                <td></td>
+                                <td></td>
                             </tr>
                             <tr>
                                 <th>频次</th>
-                                <td>{$plan->getDetailByType('dijie')->frequency}</td>
-                                <td>{$plan->getDetailByType('zhusu')->frequency}</td>
+                                <td></td>
+                                <td></td>
                             </tr>
                             <tr>
                                 <th>单价</th>
-                                <td>{$detailDijieUnit}</td>
-                                <td>{$detailZhusuUnit}</td>
+                                <td></td>
+                                <td></td>
                             </tr>
                             <tr>
                                 <th>总价</th>
-                                <td>{$detailDijieTotal}</td>
-                                <td>{$detailZhusuTotal}</td>
+                                <td></td>
+                                <td></td>
                             </tr>
                             <tr>
                                 <th>备注</th>
-                                <td>{$plan->getDetailByType('dijie')->remark}</td>
-                                <td>{$plan->getDetailByType('zhusu')->remark}</td>
+                                <td></td>
+                                <td></td>
                             </tr>
                         </table>
                     </div>

@@ -234,7 +234,6 @@ class ArticleController extends IndexController {
     //返回main界面
     public function main() {
         $articleId = Request::instance()->param('articleId');
-        // 获取当前景点根据权重的排序
         $Attractions = Attraction::order('weight')->where('article_id',$articleId)->select();
 
         $Article = Article::get($articleId);
@@ -243,9 +242,6 @@ class ArticleController extends IndexController {
         $Contractor = Contractor::get($contractorId);
 
         $Plans = Plan::where('article_id',$articleId)->select();
-
-        // 使用number_format 格式化输入金额
-        $date = $this->articleService->MoneyFormate($Plans);
         
         $paragraphUps = Paragraph::where('is_before_attraction',1)->where('article_id',$articleId)->order('weight')->select();
         $paragraphDowns = Paragraph::where('is_before_attraction',0)->where('article_id',$articleId)->order('weight')->select();
@@ -253,10 +249,6 @@ class ArticleController extends IndexController {
         $this->assign('article',$Article);
         $this->assign('contractor',$Contractor);
         $this->assign('attractions',$Attractions);
-        $this->assign('detailZhusuUnit',$date['detailZhusuUnit']);
-        $this->assign('detailZhusuTotal',$date['detailZhusuTotal']);
-        $this->assign('detailDijieUnit',$date['detailDijieUnit']);
-        $this->assign('detailDijieTotal',$date['detailDijieTotal']);
         $this->assign('plans',$Plans);
         $this->assign('paragraphUps',$paragraphUps);
         $this->assign('paragraphDowns',$paragraphDowns);
