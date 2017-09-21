@@ -50,7 +50,7 @@ class MaterialController extends IndexController {
     	return $this->fetch('edit');
     }
 
-    public function addOperate() {
+    public function save() {
     	//接受参数
         $param = Request::instance();
 

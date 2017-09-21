@@ -388,39 +388,6 @@ class Articleservice
         }
         return false;
     }
-
-    public function MoneyFormate($Plans) {
-                
-        // 遍历传入的报价方案    
-        foreach ($Plans as $key => $value) {
-            // 格式化总金额
-            $TotalCost = $this->fromate($value->total_cost);
-            $value->total_cost = $TotalCost;
-
-            // 格式化成人单价
-            $adultUnitPrice = $this->fromate($value->adult_unit_price);
-            $value->adult_unit_price = $adultUnitPrice;
-
-            // 格式化儿童单价
-            $childUnitPrice = $this->fromate($value->child_unit_price);
-            $value->child_unit_price = $childUnitPrice;
-
-            // 格式化总价
-            $totalPrice = $this->fromate($value->total_price);
-            $value->total_price = $totalPrice;    
-        }
-    }
-    // 格式化金额函数
-    public function fromate($money){
-        // 强制转化成Int类型，非数字转化成0
-        $money = (float)$money;
-        if(!$money){
-                $money = 0;
-            }
-        // 格式化的结果为安千位分隔，保存小数点后两位
-        $cost= number_format($money,2);
-        return $cost;
-    }
 }
  
 

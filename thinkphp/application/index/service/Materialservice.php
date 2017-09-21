@@ -34,12 +34,11 @@ class Materialservice  {
         //获取到参数
         $content = $parma->post('content');
         $designation = $parma->post('designation');
-        //接收到多张图片
-        $files = request()->file('images');
-
+        $action = request()->action() === 'save' ? 'add' : 'edit';
         // 新建素材实体
         $Material = new Material();
-
+        //接收到多张图片
+        $files = request()->file('input-b3');
         //新建一个保存上传文件路径的数组
         $imagePaths = [];
         if(!empty($files)) {
@@ -52,7 +51,6 @@ class Materialservice  {
             //将图片数组保存到实体中
             $Material->images = json_encode($imagePaths);
         }
-
         $Material->content = $content;
         $Material->designation = $designation;
 
