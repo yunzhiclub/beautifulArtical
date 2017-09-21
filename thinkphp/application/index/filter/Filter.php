@@ -22,4 +22,14 @@ class Filter
         $cost= number_format($money,2);
         return $cost;
     }
+
+    // 格式化当前的字符串数字
+    public function limitWordNumber($str) {
+        $str = strip_tags($str);
+        if (mb_strlen($str) < 130) {
+            return $str;
+        } else {
+            return mb_substr($str, 0, 130) . '...';
+        }
+    }
 }

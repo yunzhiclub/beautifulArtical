@@ -45,13 +45,4 @@ class Common
             self::deleteImage($imagePath);
         }
     }
-
-    public function limitWordNumber($str, $length) {
-        $str = strip_tags($str);
-        if (mb_strlen($str) < $length) {
-            return $str;
-        } else {
-            return mb_substr($str, 0, $length) . '...';
-        }
-    }
 }
