@@ -45,25 +45,4 @@ class Common
             self::deleteImage($imagePath);
         }
     }
-
-    public function limitWordNumber($str, $length) {
-        $str = strip_tags($str);
-        if (mb_strlen($str) < $length) {
-            return $str;
-        } else {
-            return mb_substr($str, 0, $length) . '...';
-        }
-    }
-
-    // 格式化金额函数
-    static public function fromate($money){
-        // 强制转化成Int类型，非数字转化成0
-        $money = (float)$money;
-        if(!$money){
-            $money = 0;
-        }
-        // 格式化的结果为安千位分隔，保存小数点后两位
-        $cost= number_format($money,2);
-        return $cost;
-    }
 }

@@ -2,7 +2,9 @@
 namespace app\index\controller;
 
 use app\index\controller\IndexController;
+use app\index\filter\Filter;
 use app\index\model\Common;
+use app\index\service\Paragraphservice;
 use think\Request;
 use app\index\model\Article;
 use app\index\model\Contractor;
@@ -23,6 +25,7 @@ use app\index\service\PlanService;
 class ArticleController extends IndexController {
 
     protected $articleService = null;
+    protected $filter = null;
 
     //构造函数实例化ArticleService
     function __construct(Request $request = null)
@@ -30,13 +33,14 @@ class ArticleController extends IndexController {
         parent::__construct($request);
         //实例化服务层
         $this->articleService = new Articleservice();
+        $this->filter = new Filter();
     }
 
     public function index()
 	{
         $pageSize = config('paginate.var_page');
 	    $articles = Article::order('id desc')->paginate($pageSize);
-	    $this->assign('common', new Common());
+        $this->assign('filter', $this->filter);
 	    $this->assign('articles', $articles);
 		return $this->fetch();
 	}
@@ -119,7 +123,6 @@ class ArticleController extends IndexController {
         $articleId = $param->param('articleId');
         $Plan = new Plan();
         $Plan = $Plan->getPlanByArticleId($articleId);
-        $this->articleService->MoneyFormate($Plan);
 
         // 方案报价为空，添加方案报价
         if (empty($Plan)) {
@@ -129,8 +132,8 @@ class ArticleController extends IndexController {
         } else {
             $this->assign('plan', $Plan[0]);
         }
-
-        $this->assign('common', new Common());
+        //传输过滤器信息
+        $this->assign('filter', $this->filter);
         // 调用service中的保存方法
         $message = $this->articleService->secondAriticle($param);
         // 将serve中处理的数据传给前台
@@ -213,45 +216,46 @@ class ArticleController extends IndexController {
         // 接收参数
         $param = Request::instance();
         $articleId = Request::instance()->param('articleId/d');
-        //调用service中的方法
-        $message =  $this->articleService->upAttraction($param); 
-        $this->success('向上排序成功',url('secondadd',['articleId'=>$articleId]));
+
+        $message =  $this->articleService->upAttraction($param);
+        if ($message['status'] == 'success') {
+            $this->success($message['message'], url('secondadd',['articleId'=>$articleId]));
+        } else {
+            $this->error($message['message'], url('secondadd',['articleId'=>$articleId]));
+        }
     }
     public function downAttraction() {
         // 接收参数
         $param = Request::instance();
         $articleId = Request::instance()->param('articleId/d');
-        //调用service中的方法
-        $message =  $this->articleService->downAttraction($param); 
-        $this->success('向下排序成功',url('secondadd',['articleId'=>$articleId]));
+
+        $message =  $this->articleService->downAttraction($param);
+        if ($message['status'] == 'success') {
+            $this->success($message['message'], url('secondadd',['articleId'=>$articleId]));
+        } else {
+            $this->error($message['message'], url('secondadd',['articleId'=>$articleId]));
+        }
     }
 
     //返回main界面
     public function main() {
         $articleId = Request::instance()->param('articleId');
-        // 获取当前景点根据权重的排序
         $Attractions = Attraction::order('weight')->where('article_id',$articleId)->select();
 
         $Article = Article::get($articleId);
-        $this->assign('article',$Article);
 
         $contractorId = $Article->contractor_id;
         $Contractor = Contractor::get($contractorId);
-        $this->assign('contractor',$Contractor);
-        $this->assign('attractions',$Attractions);
 
         $Plans = Plan::where('article_id',$articleId)->select();
-        // 使用number_format 格式化输入金额
-        $date = $this->articleService->MoneyFormate($Plans);
         
-        $this->assign('detailZhusuUnit',$date['detailZhusuUnit']);
-        $this->assign('detailZhusuTotal',$date['detailZhusuTotal']);
-        $this->assign('detailDijieUnit',$date['detailDijieUnit']);
-        $this->assign('detailDijieTotal',$date['detailDijieTotal']);
-        $this->assign('plans',$Plans);
-
         $paragraphUps = Paragraph::where('is_before_attraction',1)->where('article_id',$articleId)->order('weight')->select();
         $paragraphDowns = Paragraph::where('is_before_attraction',0)->where('article_id',$articleId)->order('weight')->select();
+
+        $this->assign('article',$Article);
+        $this->assign('contractor',$Contractor);
+        $this->assign('attractions',$Attractions);
+        $this->assign('plans',$Plans);
         $this->assign('paragraphUps',$paragraphUps);
         $this->assign('paragraphDowns',$paragraphDowns);
 
@@ -267,6 +271,7 @@ class ArticleController extends IndexController {
             }
             $tempHotel = null;
         }
+        $Hotels = array_unique($Hotels);
         $this->assign('hotels',$Hotels);
 
         return $this->fetch();

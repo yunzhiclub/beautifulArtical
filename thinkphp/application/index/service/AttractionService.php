@@ -84,6 +84,7 @@ class AttractionService {
         $hotelId = $param->post('hotelId');
 
         $Attraction = Attraction::get($attractionId);
+        $ContrastAttraction = $Attraction;
 
         $Attraction->trip = $trip;
         $Attraction->date = $date;
@@ -94,9 +95,11 @@ class AttractionService {
         $Attraction->hotel_id = $hotelId;
         $Attraction->article_id = $articleId;
 
-        if(!$Attraction->save()) {
-            $message['status'] = 'error';
-            $message['message'] = '更新失败';
+        if(json_encode($Attraction) != json_encode($ContrastAttraction)) {
+            if(!$Attraction->save()) {
+                $message['status'] = 'error';
+                $message['message'] = '更新失败';
+            }
         }
 
         $map = ['attraction_id' => $attractionId];
