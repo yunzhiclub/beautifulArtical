@@ -2,6 +2,7 @@
 namespace app\index\controller;
 
 use app\index\controller\IndexController;
+use app\index\filter\Filter;
 use app\index\model\Common;
 use think\Request;
 use app\index\model\Article;
@@ -23,6 +24,7 @@ use app\index\service\PlanService;
 class ArticleController extends IndexController {
 
     protected $articleService = null;
+    protected $filter = null;
 
     //构造函数实例化ArticleService
     function __construct(Request $request = null)
@@ -30,6 +32,7 @@ class ArticleController extends IndexController {
         parent::__construct($request);
         //实例化服务层
         $this->articleService = new Articleservice();
+        $this->filter = new Filter();
     }
 
     public function index()
@@ -37,6 +40,7 @@ class ArticleController extends IndexController {
         $pageSize = config('paginate.var_page');
 	    $articles = Article::order('id desc')->paginate($pageSize);
 	    $this->assign('common', new Common());
+        $this->assign('filter', $this->filter);
 	    $this->assign('articles', $articles);
 		return $this->fetch();
 	}
@@ -119,7 +123,6 @@ class ArticleController extends IndexController {
         $articleId = $param->param('articleId');
         $Plan = new Plan();
         $Plan = $Plan->getPlanByArticleId($articleId);
-        $this->articleService->MoneyFormate($Plan);
 
         // 方案报价为空，添加方案报价
         if (empty($Plan)) {
@@ -131,6 +134,7 @@ class ArticleController extends IndexController {
         }
 
         $this->assign('common', new Common());
+        $this->assign('filter', $this->filter);
         // 调用service中的保存方法
         $message = $this->articleService->secondAriticle($param);
         // 将serve中处理的数据传给前台

@@ -388,31 +388,6 @@ class Articleservice
         }
         return false;
     }
-
-    public function MoneyFormate($Plans) {
-                
-        // 遍历传入的报价方案    
-        foreach ($Plans as $key => $value) {
-            // 格式化总金额
-            $TotalCost = Common::fromate($value->total_cost);
-            $value->total_cost = $TotalCost;
-
-            // 根据方案报价获取所有detail
-            $planId = $value->id;
-            $Detail = new Detail();
-            $Details = $Detail->where('plan_id', $planId)->select();
-
-            // 遍历，格式化
-            foreach ($Details as $key => $value) {
-                $adultUnitPrice = Common::fromate($value->adult_unit_price);
-                $value->adult_unit_price = $adultUnitPrice;
-                $childUnitPrice = Common::fromate($value->child_unit_price);
-                $value->child_unit_price = $childUnitPrice;
-                $totalPrice = Common::fromate($value->total_price);
-                $value->total_price = $totalPrice;
-            }
-        }
-    }
 }
  
 
