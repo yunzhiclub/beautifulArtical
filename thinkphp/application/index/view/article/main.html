@@ -167,41 +167,46 @@
                     {volist name="plans" id="plan"}
                     <div class="contact-form">
                         <p class="pcontact2">方案报价</p>
-                        <p><b>出行人数 :</b> </p>
-                        <p><b>币种 :</b> </p>
-                        <p><b>总费用 :</b></p>
-                        <p><b>最晚付款时间 :</b> </p>
+                        <p><b>出行人数 :</b> {$plan->adult_num}成人 {$plan->child_num}儿童 </p>
+                        <p><b>币种 :</b> {$plan->currency} </p>
+                        <p><b>总费用 :</b> {$plan->total_cost} </p>
+                        <p><b>最晚付款时间 :</b> {$plan->last_pay_time} </p>
                         <p><b>收费分类 :</b></p>
                         <table class="table table-bordered" style="text-align: right;">
                             <tr>
                                 <th>类型</th>
-                                <th>地接</th>
-                                <th>住宿</th>
+                                <th>机票</th>
+                                <th>签证</th>
+                                <th>旅游</th>
+                                <th>保险</th>
                             </tr>
                             <tr>
-                                <th>数量</th>
-                                <td></td>
-                                <td></td>
+                                <th>成人单价</th>
+                                <td>{$plan->getDetail('plane', $plan)->adult_unit_price}</td>
+                                <td>{$plan->getDetail('visa', $plan)->adult_unit_price}</td>
+                                <td>{$plan->getDetail('tourism', $plan)->adult_unit_price}</td>
+                                <td>{$plan->getDetail('insurance', $plan)->adult_unit_price}</td>
                             </tr>
                             <tr>
-                                <th>频次</th>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                            <tr>
-                                <th>单价</th>
-                                <td></td>
-                                <td></td>
+                                <th>儿童单价</th>
+                                <td>{$plan->getDetail('plane', $plan)->child_unit_price}</td>
+                                <td>{$plan->getDetail('visa', $plan)->child_unit_price}</td>
+                                <td>{$plan->getDetail('tourism', $plan)->child_unit_price}</td>
+                                <td>{$plan->getDetail('insurance', $plan)->child_unit_price}</td>
                             </tr>
                             <tr>
                                 <th>总价</th>
-                                <td></td>
-                                <td></td>
+                                <td>{$plan->getDetail('plane', $plan)->total_price}</td>
+                                <td>{$plan->getDetail('visa', $plan)->total_price}</td>
+                                <td>{$plan->getDetail('tourism', $plan)->total_price}</td>
+                                <td>{$plan->getDetail('insurance', $plan)->total_price}</td>
                             </tr>
                             <tr>
                                 <th>备注</th>
-                                <td></td>
-                                <td></td>
+                                <td>{$plan->getDetail('plane', $plan)->remark}</td>
+                                <td>{$plan->getDetail('visa', $plan)->remark}</td>
+                                <td>{$plan->getDetail('tourism', $plan)->remark}</td>
+                                <td>{$plan->getDetail('insurance', $plan)->remark}</td>
                             </tr>
                         </table>
                     </div>
