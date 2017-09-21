@@ -34,7 +34,7 @@
                             <div id="carousel-example-generic-{$i}" class="col-md-3 carousel slide" data-ride="carousel" style="height:150px;width:300px;">
                                 <ol class="carousel-indicators">
                                     {volist name="$material->getMaterialImages()" id="image" key="key"}
-                                    <li data-target="#carousel-example-generic-{$i}" data-slide-to="{$key}"></li>
+                                    <li data-target="#carousel-example-generic-{$i}" data-slide-to="{$key}" class="{eq name="$key" value="1"}active{/eq}"></li>
                                     {/volist}
                                 </ol>
 
