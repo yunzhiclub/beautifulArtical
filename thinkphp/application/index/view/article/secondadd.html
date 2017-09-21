@@ -190,15 +190,15 @@
                                         <hr>
                                         <div class="form-group col-md-3">
                                             <label>成人单价</label>
-                                            <input type="text" class="form-control" id="adultUnitPrice" name="planeAdultUnitPrice" placeholder="成人单价..." value="{$plan->getDetail('plane', $plan)->adult_unit_price}">
+                                            <input type="text" class="form-control" id="adultUnitPrice" name="planeAdultUnitPrice" placeholder="成人单价..." value="{$plan->getDetail('plane', $plan)->adult_unit_price | $filter->moneyFilter}">
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label>儿童单价</label>
-                                            <input type="text" class="form-control" id="childUnitPrice" name="planeChildUnitPrice" placeholder="儿童单价..." value="{$plan->getDetail('plane', $plan)->child_unit_price}">
+                                            <input type="text" class="form-control" id="childUnitPrice" name="planeChildUnitPrice" placeholder="儿童单价..." value="{$plan->getDetail('plane', $plan)->child_unit_price | $filter->moneyFilter}">
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label>总价</label>
-                                            <input type="text" class="form-control" id="totalPrice" name="planeTotalPrice" placeholder="总价..." value="{$plan->getDetail('plane', $plan)->total_price}">
+                                            <input type="text" class="form-control" id="totalPrice" name="planeTotalPrice" placeholder="总价..." value="{$plan->getDetail('plane', $plan)->total_price | $filter->moneyFilter}">
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label>备注</label>
@@ -210,15 +210,15 @@
                                         <hr>
                                         <div class="form-group col-md-3">
                                             <label>成人单价</label>
-                                            <input type="text" class="form-control" id="adultUnitPrice" name="visaAdultUnitPrice" placeholder="成人单价..." value="{$plan->getDetail('visa', $plan)->adult_unit_price}">
+                                            <input type="text" class="form-control" id="adultUnitPrice" name="visaAdultUnitPrice" placeholder="成人单价..." value="{$plan->getDetail('visa', $plan)->adult_unit_price | $filter->moneyFilter}">
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label>儿童单价</label>
-                                            <input type="text" class="form-control" id="childUnitPrice" name="visaChildUnitPrice" placeholder="儿童单价..." value="{$plan->getDetail('visa', $plan)->child_unit_price}">
+                                            <input type="text" class="form-control" id="childUnitPrice" name="visaChildUnitPrice" placeholder="儿童单价..." value="{$plan->getDetail('visa', $plan)->child_unit_price | $filter->moneyFilter}">
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label>总价</label>
-                                            <input type="text" class="form-control" id="totalPrice" name="visaTotalPrice" placeholder="总价..." value="{$plan->getDetail('visa', $plan)->total_price}">
+                                            <input type="text" class="form-control" id="totalPrice" name="visaTotalPrice" placeholder="总价..." value="{$plan->getDetail('visa', $plan)->total_price | $filter->moneyFilter}">
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label>备注</label>
@@ -230,15 +230,15 @@
                                         <hr>
                                         <div class="form-group col-md-3">
                                             <label>成人单价</label>
-                                            <input type="text" class="form-control" id="adultUnitPrice" name="tourismAdultUnitPrice" placeholder="成人单价..." value="{$plan->getDetail('visa', $plan)->adult_unit_price}">
+                                            <input type="text" class="form-control" id="adultUnitPrice" name="tourismAdultUnitPrice" placeholder="成人单价..." value="{$plan->getDetail('visa', $plan)->adult_unit_price | $filter->moneyFilter}">
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label>儿童单价</label>
-                                            <input type="text" class="form-control" id="childUnitPrice" name="tourismChildUnitPrice" placeholder="儿童单价..." value="{$plan->getDetail('tourism', $plan)->child_unit_price}">
+                                            <input type="text" class="form-control" id="childUnitPrice" name="tourismChildUnitPrice" placeholder="儿童单价..." value="{$plan->getDetail('tourism', $plan)->child_unit_price | $filter->moneyFilter}">
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label>总价</label>
-                                            <input type="text" class="form-control" id="totalPrice" name="tourismTotalPrice" placeholder="总价..." value="{$plan->getDetail('tourism', $plan)->total_price}">
+                                            <input type="text" class="form-control" id="totalPrice" name="tourismTotalPrice" placeholder="总价..." value="{$plan->getDetail('tourism', $plan)->total_price | $filter->moneyFilter}">
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label>备注</label>
@@ -250,15 +250,15 @@
                                         <hr>
                                         <div class="form-group col-md-3">
                                             <label>成人单价</label>
-                                            <input type="text" class="form-control" id="adultUnitPrice" name="insuranceAdultUnitPrice" placeholder="成人单价..." value="{$plan->getDetail('insurance', $plan)->adult_unit_price}">
+                                            <input type="text" class="form-control" id="adultUnitPrice" name="insuranceAdultUnitPrice" placeholder="成人单价..." value="{$plan->getDetail('insurance', $plan)->adult_unit_price | $filter->moneyFilter}">
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label>儿童单价</label>
-                                            <input type="text" class="form-control" id="childUnitPrice" name="insuranceChildUnitPrice" placeholder="儿童单价..." value="{$plan->getDetail('insurance', $plan)->child_unit_price}">
+                                            <input type="text" class="form-control" id="childUnitPrice" name="insuranceChildUnitPrice" placeholder="儿童单价..." value="{$plan->getDetail('insurance', $plan)->child_unit_price | $filter->moneyFilter}">
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label>总价</label>
-                                            <input type="text" class="form-control" id="totalPrice" name="insuranceTotalPrice" placeholder="总价..." value="{$plan->getDetail('insurance', $plan)->total_price}">
+                                            <input type="text" class="form-control" id="totalPrice" name="insuranceTotalPrice" placeholder="总价..." value="{$plan->getDetail('insurance', $plan)->total_price | $filter->moneyFilter}">
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label>备注</label>
@@ -275,7 +275,7 @@
                                     <div class="control-group">
                                         <label for="totalCost">总费用</label>
                                         <div class="controls">
-                                            <input type="text" class="form-control" name="totalCost" placeholder="总费用..." value="{$plan->total_cost}"/>
+                                            <input type="text" class="form-control" name="totalCost" placeholder="总费用..." value="{$plan->total_cost | $filter->moneyFilter}"/>
                                         </div>
                                     </div>
                                     <hr>
