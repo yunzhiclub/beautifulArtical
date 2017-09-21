@@ -2,7 +2,7 @@
 
 namespace app\index\controller;
 
-use app\index\model\Common;
+use app\index\filter\Filter;
 use app\index\model\Hotel;
 use app\index\service\HotelService;
 use think\Request;
@@ -40,8 +40,8 @@ class HotelController extends IndexController {
                 'var_page' => 'page',
             ]);
 
-        $this->assign('common', new Common());
         $this->assign('hotels', $hotels);
+        $this->assign('filter', new Filter());
         return $this->fetch();
     }
     // 以国家显示
@@ -50,7 +50,6 @@ class HotelController extends IndexController {
     	$pageSize = config('paginate.var_page');
     	$Hotels = Hotel::order('id desc')->paginate($pageSize);
     	$countrys = [];
-        $this->assign('common', new Common());
     	$this->assign('hotels',$Hotels);
         return $this->fetch('index'); 
     }
@@ -59,7 +58,6 @@ class HotelController extends IndexController {
     {
     	$pageSize = config('paginate.var_page');
     	$hotels = Hotel::order('city desc')->paginate($pageSize);    
-        $this->assign('common', new Common());
     	$this->assign('hotels',$hotels);
         return $this->fetch('index');    
     }
@@ -68,7 +66,6 @@ class HotelController extends IndexController {
     { 
         $pageSize = config('paginate.var_page');
     	$hotels = Hotel::order('star_level desc')->paginate($pageSize);
-        $this->assign('common', new Common());
     	$this->assign('hotels',$hotels);
         return $this->fetch('index');   
     }

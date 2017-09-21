@@ -39,7 +39,6 @@ class ArticleController extends IndexController {
 	{
         $pageSize = config('paginate.var_page');
 	    $articles = Article::order('id desc')->paginate($pageSize);
-	    $this->assign('common', new Common());
         $this->assign('filter', $this->filter);
 	    $this->assign('articles', $articles);
 		return $this->fetch();
@@ -132,8 +131,7 @@ class ArticleController extends IndexController {
         } else {
             $this->assign('plan', $Plan[0]);
         }
-
-        $this->assign('common', new Common());
+        //传输过滤器信息
         $this->assign('filter', $this->filter);
         // 调用service中的保存方法
         $message = $this->articleService->secondAriticle($param);

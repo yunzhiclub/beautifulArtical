@@ -9,7 +9,7 @@
         </div>
         <div class="form-group">
             <label>摘要</label>
-            <textarea class="form-control" rows="3" readonly>{$common->limitWordNumber($summery, 254)}</textarea>
+            <textarea class="form-control" rows="3" readonly>{$summery | $filter->limitWordNumber}</textarea>
         </div>
         <div class="form-group">
             <label for="exampleInputFile">封面</label>
@@ -58,7 +58,7 @@
                                 总行程：{$_attraction->trip}<br>
                                 日期：{$_attraction->date}<br>
                                 导游：{$_attraction->guide}<br>
-                                描述：{$common->limitWordNumber($_attraction->description, 136)}<br>
+                                描述：{$_attraction->description | $filter->limitWordNumber(136)}<br>
                                 用餐：{$_attraction->getMeals()}<br>
                                 用车：{$_attraction->getCar()}<br>
                                 素材：{$_attraction->getCheckedMaterial()}<br>
@@ -91,7 +91,7 @@
                                 <img src="{:__ROOT__}/upload/{$paragraph->image}" style="height: 100px; width: 180px;" alt="">
                             </div>
                             <div class="col-md-6 col-md-offset-1" style="word-wrap: break-word;">
-                                {$common->limitWordNumber($paragraph->content, 245)}
+                                {$paragraph->content | $filter->limitWordNumber}
                             </div>
                         </div>
                         <div class="row">

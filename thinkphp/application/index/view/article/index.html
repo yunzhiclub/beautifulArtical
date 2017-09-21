@@ -30,7 +30,7 @@
                             <img src="{:__ROOT__}/upload/{$article->cover}" style="width: 125px;height: 125px;" alt="">
                     </div>
                     <div class="col-md-8" style="word-wrap:break-word;">
-                            {$common->limitWordNumber($article->summery, 167)}
+                            {$article->summery | $filter->limitWordNumber}
                     </div>
                 </div>
 
