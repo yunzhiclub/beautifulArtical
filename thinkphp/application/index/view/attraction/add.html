@@ -71,11 +71,36 @@
             <div class="form-group">
                 <label>酒店</label>
                 <div>
-                    {volist name="hotels" id="hotel"}
-                    <label>
-                        <input type="radio" name="hotelId" value="{$hotel->id}" {eq name="$attraction->hotel_id" value="$hotel->id"}checked{/eq}>
-                        {$hotel->designation}
-                    </label>
+                    {volist name="$hotel->getAllCountries()" id="country"}
+                    <div class="row">
+                        <div class="col-md-11 col-md-offset-1">
+                            <label>{$country}</label>
+                            <table class="table table-bordered">
+                                {volist name="$hotel->getCitiesByCountry($country)" id="city"}
+                                <tr>
+                                    <th class="col-md-3">{$city}</th>
+                                    <td class="col-md-9">
+                                        <table>
+                                            {volist name="$hotel->getStarsByCountryAndCity($country, $city)" id="star"}
+                                            <tr>
+                                                <th>{$star}</th>
+                                                <td>
+                                                    {volist name="$hotel->getHotelsByCountryAndCityAndStar($country, $city, $star)" id="hotel"}
+                                                    <label>
+                                                        <input type="radio" name="hotelId" value="{$hotel->id}" {eq name="$attraction->hotel_id" value="$hotel->id"}checked{/eq}>
+                                                        {$hotel->designation}
+                                                    </label>
+                                                    {/volist}
+                                                </td>
+                                            </tr>
+                                            {/volist}
+                                        </table>
+                                    </td>
+                                </tr>
+                                {/volist}
+                            </table>
+                        </div>
+                    </div>
                     {/volist}
                 </div>
             </div>
