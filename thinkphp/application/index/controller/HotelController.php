@@ -49,8 +49,8 @@ class HotelController extends IndexController {
     {
     	$pageSize = config('paginate.var_page');
     	$Hotels = Hotel::order('id desc')->paginate($pageSize);
-    	$countrys = [];
     	$this->assign('hotels',$Hotels);
+        $this->assign('filter', new Filter());
         return $this->fetch('index'); 
     }
     // 以城市显示
@@ -59,6 +59,7 @@ class HotelController extends IndexController {
     	$pageSize = config('paginate.var_page');
     	$hotels = Hotel::order('city desc')->paginate($pageSize);    
     	$this->assign('hotels',$hotels);
+        $this->assign('filter', new Filter());
         return $this->fetch('index');    
     }
     //以星级显示
@@ -67,6 +68,7 @@ class HotelController extends IndexController {
         $pageSize = config('paginate.var_page');
     	$hotels = Hotel::order('star_level desc')->paginate($pageSize);
     	$this->assign('hotels',$hotels);
+        $this->assign('filter', new Filter());
         return $this->fetch('index');   
     }
 
