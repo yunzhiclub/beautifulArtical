@@ -27,10 +27,12 @@ class AttractionController extends IndexController {
 
     public function add() {
         $materials = Material::all();
-        $hotels = Hotel::all();
+        $hotel = new Hotel();
+
         $articleId = Request::instance()->param('articleId');
+
         $this->assign('materials', $materials);
-        $this->assign('hotels', $hotels);
+        $this->assign('hotel', $hotel);
         $this->assign('articleId', $articleId);
         $this->assign('attraction', $this->attractionService->getNullAttraction());
         return $this->fetch();
@@ -52,10 +54,10 @@ class AttractionController extends IndexController {
         $attractionId = Request::instance()->param('attractionId');
         $attraction = Attraction::get($attractionId);
         $materials = Material::all();
-        $hotels = Hotel::all();
+        $hotel = new Hotel();
 
         $this->assign('materials', $materials);
-        $this->assign('hotels', $hotels);
+        $this->assign('hotel', $hotel);
         $this->assign('articleId', $articleId);
         $this->assign('attraction', $attraction);
         return $this->fetch('add');
