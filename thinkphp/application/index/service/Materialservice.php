@@ -38,7 +38,7 @@ class Materialservice  {
         // 新建素材实体
         $Material = new Material();
         //接收到多张图片
-        $files = request()->file('input-b3');
+        $files = request()->file('images');
         //新建一个保存上传文件路径的数组
         $imagePaths = [];
         if(!empty($files)) {
@@ -134,7 +134,8 @@ class Materialservice  {
         } else {
             // 获取素材对象
             $Material = Material::get($materialId);
-
+            $images = json_decode($Material->images);
+            $message['images'] = $images;
             // 素材对象为空
             if (is_null($Material)) {
                 $message['status'] = 'error';
