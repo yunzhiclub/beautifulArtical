@@ -172,14 +172,11 @@
         <div class="row-fluid">
             <div style="margin-top: 60px;">
                 <div class="row">
-                    <h2><span class="glyphicon glyphicon-edit"></span>&nbsp;新增方案报价</h2>
-                    <br>
-                    <div class="row">
-                        <div>
+                    <div class="col-md-12">
                             <div id="myTabContent" class="tab-content">
                                 <div class="tab-pane fade in active" id="firstform">
                                     <br>
-                                    <div class="control-group col-md-12">
+                                    <div class="control-group row">
                                         <label class="control-label">出行人数</label>
                                         <hr>
                                         <div class="form-group col-md-3">
@@ -191,7 +188,7 @@
                                             <input type="number" class="form-control" id="childNum" name="childNum" placeholder="儿童..." value="{$plan->child_num}">
                                         </div>
                                     </div>
-                                    <div class="control-group">
+                                    <div class="control-group row">
                                         <label>机票</label>
                                         <hr>
                                         <div class="form-group col-md-3">
@@ -211,7 +208,7 @@
                                             <input type="text" class="form-control" id="remark" name="planeRemark" placeholder="备注..." value="{$plan->getDetail('plane', $plan)->remark}">
                                         </div>
                                     </div>
-                                    <div class="control-group">
+                                    <div class="control-group row">
                                         <label>签证</label>
                                         <hr>
                                         <div class="form-group col-md-3">
@@ -231,7 +228,7 @@
                                             <input type="text" class="form-control" id="remark" name="visaRemark" placeholder="备注..." value="{$plan->getDetail('visa', $plan)->remark}">
                                         </div>
                                     </div>
-                                    <div class="control-group">
+                                    <div class="control-group row">
                                         <label>旅游</label>
                                         <hr>
                                         <div class="form-group col-md-3">
@@ -251,7 +248,7 @@
                                             <input type="text" class="form-control" id="remark" name="tourismRemark" placeholder="备注..." value="{$plan->getDetail('tourism', $plan)->remark}">
                                         </div>
                                     </div>
-                                    <div class="control-group">
+                                    <div class="control-group row">
                                         <label>保险</label>
                                         <hr>
                                         <div class="form-group col-md-3">
@@ -271,21 +268,21 @@
                                             <input type="text" class="form-control" id="remark" name="insuranceRemark" placeholder="备注..." value="{$plan->getDetail('insurance', $plan)->remark}">
                                         </div>
                                     </div>
-                                    <div class="control-group">
+                                    <div class="control-group row">
                                         <label for="currency">币种</label>
                                         <div class="controls">
                                             <input type="text" class="form-control" name="currency" placeholder="币种..." value="{$plan->currency}"/>
                                         </div>
                                     </div>
                                     <hr>
-                                    <div class="control-group">
+                                    <div class="control-group row">
                                         <label for="totalCost">总费用</label>
                                         <div class="controls">
                                             <input type="text" class="form-control" name="totalCost" placeholder="总费用..." value="{$plan->total_cost | $filter->moneyFilter}"/>
                                         </div>
                                     </div>
                                     <hr>
-                                    <div class="control-group">
+                                    <div class="control-group row">
                                         <label for="lastPayTime">最晚付款时间</label>
                                         <div class="controls">
                                             <input type="date" class="form-control" name="lastPayTime" value="{$plan->last_pay_time}"/>
@@ -294,7 +291,6 @@
                                 </div>
                                 <hr>
                             </div>
-                        </div>
                     </div>
                 </div>
             </div>
