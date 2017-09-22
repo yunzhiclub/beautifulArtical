@@ -33,12 +33,14 @@
             <label for="input-b3">上传图片</label>
             <input id="input-b3" name="images[]" type="file" class="file" multiple data-show-upload="false" data-show-caption="true" >
         </div>
+        {eq name = "$action" value = "update"}
         <div class="form-group">
             <p>在更改时请将更改后的图片包括原图一同上传(上传后会将原图删除)</p>
             {volist name = "images" id = "image" key="key" }
                 <img src="{:__ROOT__}/upload/{$image}" style="height: 100px; width: 200px;" >
             {/volist}
         </div>
+        {/eq}
 
     <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-ok"></span>&nbsp;完成</button>
     <br>
