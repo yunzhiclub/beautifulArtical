@@ -11,6 +11,7 @@ use app\index\model\Plan;
 use app\index\model\Contractor;
 use app\index\model\Material;
 use app\index\model\Detail;
+use app\index\service\AttractionService;
 /**
  *
  * @authors zhuchenshu
@@ -333,10 +334,10 @@ class Articleservice
 
         // 删除景点
         $Attractions = Attraction::where('article_id',$articleId)->select();
-        $TempAttraction = new Attraction();
+        $attractionService = new AttractionService();
         if(!is_null($Attractions)) {
             foreach ($Attractions as $Attraction) {
-                if(!$TempAttraction->deleteAttraction($Attraction->id)) {
+                if(!$attractionService->deleteAttraction($param)) {
                     $message['message'] = '删除景点失败';
                     $message['status'] = 'error';
                 }
