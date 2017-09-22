@@ -188,7 +188,7 @@ class Materialservice  {
 
                     } else {
                         // 删除照片
-                        if (!is_null($images)){
+                        if (!empty($images)) {
                             foreach ($images as $key => $value) {
                                 Common::deleteImage('upload/'.$value);
                             }

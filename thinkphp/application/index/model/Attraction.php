@@ -33,15 +33,15 @@ class Attraction extends Model {
     public function getCheckedMaterial() {
         $map = ['attraction_id' => $this->id];
         $AttractionMaterials = AttractionMaterial::where($map)->select();
-        $str = '';
+        $materials = [];
         if(!is_null($AttractionMaterials)) {
             foreach ($AttractionMaterials as $AttractionMaterial) {
                 $materialId = $AttractionMaterial->material_id;
                 $material = Material::get($materialId);
-                $str = $str.$material->designation.' ';
+                array_push($materials, $material);
             }
         }
-        return $str;
+        return $materials;
     }
 
     public function getHotelDesignation() {
