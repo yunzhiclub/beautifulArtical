@@ -60,20 +60,44 @@ public class ApiInitDataListener implements ApplicationListener<ContextRefreshed
         Paragraph paragraph = new Paragraph();
         paragraph.setTitle("九大服务");
         paragraph.setContent(
-                "                    <ul>\n" +
-                "                        <li><span class=\"glyphicon glyphicon-menu-right\"></span> 全程商务专车，专业当地华人双语导游 </li>\n" +
-                "                        <li><span class=\"glyphicon glyphicon-menu-right\"></span> 独立成团，不与陌生人拼团 </li>\n" +
-                "                        <li><span class=\"glyphicon glyphicon-menu-right\"></span> 真正纯玩品质，承诺0购物0自费 </li>\n" +
-                "                        <li><span class=\"glyphicon glyphicon-menu-right\"></span> 导游带您深入小众美景，去除不安全地带 </li>\n" +
-                "                        <li><span class=\"glyphicon glyphicon-menu-right\"></span> 全程甄选酒店，安全舒适 </li>\n" +
-                "                        <li><span class=\"glyphicon glyphicon-menu-right\"></span> 私家尊享，7* 24小时专属旅行管家 </li>\n" +
-                "                    </ul> ");
-        paragraph.setBeforeAttraction(true);
+                "<ul class=\" list-paddingleft-2\" style=\"list-style-type: decimal;\">\n" +
+                        "    <li>\n" +
+                        "        <p>\n" +"<span class=\"glyphicon glyphicon-menu-right\"></span>" +
+                        "             全程商务专车，专业当地华人双语导游\n" +
+                        "        </p>\n" +
+                        "    </li>\n" +
+                        "    <li>\n" +
+                        "        <p>\n" +"<span class=\"glyphicon glyphicon-menu-right\"></span>" +
+                        "            独立成团，不与陌生人拼团\n" +
+                        "        </p>\n" +
+                        "    </li>\n" +
+                        "    <li>\n" +
+                        "        <p>\n" +"<span class=\"glyphicon glyphicon-menu-right\"></span>" +
+                        "            真正纯玩品质，承诺0购物0自费\n" +
+                        "        </p>\n" +
+                        "    </li>\n" +
+                        "    <li>\n" +
+                        "        <p>\n" +"<span class=\"glyphicon glyphicon-menu-right\"></span>" +
+                        "            导游带您深入小众美景，去除不安全地带\n" +
+                        "        </p>\n" +
+                        "    </li>\n" +
+                        "    <li>\n" +
+                        "        <p>\n" +"<span class=\"glyphicon glyphicon-menu-right\"></span>" +
+                        "            全程甄选酒店，安全舒适 \n" +
+                        "        </p>\n" +
+                        "    </li>\n" +
+                        "    <li>\n" +
+                        "        <p>\n" +"<span class=\"glyphicon glyphicon-menu-right\"></span>" +
+                        "            私家尊享，7* 24小时专属旅行管家<br/>\n" +
+                        "        </p>\n" +
+                        "    </li>\n" +
+                        "</ul>");
+        paragraph.setBeforeAttraction(false);
         paragraphRepository.save(paragraph);
         //六大品质
         Paragraph paragraph1 = new Paragraph();
         paragraph1.setTitle("六大品质");
-        paragraph1.setBeforeAttraction(true);
+        paragraph1.setBeforeAttraction(false);
         paragraph1.setContent("<ul class=\" list-paddingleft-2\" style=\"list-style-type: decimal;\">\n" +
                 "    <li>\n" +
                 "        <p>\n" +"<span class=\"glyphicon glyphicon-menu-right\"></span>" +
@@ -158,47 +182,47 @@ public class ApiInitDataListener implements ApplicationListener<ContextRefreshed
         paragraph3.setContent("<ul class=\" list-paddingleft-2\" style=\"list-style-type: decimal;\">\n" +
                 "    <li>\n" +
                 "        <p>\n" +"<span class=\"glyphicon glyphicon-hand-right\"></span>" +
-                "            <span style=\"font-size: 14px;\">酒店星级：全程4星酒店，两间三人间，含早餐。注意，欧洲三人间可能是三张单人床，也可能是一张大床加一张沙发床或折叠床，或者是两张单人床加一个沙发床或折叠床，以酒店根据入住情况安排为准。</span>\n" +
+                "            <span>酒店星级：全程4星酒店，两间三人间，含早餐。注意，欧洲三人间可能是三张单人床，也可能是一张大床加一张沙发床或折叠床，或者是两张单人床加一个沙发床或折叠床，以酒店根据入住情况安排为准。</span>\n" +
                 "        </p>\n" +
                 "    </li>\n" +
                 "    <li>\n" +
                 "        <p>\n" +"<span class=\"glyphicon glyphicon-hand-right\"></span>" +
-                "            <span style=\"font-size: 14px;\">全程晚数：13晚住宿，详细信息以一下“酒店安排”为准。</span>\n" +
+                "            <span>全程晚数：13晚住宿，详细信息以一下“酒店安排”为准。</span>\n" +
                 "        </p>\n" +
                 "    </li>\n" +
                 "    <li>\n" +
                 "        <p>\n" +"<span class=\"glyphicon glyphicon-hand-right\"></span>" +
-                "            <span style=\"font-size: 14px;\">用餐：早餐：酒店内西式自助早餐，正餐自理（导游会推荐用餐）。</span>\n" +
+                "            <span>用餐：早餐：酒店内西式自助早餐，正餐自理（导游会推荐用餐）。</span>\n" +
                 "        </p>\n" +
                 "    </li>\n" +
                 "    <li>\n" +
                 "        <p>\n" +"<span class=\"glyphicon glyphicon-hand-right\"></span>" +
-                "            <span style=\"font-size: 14px;\">交通：7-9座位旅游车，优秀司机兼导游服务，六人用车，用车时间：（9.21-23及9.25-27及10.1全天用车，4号巴黎送机）</span>\n" +
+                "            <span>交通：7-9座位旅游车，优秀司机兼导游服务，六人用车，用车时间：（9.21-23及9.25-27及10.1全天用车，4号巴黎送机）</span>\n" +
                 "        </p>\n" +
                 "    </li>\n" +
                 "    <li>\n" +
                 "        <p>\n" +"<span class=\"glyphicon glyphicon-hand-right\"></span>" +
-                "            <span style=\"font-size: 14px;\">保险：中意财险申根无忧环球旅行综合保障钻石款（15-17天）/6人。</span>\n" +
+                "            <span>保险：中意财险申根无忧环球旅行综合保障钻石款（15-17天）/6人。</span>\n" +
                 "        </p>\n" +
                 "    </li>\n" +
                 "    <li>\n" +
                 "        <p>\n" +"<span class=\"glyphicon glyphicon-hand-right\"></span>" +
-                "            <span style=\"font-size: 14px;\">司导全程小费。</span>\n" +
+                "            <span>司导全程小费。</span>\n" +
                 "        </p>\n" +
                 "    </li>\n" +
                 "    <li>\n" +
                 "        <p>\n" +"<span class=\"glyphicon glyphicon-hand-right\"></span>" +
-                "            <span style=\"font-size: 14px;\">司导全程用餐补助。</span>\n" +
+                "            <span>司导全程用餐补助。</span>\n" +
                 "        </p>\n" +
                 "    </li>\n" +
                 "    <li>\n" +
                 "        <p>\n" +"<span class=\"glyphicon glyphicon-hand-right\"></span>" +
-                "            <span style=\"font-size: 14px;\">司导全程住宿补助。</span>\n" +
+                "            <span>司导全程住宿补助。</span>\n" +
                 "        </p>\n" +
                 "    </li>\n" +
                 "    <li>\n" +
                 "        <p>\n" +"<span class=\"glyphicon glyphicon-hand-right\"></span>" +
-                "            <span style=\"font-size: 14px;\">司导服务费，车辆燃油费、过路费、高速费、停车费、进城费。</span><br/>\n" +
+                "            <span>司导服务费，车辆燃油费、过路费、高速费、停车费、进城费。</span><br/>\n" +
                 "        </p>\n" +
                 "    </li>\n" +
                 "</ul>");
