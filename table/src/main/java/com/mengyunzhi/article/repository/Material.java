@@ -11,10 +11,8 @@ public class Material {
     private String content;         //描述
     private String designation;     //名称
     private String images;          //图片
-
-    public Material() {
-    }
-
+    private String country;         // 国家
+    private String area;            // 地区
 
     @Override
     public String toString() {
@@ -22,9 +20,31 @@ public class Material {
                 "id=" + id +
                 ", content='" + content + '\'' +
                 ", designation='" + designation + '\'' +
-                ", image='" + images + '\'' +
+                ", images='" + images + '\'' +
+                ", country='" + country + '\'' +
+                ", area='" + area + '\'' +
                 '}';
     }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
+    }
+
+    public Material() {
+    }
+
 
     public Long getId() {
         return id;
