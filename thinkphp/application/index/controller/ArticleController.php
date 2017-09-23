@@ -258,6 +258,7 @@ class ArticleController extends IndexController {
         $this->assign('plans',$Plans);
         $this->assign('paragraphUps',$paragraphUps);
         $this->assign('paragraphDowns',$paragraphDowns);
+        $this->assign('filter', new Filter());
 
         $Hotels = [];
 
