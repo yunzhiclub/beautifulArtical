@@ -1,4 +1,5 @@
 {extend name="index"} {block name="title"}文章编辑{/block} {block name="content"}
+<script type="text/javascript" src="{:__ROOT__}/style/js/Calculation.js"></script>
 <div class="col-md-8 col-md-offset-1" style="margin-top: 60px;min-height: 730px;">
     <h2><span class="glyphicon glyphicon-edit"></span>&nbsp;文章编辑</h2>
     <br>
@@ -60,8 +61,8 @@
                                 导游：{$_attraction->guide}<br>
                                 用餐：{$_attraction->getMeals()}<br>
                                 用车：{$_attraction->getCar()}<br>
-                                素材：
-                                {volist name="$_attraction->getCheckedMaterial()" id="material"}<button type="button" class="btn btn-default btn-xs">{$material->designation}</button>
+
+                                素材：{volist name="$_attraction->getCheckedMaterial()" id="material"}<button type="button" class="btn btn-default btn-xs">{$material->designation}</button>
                                 {/volist}
                                 <br>
                                 酒店：{$_attraction->getHotelDesignation()}<br>
@@ -178,11 +179,11 @@
                                         <hr>
                                         <div class="form-group col-md-3">
                                             <label>成人数</label>
-                                            <input type="number" class="form-control" id="adultNum" name="adultNum" placeholder="成人..." value="{$plan->adult_num}">
+                                            <input type="number" class="form-control" id="adultNum" name="adultNum" placeholder="成人..." value="{$plan->adult_num}" onkeyup="jisuan();">
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label>儿童数</label>
-                                            <input type="number" class="form-control" id="childNum" name="childNum" placeholder="儿童..." value="{$plan->child_num}">
+                                            <input type="number" class="form-control" id="childNum" name="childNum" placeholder="儿童..." value="{$plan->child_num}" onkeyup="jisuan();">
                                         </div>
                                     </div>
                                     <div class="control-group row">
@@ -190,19 +191,19 @@
                                         <hr>
                                         <div class="form-group col-md-3">
                                             <label>成人单价</label>
-                                            <input type="text" class="form-control" id="adultUnitPrice" name="planeAdultUnitPrice" placeholder="成人单价..." value="{$plan->getDetail('plane', $plan)->adult_unit_price | $filter->moneyFilter}">
+                                            <input type="text" class="form-control" id="planeAdultUnitPrice" name="planeAdultUnitPrice" placeholder="成人单价..." value="{$plan->getDetail('plane', $plan)->adult_unit_price | $filter->moneyFilter}" onkeyup="jisuan();">
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label>儿童单价</label>
-                                            <input type="text" class="form-control" id="childUnitPrice" name="planeChildUnitPrice" placeholder="儿童单价..." value="{$plan->getDetail('plane', $plan)->child_unit_price | $filter->moneyFilter}">
+                                            <input type="text" class="form-control" id="planeChildUnitPrice" name="planeChildUnitPrice" placeholder="儿童单价..." value="{$plan->getDetail('plane', $plan)->child_unit_price | $filter->moneyFilter}" onkeyup="jisuan();">
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label>总价</label>
-                                            <input type="text" class="form-control" id="totalPrice" name="planeTotalPrice" placeholder="总价..." value="{$plan->getDetail('plane', $plan)->total_price | $filter->moneyFilter}">
+                                            <input type="text" class="form-control" id="planeTotalPrice" name="planeTotalPrice" placeholder="总价..." value="{$plan->getDetail('plane', $plan)->total_price | $filter->moneyFilter}" readonly>
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label>备注</label>
-                                            <input type="text" class="form-control" id="remark" name="planeRemark" placeholder="备注..." value="{$plan->getDetail('plane', $plan)->remark}">
+                                            <input type="text" class="form-control" id="planeRemark" name="planeRemark" placeholder="备注..." value="{$plan->getDetail('plane', $plan)->remark}">
                                         </div>
                                     </div>
                                     <div class="control-group row">
@@ -210,19 +211,19 @@
                                         <hr>
                                         <div class="form-group col-md-3">
                                             <label>成人单价</label>
-                                            <input type="text" class="form-control" id="adultUnitPrice" name="visaAdultUnitPrice" placeholder="成人单价..." value="{$plan->getDetail('visa', $plan)->adult_unit_price | $filter->moneyFilter}">
+                                            <input type="text" class="form-control" id="visaAdultUnitPrice" name="visaAdultUnitPrice" placeholder="成人单价..." value="{$plan->getDetail('visa', $plan)->adult_unit_price | $filter->moneyFilter}" onkeyup="jisuan();">
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label>儿童单价</label>
-                                            <input type="text" class="form-control" id="childUnitPrice" name="visaChildUnitPrice" placeholder="儿童单价..." value="{$plan->getDetail('visa', $plan)->child_unit_price | $filter->moneyFilter}">
+                                            <input type="text" class="form-control" id="visaChildUnitPrice" name="visaChildUnitPrice" placeholder="儿童单价..." value="{$plan->getDetail('visa', $plan)->child_unit_price | $filter->moneyFilter}" onkeyup="jisuan();">
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label>总价</label>
-                                            <input type="text" class="form-control" id="totalPrice" name="visaTotalPrice" placeholder="总价..." value="{$plan->getDetail('visa', $plan)->total_price | $filter->moneyFilter}">
+                                            <input type="text" class="form-control" id="visaTotalPrice" name="visaTotalPrice" placeholder="总价..." value="{$plan->getDetail('visa', $plan)->total_price | $filter->moneyFilter}" readonly>
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label>备注</label>
-                                            <input type="text" class="form-control" id="remark" name="visaRemark" placeholder="备注..." value="{$plan->getDetail('visa', $plan)->remark}">
+                                            <input type="text" class="form-control" id="visaRemark" name="visaRemark" placeholder="备注..." value="{$plan->getDetail('visa', $plan)->remark}">
                                         </div>
                                     </div>
                                     <div class="control-group row">
@@ -230,19 +231,19 @@
                                         <hr>
                                         <div class="form-group col-md-3">
                                             <label>成人单价</label>
-                                            <input type="text" class="form-control" id="adultUnitPrice" name="tourismAdultUnitPrice" placeholder="成人单价..." value="{$plan->getDetail('tourism', $plan)->adult_unit_price | $filter->moneyFilter}">
+                                            <input type="text" class="form-control" id="tourismAdultUnitPrice" name="tourismAdultUnitPrice" placeholder="成人单价..." value="{$plan->getDetail('tourism', $plan)->adult_unit_price | $filter->moneyFilter}" onkeyup="jisuan();">
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label>儿童单价</label>
-                                            <input type="text" class="form-control" id="childUnitPrice" name="tourismChildUnitPrice" placeholder="儿童单价..." value="{$plan->getDetail('tourism', $plan)->child_unit_price | $filter->moneyFilter}">
+                                            <input type="text" class="form-control" id="tourismChildUnitPrice" name="tourismChildUnitPrice" placeholder="儿童单价..." value="{$plan->getDetail('tourism', $plan)->child_unit_price | $filter->moneyFilter}" onkeyup="jisuan();">
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label>总价</label>
-                                            <input type="text" class="form-control" id="totalPrice" name="tourismTotalPrice" placeholder="总价..." value="{$plan->getDetail('tourism', $plan)->total_price | $filter->moneyFilter}">
+                                            <input type="text" class="form-control" id="tourismTotalPrice" name="tourismTotalPrice" placeholder="总价..." value="{$plan->getDetail('tourism', $plan)->total_price | $filter->moneyFilter}" readonly>
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label>备注</label>
-                                            <input type="text" class="form-control" id="remark" name="tourismRemark" placeholder="备注..." value="{$plan->getDetail('tourism', $plan)->remark}">
+                                            <input type="text" class="form-control" id="tourismRemark" name="tourismRemark" placeholder="备注..." value="{$plan->getDetail('tourism', $plan)->remark}">
                                         </div>
                                     </div>
                                     <div class="control-group row">
@@ -250,19 +251,19 @@
                                         <hr>
                                         <div class="form-group col-md-3">
                                             <label>成人单价</label>
-                                            <input type="text" class="form-control" id="adultUnitPrice" name="insuranceAdultUnitPrice" placeholder="成人单价..." value="{$plan->getDetail('insurance', $plan)->adult_unit_price | $filter->moneyFilter}">
+                                            <input type="text" class="form-control" id="insuranceAdultUnitPrice" name="insuranceAdultUnitPrice" placeholder="成人单价..." value="{$plan->getDetail('insurance', $plan)->adult_unit_price | $filter->moneyFilter}" onkeyup="jisuan();">
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label>儿童单价</label>
-                                            <input type="text" class="form-control" id="childUnitPrice" name="insuranceChildUnitPrice" placeholder="儿童单价..." value="{$plan->getDetail('insurance', $plan)->child_unit_price | $filter->moneyFilter}">
+                                            <input type="text" class="form-control" id="insuranceChildUnitPrice" name="insuranceChildUnitPrice" placeholder="儿童单价..." value="{$plan->getDetail('insurance', $plan)->child_unit_price | $filter->moneyFilter}" onkeyup="jisuan();">
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label>总价</label>
-                                            <input type="text" class="form-control" id="totalPrice" name="insuranceTotalPrice" placeholder="总价..." value="{$plan->getDetail('insurance', $plan)->total_price | $filter->moneyFilter}">
+                                            <input type="text" class="form-control" id="insuranceTotalPrice" name="insuranceTotalPrice" placeholder="总价..." value="{$plan->getDetail('insurance', $plan)->total_price | $filter->moneyFilter}" readonly>
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label>备注</label>
-                                            <input type="text" class="form-control" id="remark" name="insuranceRemark" placeholder="备注..." value="{$plan->getDetail('insurance', $plan)->remark}">
+                                            <input type="text" class="form-control" id="insuranceRemark" name="insuranceRemark" placeholder="备注..." value="{$plan->getDetail('insurance', $plan)->remark}">
                                         </div>
                                     </div>
                                     <div class="control-group row">
@@ -275,7 +276,7 @@
                                     <div class="control-group row">
                                         <label for="totalCost">总费用</label>
                                         <div class="controls">
-                                            <input type="text" class="form-control" name="totalCost" placeholder="总费用..." value="{$plan->total_cost | $filter->moneyFilter}"/>
+                                            <input type="text" class="form-control" id="totalCost" name="totalCost" placeholder="总费用..." value="{$plan->total_cost | $filter->moneyFilter}" readonly />
                                         </div>
                                     </div>
                                     <hr>
