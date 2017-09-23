@@ -10,6 +10,7 @@
     <!-- Custom Theme files -->
     <link href="{:__ROOT__}/style/css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
     <link href="{:__ROOT__}/style/css/style.css" type="text/css" rel="stylesheet" media="all">
+    <link href="{:__ROOT__}/style/css/Timelinestyle.css" type="text/css" rel="stylesheet" media="all">
     <!-- Slider Show css-->
     <link rel="stylesheet" href="{:__ROOT__}/style/css/ken-burns.css" type="text/css" media="all" />
     <!-- //Custom Theme files -->
@@ -67,7 +68,23 @@
                     </div>
                 </div>
                 {/volist}
-
+                
+                <section id="cd-timeline" class="cd-container">
+                    {volist name="attractions" id="attraction" key="key"}
+                    <div class="cd-timeline-block">
+                        <div class="cd-timeline-img cd-movie">
+                            <img src="{:__ROOT__}/style/images/cd-icon-location.svg" alt="Location">
+                        </div>
+                        <div class="cd-timeline-content">
+                            <h4>Day{$key}</h4>
+                            {volist name="$attraction->getMaterials()" id="material" key="i"}
+                            <p>{$material->designation}</p>
+                            {/volist}
+                        </div>
+                    </div>
+                     {/volist}
+                </section>
+                
                 <!-- 旅游行程 -->
                 <br><br>
                 <div class="w3agile properties">
