@@ -89,32 +89,47 @@
                             <p><b class="pfont">用餐 :</b> {$attraction->getMeals()} </p>
                             <p><b class="pfont">用车 :</b> {$attraction->getCar()} </p>
                             <p><b class="pfont">酒店 :</b> {$attraction->getHotelDesignation()} </p>
-                        </div>
-                        {volist name="$attraction->getMaterials()" id="material" key="i"}
-                        <div class="properties-img" style="height: 167px;">
-                            <div id="carousel-example-generic-{$i}" class="carousel slide" data-ride="carousel" style="height:150px;width:300px;">
-                                <ol class="carousel-indicators">
-                                    {volist name="$material->getMaterialImages()" id="image" key="key"}
-                                    <li data-target="#carousel-example-generic-{$i}" data-slide-to="{$key}" class="{eq name="$key" value="1"}active{/eq}"></li>
-                                    {/volist}
-                                </ol>
+                            <p><b class="pfont">素材 :</b></p>
+                                <!--弹窗-->
+                                {volist name="$attraction->getMaterials()" id="material" key="i"}
+                                <!-- Button trigger modal -->
+                                <a class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal-{$i}">
+                                    {$material->designation}
+                                </a>
 
-                                <div class="carousel-inner" role="listbox">
-                                    {volist name="$material->getMaterialImages()" id="image" key="key"}
-                                    <div class="item {eq name="$key" value="1"}active{/eq}">
-                                        <img src="{:__ROOT__}/upload/{$image}" alt="" style="width: 298px;height: 167px;">
-                                        <div class="carousel-caption">
+                                <div class="modal fade" id="myModal-{$i}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                <h4 class="modal-title" id="myModalLabel">{$material->designation}</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <!--轮播图-->
+                                                <div id="carousel-example-generic-{$i}" class="carousel slide" data-ride="carousel">
+                                                    <ol class="carousel-indicators">
+                                                        {volist name="$material->getMaterialImages()" id="image" key="key"}
+                                                        <li data-target="#carousel-example-generic-{$i}" data-slide-to="{$key}" class="{eq name="$key" value="1"}active{/eq}"></li>
+                                                        {/volist}
+                                                    </ol>
+                                                    <div class="carousel-inner" role="listbox">
+                                                        {volist name="$material->getMaterialImages()" id="image" key="key"}
+                                                        <div class="item {eq name="$key" value="1"}active{/eq}">
+                                                        <img src="{:__ROOT__}/upload/{$image}" alt="" style="width: 298px;height: 167px;">
+                                                        </div>
+                                                        {/volist}
+                                                    </div>
+                                                </div>
+                                                <!--轮播图-->
+                                                <p><b class="pfont">名称 :</b> {$material->designation} </p>
+                                                <p><b class="pfont">描述 :</b> {$material->content} </p>
+                                            </div>
                                         </div>
                                     </div>
-                                    {/volist}
                                 </div>
-                            </div>
+                                {/volist}
+                                <!--弹窗-->
                         </div>
-                        <div class="w3ls-text">
-                            <p><b class="pfont">名称 :</b> {$material->designation}  </p>
-                            <p><b class="pfont">描述 :</b> {$material->content} </p>
-                        </div>
-                        {/volist}
                     </div>
                     {/volist}
                     <div class="clearfix"></div>
