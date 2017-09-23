@@ -20,11 +20,11 @@ class Materialservice  {
     }
 
     /**
-     * @param $parma
+     * @param $param
      * @return array
      * 多张图片同时上传的过程
      */
-    public function materialAdd($parma) {
+    public function materialAdd($param) {
     	//初始化返回信息
         $message = [];
         $message['status'] = 'success';
@@ -32,8 +32,10 @@ class Materialservice  {
         $message['message'] = '景点素材添加成功';
 
         //获取到参数
-        $content = $parma->post('content');
-        $designation = $parma->post('designation');
+        $content = $param->post('content');
+        $designation = $param->post('designation');
+        $area = $param->post('area');
+        $country = $param->post('country'); 
         $action = request()->action() === 'save' ? 'add' : 'edit';
         // 新建素材实体
         $Material = new Material();
@@ -53,6 +55,8 @@ class Materialservice  {
         }
         $Material->content = $content;
         $Material->designation = $designation;
+        $Material->area = $area;
+        $Material->country = $country;
 
         if($Material->save()){
         	$message['status'] = 'success';
@@ -65,12 +69,12 @@ class Materialservice  {
         }
         return $message;
     }
-    public function materialUpdate($parma)  {
+    public function materialUpdate($param)  {
         $message = [];
         $message['status'] = 'success';
         $message['message'] = '景点素材编辑成功';
 
-        $materialId = $parma->param('materialId/d');
+        $materialId = $param->param('materialId/d');
 
         if (is_null($materialId) || $materialId === 0) {
             $message['status'] = 'error';
@@ -85,8 +89,10 @@ class Materialservice  {
             return $message;
         }
 
-        $content = $parma->post('content');
-        $designation = $parma->post('designation');
+        $content = $param->post('content');
+        $designation = $param->post('designation');
+        $area = $param->post('area');
+        $country = $param->post('country');
         $files = request()->file('images');
 
         $oldImagePaths = $Material->images;
@@ -100,7 +106,7 @@ class Materialservice  {
             Common::deleteManyImages($oldImagePaths);
         }
 
-        if($Material->content == $content && $Material->designation == $designation && empty($files)) {
+        if($Material->content == $content && $Material->designation == $designation && $Material->area == $area && $Material->country == $country && empty($files)) {
             $message['message'] = '素材信息未改变';
             $message['status'] = 'error';
             return $message;
@@ -108,6 +114,8 @@ class Materialservice  {
 
         $Material->content = $content;
         $Material->designation = $designation;
+        $Material->area = $area;
+        $Material->country = $country;
 
         if(!$Material->save() ) {
             $message['status'] = 'error';
@@ -116,7 +124,7 @@ class Materialservice  {
 
         return $message;
     }
-    public function materialEdit($parma) {
+    public function materialEdit($param) {
         // 初始化信息
         $message = [];
         $message['status'] = 'success';
@@ -124,7 +132,7 @@ class Materialservice  {
         $message['message'] = '景点素材添加成功';
 
         // 接受传来的素材id
-        $materialId = $parma->param('materialId/d');
+        $materialId = $param->param('materialId/d');
 
         // 未获取到素材id
         if (is_null($materialId) || $materialId === 0) {
