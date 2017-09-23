@@ -30,13 +30,13 @@
                 <label>用餐</label>
                 <div>
                     <label class="checkbox-inline">
-                        <input type="checkbox" name="meal[]" value="breakfast" {eq name="$attraction->getMealIsChecked('breakfast')" value="true"}checked{/eq}> 早餐
+                        <input type="checkbox" name="meal[]" value="breakfast" {eq name="$attraction->getMealIsChecked('breakfast')" value="true" }checked{/eq}> 早餐
                     </label>
                     <label class="checkbox-inline">
-                        <input type="checkbox" name="meal[]" value="lunch" {eq name="$attraction->getMealIsChecked('lunch')" value="true"}checked{/eq}> 午餐
+                        <input type="checkbox" name="meal[]" value="lunch" {eq name="$attraction->getMealIsChecked('lunch')" value="true" }checked{/eq}> 午餐
                     </label>
                     <label class="checkbox-inline">
-                        <input type="checkbox" name="meal[]" value="supper" {eq name="$attraction->getMealIsChecked('supper')" value="true"}checked{/eq}> 晚餐
+                        <input type="checkbox" name="meal[]" value="supper" {eq name="$attraction->getMealIsChecked('supper')" value="true" }checked{/eq}> 晚餐
                     </label>
                 </div>
             </div>
@@ -44,29 +44,44 @@
                 <label>用车</label>
                 <div>
                     <label class="radio-inline">
-                        <input type="radio" name="car" value="sevenToNineBusinessCar" {eq name="$attraction->car" value="sevenToNineBusinessCar"}checked{/eq}> 7-9座商务车
+                        <input type="radio" name="car" value="sevenToNineBusinessCar" {eq name="$attraction->car" value="sevenToNineBusinessCar" }checked{/eq}> 7-9座商务车
                     </label>
                     <label class="radio-inline">
-                        <input type="radio" name="car" value="train" {eq name="$attraction->car" value="train"}checked{/eq}> 火车
+                        <input type="radio" name="car" value="train" {eq name="$attraction->car" value="train" }checked{/eq}> 火车
                     </label>
                     <label class="radio-inline">
-                        <input type="radio" name="car" value="car" {eq name="$attraction->car" value="car"}checked{/eq}> 汽车
+                        <input type="radio" name="car" value="car" {eq name="$attraction->car" value="car" }checked{/eq}> 汽车
                     </label>
                     <label class="radio-inline">
-                        <input type="radio" name="car" value="plane" {eq name="$attraction->car" value="plane"}checked{/eq}> 飞机
+                        <input type="radio" name="car" value="plane" {eq name="$attraction->car" value="plane" }checked{/eq}> 飞机
                     </label>
                 </div>
             </div>
             <div class="form-group">
                 <label>素材</label>
                 <div>
-                    {volist name="materials" id="material"}
-                    <label class="checkbox-inline">
-                        <input type="checkbox" name="materialId[]" value="{$material->id}" {eq name="$material->getIsChecked($attraction->id)" value="true"}checked{/eq}>
-                        {$material->designation}
-                    </label>
+                    {volist name="$material->getAllCountries()" id="country"}
+                    <div class="row">
+                        <div class="col-md-11 col-md-offset-1">
+                            <label>{$country}</label>
+                            <table class="table table-bordered">
+                                {volist name="$material->getAreasByCountry($country)" id="area"}
+                                <tr>
+                                    <th class="col-md-3">{$area}</th>
+                                    <td>
+                                        {volist name="$material->getMaterialByCountryAndCity($country, $area)" id="material"}
+                                        <label class="checkbox-inline">
+                                            <input type="checkbox" name="materialId[]" value="{$material->id}" {eq name="$material->getIsChecked($attraction->id)" value="true  " }checked{/eq}> {$material->designation}
+                                        </label>
+                                        {/volist}
+                                    </td>
+                                </tr>
+                                {/volist}
+                            </table>
+                        </div>
+                    </div>
                     {/volist}
-                </div>
+                </div>  
             </div>
             <div class="form-group">
                 <label>酒店</label>
@@ -87,8 +102,7 @@
                                                 <td>
                                                     {volist name="$hotel->getHotelsByCountryAndCityAndStar($country, $city, $star)" id="hotel"}
                                                     <label>
-                                                        <input type="radio" name="hotelId" value="{$hotel->id}" {eq name="$attraction->hotel_id" value="$hotel->id"}checked{/eq}>
-                                                        {$hotel->designation}
+                                                        <input type="radio" name="hotelId" value="{$hotel->id}" {eq name="$attraction->hotel_id" value="$hotel->id" }checked{/eq}> {$hotel->designation}
                                                     </label>
                                                     {/volist}
                                                 </td>
