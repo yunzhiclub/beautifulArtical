@@ -98,7 +98,7 @@ class HotelService {
         $hotel->designation = '';
         $hotel->city = '';
         $hotel->country = '';
-        $hotel->star_level = '';
+        $hotel->star_level = '3星级';
         $hotel->remark = '';
         return $hotel;
     }
