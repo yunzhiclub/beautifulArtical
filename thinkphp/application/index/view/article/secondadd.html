@@ -48,11 +48,11 @@
                     </div>
                 </div>
             </li>
-            {/volist} {volist name="attraction" id="_attraction" key="key"}
+            {/volist} {volist name="attraction" id="_attraction" key="keys"}
             <li>
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <h4>Day{$key}</h4>
+                        <h4>Day{$keys}</h4>
                         <br>
                         <div class="row">
                             <div class="col-md-10">
@@ -64,16 +64,15 @@
 
                                 素材：{volist name="$_attraction->getCheckedMaterial()" id="material"}{$material->designation}&nbsp;{/volist}
                                 <br>
-
                                 酒店：{$_attraction->getHotelDesignation()}<br>
                                 描述：{$_attraction->description | $filter->limitWordNumber}<br>
                             </div>
                             <div class="col-md-2">
                                 <br>
                                 <br>
-                                {eq name="$key" value="1"} {else /}<a class="btn btn-default" href="{:url('upAttraction',['articleId'=>$articleId,'attractionId'=>$_attraction->id,'number'=>$key])}"><span class="glyphicon glyphicon-arrow-up" ></span></a>{/eq}
+                                {eq name="$keys" value="1"} {else /}<a class="btn btn-default" href="{:url('upAttraction',['articleId'=>$articleId,'attractionId'=>$_attraction->id,'number'=>$keys])}"><span class="glyphicon glyphicon-arrow-up" ></span></a>{/eq}
                                 <br>
-                                {eq name="$key" value="$length"} {else /}<a class="btn btn-default" href="{:url('downAttraction',['articleId'=>$articleId,'attractionId'=>$_attraction->id,'number'=>$key])}"><span class="glyphicon glyphicon-arrow-down"></span></a>{/eq}
+                                {eq name="$keys" value="$length"} {else /}<a class="btn btn-default" href="{:url('downAttraction',['articleId'=>$articleId,'attractionId'=>$_attraction->id,'number'=>$keys])}"><span class="glyphicon glyphicon-arrow-down"></span></a>{/eq}
                             </div>
                         </div>
                         <div class="row">
