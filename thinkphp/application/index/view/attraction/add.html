@@ -70,8 +70,8 @@
                                     <th class="col-md-3">{$area}</th>
                                     <td>
                                         {volist name="$material->getMaterialByCountryAndCity($country, $area)" id="material"}
-                                        <label>
-                                            <input type="radio" name="materialId" value="{$material->id}" {eq name="$material->getIsChecked($attraction->id)" value="true  " }checked{/eq}> {$material->designation}
+                                        <label class="checkbox-inline">
+                                            <input type="checkbox" name="materialId[]" value="{$material->id}" {eq name="$material->getIsChecked($attraction->id)" value="true  " }checked{/eq}> {$material->designation}
                                         </label>
                                         {/volist}
                                     </td>
