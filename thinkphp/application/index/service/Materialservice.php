@@ -97,13 +97,15 @@ class Materialservice  {
 
         $oldImagePaths = $Material->images;
         $imagePaths = [];
-        if(!empty($files)) {
+        if (!empty($files)) {
             foreach ($files as $key => $value) {
                 $imagePath = Common::uploadImage($value);
                 array_push($imagePaths, $imagePath);
             }
             $Material->images = json_encode($imagePaths);
-            Common::deleteManyImages($oldImagePaths);
+            if (!empty($oldImagePaths)) {
+                Common::deleteManyImages($oldImagePaths);
+            }
         }
 
         if($Material->content == $content && $Material->designation == $designation && $Material->area == $area && $Material->country == $country && empty($files)) {
