@@ -23,6 +23,7 @@ Main components
   padding: 2em 0;
   margin-top: 0em;
   margin-bottom: 0em;
+  background-color: #F6F6FA;
 }
 #cd-timeline::before {
   /* this is the vertical line */
@@ -122,9 +123,10 @@ Main components
 }
 
 .cd-timeline-content {
+  margin: 5px 0px;
   position: relative;
   margin-left: 60px;
-  background: white;
+  background-color: white;
   border-radius: 0.25em;
   padding: 1em;
 }
