@@ -44,6 +44,8 @@ class MaterialController extends IndexController {
         $Material->designation = '';
         $Material->content = '';
         $Material->image = '';
+        $Material->area = '';
+        $Material->country = '';
 
         $this->assign('material', $Material);
         $this->assign('images', '');
