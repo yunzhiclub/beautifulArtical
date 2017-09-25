@@ -18,13 +18,11 @@ class AttractionService {
         $attractionexist = Attraction::where("article_id",$article_id)->select();
         $length = sizeof($attractionexist);
         if ($length!=0) {
-            var_dump($attractionexist[$length-1]->date);
             $attraction->date =  date("Y-m-d",strtotime("+1 day",strtotime($attractionexist[$length-1]->date)));
 
         } else {
             $attraction->date = '';
         }
-        var_dump($attraction->date);
         $attraction->trip = '';
         $attraction->guide = '';
         $attraction->description = '';

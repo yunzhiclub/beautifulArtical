@@ -12,6 +12,8 @@ use app\index\model\Contractor;
 use app\index\model\Material;
 use app\index\model\Detail;
 use app\index\service\AttractionService;
+use app\index\filter\Filter;
+
 /**
  *
  * @authors zhuchenshu
@@ -49,20 +51,22 @@ class Articleservice
         }
         
         $Article->title = $title;
-        $Article->summery = $summery;
+        $File = new Filter;
+        $Article->summery = $File->limitWordNumber($summery);
         $Article->contractor_id = $contractorId;
 
         $imagePath = Common::uploadImage($file);
         $Article->cover = $imagePath;
         
-        if($Article->save()) {
+        if($Article->validate(true)->save()) {
             //保存成功
             $message['param']['articleId'] = $Article->id;
         } else {
             //保存失败
             $message['status'] = 'error';
-            $message['message'] = '没有添加成功，请重新添加';
+            $message['message'] = '摘要未添加，请重新添加';
             $message['route'] = 'firstadd';
+            return $message;
         }
         // firstadd界面传入行程路线图片
         $routes = request()->file('routes');
