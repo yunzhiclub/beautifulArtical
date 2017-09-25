@@ -13,11 +13,12 @@ class DetailService
 	    $message['message'] = '保存成功';
 	    $message['route'] = 'article/index';
 
+	    $Detail = new Detail();
 	    // 保存机票
         $result = $this->saveDetailByType($planId, 'plane', $data['planeAdultUnitPrice'], $data['planeChildUnitPrice'], $data['planeTotalPrice'], $data['planeRemark']);
-		if (!$result) {
+		if ($result['status'] === 'error') {
 		    $message['status'] = 'error';
-		    $message['message'] = '机票保存失败';
+		    $message['message'] = '机票保存失败' . $result['message'];
 		    return $message;
         }
 
@@ -61,10 +62,13 @@ class DetailService
 		$Detail->total_price = $totalPrice;
 		$Detail->remark = $remark;
 
-        if ($Detail->save() === false) {
-            return false;
+        if ($Detail->validate(true)->save()) {
+            $message['status'] = 'error';
+            $message['message'] = $Detail->getError();
         } else {
-            return true;
+            $message['status'] = 'success';
         }
+
+        return $message;
 	}
 }
