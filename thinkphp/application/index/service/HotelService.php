@@ -26,8 +26,8 @@ class HotelService {
         $hotel->star_level = $param->post('star_level');
         $hotel->remark = $param->post('remark');
 
-        if(!$hotel->save()) {
-            $message['message'] = '保存失败';
+        if(!$hotel->validate(true)->save()) {
+            $message['message'] = $hotel->getError();
             $message['status']  = 'error';
         }
 
@@ -58,8 +58,8 @@ class HotelService {
         $hotel->star_level = $star_level;
         $hotel->remark = $remark;
 
-        if(!$hotel->save()) {
-            $message['message'] = '保存失败';
+        if(!$hotel->validate(true)->save()) {
+            $message['message'] = $hotel->getError();
             $message['status'] = 'error';
             return $message;
         }
