@@ -17,9 +17,11 @@ class Contractorservice
 
 		$Contractor = new Contractor();
 
-		if (!$Contractor->saveContractor($data)) {
+		$tempMessage = $Contractor->saveContractor($data);
+		if (!$tempMessage['is_success']) {
 			$message['status'] = 'error';
-			$message['message'] = '保存失败';
+			$message['message'] = $tempMessage['errorMessage'];
+			$message['route'] = 'contractor/add';
 		}
 
 		return $message;		
@@ -49,7 +51,7 @@ class Contractorservice
 		$Contractor->phone = $param->post('phone');
 		$Contractor->email = $param->post('email');
 
-		if($Contractor->save()){
+		if($Contractor->validate(true)->save()){
 			$message['status'] = 'success';
 			$message['message'] = '编辑成功！';
 			$message['route'] = 'index';
