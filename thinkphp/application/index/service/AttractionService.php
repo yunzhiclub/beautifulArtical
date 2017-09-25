@@ -90,7 +90,7 @@ class AttractionService {
         $hotelId = $param->post('hotelId');
 
         $Attraction = Attraction::get($attractionId);
-        $ContrastAttraction = $Attraction;
+        $ContrastAttraction = clone $Attraction;
 
         $Attraction->trip = $trip;
         $Attraction->date = $date;
