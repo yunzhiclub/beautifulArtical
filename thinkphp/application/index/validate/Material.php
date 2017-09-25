@@ -10,9 +10,18 @@ use think\Validate;
 
 class Material extends Validate {
     protected $rule = [
-        'designation' => 'require|length:2,25',
+        'designation' => 'require',
         'area' => 'require',
         'country' => 'require',
         'content' => 'require',
+        'images' => 'require',
+    ];
+
+    protected $message = [
+        'designation' => '名称不能为空',
+        'area' => '地区不能为空',
+        'country' => '国家不能为空',
+        'content' => '描述不能为空',
+        'images' => '图片未上传',
     ];
 }

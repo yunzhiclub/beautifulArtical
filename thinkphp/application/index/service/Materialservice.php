@@ -59,26 +59,10 @@ class Materialservice  {
         $Material->designation = $designation;
         $Material->area = $area;
         $Material->country = $country;
-        $result = $Material->validate(true)->save($Material->getData('designation'));
-        if($Material->validate(true)->save($Material->getData())){
-        	$message['status'] = 'success';
-        	$message['route'] = 'index';
-        	$message['message'] = '景点素材添加成功';
-        } else {
+
+        if(!$Material->validate(true)->save()){
             $message['status'] = 'error';
-            if (empty($Material->designation)) {
-                $message['message'] = '景点素材添加失败:名称不能为空';
-            } else if (empty($Material->area)) {
-                $message['message'] = '景点素材添加失败:地区不能为空';
-            } else if (empty($Material->country)) {
-                $message['message'] = '景点素材添加失败:国家不能为空';
-            } else if (empty($Material->content)) {
-                $message['message'] = '景点素材添加失败:描述不能为空';
-            } else if (empty($Material->images)) {
-                $message['message'] = '景点素材添加失败:图片未上传';
-            } else {
-                $message['message'] = '景点素材添加失败';
-            }
+            $message['message'] = '景点素材添加失败：'.$Material->getError();
         }
         return $message;
     }
@@ -123,7 +107,6 @@ class Materialservice  {
 
         if($Material->content == $content && $Material->designation == $designation && $Material->area == $area && $Material->country == $country && empty($files)) {
             $message['message'] = '素材信息未改变';
-            $message['status'] = 'error';
             return $message;
         }
 
@@ -132,9 +115,9 @@ class Materialservice  {
         $Material->area = $area;
         $Material->country = $country;
 
-        if(!$Material->save() ) {
+        if(!$Material->validate(true)->save() ) {
             $message['status'] = 'error';
-            $message['message'] = '保存失败';
+            $message['message'] = '素材信息更新失败：'.$Material->getError();
         }
 
         return $message;
