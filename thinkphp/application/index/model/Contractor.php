@@ -24,9 +24,10 @@ class Contractor extends Model
 		$this->mobile = $data['mobile'];
 		$this->email = $data['email'];
 
-		if ($this->save()) {
-			return true;
-		}
-		return false;
+		$boolean = $this->validate(true)->save();
+		$errorMessage = $this->getError();
+        $data['errorMessage'] = $errorMessage;
+        $data['is_success'] = $boolean;
+		return $data;
 	}
 }
