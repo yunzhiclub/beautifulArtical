@@ -52,20 +52,33 @@ class Materialservice  {
 
             //将图片数组保存到实体中
             $Material->images = json_encode($imagePaths);
+        } else {
+            $Material->images = '';
         }
         $Material->content = $content;
         $Material->designation = $designation;
         $Material->area = $area;
         $Material->country = $country;
-
-        if($Material->save()){
+        $result = $Material->validate(true)->save($Material->getData('designation'));
+        if($Material->validate(true)->save($Material->getData())){
         	$message['status'] = 'success';
         	$message['route'] = 'index';
         	$message['message'] = '景点素材添加成功';
-        }else{
-        	$message['status'] = 'error';
-        	$message['route'] = 'index';
-        	$message['message'] = '景点素材添加失败';
+        } else {
+            $message['status'] = 'error';
+            if (empty($Material->designation)) {
+                $message['message'] = '景点素材添加失败:名称不能为空';
+            } else if (empty($Material->area)) {
+                $message['message'] = '景点素材添加失败:地区不能为空';
+            } else if (empty($Material->country)) {
+                $message['message'] = '景点素材添加失败:国家不能为空';
+            } else if (empty($Material->content)) {
+                $message['message'] = '景点素材添加失败:描述不能为空';
+            } else if (empty($Material->images)) {
+                $message['message'] = '景点素材添加失败:图片未上传';
+            } else {
+                $message['message'] = '景点素材添加失败';
+            }
         }
         return $message;
     }
