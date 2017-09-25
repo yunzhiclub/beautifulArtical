@@ -111,4 +111,19 @@ class Attraction extends Model {
             return false;
         }
     }
+
+    public function getOneImage() {
+        //获取当前的景点儿的素材
+        $materials = $this->getMaterials();
+
+        //获取当前第一个素材的第一张图片
+        $image = "";
+        if (!empty($materials)) {
+            $images = $materials[0]->getMaterialImages;
+            $image = $images[0];
+        }
+
+        //返回图片地址
+        return $image;
+    }
 }
