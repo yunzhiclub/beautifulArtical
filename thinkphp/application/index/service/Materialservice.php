@@ -52,20 +52,17 @@ class Materialservice  {
 
             //将图片数组保存到实体中
             $Material->images = json_encode($imagePaths);
+        } else {
+            $Material->images = '';
         }
         $Material->content = $content;
         $Material->designation = $designation;
         $Material->area = $area;
         $Material->country = $country;
 
-        if($Material->save()){
-        	$message['status'] = 'success';
-        	$message['route'] = 'index';
-        	$message['message'] = '景点素材添加成功';
-        }else{
-        	$message['status'] = 'error';
-        	$message['route'] = 'index';
-        	$message['message'] = '景点素材添加失败';
+        if(!$Material->validate(true)->save()){
+            $message['status'] = 'error';
+            $message['message'] = '景点素材添加失败：'.$Material->getError();
         }
         return $message;
     }
@@ -110,7 +107,6 @@ class Materialservice  {
 
         if($Material->content == $content && $Material->designation == $designation && $Material->area == $area && $Material->country == $country && empty($files)) {
             $message['message'] = '素材信息未改变';
-            $message['status'] = 'error';
             return $message;
         }
 
@@ -119,9 +115,9 @@ class Materialservice  {
         $Material->area = $area;
         $Material->country = $country;
 
-        if(!$Material->save() ) {
+        if(!$Material->validate(true)->save() ) {
             $message['status'] = 'error';
-            $message['message'] = '保存失败';
+            $message['message'] = '素材信息更新失败：'.$Material->getError();
         }
 
         return $message;

@@ -66,7 +66,7 @@ class MaterialController extends IndexController {
 
         } else {
             //跳转失败的界面
-            $this->error($message['message'], url($message['route']));
+            $this->error($message['message']);
         }
     }
     
@@ -110,7 +110,7 @@ class MaterialController extends IndexController {
         if ($message['status'] === 'success') {
             $this->success($message['message'], url('material/index'));
         } else {
-            $this->error($message['message'], url('material/index'));
+            $this->error($message['message']);
         }
     }
 }
