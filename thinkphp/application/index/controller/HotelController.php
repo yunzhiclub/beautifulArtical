@@ -104,7 +104,6 @@ class HotelController extends IndexController {
 
     public function update() {
         $param = Request::instance();
-        $hotelId = $param->param('hotelId');
         $message = $this->HotelService->updateHotel($param);
 
         if($message['status'] == 'success') {
