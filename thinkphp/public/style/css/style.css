@@ -187,6 +187,7 @@ ul.nav-sub li a {
 }
 .container, 
 .content-wrap {
+    overflow-x: hidden;
 	width: 100%;
 	height: 100%;
 }
