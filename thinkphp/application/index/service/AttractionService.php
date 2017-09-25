@@ -89,8 +89,8 @@ class AttractionService {
         $meals = $param->post('meal/a');
         $car = $param->post('car');
         $materialIds = $param->post('materialId/a');
-        $articleId = $param->param('articleId');
-        $hotelId = $param->post('hotelId');
+        $articleId = $param->param('articleId/d');
+        $hotelId = $param->post('hotelId/d');
 
         $Attraction = Attraction::get($attractionId);
         $ContrastAttraction = clone $Attraction;
