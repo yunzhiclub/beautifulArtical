@@ -74,7 +74,6 @@ class HotelController extends IndexController {
 
     public function add() {
         $hotel = $this->HotelService->getNullHotel();
-
         $this->assign('hotel', $hotel);
         $this->assign('starLevel',$hotel->star_level);
        
@@ -88,7 +87,7 @@ class HotelController extends IndexController {
         if($message['status'] == 'success') {
             return $this->success($message['message'], url('hotel/index'));
         } else {
-            return $this->error($message['message'], url('hotel/index'));
+            return $this->error($message['message']);
         }
     }
 
@@ -105,12 +104,13 @@ class HotelController extends IndexController {
 
     public function update() {
         $param = Request::instance();
+        $hotelId = $param->param('hotelId');
         $message = $this->HotelService->updateHotel($param);
 
         if($message['status'] == 'success') {
             return $this->success($message['message'], url('hotel/index'));
         } else {
-            return $this->error($message['message'], url('hotel/index'));
+            return $this->error($message['message']);
         }
     }
 
