@@ -13,10 +13,16 @@ use app\index\model\Attraction;
 
 class AttractionService {
 
-    public function getNullAttraction() {
+    public function getNullAttraction($article_id) {
         $attraction = new Attraction();
+        $attractionexist = Attraction::where("article_id",$article_id);
+        if (is_null($attractionexist)) {
+            $length = sizeof($attractionexist);
+            $attraction->date =  $attractionexist[$length-1]->date;
+        } else {
+            $attraction->date = '';
+        }
         $attraction->trip = '';
-        $attraction->date = '';
         $attraction->guide = '';
         $attraction->description = '';
         $attraction->meal = 'breakfast';
