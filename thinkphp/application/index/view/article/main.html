@@ -68,9 +68,9 @@
                             <img src="{:__ROOT__}/style/images/cd-icon-location.svg" alt="Location">
                         </div>
                         <div class="cd-timeline-content">
-                            <h4>Day{$key}</h4><span>{$attraction->trip}</span>
+                            <h4>{$attraction->trip}</h4>
                             {volist name="$attraction->getMaterials()" id="material" key="i"}
-                            <p>{$material->designation}</p>
+                            <p style="display: inline;">{$material->designation}</p>&nbsp;&nbsp;
                             {/volist}
                         </div>
                     </div>
@@ -80,7 +80,7 @@
                 <div class="about">
                     <h3 style="text-align: center;" class="w3ls-title">{$pragraph->title}</h3> {$pragraph->content}
                     <div class="properties-img" {eq name="$pragraph->image" value="" }style="display: none"{/eq}>
-                        <img src="{:__ROOT__}/upload/{$pragraph->image}" {eq name="$pragraph->image" value="" }style="display: none"{/eq}>
+                        <img src="{:__ROOT__}/upload/{$pragraph->image}" alt="" {eq name="$pragraph->image" value="" }style="display: none"{/eq}>
                     </div>
                 </div>
                 {/volist}
@@ -101,12 +101,11 @@
                         </div>
                         <div class="w3ls-text">
                             <p><b class="pfont">日期 :</b> {$attraction->date} </p>
-                            <p><b class="pfont">导游 :</b> {$attraction->guide} </p>
-                            <p><b class="pfont">描述 :</b> {$attraction->description} </p>
                             <p><b class="pfont">用餐 :</b> {$attraction->getMeals()} </p>
                             <p><b class="pfont">用车 :</b> {$attraction->getCar()} </p>
                             <p><b class="pfont">酒店 :</b> {$attraction->getHotelDesignation()} </p>
-                            <p><b class="pfont">素材 :</b></p>
+                            <p><b class="pfont">导游 :</b> {$attraction->guide} </p>
+                            <p><b class="pfont">景点 :</b></p>
                                 <!--弹窗-->
                                 {volist name="$attraction->getMaterials()" id="material" key="i"}
                                 <!-- Button trigger modal -->
@@ -115,6 +114,9 @@
                                 </a>
                                 {/volist}
                                 <!--弹窗-->
+                            <p><b class="pfont">描述 :</b> {$attraction->description} </p>
+                            
+                            
                         </div>
                     </div>
                     {volist name="$attraction->getMaterials()" id="material" key="i"}
