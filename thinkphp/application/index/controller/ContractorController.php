@@ -57,7 +57,7 @@ class ContractorController extends IndexController
 		if ($message['status'] === 'success') {
 			return $this->success($message['message'], url($message['route']));
 		} else {
-			return $this->error($message['message'], url($message['route']));
+			return $this->error($message['message']);
 		}
 	}
 	// 编辑订制师信息
