@@ -23,7 +23,10 @@ class ContractorController extends IndexController
 
 	public function index() {
         $pageSize = config('paginate.var_page');
-	    $contractors = Contractor::order('id desc')->paginate($pageSize);
+	    $contractorName = Request::instance()->get('contractorName');
+
+        $contractors = $this->contractorService->searchContractor($contractorName, $pageSize);
+
 	    $this->assign('contractors', $contractors);
 	    return $this->fetch();
     }

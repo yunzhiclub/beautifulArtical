@@ -22,10 +22,6 @@ class Attraction extends Model {
                     return true;
                 }
             }
-        } else {
-            if($checkMeal == 'breakfast') {
-                return true;
-            }
         }
         return false;
     }
@@ -68,13 +64,17 @@ class Attraction extends Model {
     public function getMeals() {
         $meals = json_decode($this->meal);
         $str = null;
-        foreach ($meals as $meal) {
-            if ($meal == 'breakfast') {
-                $str = $str.'早餐 ';
-            } else if ($meal == 'lunch') {
-                $str = $str.'午餐 ';
-            } else if ($meal == 'supper') {
-                $str = $str.'晚餐';
+        if (!is_null($meals)) {
+            foreach ($meals as $meal) {
+                if ($meal == 'breakfast') {
+                    $str = $str.'早餐 ';
+                } else if ($meal == 'lunch') {
+                    $str = $str.'午餐 ';
+                } else if ($meal == 'supper') {
+                    $str = $str.'晚餐';
+                } else if ($meal == 'selfcare') {
+                    $str = $str.'自理';
+                }
             }
         }
         return $str;
@@ -102,5 +102,28 @@ class Attraction extends Model {
             }
         }
         return $materials;
+    }
+
+    public function defaultCheck($param) {
+        if ($param == 'add') {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function getOneImage() {
+        //获取当前的景点儿的素材
+        $materials = $this->getMaterials();
+
+        //获取当前第一个素材的第一张图片
+        $image = "";
+        if (!empty($materials)) {
+            $images = $materials[0]->getMaterialImages;
+            $image = $images[0];
+        }
+
+        //返回图片地址
+        return $image;
     }
 }

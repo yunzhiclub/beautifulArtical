@@ -30,13 +30,16 @@
                 <label>用餐</label>
                 <div>
                     <label class="checkbox-inline">
-                        <input type="checkbox" name="meal[]" value="breakfast" {eq name="$attraction->getMealIsChecked('breakfast')" value="true" }checked{/eq}> 早餐
+                        <input type="checkbox" name="meal[]" value="breakfast" {eq name="$attraction->defaultCheck(request()->action())" value="true"}checked{/eq} {eq name="$attraction->getMealIsChecked('breakfast')" value="true" }checked{/eq}> 早餐
                     </label>
                     <label class="checkbox-inline">
                         <input type="checkbox" name="meal[]" value="lunch" {eq name="$attraction->getMealIsChecked('lunch')" value="true" }checked{/eq}> 午餐
                     </label>
                     <label class="checkbox-inline">
                         <input type="checkbox" name="meal[]" value="supper" {eq name="$attraction->getMealIsChecked('supper')" value="true" }checked{/eq}> 晚餐
+                    </label>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" name="meal[]" value="selfcare" {eq name="$attraction->getMealIsChecked('selfcare')" value="true" }checked{/eq}> 自理
                     </label>
                 </div>
             </div>

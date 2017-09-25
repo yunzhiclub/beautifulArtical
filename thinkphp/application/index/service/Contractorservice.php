@@ -109,4 +109,18 @@ class Contractorservice
 
 		return $message;
 	}
+
+    public function searchContractor($contractorName, $pageSize) {
+        $contractor = new Contractor();
+        if(!empty($contractorName)) {
+            $contractor->where('designation', 'like', '%'. $contractorName. '%');
+        }
+        $contractors = $contractor->order('id desc')->paginate($pageSize, false, [
+            'query' => [
+                'contractorName' => $contractorName,
+            ],
+            'var_page' => 'page',
+        ]);
+        return $contractors;
+    }
 }
