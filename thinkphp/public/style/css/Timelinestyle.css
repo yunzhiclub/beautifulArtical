@@ -76,7 +76,7 @@ Main components
 .cd-timeline-img {
   position: absolute;
   top: 0;
-  left: 0;
+  left: 4px;
   width: 30px;
   height: 30px;
   border-radius: 50%;
@@ -126,6 +126,7 @@ Main components
   margin: 5px 0px;
   position: relative;
   margin-left: 60px;
+  margin-right: 30px;
   background-color: white;
   border-radius: 0.25em;
   padding: 1em;
