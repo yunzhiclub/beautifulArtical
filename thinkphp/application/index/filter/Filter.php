@@ -26,6 +26,7 @@ class Filter
     // 格式化当前的字符串数字
     public function limitWordNumber($str) {
         $str = strip_tags($str);
+        $str = str_replace(' ', '', $str);
         if (mb_strlen($str) < 130) {
             return $str;
         } else {
