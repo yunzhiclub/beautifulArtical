@@ -49,9 +49,9 @@ class PlanService
         $Plan->total_cost = $data['totalCost'];
 
         // 保存
-        if ($Plan->save() === false) {
+        if ($Plan->validate(true)->save() === false ) {
             $message['status'] = 'error';
-            $message['message'] = '保存失败！';
+            $message['message'] = '保存失败:' . $Plan->getError();
 
         } else {
             $plan = $Plan->where('article_id', $articleId)->find();
