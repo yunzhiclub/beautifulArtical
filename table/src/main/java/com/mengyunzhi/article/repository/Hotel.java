@@ -1,5 +1,7 @@
 package com.mengyunzhi.article.repository;
 
+import org.hibernate.annotations.ColumnDefault;
+
 import javax.persistence.*;
 
 @Entity
@@ -18,6 +20,7 @@ public class Hotel {
     private String starLevel;
 
     // 酒店备注
+    @ColumnDefault("'无'")
     private String remark;
     private String country;
 
