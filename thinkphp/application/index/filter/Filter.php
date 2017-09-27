@@ -32,4 +32,12 @@ class Filter
             return mb_substr($str, 0, 130) . '...';
         }
     }
+    public function limitPreviewWordNumber($str,$number) {
+        $str = strip_tags($str);
+        if (mb_strlen($str) < $number) {
+            return $str;
+        } else {
+            return mb_substr($str, 0, $number) . '...';
+        }
+    }
 }

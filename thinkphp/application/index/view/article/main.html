@@ -70,7 +70,9 @@
                         <div class="cd-timeline-content">
                             <h4>{$attraction->trip}</h4>
                             {volist name="$attraction->getMaterials()" id="material" key="i"}
-                            <p style="display: inline;">{$material->designation}</p>&nbsp;&nbsp;
+                            <p style="display: inline;">
+                                {$filter->limitPreviewWordNumber($material->designation, 5)}
+                            </p>&nbsp;&nbsp;
                             {/volist}
                         </div>
                     </div>
@@ -110,7 +112,7 @@
                                 {volist name="$attraction->getMaterials()" id="material" key="i"}
                                 <!-- Button trigger modal -->
                                 <a class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal-{$i}">
-                                    {$material->designation}
+                                {$filter->limitPreviewWordNumber($material->designation, 5)}
                                 </a>
                                 {/volist}
                                 <!--弹窗-->
