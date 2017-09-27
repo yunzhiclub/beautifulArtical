@@ -393,6 +393,33 @@ class Articleservice
         }
         return false;
     }
+
+    public function searchArticleByContractorName($contractorName, $pageSize) {
+        if (!empty($contractorName)) {
+            // 取出匹配的定制师
+            $contractors = Contractor::where('designation', 'like', '%'. $contractorName. '%')->select();
+            if (!is_null($contractors)) {
+                $map['contractor_id'] = [];
+                // 根据定制师建立查询条件
+                foreach ($contractors as $contractor) {
+                    $tempMap = array('eq', $contractor->id);
+                    array_push($map['contractor_id'], $tempMap);
+                }
+                array_push($map['contractor_id'], 'or');
+
+                $articles = Article::where($map)->order('id desc')->paginate($pageSize, false, [
+                    'query' => [
+                        'contractorName' => $contractorName,
+                    ],
+                    'var_page' => 'page',
+                ]);
+                return $articles;
+            }
+        }
+
+        $articles = Article::order('id desc')->paginate($pageSize);
+        return $articles;
+    }
 }
  
 
