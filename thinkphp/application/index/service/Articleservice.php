@@ -398,7 +398,7 @@ class Articleservice
         if (!empty($contractorName)) {
             // 取出匹配的定制师
             $contractors = Contractor::where('designation', 'like', '%'. $contractorName. '%')->select();
-            if (!is_null($contractors)) {
+            if (!empty($contractors)) {
                 $map['contractor_id'] = [];
                 // 根据定制师建立查询条件
                 foreach ($contractors as $contractor) {
@@ -413,6 +413,9 @@ class Articleservice
                     ],
                     'var_page' => 'page',
                 ]);
+                return $articles;
+            } else {
+                $articles = Article::where('id', 0)->paginate();
                 return $articles;
             }
         }
