@@ -394,30 +394,16 @@ class Articleservice
         return false;
     }
 
-    public function searchArticleByContractorName($contractorName, $pageSize) {
-        if (!empty($contractorName)) {
+    public function searchArticle($articleTitle, $pageSize) {
+        if (!empty($articleTitle)) {
             // 取出匹配的定制师
-            $contractors = Contractor::where('designation', 'like', '%'. $contractorName. '%')->select();
-            if (!empty($contractors)) {
-                $map['contractor_id'] = [];
-                // 根据定制师建立查询条件
-                foreach ($contractors as $contractor) {
-                    $tempMap = array('eq', $contractor->id);
-                    array_push($map['contractor_id'], $tempMap);
-                }
-                array_push($map['contractor_id'], 'or');
-
-                $articles = Article::where($map)->order('id desc')->paginate($pageSize, false, [
-                    'query' => [
-                        'contractorName' => $contractorName,
-                    ],
-                    'var_page' => 'page',
-                ]);
-                return $articles;
-            } else {
-                $articles = Article::where('id', 0)->paginate();
-                return $articles;
-            }
+            $articles = Article::where('title', 'like', '%'. $articleTitle. '%')->order('id desc')->paginate($pageSize, false, [
+                'query' => [
+                    'articleTitle' => $articleTitle,
+                ],
+                'var_page' => 'page',
+            ]);
+            return $articles;
         }
 
         $articles = Article::order('id desc')->paginate($pageSize);
