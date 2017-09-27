@@ -18,7 +18,7 @@ class DetailService
         $result = $this->saveDetailByType($planId, 'plane', $data['planeAdultUnitPrice'], $data['planeChildUnitPrice'], $data['planeTotalPrice'], $data['planeRemark']);
 		if ($result['status'] === 'error') {
 		    $message['status'] = 'error';
-		    $message['message'] = '机票保存失败' . $result['message'];
+		    $message['message'] = '机票保存失败:' . $result['message'];
 		    return $message;
         }
 
@@ -26,7 +26,7 @@ class DetailService
         $result = $this->saveDetailByType($planId, 'visa', $data['visaAdultUnitPrice'], $data['visaChildUnitPrice'], $data['visaTotalPrice'], $data['visaRemark']);
         if (!$result) {
             $message['status'] = 'error';
-            $message['message'] = '签证保存失败';
+            $message['message'] = '签证保存失败:' . $result['message'];
             return $message;
         }
 
@@ -34,7 +34,7 @@ class DetailService
         $result = $this->saveDetailByType($planId, 'tourism', $data['tourismAdultUnitPrice'], $data['tourismChildUnitPrice'], $data['tourismTotalPrice'], $data['tourismRemark']);
         if (!$result) {
             $message['status'] = 'error';
-            $message['message'] = '旅游保存失败';
+            $message['message'] = '旅游保存失败:' . $result['message'];
             return $message;
         }
 
@@ -42,7 +42,7 @@ class DetailService
         $result = $this->saveDetailByType($planId, 'insurance', $data['insuranceAdultUnitPrice'], $data['insuranceChildUnitPrice'], $data['insuranceTotalPrice'], $data['insuranceRemark']);
         if (!$result) {
             $message['status'] = 'error';
-            $message['message'] = '保险保存失败';
+            $message['message'] = '保险保存失败:' . $result['message'];
             return $message;
         }
 
@@ -62,7 +62,7 @@ class DetailService
 		$Detail->total_price = $totalPrice;
 		$Detail->remark = $remark;
 
-        if ($Detail->validate(true)->save()) {
+        if ($Detail->validate(true)->save() === false) {
             $message['status'] = 'error';
             $message['message'] = $Detail->getError();
         } else {

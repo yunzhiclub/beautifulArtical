@@ -47,9 +47,9 @@ class PlanService
         $Plan->currency = $data['currency'];
         $Plan->last_pay_time = $data['lastPayTime'];
         $Plan->total_cost = $data['totalCost'];
-        $result = $Plan->validate(true)->save();
+
         // 保存
-        if (!$Plan->validate(true)->save()) {
+        if ($Plan->validate(true)->save() === false ) {
             $message['status'] = 'error';
             $message['message'] = '保存失败:' . $Plan->getError();
 

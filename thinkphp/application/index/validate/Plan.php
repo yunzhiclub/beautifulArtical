@@ -13,15 +13,15 @@ class Plan extends Validate {
         'adult_num' => 'require',
         'child_num' => 'require',
         'currency' => 'require',
-        'last_pay_time' => 'require',
         'total_cost' => 'require',
+        'last_pay_time' => 'require',
     ];
 
     protected $message = [
         'adult_num' => '成人数不能为空',
         'child_num' => '儿童数不能为空',
         'currency' => '币种不能为空',
-        'last_pay_time' => '最晚付款时间不能为空',
         'total_cost' => '总费用不能为空',
+        'last_pay_time' => '最晚付款时间不能为空',
     ];
 }
