@@ -38,6 +38,9 @@ class File extends SplFileObject
 
     public function __construct($filename, $mode = 'r')
     {
+        if (!is_file($filename)) {
+            $myfile = fopen($filename, "w");
+        }
         parent::__construct($filename, $mode);
         $this->filename = $this->getRealPath();
     }
