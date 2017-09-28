@@ -397,6 +397,22 @@ class Articleservice
         }
         return false;
     }
+
+    public function searchArticle($articleTitle, $pageSize) {
+        if (!empty($articleTitle)) {
+            // 取出匹配的定制师
+            $articles = Article::where('title', 'like', '%'. $articleTitle. '%')->order('id desc')->paginate($pageSize, false, [
+                'query' => [
+                    'articleTitle' => $articleTitle,
+                ],
+                'var_page' => 'page',
+            ]);
+            return $articles;
+        }
+
+        $articles = Article::order('id desc')->paginate($pageSize);
+        return $articles;
+    }
 }
  
 

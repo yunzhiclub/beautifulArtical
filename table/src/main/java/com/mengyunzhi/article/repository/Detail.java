@@ -1,5 +1,7 @@
 package com.mengyunzhi.article.repository;
 
+import org.hibernate.annotations.ColumnDefault;
+
 import javax.persistence.*;
 import java.text.DecimalFormat;
 
@@ -12,6 +14,7 @@ public class Detail {
     private DecimalFormat adultUnitPrice;   // 成人单价
     private DecimalFormat childUnitPrice;   // 儿童单价
     private DecimalFormat totalPrice; //总价
+    @ColumnDefault("'无'")
     private String remark; // 备注
 
     @ManyToOne          //关联Plan实体
