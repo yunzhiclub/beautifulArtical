@@ -161,7 +161,7 @@ class Articleservice
         if(empty($Paragraph)){
             $Paragraph = new Paragraph;
         }
-        if(!empty( $Paragraph->image)){
+        if(!empty( $Paragraph->image) && !empty($routes)){
             $imagePath = PUBLIC_PATH . '/' . $Paragraph->image;
             Common::deleteImage($imagePath);
         }
@@ -177,12 +177,16 @@ class Articleservice
                 $imagePath = Common::uploadImage($routes);
                 $Paragraph->image = $imagePath;
             }
-            $Paragraph->save();
-            }else{
-                $Paragraph = Paragraph::where('title',"行程路线")->where('article_id',$articleId)->find();
-                if(!empty($Paragraph)){
-                    $Paragraph->delete();
-                }
+            if(!$Paragraph->save()) {
+                return $message;
+            }
+        }
+        if($judge==0 && !empty($judge)){
+            $Paragraph = Paragraph::where('title',"行程路线")->where('article_id',$articleId)->find();
+            if(!empty($Paragraph)){
+                
+                $Paragraph->delete();
+            }
         }
         return $message;
     }
