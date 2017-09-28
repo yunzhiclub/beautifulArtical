@@ -44,8 +44,9 @@
         {eq name = "$action" value = "update"}
         <div class="form-group">
             <p>在更改时请将更改后的图片包括原图一同上传(上传后会将原图删除)</p>
-            {volist name = "images" id = "image" key="key" }
-                <img src="{:__ROOT__}/upload/{$image}" style="height: 100px; width: 200px;" >
+            {volist name = "images" id = "image"}
+                <img src="{:__ROOT__}/upload/{$image}" style="height: 100px; width: 200px;" id="{$i}">
+                <button type="button" onclick="deleteImage({$i}, {$material->id})" id = "but_{$i}">delete</button>
             {/volist}
         </div>
         {/eq}
@@ -72,6 +73,36 @@
                 actionZoom:''
             }
         });
+
+        //删除照片的ajax请求
+        function deleteImage (key,　materialId) {
+            //获取当前路径域名
+            var host = window.location.host;
+            //拼接路径
+            var url = "http://" + host + "/index/material/deleteImage?materialId=" + materialId + "&imageKey=" + key;
+            //发送ajax请求
+            console.log(key);
+            console.log(materialId);
+            $.ajax({
+                url: url,
+                type: "get",
+                success: function (response) {
+                    console.log(response);
+                    if (response.status === "success") {
+                        console.log('success');
+                        //隐藏相应的元素
+                        var image = document.getElementById(key);
+                        var buttom = document.getElementById("but_" + key);
+                        console.log(image)
+                        image.style.visibility = 'hidden';
+                        buttom.style.visibility = 'hidden';
+                    }
+                },
+                error: function (xhr) {
+                    alert("服务器内部发生错误");
+                }
+            });
+        }
     </script>
 </div>
 {/block}

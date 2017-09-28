@@ -113,4 +113,12 @@ class MaterialController extends IndexController {
             $this->error($message['message']);
         }
     }
+
+    public function deleteImage() {
+        $param = Request::instance();
+        $message = $this->materialService->deleteImage($param);
+
+        //返回相关的消息
+        return $message;
+    }
 }
