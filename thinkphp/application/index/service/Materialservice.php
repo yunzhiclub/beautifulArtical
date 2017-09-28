@@ -92,17 +92,13 @@ class Materialservice  {
         $country = $param->post('country');
         $files = request()->file('images');
 
-        $oldImagePaths = $Material->images;
-        $imagePaths = [];
+        $imagePaths = $Material->getMaterialImages();
         if (!empty($files)) {
             foreach ($files as $key => $value) {
                 $imagePath = Common::uploadImage($value);
                 array_push($imagePaths, $imagePath);
             }
             $Material->images = json_encode($imagePaths);
-            if (!empty($oldImagePaths)) {
-                Common::deleteManyImages($oldImagePaths);
-            }
         }
 
         if($Material->content == $content && $Material->designation == $designation && $Material->area == $area && $Material->country == $country && empty($files)) {
@@ -219,5 +215,46 @@ class Materialservice  {
             'var_page' => 'page',
         ]);
         return $materials;
+    }
+
+    public function deleteImage($param) {
+        //定义返回信息
+        $message['status'] = 'success';
+
+        $materialId = $param->param('materialId/d');
+        $key = $param->param('imageKey/d');
+
+        //从数据库取出数据
+        $material = Material::get($materialId);
+        $images = $material->getMaterialImages();
+
+        $imagePath = $images[$key - 1];
+        //删除图片
+        Common::deleteImage($imagePath);
+
+        //获取图片中的数组元素
+        $arrayLength = count($images);
+
+        if ($key === $arrayLength) {
+            //说明只有一个元素
+            unset($images[$key - 1]);
+        } else {
+            //从数组中移除这个元素
+            $i = $key - 1;
+            for (; $i < $arrayLength - 1; $i++) {
+                $images[$i] = $images[$i + 1];
+            }
+
+            unset($images[$i]);
+        }
+
+        $material->images = json_encode($images);
+
+        //从数据库更新数据
+        if (!$material->validate(true)->save()) {
+            $message['status'] = 'error';
+        }
+
+        return $message;
     }
 }
