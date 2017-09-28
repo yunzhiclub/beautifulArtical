@@ -39,9 +39,9 @@ class ArticleController extends IndexController {
     public function index()
 	{
         $pageSize = config('paginate.var_page');
-        $contractorName = Request::instance()->get('contractorName');
+        $articleTitle = Request::instance()->get('articleTitle');
 
-        $articles = $this->articleService->searchArticleByContractorName($contractorName, $pageSize);
+        $articles = $this->articleService->searchArticle($articleTitle, $pageSize);
 
         $this->assign('filter', $this->filter);
 	    $this->assign('articles', $articles);
