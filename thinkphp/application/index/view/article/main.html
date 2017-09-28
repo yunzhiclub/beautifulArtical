@@ -90,12 +90,12 @@
                 <br><br>
                 <div class="w3agile properties">
                     <h3 class="w3ls-title" style="color: #8b008b;">旅游线路</h3>
-                    {volist name="attractions" id="attraction" key="key"}
+                    {volist name="attractions" id="attraction" key="mainKey"}
                     <div class="properties-bottom">
                         <div class="properties-img">
                             <img src="{:__ROOT__}/upload/{$attraction->getOneImage()}" alt="">
                             <div class="w3ls-buy">
-                                <a href="single.html">Day{$key}</a>
+                                <a href="single.html">Day{$mainKey}</a>
                             </div>
                             <div class="view-caption">
                                 <h4><span class="glyphicon glyphicon-map-marker"></span>{$attraction->trip} </h4>
@@ -111,55 +111,54 @@
                                 <!--弹窗-->
                                 {volist name="$attraction->getMaterials()" id="material" key="i"}
                                 <!-- Button trigger modal -->
-                                <a class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal-{$i}">
+                                <a class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal-{$mainKey}-{$i}">
                                 {$filter->limitPreviewWordNumber($material->designation, 5)}
                                 </a>
                                 {/volist}
                                 <!--弹窗-->
+                                {volist name="$attraction->getMaterials()" id="material" key="i"}
+                                    <div class="modal fade" id="myModal-{$mainKey}-{$i}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="position: relative">
+                                        <div role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                    <h4 class="modal-title" id="myModalLabel">{$material->designation}</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <!--轮播图-->
+                                                    <div id="carousel-example-generic-{$mainKey}-{$i}" class="carousel slide" data-ride="carousel">
+                                                        <ol class="carousel-indicators">
+                                                            {volist name="$material->getMaterialImages()" id="image" key="minorKey"}
+                                                            <li data-target="#carousel-example-generic-{$mainKey}-{$i}" data-slide-to="{$mainKey}-{$i}-{$minorKey}" class="{eq name="$minorKey" value="1"}active{/eq}"></li>
+                                                            {/volist}
+                                                        </ol>
+                                                        <div class="carousel-inner" role="listbox">
+                                                            {volist name="$material->getMaterialImages()" id="image" key="leastKey"}
+                                                            <div class="item {eq name='$leastKey' value='1'}active{/eq}">
+                                                            <img src="{:__ROOT__}/upload/{$image}" alt="" style="width:100%;height: 45vw">
+                                                            </div>
+                                                            {/volist}
+                                                        </div>
+                                                        <a class="left carousel-control" href="#carousel-example-generic-{$mainKey}-{$i}" data-slide="prev">
+                                                            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                                                            <span class="sr-only">Previous</span>
+                                                        </a>
+                                                        <a class="right carousel-control" href="#carousel-example-generic-{$mainKey}-{$i}" data-slide="next">
+                                                            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                                            <span class="sr-only">Next</span>
+                                                        </a>
+                                                    </div>
+                                                    <!--轮播图-->
+                                                    <p>{$material->content | $filter->limitWordNumber}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {/volist}
                             <p><b class="pfont">描述 :</b> {$attraction->description} </p>
-                            
-                            
                         </div>
                     </div>
-                    {volist name="$attraction->getMaterials()" id="material" key="i"}
-                        <div class="modal fade" id="myModal-{$i}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="position: relative">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                        <h4 class="modal-title" id="myModalLabel">{$material->designation}</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <!--轮播图-->
-                                        <div id="carousel-example-generic-{$i}" class="carousel slide" data-ride="carousel">
-                                            <ol class="carousel-indicators">
-                                                {volist name="$material->getMaterialImages()" id="image" key="key"}
-                                                <li data-target="#carousel-example-generic-{$i}" data-slide-to="{$key}" class="{eq name="$key" value="1"}active{/eq}"></li>
-                                                {/volist}
-                                            </ol>
-                                            <div class="carousel-inner" role="listbox">
-                                                {volist name="$material->getMaterialImages()" id="image" key="key"}
-                                                <div class="item {eq name='$key' value='1'}active{/eq}">
-                                                <img src="{:__ROOT__}/upload/{$image}" alt="" style="width:100%;height: 45vw">
-                                                </div>
-                                                {/volist}
-                                            </div>
-                                            <a class="left carousel-control" href="#carousel-example-generic-{$i}" data-slide="prev">
-                                                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                                                <span class="sr-only">Previous</span>
-                                            </a>
-                                            <a class="right carousel-control" href="#carousel-example-generic-{$i}" data-slide="next">
-                                                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                                                <span class="sr-only">Next</span>
-                                            </a>
-                                        </div>
-                                        <!--轮播图-->
-                                        <p>{$material->content | $filter->limitWordNumber}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    {/volist}
+                    
                     {/volist}
                     <div class="clearfix"></div>
                 </div>
