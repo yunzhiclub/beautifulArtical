@@ -47,26 +47,64 @@ class HotelController extends IndexController {
     // 以国家显示
     public function country()
     {
-    	$pageSize = config('paginate.var_page');
-    	$Hotels = Hotel::order('id desc')->paginate($pageSize);
-    	$this->assign('hotels',$Hotels);
+        $city = Request::instance()->get('city');
+        $Hotel = new Hotel();
+
+        if (!empty($city)) {
+            $Hotel->where('city', 'like', '%' . $city . '%');
+        }
+        $pageSize = config('paginate.var_page');
+
+        $hotels = $Hotel->order('city desc')->paginate($pageSize, false, [
+            'query' =>[
+                'city' => $city,
+            ],
+            'var_page' => 'page',
+        ]);
+        
+    	$this->assign('hotels',$hotels);
         $this->assign('filter', new Filter());
         return $this->fetch('index'); 
     }
     // 以城市显示
     public function city()
     {
+        $city = Request::instance()->get('city');
+        $Hotel = new Hotel();
+
+        if (!empty($city)) {
+            $Hotel->where('city', 'like', '%' . $city . '%');
+        }
     	$pageSize = config('paginate.var_page');
-    	$hotels = Hotel::order('city desc')->paginate($pageSize);    
+
+    	$hotels = $Hotel->order('city desc')->paginate($pageSize, false, [
+            'query' =>[
+                'city' => $city,
+            ],
+            'var_page' => 'page',
+        ]);
+
     	$this->assign('hotels',$hotels);
         $this->assign('filter', new Filter());
         return $this->fetch('index');    
     }
     //以星级显示
     public function starlevel()
-    { 
+    {
+        $city = Request::instance()->get('city');
+        $Hotel = new Hotel();
+
+        if (!empty($city)) {
+            $Hotel->where('city', 'like', '%' . $city . '%');
+        }
         $pageSize = config('paginate.var_page');
-    	$hotels = Hotel::order('star_level desc')->paginate($pageSize);
+
+        $hotels = $Hotel->order('city desc')->paginate($pageSize, false, [
+            'query' =>[
+                'city' => $city,
+            ],
+            'var_page' => 'page',
+        ]);
     	$this->assign('hotels',$hotels);
         $this->assign('filter', new Filter());
         return $this->fetch('index');   
