@@ -61,7 +61,7 @@ class AttractionService {
         $Attraction->weight = Attraction::where('article_id', '=', $articleId)->max("weight")+1;
         if(!$Attraction->save()) {
             $message['status'] = 'error';
-            $message['message'] = $Attraction->getError();
+            $message['message'] = '保存失败';
         }
 
         if(!is_null($materialIds)) {
