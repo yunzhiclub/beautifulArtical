@@ -1,5 +1,7 @@
 package com.mengyunzhi.article.repository;
 
+import org.hibernate.annotations.ColumnDefault;
+
 import javax.persistence.*;
 
 @Entity
@@ -22,10 +24,11 @@ public class Paragraph {
     private String image;
 
     // 权重
+    @ColumnDefault("0")
     private int weight;
 
     // 是否景点前
-    private boolean isBeforeAttraction;
+    private int isBeforeAttraction;
 
     @Override
     public String toString() {
@@ -41,15 +44,6 @@ public class Paragraph {
     }
 
     public Paragraph() {
-    }
-
-    public Paragraph(Article article, String title, String content, String image, int weight, boolean isBeforeAttraction) {
-        this.article = article;
-        this.title = title;
-        this.content = content;
-        this.image = image;
-        this.weight = weight;
-        this.isBeforeAttraction = isBeforeAttraction;
     }
 
     public Long getId() {
@@ -100,12 +94,11 @@ public class Paragraph {
         this.weight = weight;
     }
 
-    public boolean isBeforeAttraction() {
+    public int getIsBeforeAttraction() {
         return isBeforeAttraction;
     }
 
-    public void setBeforeAttraction(boolean beforeAttraction) {
-        isBeforeAttraction = beforeAttraction;
+    public void setIsBeforeAttraction(int isBeforeAttraction) {
+        this.isBeforeAttraction = isBeforeAttraction;
     }
-
 }
