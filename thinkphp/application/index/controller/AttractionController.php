@@ -45,7 +45,7 @@ class AttractionController extends IndexController {
         if($message['status'] == 'success') {
             return $this->success($message['message'], url('article/secondadd', ['articleId' => $articleId]));
         } else {
-            return $this->error($message['message'], url('article/secondadd', ['articleId' => $articleId]));
+            return $this->error($message['message']);
         }
     }
 

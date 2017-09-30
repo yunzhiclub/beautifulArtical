@@ -6,7 +6,7 @@
         <form method="post" action="{:url($action, ['id' => $Paragraph->getData('id'), 'articleId' => $articleId])}" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="title">标题</label>
-                <input type="text" class="form-control" placeholder="标题" name="title" id="title" value="{$Paragraph->getData('title')}">
+                <input type="text" required class="form-control" placeholder="标题" name="title" id="title" value="{$Paragraph->getData('title')}">
             </div>
             <div class="form-group">
                 <label>段落</label>
