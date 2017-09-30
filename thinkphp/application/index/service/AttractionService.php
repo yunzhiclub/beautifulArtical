@@ -50,6 +50,9 @@ class AttractionService {
 
         $Attraction = new Attraction();
         $Attraction->trip = $trip;
+        if (empty($date)) {
+            $date = "0000-00-0";
+        }
         $Attraction->date = $date;
         $Attraction->guide = $guide;
         $Attraction->description = $description;
