@@ -58,13 +58,15 @@ class AttractionService {
         $Attraction->guide = $guide;
         $Attraction->description = $description;
         $Attraction->meal = json_encode($meals);
+        var_dump($Attraction->meal);
         $Attraction->car = $car;
         $Attraction->hotel_id = $hotelId;
         $Attraction->article_id = $articleId;
         $Attraction->weight = Attraction::where('article_id', '=', $articleId)->max("weight")+1;
-        if(!$Attraction->save()) {
+        if(!$Attraction->validate(true)->save()) {
             $message['status'] = 'error';
-            $message['message'] = '保存失败';
+            $message['message'] = $Attraction->getError();
+            return $message;
         }
 
         if(!is_null($materialIds)) {

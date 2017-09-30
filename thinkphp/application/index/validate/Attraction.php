@@ -10,10 +10,20 @@ use think\Validate;
  */
 class Attraction extends Validate {
     protected $rule = [
-        'hotel_id'  => 'require'
+        'trip'  => 'require',
+        'date'  => 'require',
+        'guide'  => 'require',
+        'description'  => 'require',
+        'meal'  => 'require| is not null',
+        'hotel_id'  => 'require',
     ];
 
     protected $message = [
+        'trip'  => '行程信息不为空',
+        'date'  => '日期不为空',
+        'guide'  => '导游信息不为空',
+        'description'  => '描述信息不为空',
+        'meal'  => '用餐信息不为空',
         'hotel_id'  => '酒店信息不为空'
     ];
 }
