@@ -102,7 +102,7 @@ class Materialservice  {
         }
 
         if($Material->content == $content && $Material->designation == $designation && $Material->area == $area && $Material->country == $country && empty($files)) {
-            $message['message'] = '素材信息未改变';
+            $message['message'] = '景点素材编辑成功';
             return $message;
         }
 
