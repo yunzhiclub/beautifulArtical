@@ -55,7 +55,7 @@ class HotelController extends IndexController {
         }
         $pageSize = config('paginate.var_page');
 
-        $hotels = $Hotel->order('city desc')->paginate($pageSize, false, [
+        $hotels = $Hotel->order('country desc')->paginate($pageSize, false, [
             'query' =>[
                 'city' => $city,
             ],
@@ -99,7 +99,7 @@ class HotelController extends IndexController {
         }
         $pageSize = config('paginate.var_page');
 
-        $hotels = $Hotel->order('city desc')->paginate($pageSize, false, [
+        $hotels = $Hotel->order('star_level desc')->paginate($pageSize, false, [
             'query' =>[
                 'city' => $city,
             ],
