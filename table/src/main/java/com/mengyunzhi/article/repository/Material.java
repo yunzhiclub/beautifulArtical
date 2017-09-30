@@ -10,6 +10,7 @@ public class Material {
     @Column(length = 3000)
     private String content;         //描述
     private String designation;     //名称
+    @Column(length = 300)
     private String images;          //图片
     private String country;         // 国家
     private String area;            // 地区

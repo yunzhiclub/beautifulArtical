@@ -92,12 +92,12 @@ public class ApiInitDataListener implements ApplicationListener<ContextRefreshed
                         "        </p>\n" +
                         "    </li>\n" +
                         "</ul>");
-        paragraph.setBeforeAttraction(false);
+        paragraph.setIsBeforeAttraction(0);
         paragraphRepository.save(paragraph);
         //六大品质
         Paragraph paragraph1 = new Paragraph();
         paragraph1.setTitle("六大品质");
-        paragraph1.setBeforeAttraction(false);
+        paragraph1.setIsBeforeAttraction(0);
         paragraph1.setContent("<ul class=\" list-paddingleft-2\" style=\"list-style-type: decimal;\">\n" +
                 "    <li>\n" +
                 "        <p>\n" +"<span class=\"glyphicon glyphicon-menu-right\"></span>" +
@@ -175,7 +175,7 @@ public class ApiInitDataListener implements ApplicationListener<ContextRefreshed
                 "        </p>\n" +
                 "    </li>\n" +
                 "</ul>");
-        paragraph2.setBeforeAttraction(false);
+        paragraph2.setIsBeforeAttraction(0);
         paragraphRepository.save(paragraph2);
         Paragraph paragraph3 = new Paragraph();
         paragraph3.setTitle("费用包括");
@@ -226,7 +226,7 @@ public class ApiInitDataListener implements ApplicationListener<ContextRefreshed
                 "        </p>\n" +
                 "    </li>\n" +
                 "</ul>");
-        paragraph3.setBeforeAttraction(false);
+        paragraph3.setIsBeforeAttraction(0);
         paragraphRepository.save(paragraph3);
         Paragraph paragraph4 = new Paragraph();
         paragraph4.setTitle("费用不包括");
@@ -317,7 +317,7 @@ public class ApiInitDataListener implements ApplicationListener<ContextRefreshed
                 "        </p>\n" +
                 "    </li>\n" +
                 "</ul>");
-        paragraph4.setBeforeAttraction(false);
+        paragraph4.setIsBeforeAttraction(0);
         paragraphRepository.save(paragraph4);
     }
 }

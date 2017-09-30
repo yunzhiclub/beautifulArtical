@@ -47,8 +47,7 @@ class HotelService {
         $star_level = $param->post('star_level');
         $remark = $param->post('remark');
 
-        if($hotel->designation == $designation && $hotel->city == $city && $hotel->star_level == $star_level && $hotel->remark == $remark) {
-            $message['message'] = '酒店内容没有改变';
+        if($hotel->designation == $designation && $hotel->country == $country && $hotel->city == $city && $hotel->star_level == $star_level && $hotel->remark == $remark) {
             return $message;
         }
 
