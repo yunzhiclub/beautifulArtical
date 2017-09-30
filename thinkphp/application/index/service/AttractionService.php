@@ -48,6 +48,7 @@ class AttractionService {
         $articleId = $param->param('articleId');
         $hotelId = $param->post('hotelId');
 
+
         $Attraction = new Attraction();
         $Attraction->trip = $trip;
         if (empty($date)) {
@@ -61,7 +62,6 @@ class AttractionService {
         $Attraction->hotel_id = $hotelId;
         $Attraction->article_id = $articleId;
         $Attraction->weight = Attraction::where('article_id', '=', $articleId)->max("weight")+1;
-
         if(!$Attraction->save()) {
             $message['status'] = 'error';
             $message['message'] = '保存失败';
@@ -72,6 +72,9 @@ class AttractionService {
                 $message['status'] = 'error';
                 $message['message'] = '保存失败';
             }
+        }else{
+            $message['status'] = 'error';
+            $message['message'] = '素材未选择';
         }
 
         return $message;
