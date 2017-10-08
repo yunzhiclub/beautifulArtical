@@ -27,3 +27,4 @@ class Attraction extends Validate {
         'hotel_id'  => '酒店信息不为空'
     ];
 }
+t   
