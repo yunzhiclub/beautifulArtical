@@ -26,5 +26,4 @@ class Attraction extends Validate {
         'meal'  => '用餐信息不为空',
         'hotel_id'  => '酒店信息不为空'
     ];
-}
-t   
+}  
