@@ -86,9 +86,9 @@
                 url: url,
                 type: "get",
                 success: function (response) {
-                    console.log(response);
                     if (response.status === "success") {
-                        console.log('success');
+                        //刷新当前界面
+                        location.reload();
                         //隐藏相应的元素
                         var image = document.getElementById(key);
                         var buttom = document.getElementById("but_" + key);
