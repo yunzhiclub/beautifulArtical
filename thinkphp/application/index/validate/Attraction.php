@@ -14,7 +14,7 @@ class Attraction extends Validate {
         'date'  => 'require',
         'guide'  => 'require',
         'description'  => 'require',
-        'meal'  => 'require| is not null',
+        'meal'  => 'require',
         'hotel_id'  => 'require',
     ];
 
