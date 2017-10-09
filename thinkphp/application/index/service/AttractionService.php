@@ -57,8 +57,11 @@ class AttractionService {
         $Attraction->date = $date;
         $Attraction->guide = $guide;
         $Attraction->description = $description;
-        $Attraction->meal = json_encode($meals);
-        var_dump($Attraction->meal);
+        if(!is_null($meals)) {
+            $Attraction->meal = json_encode($meals);
+        }else {
+            $Attraction->meal = '';
+        }
         $Attraction->car = $car;
         $Attraction->hotel_id = $hotelId;
         $Attraction->article_id = $articleId;
