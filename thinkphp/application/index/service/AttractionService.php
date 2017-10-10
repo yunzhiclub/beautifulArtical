@@ -77,9 +77,6 @@ class AttractionService {
                 $message['status'] = 'error';
                 $message['message'] = '保存失败';
             }
-        }else{
-            $message['status'] = 'error';
-            $message['message'] = '素材未选择';
         }
 
         return $message;
