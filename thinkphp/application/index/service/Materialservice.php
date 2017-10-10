@@ -44,6 +44,14 @@ class Materialservice  {
         //新建一个保存上传文件路径的数组
         $imagePaths = [];
         if(!empty($files)) {
+            // 最多上传6张图片
+            if (sizeof($files) > 6) {
+                $message['status'] = 'error';
+                $message['message'] = '最多上传6张图片，请重新选择';
+
+                return $message;
+            }
+            
             //开始保存图片的路径数据
             foreach ($files as $key => $value) {
                 $imagePath = Common::uploadImage($value);
