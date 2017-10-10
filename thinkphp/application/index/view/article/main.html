@@ -178,9 +178,9 @@
                     <div class="contact-form" >
                         <br>
                         <p class="pcontact1">定制师信息</p>
-                        <table class="table table-bordered">
-                            <tr>
-                                <th>名&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;字</th>
+                        <table class="table">
+                            <tr class="info">
+                                <th>名&nbsp;&nbsp;&nbsp;字</th>
                                 <td>{$contractor->designation}</td>
                             </tr>
                             <tr>
@@ -215,7 +215,7 @@
                         <p><b>总费用 :</b> {$plan->total_cost | $filter->moneyFilter} </p>
                         <p><b>最晚付款时间 :</b> {$plan->last_pay_time} </p>
                         <p><b>收费分类 :</b></p>
-                        <table class="table table-striped" style="text-align: right;">
+                        <table class="table" style="text-align: right;">
                             <tr class="info">
                                 <th>类型</th>
                                 <th>机票</th>
