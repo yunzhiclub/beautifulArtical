@@ -63,21 +63,4 @@ class PlanService
 
         return $message;
 	}
-
-    public function deletePlan($param) {
-        $planId = $param->param('planId/d');
-        $Plan = Plan::get($planId);
-        $DetailZhusu = $Plan->getDetailByType('zhusu');
-        $DetailDijie = $Plan->getDetailByType('dijie');
-        
-        $dijieDelete = $DetailDijie->delete();
-        $zhusuDelete = $DetailZhusu->delete();
-        $planDelete = $Plan->delete();
-        
-        if($planDelete && $dijieDelete && $zhusuDelete){
-            return true;
-        }
-            return false;
-    }
-
 }
