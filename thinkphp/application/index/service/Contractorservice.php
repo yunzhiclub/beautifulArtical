@@ -42,8 +42,13 @@ class Contractorservice
 		$contractorId = $param->param('contractorId/d');
 
 		$message = [];
+        $message['status'] = 'success';
+        $message['message'] = '编辑成功！';
+        $message['route'] = 'index';
 
 		$Contractor = Contractor::get($contractorId);
+
+        $NewContractor = clone $Contractor;
 
 		$Contractor->designation = $param->post('designation');
 		$Contractor->fax = $param->post('fax');
@@ -51,15 +56,14 @@ class Contractorservice
 		$Contractor->phone = $param->post('phone');
 		$Contractor->email = $param->post('email');
 
-		if($Contractor->validate(true)->save()){
-			$message['status'] = 'success';
-			$message['message'] = '编辑成功！';
-			$message['route'] = 'index';
-		}else{
-			$message['status'] = 'success';
-			$message['message'] = '数据未编辑！';
-			$message['route'] = 'index';
-		}
+		if (json_encode($NewContractor) != json_encode($Contractor)) {
+            if(!$Contractor->validate(true)->save()){
+                $message['status'] = 'error';
+                $message['message'] = '编辑失败！';
+                $message['route'] = 'index';
+            }
+        }
+
 		return $message;
 	} 
 

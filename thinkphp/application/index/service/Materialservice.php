@@ -131,7 +131,6 @@ class Materialservice  {
         $message = [];
         $message['status'] = 'success';
         $message['route'] = 'index';
-        $message['message'] = '景点素材添加成功';
 
         // 接受传来的素材id
         $materialId = $param->param('materialId/d');
