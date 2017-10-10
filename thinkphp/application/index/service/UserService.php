@@ -23,18 +23,14 @@ class UserService {
         $username = $param->post('username');
         $password = $param->post('password');
 
-        if($user->username == $username && $user->password == $password) {
-            $message['message'] = '信息未更改';
-            $message['status'] = 'success';
-            return $message;
-        }
+        if($user->username != $username || $user->password != $password) {
+            $user->username = $username;
+            $user->password = $password;
 
-        $user->username = $username;
-        $user->password = $password;
-
-        if(!$user->save()) {
-            $message['message'] = '修改失败';
-            $message['status'] = 'success';
+            if(!$user->save()) {
+                $message['message'] = '修改失败';
+                $message['status']  = 'error';
+            }
         }
 
         return $message;
