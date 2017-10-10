@@ -24,7 +24,7 @@ class DetailService
 
         // 保存签证
         $result = $this->saveDetailByType($planId, 'visa', $data['visaAdultUnitPrice'], $data['visaChildUnitPrice'], $data['visaTotalPrice'], $data['visaRemark']);
-        if (!$result) {
+        if ($result['status'] === 'error') {
             $message['status'] = 'error';
             $message['message'] = '签证保存失败:' . $result['message'];
             return $message;
@@ -32,7 +32,7 @@ class DetailService
 
         // 保存旅游
         $result = $this->saveDetailByType($planId, 'tourism', $data['tourismAdultUnitPrice'], $data['tourismChildUnitPrice'], $data['tourismTotalPrice'], $data['tourismRemark']);
-        if (!$result) {
+        if ($result['status'] === 'error') {
             $message['status'] = 'error';
             $message['message'] = '旅游保存失败:' . $result['message'];
             return $message;
@@ -40,7 +40,7 @@ class DetailService
 
         // 保存保险
         $result = $this->saveDetailByType($planId, 'insurance', $data['insuranceAdultUnitPrice'], $data['insuranceChildUnitPrice'], $data['insuranceTotalPrice'], $data['insuranceRemark']);
-        if (!$result) {
+        if ($result['status'] === 'error') {
             $message['status'] = 'error';
             $message['message'] = '保险保存失败:' . $result['message'];
             return $message;
@@ -60,8 +60,11 @@ class DetailService
 		$Detail->adult_unit_price = $adultUnitPrice;
 		$Detail->child_unit_price = $childUnitPrice;
 		$Detail->total_price = $totalPrice;
-		$Detail->remark = $remark;
-
+		if (empty($remark)) {
+            $Detail->remark = "无";
+        } else {
+		    $Detail->remark = $remark;
+        }
         if ($Detail->validate(true)->save() === false) {
             $message['status'] = 'error';
             $message['message'] = $Detail->getError();
