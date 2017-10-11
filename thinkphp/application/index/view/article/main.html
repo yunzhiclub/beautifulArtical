@@ -158,21 +158,22 @@
                             <p><b class="pfont">描述 :</b> {$attraction->description} </p>
                         </div>
                     </div>
-                    
+
                     {/volist}
                     <div class="clearfix"></div>
                 </div>
-                {volist name="paragraphDowns" id="_pragraph"}
-                <div class="about">
+                <div class="backgroundcolor">
+                {volist name="paragraphDowns" id="_pragraph" key = "key"}
+                <div class="about ">
                     <h3 style="text-align: center;" class="w3ls-title">{$_pragraph->title}</h3> {$_pragraph->content}
                     <div class="properties-img" {eq name="$_pragraph->image" value="" }style="display: none"{/eq}>
                          <img src="{:__ROOT__}/upload/{$_pragraph->image}">
                     </div>
                 </div>
                 {/volist}
+                </div>
                 <!-- //旅游行程 -->
-
-                <div class="contact">
+                <div class="contact" style="margin-top: 40px;">
                     <!-- 定制师信息 -->
                     {eq name="$contractor" value=""} {else/}
                     <div class="contact-form" >
