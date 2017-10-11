@@ -45,9 +45,9 @@ class Materialservice  {
         $imagePaths = [];
         if(!empty($files)) {
             // 最多上传6张图片
-            if (sizeof($files) > 6) {
-                $message['status'] = 'error';
-                $message['message'] = '最多上传6张图片，请重新选择';
+            if (!$this->validateImages(sizeof($files))) {
+                $message['status']  = 'error';
+                $message['message'] = '最多上传' . config('maxImage.count') . '张图片，请重新选择';
 
                 return $message;
             }
@@ -107,6 +107,13 @@ class Materialservice  {
                 array_push($imagePaths, $imagePath);
             }
             $Material->images = json_encode($imagePaths);
+        }
+
+        if (!$this->validateImages(count($Material->getMaterialImages()))) {
+            $message['status']  = 'error';
+            $message['message'] = '最多上传' . config('maxImage.count') . '张图片，请重新选择';
+
+            return $message;
         }
 
         if($Material->content == $content && $Material->designation == $designation && $Material->area == $area && $Material->country == $country && empty($files)) {
@@ -263,5 +270,15 @@ class Materialservice  {
         }
 
         return $message;
+    }
+
+    public function validateImages($size) {
+        //获取最多上传图片的配置
+        $maxImageCount = config('maxImage.count');
+
+        if ($size > $maxImageCount)
+            return false;
+        else
+            return true;
     }
 }

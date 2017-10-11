@@ -228,4 +228,9 @@ return [
         'var_page'  => '6',
         'list_rows' => 15,
     ],
+
+    //最多能上传图片的配置
+    'maxImage'              => [
+         'count'    => 5
+    ],
 ];
