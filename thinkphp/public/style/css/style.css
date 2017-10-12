@@ -92,13 +92,13 @@ body a:hover{
 .copy-right p a:hover{
     color: #fff; 
 }
-.backgroundcolor div:nth-child(5n + 1) {
+.backgroundcolor div:nth-child(6n + 1) {
     background-color: #e1f9fb;
 }
-.backgroundcolor div:nth-child(5n + 3) {
+.backgroundcolor div:nth-child(6n + 3) {
     background-color: #dff0d8;
 }
-.backgroundcolor div:nth-child(5n + 5) {
+.backgroundcolor div:nth-child(6n + 5) {
     background-color: #f5f1f1;
 }
 /*-- //main --*/ 

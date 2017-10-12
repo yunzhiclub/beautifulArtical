@@ -12,15 +12,15 @@
         <form action="{:url($action, ['hotelId' => $hotel->id])}" method="post">
             <div class="form-group">
                 <label>名称</label>
-                <input type="text" class="form-control" name="designation" placeholder="名称..." value="{$hotel->designation}">
+                <input type="text" class="form-control" name="designation" placeholder="名称..." value="{$hotel->designation}" required>
             </div>
             <div class="form-group">
                 <label>目的国家</label>
-                <input type="text" class="form-control" name="country" placeholder="所在国家..." value="{$hotel->country}">
+                <input type="text" class="form-control" name="country" placeholder="所在国家..." value="{$hotel->country}" required>
             </div>
             <div class="form-group">
                 <label>目的城市</label>
-                <input type="text" class="form-control" name="city" placeholder="所在城市..." value="{$hotel->city}">
+                <input type="text" class="form-control" name="city" placeholder="所在城市..." value="{$hotel->city}" required>
             </div>
             <div class="form-group">
                 <label>星级</label>
