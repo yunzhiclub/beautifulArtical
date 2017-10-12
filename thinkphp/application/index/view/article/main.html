@@ -269,8 +269,11 @@
                         <p><b>酒店城市：</b>{$hotel->city}</p>
                         <p><b>星级：</b>{$hotel->star_level}</p>
                         <p><b>备注：</b>{$hotel->remark}</p>
-                        {/volist}
+                        {/volist
+                        {eq name="key" value="0"}
+                        {else /}
                         <p>本报价按照欧元兑换人民币汇率7.98核算</p>
+                        {/eq}
                         <br>
                     </div>
                     <!--酒店信息-->
