@@ -80,11 +80,11 @@ class ContractorController extends IndexController
 		// 返回相应的界面
 		if ($message['status'] === 'success') {
 			// 返回保存成功界面
-			return $this->success($message['message'], url($message['route']));
+			return $this->success($message['message'], url('index'));
 
 		} else {
 			// 返回保存失败界面
-			return $this->error($message['message'], url($message['route']));
+			return $this->error($message['message']);
 		}
 	}
 	public function delete()
