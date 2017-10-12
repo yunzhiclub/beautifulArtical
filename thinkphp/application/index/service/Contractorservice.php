@@ -44,7 +44,6 @@ class Contractorservice
 		$message = [];
         $message['status'] = 'success';
         $message['message'] = '编辑成功！';
-        $message['route'] = 'index';
 
 		$Contractor = Contractor::get($contractorId);
 
@@ -59,8 +58,7 @@ class Contractorservice
 		if (json_encode($NewContractor) != json_encode($Contractor)) {
             if(!$Contractor->validate(true)->save()){
                 $message['status'] = 'error';
-                $message['message'] = '编辑失败！';
-                $message['route'] = 'index';
+                $message['message'] = $Contractor->getError();
             }
         }
 
