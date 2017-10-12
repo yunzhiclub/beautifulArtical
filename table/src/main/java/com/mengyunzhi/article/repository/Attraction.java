@@ -24,6 +24,7 @@ public class Attraction {
     private Set<Material> material = new HashSet<Material>();
 
     private String trip;
+    @Column(length = 500)
     private String description;
     private Date date;
     private String meal;

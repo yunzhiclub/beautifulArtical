@@ -111,9 +111,9 @@ class AttractionService {
         $Attraction->article_id = $articleId;
 
         if(json_encode($Attraction) != json_encode($ContrastAttraction)) {
-            if(!$Attraction->save()) {
+            if(!$Attraction->validate(true)->save()) {
                 $message['status'] = 'error';
-                $message['message'] = '更新失败';
+                $message['message'] = $Attraction->getError();
             }
         }
 

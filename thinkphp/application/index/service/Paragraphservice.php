@@ -36,16 +36,16 @@ class Paragraphservice
 
 			} else {
 				// 更新失败
-				$message['status'] = 'error';
-				$message['message'] = '段落信息未修改！';
+				$message['status'] = 'success';
+				$message['message'] = '保存成功！';
 				$message['route'] = 'article/secondadd';
 			}
 
 		} else {
 			// 新增段落是没有上传图片
 			if (is_null($file)) {
-				$message['status'] = 'error';
-				$message['message'] = '提示：此段落没有图片！';
+				$message['status'] = 'success';
+				$message['message'] = '保存成功！';
 				$message['route'] = 'article/secondadd';
 			}
 
