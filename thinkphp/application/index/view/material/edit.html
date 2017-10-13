@@ -37,19 +37,21 @@
                 });
             </script>
         </div>
-        <div class="form-group">
-            <label for="input-b3">上传图片(最多{:config('maxImage.count')}张)</label>
-            <input id="input-b3" name="images[]" type="file" class="file" multiple data-show-upload="false" data-show-caption="true" >
-        </div>
+        <br>
         <div class="row">
-        {eq name = "$action" value = "update"}
+            {eq name = "$action" value = "update"}
             {volist name = "images" id = "image"}
             <div class="form-group col-md-4">
                 <img src="{:__ROOT__}/upload/{$image}" style="height: 100px; width: 200px;" id="{$i}">
                 <button class="btn btn-xs btn-danger" type="button" onclick="deleteImage({$i}, {$material->id})" id = "but_{$i}"><i class="glyphicon glyphicon-trash"></i>&nbsp;删除</button>
             </div>
             {/volist}
-        {/eq}
+            {/eq}
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="input-b3">上传图片(最多{:config('maxImage.count')}张)</label>
+            <input id="input-b3" name="images[]" type="file" class="file" multiple data-show-upload="false" data-show-caption="true" >
         </div>
     <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-ok"></span>&nbsp;完成</button>
     <br>
