@@ -76,4 +76,12 @@ class Hotel extends Model {
         $hotels = Hotel::where($map)->select();
         return $hotels;
     }
+
+    public function judgeEmptyHotel($Hotels) {
+	    if (empty($Hotels)) {
+	        return true;
+        } else {
+	        return false;
+        }
+    }
 }

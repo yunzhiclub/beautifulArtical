@@ -264,14 +264,16 @@
                     <!--酒店信息-->
                     <div class="contact-form">
                     <br>
-                        <p class="pcontact2">酒店信息</p> {volist name="hotels" id="hotel" key="key"}
+
+                        {eq name="$hotel->judgeEmptyHotel($hotels)" value="true"}
+                        {else /}
+                        <p class="pcontact2">酒店信息</p>{volist name="hotels" id="hotel" key="key"}
                         <p class="title"><b><i class="glyphicon glyphicon-glass"></i> {$hotel->designation} :</b></p>
                         <p><b>酒店城市：</b>{$hotel->city}</p>
                         <p><b>星级：</b>{$hotel->star_level}</p>
                         <p><b>备注：</b>{$hotel->remark}</p>
-                        {/volist
-                        {eq name="key" value="0"}
-                        {else /}
+                        {/volist}
+
                         <p>本报价按照欧元兑换人民币汇率7.98核算</p>
                         {/eq}
                         <br>

@@ -277,6 +277,8 @@ class ArticleController extends IndexController {
         }
         $Hotels = array_unique($Hotels);
         $this->assign('hotels',$Hotels);
+        $Hotel = new Hotel();
+        $this->assign('hotel', $Hotel);
 
         return $this->fetch();
     }
