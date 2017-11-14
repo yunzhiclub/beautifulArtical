@@ -52,7 +52,7 @@ class Articleservice
         
         $Article->title = $title;
         $File = new Filter;
-        $Article->summery = $File->limitWordNumber($summery);
+        $Article->summery = $summery;
         $Article->contractor_id = $contractorId;
 
         $imagePath = Common::uploadImage($file);
