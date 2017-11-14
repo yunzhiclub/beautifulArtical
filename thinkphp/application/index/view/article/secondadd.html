@@ -22,8 +22,8 @@
         <div class="form-group">
             <label for="TextInput">正文</label>
             <span class="col-md-offset-1">
-				<a class="btn btn-primary btn-sm" href="{:url('Paragraph/index', ['articleId'=>$articleId,'id'=>''])}"><span class="glyphicon glyphicon-plus"></span>&nbsp;段落</a>&nbsp;&nbsp;
-            <a class="btn btn-primary btn-sm" href="{:url('Attraction/add?articleId='.$articleId)}"><span class="glyphicon glyphicon-plus"></span>&nbsp;景点</a>&nbsp;&nbsp;
+				<a class="btn btn-primary btn-sm" href="{:url('Attraction/add?articleId='.$articleId)}" ><span class="glyphicon glyphicon-plus"></span>&nbsp;日程</a>&nbsp;&nbsp;
+            <a class="btn btn-primary btn-sm" href="{:url('Paragraph/index', ['articleId'=>$articleId,'id'=>''])}"><span class="glyphicon glyphicon-plus">自定义段落</span>&nbsp;</a>&nbsp;&nbsp;
         </div>
         <ul style="list-style-type: none;">
             {volist name="paragraphUp" id="paragraph"}
