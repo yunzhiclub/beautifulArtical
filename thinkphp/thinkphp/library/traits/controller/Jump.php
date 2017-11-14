@@ -34,7 +34,7 @@ trait Jump
      * @param array     $header 发送的Header信息
      * @return void
      */
-    protected function success($msg = '', $url = null, $data = '', $wait = 3, array $header = [])
+    protected function success($msg = '', $url = null, $data = '', $wait = 1, array $header = [])
     {
         $code = 1;
         if (is_numeric($msg)) {
@@ -56,8 +56,9 @@ trait Jump
 
         $type = $this->getResponseType();
         if ('html' == strtolower($type)) {
-            $result = ViewTemplate::instance(Config::get('template'), Config::get('view_replace_str'))
-                ->fetch(Config::get('dispatch_success_tmpl'), $result);
+            // $result = ViewTemplate::instance(Config::get('template'), Config::get('view_replace_str'))
+            //     ->fetch(Config::get('dispatch_success_tmpl'), $result);
+            $this->redirect($url);
         }
         $response = Response::create($result, $type)->header($header);
         throw new HttpResponseException($response);
@@ -73,7 +74,7 @@ trait Jump
      * @param array     $header 发送的Header信息
      * @return void
      */
-    protected function error($msg = '', $url = null, $data = '', $wait = 3, array $header = [])
+    protected function error($msg = '', $url = null, $data = '', $wait = 1, array $header = [])
     {
         $code = 0;
         if (is_numeric($msg)) {
