@@ -47,4 +47,9 @@ class Common
             self::deleteImage($imagePath);
         }
     }
+
+    // 获取上一页面url
+    public static function getPreUrl() {
+        return $_SERVER['HTTP_REFERER'];
+    }
 }
