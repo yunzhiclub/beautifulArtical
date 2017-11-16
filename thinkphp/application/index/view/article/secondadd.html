@@ -85,89 +85,7 @@
                     </div>
                 </div>
             </li>
-            {/volist} {volist name="paragraphDown" id="paragraph"}
-            <li>
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <h4>{$paragraph->title}</h4>
-                        <div class="row">
-                            <div class="col-md-3" style="height: 100px;">
-                                <img src="{:__ROOT__}/upload/{$paragraph->image}" style="height: 100px; width: 180px;" alt="">
-                            </div>
-                            <div class="col-md-6 col-md-offset-1" style="word-wrap: break-word;">
-                                {$paragraph->content | $filter->limitWordNumber}
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12" style="height: 40px; margin-top: 10px;">
-                                <a class="btn btn-info btn-sm" href="{:url('Paragraph/edit',['articleId'=>$articleId,'id'=>$paragraph->id])}"><span class="glyphicon glyphicon-pencil"></span>&nbsp;编辑</a>
-                                <a class="btn btn-danger btn-sm" href="{:url('Paragraph/delete', ['articleId'=>$articleId,'id'=>$paragraph->id])}"><span class="glyphicon glyphicon-trash"></span>&nbsp;删除</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            {/volist}
-            <!-- 定制师 -->
-            <li>
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <table class="table table-hover table-bordered">
-                                    {eq name="$judgeContractor" value="0"} {else/}
-                                    <tr>
-                                        <th>定制师</th>
-                                        <td>{$contractor->designation}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>电话号码</th>
-                                        <td>{$contractor->phone}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>传真号码</th>
-                                        <td>{$contractor->fax}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>手机号码</th>
-                                        <td>{$contractor->mobile}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>电子邮件</th>
-                                        <td>{$contractor->email}</td>
-                                    </tr>
-                                    {/eq}
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div>
-                    <table class="table table-hover table-responsive table-bordered" style="word-break:break-all;">
-                        {eq name="$judgeHotel" value="0"} {else/}
-                        <h3>酒店信息</h3>
-                        <tr class="warning">
-                            <th width="20%">名称</th>
-                            <th width="20%">城市</th>
-                            <th width="20%">星级</th>
-                            <th width="40%">备注</th>
-                        </tr>
-                        {/eq} {volist name="hotel" id="hotel"}
-                        <tr>
-                            <th>{$hotel->designation}</th>
-                            <th>{$hotel->city}</th>
-                            <th>{$hotel->star_level}</th>
-                            <th>{$hotel->remark}</th>
-                        </tr>
-                        {/volist}
-                    </table>
-                </div>
-            </li>
-        </ul>
-        <script type="text/javascript" src="{:__ROOT__}/style/js/Calculation.js"></script>
-        <div class="row-fluid">
+             <div class="row-fluid">
             <div style="margin-top: 60px;">
                 <div class="row">
                     <div class="col-md-12">
@@ -293,6 +211,88 @@
                 </div>
             </div>
         </div>
+            {/volist} {volist name="paragraphDown" id="paragraph"}
+            <li>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h4>{$paragraph->title}</h4>
+                        <div class="row">
+                            <div class="col-md-3" style="height: 100px;">
+                                <img src="{:__ROOT__}/upload/{$paragraph->image}" style="height: 100px; width: 180px;" alt="">
+                            </div>
+                            <div class="col-md-6 col-md-offset-1" style="word-wrap: break-word;">
+                                {$paragraph->content | $filter->limitWordNumber}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12" style="height: 40px; margin-top: 10px;">
+                                <a class="btn btn-info btn-sm" href="{:url('Paragraph/edit',['articleId'=>$articleId,'id'=>$paragraph->id])}"><span class="glyphicon glyphicon-pencil"></span>&nbsp;编辑</a>
+                                <a class="btn btn-danger btn-sm" href="{:url('Paragraph/delete', ['articleId'=>$articleId,'id'=>$paragraph->id])}"><span class="glyphicon glyphicon-trash"></span>&nbsp;删除</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            {/volist}
+            <!-- 定制师 -->
+            <li>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <table class="table table-hover table-bordered">
+                                    {eq name="$judgeContractor" value="0"} {else/}
+                                    <tr>
+                                        <th>定制师</th>
+                                        <td>{$contractor->designation}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>电话号码</th>
+                                        <td>{$contractor->phone}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>传真号码</th>
+                                        <td>{$contractor->fax}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>手机号码</th>
+                                        <td>{$contractor->mobile}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>电子邮件</th>
+                                        <td>{$contractor->email}</td>
+                                    </tr>
+                                    {/eq}
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div>
+                    <table class="table table-hover table-responsive table-bordered" style="word-break:break-all;">
+                        {eq name="$judgeHotel" value="0"} {else/}
+                        <h3>酒店信息</h3>
+                        <tr class="warning">
+                            <th width="20%">名称</th>
+                            <th width="20%">城市</th>
+                            <th width="20%">星级</th>
+                            <th width="40%">备注</th>
+                        </tr>
+                        {/eq} {volist name="hotel" id="hotel"}
+                        <tr>
+                            <th>{$hotel->designation}</th>
+                            <th>{$hotel->city}</th>
+                            <th>{$hotel->star_level}</th>
+                            <th>{$hotel->remark}</th>
+                        </tr>
+                        {/volist}
+                    </table>
+                </div>
+            </li>
+        </ul>
+        <script type="text/javascript" src="{:__ROOT__}/style/js/Calculation.js"></script>
         <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-ok"></span>&nbsp;完成</button>
         <a class="btn btn-danger col-md-offset-9" href="{:url('article/delete',['articleId' => $articleId])}"><span class="glyphicon glyphicon-trash"></span>&nbsp;取消新增</a>
         <br>
