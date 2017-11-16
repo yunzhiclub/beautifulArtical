@@ -68,6 +68,7 @@ class ContractorController extends IndexController
 		$message = $this->contractorService->editContractor($param);
 		// 将文章信息返回到v层
 		$this->assign('contractor', $message['contractor']);
+		$this->assign('http_referer', $message['http_referer']);
 		// 返回编辑界面
 		return $this->fetch();
 	}
@@ -75,12 +76,13 @@ class ContractorController extends IndexController
 	public function update() {
 		// 从v层传来数据
 		$param = Request::instance();
+
 		// 送到s层处理数据
 		$message = $this->contractorService->updateContractor($param); 
 		// 返回相应的界面
 		if ($message['status'] === 'success') {
 			// 返回保存成功界面
-			return $this->success($message['message'], url('index'));
+			return $this->success($message['message'], $message['url']);
 
 		} else {
 			// 返回保存失败界面
