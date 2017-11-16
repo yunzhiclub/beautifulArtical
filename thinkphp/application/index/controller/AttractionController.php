@@ -83,4 +83,40 @@ class AttractionController extends IndexController {
             return $this->error($message['message'], url('article/secondadd', ['articleId' => $articleId]));
         }
     }
+
+    public function getCity() {
+        $countryIndex = Request::instance()->param('country');
+
+        $hotel     = new Hotel();
+        $countries = $hotel->getAllCountries();
+        $cities    = $hotel->getCitiesByCountry($countries[$countryIndex]);
+
+        return $cities;
+    }
+
+    public function getStar() {
+        $countryIndex = Request::instance()->param('country');
+        $cityIndex    = Request::instance()->param('city');
+
+        $hotel     = new Hotel();
+        $countries = $hotel->getAllCountries();
+        $cities    = $hotel->getCitiesByCountry($countries[$countryIndex]);
+        $stars     = $hotel->getStarsByCountryAndCity($countries[$countryIndex], $cities[$cityIndex]);
+
+        return $stars;
+    }
+
+    public function getHotelName() {
+        $countryIndex = Request::instance()->param('country');
+        $cityIndex    = Request::instance()->param('city');
+        $starIndex    = Request::instance()->param('star');
+
+        $hotel     = new Hotel();
+        $countries = $hotel->getAllCountries();
+        $cities    = $hotel->getCitiesByCountry($countries[$countryIndex]);
+        $stars     = $hotel->getStarsByCountryAndCity($countries[$countryIndex], $cities[$cityIndex]);
+        $names     = $hotel->getHotelsByCountryAndCityAndStar($countries[$countryIndex], $cities[$cityIndex], $stars[$starIndex]);
+
+        return $names;
+    }
 }
