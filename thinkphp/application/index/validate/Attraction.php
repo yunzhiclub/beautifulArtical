@@ -12,7 +12,7 @@ class Attraction extends Validate {
     protected $rule = [
         'trip'  => 'require',
         'date'  => 'require',
-        'guide'  => 'require',
+        // 'guide'  => 'require',
         'description'  => 'require|max:500',
         'meal'  => 'require',
         'hotel_id'  => 'require',
@@ -21,7 +21,7 @@ class Attraction extends Validate {
     protected $message = [
         'trip'  => '行程信息不为空',
         'date'  => '日期不为空',
-        'guide'  => '导游信息不为空',
+        // 'guide'  => '导游信息不为空',
         'description'  => '描述最多允许添加500字',
         'meal'  => '用餐信息不为空',
         'hotel_id'  => '酒店信息不为空'

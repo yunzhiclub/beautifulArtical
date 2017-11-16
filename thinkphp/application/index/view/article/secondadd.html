@@ -60,7 +60,7 @@
                                 日期：{$_attraction->date}<br>
                                 <!-- 导游：{$_attraction->guide}<br> -->
                                 用餐：{$_attraction->getMeals()}<br>
-                                用车：{$_attraction->getCar()}<br>
+                                用车：{$_attraction->getCars()}<br>
 
                                 素材：{volist name="$_attraction->getCheckedMaterial()" id="material"}<button type="button" class="btn btn-default btn-xs">{$material->designation}</button>
                                 {/volist}

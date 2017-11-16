@@ -48,17 +48,43 @@ class Attraction extends Model {
         }
     }
 
-    public function getCar() {
-        $car = $this->car;
-        if($car == 'sevenToNineBusinessCar') {
-            return '7-9座商务车';
-        } else if($car == 'train') {
-            return '火车';
-        } else if($car == 'car') {
-            return '汽车';
-        } else if($car == 'plane') {
-            return '飞机';
+    public function getCarIsChecked($checkCar) {
+        $cars = json_decode($this->car);
+
+        // 有用车字段，选择checked
+        if(!is_null($cars)) {
+            foreach ($cars as $car) {
+                if($car == $checkCar) {
+                    return true;
+                }
+            }
         }
+        return false;
+    }
+
+    public function getCars() {
+        $cars = json_decode($this->car);
+        $msg = null;
+        if (!is_null($cars)) {
+            foreach ($cars as $car) {
+                if ($car == 'plane') {
+                    $msg = $msg.'飞机 ';
+                } else if ($car == 'pickPlane') {
+                    $msg = $msg.'接机 ';
+                } else if ($car == 'sendPlane') {
+                    $msg = $msg.'送机 ';
+                } else if ($car == 'train') {
+                    $msg = $msg.'火车 ';
+                } else if ($car == 'ship') {
+                    $msg = $msg.'轮渡 ';
+                } else if ($car == 'allDayCar') {
+                    $msg = $msg.'全天用车 ';
+                } else if ($car == 'halfDayCar') {
+                    $msg = $msg.'半天用车';
+                }
+            }
+        }
+        return $msg;
     }
 
     public function getMeals() {
@@ -71,7 +97,7 @@ class Attraction extends Model {
                 } else if ($meal == 'lunch') {
                     $str = $str.'午餐 ';
                 } else if ($meal == 'supper') {
-                    $str = $str.'晚餐';
+                    $str = $str.'晚餐 ';
                 } else if ($meal == 'selfcare') {
                     $str = $str.'自理';
                 }

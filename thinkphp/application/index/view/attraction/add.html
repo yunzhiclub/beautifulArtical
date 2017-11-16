@@ -46,17 +46,26 @@
             <div class="form-group">
                 <label>用车</label>
                 <div>
-                    <label class="radio-inline">
-                        <input type="radio" name="car" value="sevenToNineBusinessCar" {eq name="$attraction->car" value="sevenToNineBusinessCar" }checked{/eq}> 7-9座商务车
+                    <label class="checkbox-inline">
+                        <input type="checkbox" name="car[]" value="plane" {eq name="$attraction->getCarIsChecked('plane')" value="true" }checked{/eq}> 飞机
                     </label>
-                    <label class="radio-inline">
-                        <input type="radio" name="car" value="train" {eq name="$attraction->car" value="train" }checked{/eq}> 火车
+                    <label class="checkbox-inline">
+                        <input type="checkbox" name="car[]" value="pickPlane" {eq name="$attraction->getCarIsChecked('pickPlane')" value="true" }checked{/eq}> 接机
                     </label>
-                    <label class="radio-inline">
-                        <input type="radio" name="car" value="car" {eq name="$attraction->car" value="car" }checked{/eq}> 汽车
+                    <label class="checkbox-inline">
+                        <input type="checkbox" name="car[]" value="sendPlane" {eq name="$attraction->getCarIsChecked('sendPlane')" value="true" }checked{/eq}> 送机
                     </label>
-                    <label class="radio-inline">
-                        <input type="radio" name="car" value="plane" {eq name="$attraction->car" value="plane" }checked{/eq}> 飞机
+                    <label class="checkbox-inline">
+                        <input type="checkbox" name="car[]" value="train" {eq name="$attraction->getCarIsChecked('plane')" value="true" }checked{/eq}> 火车
+                    </label>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" name="car[]" value="ship" {eq name="$attraction->getCarIsChecked('ship')" value="true" }checked{/eq}> 轮渡
+                    </label>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" name="car[]" value="allDayCar" {eq name="$attraction->getCarIsChecked('allDayCar')" value="true" }checked{/eq}> 全天用车
+                    </label>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" name="car[]" value="halfDayCar" {eq name="$attraction->getCarIsChecked('halfDayCar')" value="true" }checked{/eq}> 半天用车
                     </label>
                 </div>
             </div>
