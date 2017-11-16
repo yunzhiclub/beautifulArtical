@@ -23,10 +23,11 @@ class AttractionController extends IndexController {
     {
         parent::__construct($request);
         $this->attractionService = new AttractionService();
+        $this->hotelService      = new HotelService();
     }
 
     public function add() {
-        $hotel = new Hotel();
+        $hotel = $this->hotelService->getNullHotel();
         $material = new Material();
 
         $articleId = Request::instance()->param('articleId');
@@ -53,7 +54,7 @@ class AttractionController extends IndexController {
         $articleId = Request::instance()->param('articleId');
         $attractionId = Request::instance()->param('attractionId');
         $attraction = Attraction::get($attractionId);
-        $hotel = new Hotel();
+        $hotel = Hotel::get($attraction->hotel_id);
         $material = new Material();
         $this->assign('material', $material);
         $this->assign('hotel', $hotel);
