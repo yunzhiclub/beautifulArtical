@@ -27,7 +27,7 @@ class AttractionService {
         $attraction->guide = '';
         $attraction->description = '';
         $attraction->meal = 'breakfast';
-        $attraction->car = 'sevenToNineBusinessCar';
+        $attraction->car = 'plane';
         $attraction->id = 0;
         $attraction->hotel_id = '';
         return $attraction;
@@ -43,7 +43,7 @@ class AttractionService {
         $guide = $param->post('guide');
         $description = $param->post('description');
         $meals = $param->post('meal/a');
-        $car = $param->post('car');
+        $cars = $param->post('car/a');
         $materialIds = $param->post('materialId/a');
         $articleId = $param->param('articleId');
         $hotelId = $param->post('hotelId');
@@ -62,7 +62,13 @@ class AttractionService {
         }else {
             $Attraction->meal = '';
         }
-        $Attraction->car = $car;
+
+        if (!is_null($cars)) {
+            $Attraction->car = json_encode($cars);
+        } else {
+            $Attraction->car = '';
+        }
+        
         $Attraction->hotel_id = $hotelId;
         $Attraction->article_id = $articleId;
         $Attraction->weight = Attraction::where('article_id', '=', $articleId)->max("weight")+1;
@@ -93,7 +99,7 @@ class AttractionService {
         $guide = $param->post('guide');
         $description = $param->post('description');
         $meals = $param->post('meal/a');
-        $car = $param->post('car');
+        $cars = $param->post('car/a');
         $materialIds = $param->post('materialId/a');
         $articleId = $param->param('articleId/d');
         $hotelId = $param->post('hotelId/d');
@@ -106,7 +112,7 @@ class AttractionService {
         $Attraction->guide = $guide;
         $Attraction->description = $description;
         $Attraction->meal = json_encode($meals);
-        $Attraction->car = $car;
+        $Attraction->car = json_encode($cars);
         $Attraction->hotel_id = $hotelId;
         $Attraction->article_id = $articleId;
 
