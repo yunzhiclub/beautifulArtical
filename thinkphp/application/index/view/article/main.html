@@ -41,7 +41,7 @@
                     <button class="menu-button"></button>
                 </div>
                 <div class="logo">
-                    <h2><a>洛克</a></h2>
+                    <h2><a>洛克定制旅游</a></h2>
                     <!-- 可以换成洛克酒店的logo -->
                 </div>
                 <div class="login">
@@ -165,52 +165,8 @@
                     {/volist}
                     <div class="clearfix"></div>
                 </div>
-                <div class="backgroundcolor">
-                {volist name="paragraphDowns" id="_pragraph" key = "key"}
-                <div class="about ">
-                    <h3 style="text-align: center;" class="w3ls-title">{$_pragraph->title}</h3> {$_pragraph->content}
-                    <div class="properties-img" {eq name="$_pragraph->image" value="" }style="display: none"{/eq}>
-                         <img src="{:__ROOT__}/upload/{$_pragraph->image}">
-                    </div>
-                </div>
-                {/volist}
-                </div>
-                <!-- //旅游行程 -->
-                <div class="contact" style="margin-top: 40px;">
-                    <!-- 定制师信息 -->
-                    {eq name="$contractor" value=""} {else/}
-                    <div class="contact-form" >
-                        <br>
-                        <p class="pcontact1">定制师信息</p>
-                        <table class="table">
-                            <tr class="info">
-                                <th>名&nbsp;&nbsp;&nbsp;字</th>
-                                <td>{$contractor->designation}</td>
-                            </tr>
-                            <tr>
-                                <th>电话号码</th>
-                                <td>{$contractor->phone}</td>
-                            </tr>
-                            <tr>
-                                <th>传真号码</th>
-                                <td>{$contractor->fax}</td>
-                            </tr>
-                            <tr>
-                                <th>手机号码</th>
-                                <td>{$contractor->mobile}</td>
-                            </tr>
-                            <tr>
-                                <th>电子邮件</th>
-                                <td><a href="mailto:{$contractor->email}">{$contractor->email}</a></td>
-                            </tr>
-                            <br>
-                        </table>
-                    </div>
-                    {/eq}
-                    <br>
-                    <!-- 定制师信息 -->
-
-                    <!-- 方案报价 -->
+                <br><br>
+                <!-- 方案报价 -->
                     {volist name="plans" id="plan"}
                     <div class="contact-form">
                         <p class="pcontact2">方案报价</p>
@@ -259,8 +215,51 @@
                     </div>
                     {/volist}
                     <br>
-                    <!-- 方案报价 -->
-                    
+                <div class="backgroundcolor">
+                {volist name="paragraphDowns" id="_pragraph" key = "key"}
+                <div class="about ">
+                    <h3 style="text-align: center;" class="w3ls-title">{$_pragraph->title}</h3> {$_pragraph->content}
+                    <div class="properties-img" {eq name="$_pragraph->image" value="" }style="display: none"{/eq}>
+                         <img src="{:__ROOT__}/upload/{$_pragraph->image}">
+                    </div>
+                </div>
+                {/volist}
+                </div>
+                <!-- //旅游行程 -->
+                <div class="contact" style="margin-top: 40px;">
+                    <!-- 定制师信息 -->
+                    {eq name="$contractor" value=""} {else/}
+                    <div class="contact-form" >
+                        <br>
+                        <p class="pcontact1">定制师信息</p>
+                        <table class="table">
+                            <tr class="info">
+                                <th>名&nbsp;&nbsp;&nbsp;字</th>
+                                <td>{$contractor->designation}</td>
+                            </tr>
+                            <tr>
+                                <th>电话号码</th>
+                                <td>{$contractor->phone}</td>
+                            </tr>
+                            <tr>
+                                <th>传真号码</th>
+                                <td>{$contractor->fax}</td>
+                            </tr>
+                            <tr>
+                                <th>手机号码</th>
+                                <td>{$contractor->mobile}</td>
+                            </tr>
+                            <tr>
+                                <th>电子邮件</th>
+                                <td><a href="mailto:{$contractor->email}">{$contractor->email}</a></td>
+                            </tr>
+                            <br>
+                        </table>
+                    </div>
+                    {/eq}
+                    <br>
+                    <!-- 定制师信息 -->
+
                     <!--酒店信息-->
                     <div class="contact-form">
                     <br>
