@@ -30,6 +30,11 @@ class Contractorservice
 	public function editContractor($param) {
 		// 获取接受信息
 		$contractorId = $param->param('contractorId/d');
+
+		// 获取上一页面url
+		$HTTP_REFERER = $_SERVER['HTTP_REFERER'];
+		$message['http_referer'] = $HTTP_REFERER;
+
 		// 获取订制师实体
 		$Contractor = Contractor::get($contractorId);
 		// 获取订制师实体信息
@@ -40,10 +45,12 @@ class Contractorservice
 	public function updateContractor($param) {
 		// 获取接受信息
 		$contractorId = $param->param('contractorId/d');
-
+		$url = $param->post('url');
+		
 		$message = [];
         $message['status'] = 'success';
         $message['message'] = '编辑成功！';
+        $message['url'] = $url;
 
 		$Contractor = Contractor::get($contractorId);
 
