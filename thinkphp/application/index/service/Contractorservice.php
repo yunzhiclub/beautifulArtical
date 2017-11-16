@@ -3,6 +3,7 @@ namespace app\index\service;
 
 use app\index\model\Contractor;
 use app\index\model\Article;
+use app\index\model\Common;
 
 class Contractorservice
 {
@@ -32,8 +33,7 @@ class Contractorservice
 		$contractorId = $param->param('contractorId/d');
 
 		// 获取上一页面url
-		$HTTP_REFERER = $_SERVER['HTTP_REFERER'];
-		$message['http_referer'] = $HTTP_REFERER;
+		$message['pre_url'] = Common::getPreUrl();
 
 		// 获取订制师实体
 		$Contractor = Contractor::get($contractorId);
@@ -45,7 +45,7 @@ class Contractorservice
 	public function updateContractor($param) {
 		// 获取接受信息
 		$contractorId = $param->param('contractorId/d');
-		$url = $param->post('url');
+		$url = $param->post('pre_url');
 		
 		$message = [];
         $message['status'] = 'success';
