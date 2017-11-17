@@ -37,7 +37,11 @@ class Hotel extends Model {
                 array_push($countries, $hotel->country);
             }
         }
-        $countries = array_unique($countries);
+        $temps = array_unique($countries);
+        $countries = [];
+        foreach ($temps as $temp) {
+            array_push($countries, $temp);
+        }
         return $countries;
     }
 
@@ -49,7 +53,11 @@ class Hotel extends Model {
 	            array_push($cities, $hotel->city);
             }
         }
-        $cities = array_unique($cities);
+        $temps  = array_unique($cities);
+	    $cities = [];
+	    foreach ($temps as $temp) {
+	        array_push($cities, $temp);
+        }
 	    return $cities;
     }
 
@@ -64,7 +72,11 @@ class Hotel extends Model {
 	            array_push($stars, $hotel->star_level);
             }
         }
-        $stars = array_unique($stars);
+        $temps = array_unique($stars);
+	    $stars = [];
+	    foreach ($temps as $temp) {
+	        array_push($stars, $temp);
+        }
 	    return $stars;
     }
 
