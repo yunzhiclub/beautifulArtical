@@ -3,9 +3,9 @@
     <div class="row">
         <h2><span class="glyphicon glyphicon-edit"></span>&nbsp;
             {eq name="$attraction->id" value="0"}
-            添加景点
+            添加日程
             {else /}
-            编辑景点
+            编辑日程
             {/eq}
         </h2>
         <br> {php}$action = request()->action() === 'add' ? 'save' : 'update';{/php}
@@ -97,7 +97,33 @@
             </div>
             <div class="form-group">
                 <label>酒店</label>
-                <div>
+                <div class="row">
+                    <div class="col-md-2">
+                        <select id="hotel-country" class="form-control" onclick="hotelGetCity()">
+                            {volist name="$hotel->getAllCountries()" id="country"}
+                            <option {eq name="$hotel->country" value="$country"}selected{/eq} >
+                                {$country}
+                            </option>
+                            {/volist}
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <select id="hotel-city" class="form-control" onclick="hotelGetStar()">
+
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <select id="hotel-star" class="form-control" onclick="hotelGetName()">
+
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <select name="hotelId" id="hotel-name" class="form-control">
+
+                        </select>
+                    </div>
+                </div>
+                <!--<div>
                     {volist name="$hotel->getAllCountries()" id="country"}
                     <div class="row">
                         <div class="col-md-11 col-md-offset-1">
@@ -129,9 +155,137 @@
                     </div>
                     {/volist}
                 </div>
+                -->
             </div>
             <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-ok"></span>&nbsp;完成</button>
         </form>
     </div>
 </div>
+<script>
+    function hotelGetCity() {
+        var countryNode  = document.getElementById('hotel-country');
+        var countryIndex = countryNode.selectedIndex;
+        var cityNode     = document.getElementById('hotel-city');
+        var starNode     = document.getElementById('hotel-star');
+        var nameNode     = document.getElementById('hotel-name');
+
+        starNode.length  = 0;
+        nameNode.length  = 0;
+
+        console.log(countryIndex);
+
+        // 获取域名
+        var host = window.location.host;
+        // 拼接路径
+        var url = "http://" + host + "/index/attraction/getCity?country=" + countryIndex;
+        //发送ajax请求
+        console.log(url);
+
+        $.ajax({
+            url:   url,
+            type: "get",
+            success: function (response) {
+                var cities = response;
+
+                cityNode.length = 0;
+
+                for (var i = 0; i < cities.length; i ++) {
+                    var cityOption = document.createElement('option');
+                    cityOption.innerHTML = cities[i];
+                    cityNode.appendChild(cityOption);
+                }
+
+                console.log(cities);
+            },
+            error: function (xhr) {
+                cityNode.length = 0;
+            }
+        });
+    }
+
+    function hotelGetStar() {
+        var countryNode  = document.getElementById('hotel-country');
+        var countryIndex = countryNode.selectedIndex;
+        var cityNode     = document.getElementById('hotel-city');
+        var cityIndex    = cityNode.selectedIndex;
+        var starNode     = document.getElementById('hotel-star');
+        var nameNode     = document.getElementById('hotel-name');
+
+        nameNode.length  = 0;
+
+        console.log(countryIndex);
+        console.log(cityIndex);
+
+        // 获取域名
+        var host = window.location.host;
+        // 拼接路径
+        var url = "http://" + host + "/index/attraction/getStar?country=" + countryIndex + "&city=" + cityIndex;
+        //发送ajax请求
+        console.log(url);
+
+        $.ajax({
+            url:   url,
+            type: "get",
+            success: function (response) {
+                var stars = response;
+
+                starNode.length = 0;
+
+                for (var i = 0; i < stars.length; i ++) {
+                    var starOption = document.createElement('option');
+                    starOption.innerHTML = stars[i];
+                    starNode.appendChild(starOption);
+                }
+
+                console.log(stars);
+            },
+            error: function (xhr) {
+                starNode.length = 0;
+            }
+        });
+    }
+
+    function hotelGetName() {
+        var countryNode  = document.getElementById('hotel-country');
+        var countryIndex = countryNode.selectedIndex;
+        var cityNode     = document.getElementById('hotel-city');
+        var cityIndex    = cityNode.selectedIndex;
+        var starNode     = document.getElementById('hotel-star');
+        var starIndex    = starNode.selectedIndex;
+        var nameNode     = document.getElementById('hotel-name');
+
+        console.log(countryIndex);
+        console.log(cityIndex);
+        console.log(starIndex);
+
+        // 获取域名
+        var host = window.location.host;
+        // 拼接路径
+        var url = "http://" + host + "/index/attraction/getHotelName?country=" + countryIndex + "&city=" + cityIndex + "&star=" + starIndex;
+        //发送ajax请求
+        console.log(url);
+
+        $.ajax({
+            url:   url,
+            type: "get",
+            success: function (response) {
+                var names = response;
+
+                nameNode.length = 0;
+
+                for (var i = 0; i < names.length; i ++) {
+                    var nameOption = document.createElement('option');
+                    nameOption.innerHTML = names[i].designation;
+                    nameOption.value     = names[i].id;
+                    nameNode.appendChild(nameOption);
+                }
+
+                console.log(names);
+            },
+            error: function (xhr) {
+                nameNode.length = 0;
+            }
+        });
+    }
+</script>
 {/block}

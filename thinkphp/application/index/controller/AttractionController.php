@@ -23,10 +23,11 @@ class AttractionController extends IndexController {
     {
         parent::__construct($request);
         $this->attractionService = new AttractionService();
+        $this->hotelService      = new HotelService();
     }
 
     public function add() {
-        $hotel = new Hotel();
+        $hotel = $this->hotelService->getNullHotel();
         $material = new Material();
 
         $articleId = Request::instance()->param('articleId');
@@ -53,7 +54,7 @@ class AttractionController extends IndexController {
         $articleId = Request::instance()->param('articleId');
         $attractionId = Request::instance()->param('attractionId');
         $attraction = Attraction::get($attractionId);
-        $hotel = new Hotel();
+        $hotel = Hotel::get($attraction->hotel_id);
         $material = new Material();
         $this->assign('material', $material);
         $this->assign('hotel', $hotel);
@@ -82,5 +83,41 @@ class AttractionController extends IndexController {
         } else {
             return $this->error($message['message'], url('article/secondadd', ['articleId' => $articleId]));
         }
+    }
+
+    public function getCity() {
+        $countryIndex = Request::instance()->param('country');
+
+        $hotel     = new Hotel();
+        $countries = $hotel->getAllCountries();
+        $cities    = $hotel->getCitiesByCountry($countries[$countryIndex]);
+
+        return $cities;
+    }
+
+    public function getStar() {
+        $countryIndex = Request::instance()->param('country');
+        $cityIndex    = Request::instance()->param('city');
+
+        $hotel     = new Hotel();
+        $countries = $hotel->getAllCountries();
+        $cities    = $hotel->getCitiesByCountry($countries[$countryIndex]);
+        $stars     = $hotel->getStarsByCountryAndCity($countries[$countryIndex], $cities[$cityIndex]);
+
+        return $stars;
+    }
+
+    public function getHotelName() {
+        $countryIndex = Request::instance()->param('country');
+        $cityIndex    = Request::instance()->param('city');
+        $starIndex    = Request::instance()->param('star');
+
+        $hotel     = new Hotel();
+        $countries = $hotel->getAllCountries();
+        $cities    = $hotel->getCitiesByCountry($countries[$countryIndex]);
+        $stars     = $hotel->getStarsByCountryAndCity($countries[$countryIndex], $cities[$cityIndex]);
+        $names     = $hotel->getHotelsByCountryAndCityAndStar($countries[$countryIndex], $cities[$cityIndex], $stars[$starIndex]);
+
+        return $names;
     }
 }
