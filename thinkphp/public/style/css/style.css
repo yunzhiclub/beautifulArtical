@@ -120,6 +120,7 @@ body a:hover{
 }
 .logo {
     text-align: center;
+    width: auto;
 }
 .logo h2 {
     font-size: 1.3em;
@@ -129,7 +130,7 @@ body a:hover{
     color: #8b008b;
     background: #fff; 
     font-weight: 300;
-    border-radius: 50%;
+    border-radius: 40%;
     padding: 8px;
     display: inline-block;
 	text-decoration:none;
@@ -2138,7 +2139,7 @@ p.w3-text {
 }
 @media(max-width:414px){
 .header {
-    padding: 1em 1.5em;
+    padding: 1em 1.5em 0em 1.5em;
 }
 .welcome {
     padding: 2.5em 3em 0;
