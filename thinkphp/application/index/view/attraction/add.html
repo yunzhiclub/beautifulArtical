@@ -56,7 +56,7 @@
                         <input type="checkbox" name="car[]" value="sendPlane" {eq name="$attraction->getCarIsChecked('sendPlane')" value="true" }checked{/eq}> 送机
                     </label>
                     <label class="checkbox-inline">
-                        <input type="checkbox" name="car[]" value="train" {eq name="$attraction->getCarIsChecked('plane')" value="true" }checked{/eq}> 火车
+                        <input type="checkbox" name="car[]" value="train" {eq name="$attraction->getCarIsChecked('train')" value="true" }checked{/eq}> 火车
                     </label>
                     <label class="checkbox-inline">
                         <input type="checkbox" name="car[]" value="ship" {eq name="$attraction->getCarIsChecked('ship')" value="true" }checked{/eq}> 轮渡
@@ -105,7 +105,9 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-2">
+                    <div class="col-md-3 row">
+                        <label class="col-md-4 select_lable">国家</label>
+                        <div class="col-md-8">
                         <select id="hotel-country" class="form-control" onclick="hotelGetCity()">
                             {volist name="$hotel->getAllCountries()" id="country"}
                             <option {eq name="$hotel->country" value="$country"}selected="true"{/eq} >
@@ -113,21 +115,31 @@
                             </option>
                             {/volist}
                         </select>
+                        </div>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-3 row">
+                        <label class="col-md-4 select_lable">城市</label>
+                        <div class="col-md-8">
                         <select id="hotel-city" class="form-control" onclick="hotelGetStar()">
 
                         </select>
+                        </div>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-3 row">
+                        <label class="col-md-4 select_lable">星级</label>
+                        <div class="col-md-8">
                         <select id="hotel-star" class="form-control" onclick="hotelGetName()">
 
                         </select>
+                        </div>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-3 row">
+                        <label class="col-md-4 select_lable">酒店</label>
+                        <div class="col-md-8">
                         <select name="hotelId" id="hotel-name" class="form-control">
 
                         </select>
+                        </div>
                     </div>
                 </div>
                 <!--<div>
