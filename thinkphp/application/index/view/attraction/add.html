@@ -98,10 +98,17 @@
             <div class="form-group">
                 <label>酒店</label>
                 <div class="row">
+                    <div class="col-md-12">
+                        <p id="city" class="hide">{$hotel->city}</p>
+                        <p id="star" class="hide">{$hotel->star_level}</p>
+                        <p id="name" class="hide">{$hotel->designation}</p>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-md-2">
                         <select id="hotel-country" class="form-control" onclick="hotelGetCity()">
                             {volist name="$hotel->getAllCountries()" id="country"}
-                            <option {eq name="$hotel->country" value="$country"}selected{/eq} >
+                            <option {eq name="$hotel->country" value="$country"}selected="true"{/eq} >
                                 {$country}
                             </option>
                             {/volist}
@@ -163,6 +170,7 @@
 </div>
 <script>
     function hotelGetCity() {
+        var city  　　　　= document.getElementById('city').innerHTML;
         var countryNode  = document.getElementById('hotel-country');
         var countryIndex = countryNode.selectedIndex;
         var cityNode     = document.getElementById('hotel-city');
@@ -190,12 +198,25 @@
                 cityNode.length = 0;
 
                 for (var i = 0; i < cities.length; i ++) {
+
                     var cityOption = document.createElement('option');
                     cityOption.innerHTML = cities[i];
+
+                    console.log(cityOption);
+
                     cityNode.appendChild(cityOption);
                 }
 
-                console.log(cities);
+                for (var i = 0; i < cityNode.options.length; i ++) {
+
+                    if (cityNode.options[i].innerHTML == city) {
+                        cityNode.options[i].setAttribute("selected", "true");
+                    }
+                }
+
+                console.log("testIndex" + cityNode.selectedIndex);
+
+                hotelGetStar();
             },
             error: function (xhr) {
                 cityNode.length = 0;
@@ -204,6 +225,7 @@
     }
 
     function hotelGetStar() {
+        var star  　　　　= document.getElementById('star');
         var countryNode  = document.getElementById('hotel-country');
         var countryIndex = countryNode.selectedIndex;
         var cityNode     = document.getElementById('hotel-city');
@@ -237,7 +259,16 @@
                     starNode.appendChild(starOption);
                 }
 
+                for (var i = 0; i < starNode.options.length; i ++) {
+
+                    if (starNode.options[i].innerHTML == star) {
+                        starNode.options[i].setAttribute("selected", "true");
+                    }
+                }
+
                 console.log(stars);
+
+                hotelGetName();
             },
             error: function (xhr) {
                 starNode.length = 0;
@@ -246,6 +277,7 @@
     }
 
     function hotelGetName() {
+        var name         = document.getElementById('name');
         var countryNode  = document.getElementById('hotel-country');
         var countryIndex = countryNode.selectedIndex;
         var cityNode     = document.getElementById('hotel-city');
@@ -280,12 +312,23 @@
                     nameNode.appendChild(nameOption);
                 }
 
+                for (var i = 0; i < nameNode.options.length; i ++) {
+
+                    if (nameNode.options[i].innerHTML == star) {
+                        nameNode.options[i].setAttribute("selected", "true");
+                    }
+                }
+
                 console.log(names);
             },
             error: function (xhr) {
                 nameNode.length = 0;
             }
         });
+    }
+
+    window.onload = function () {
+        hotelGetCity();
     }
 </script>
 {/block}
