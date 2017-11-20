@@ -1,7 +1,7 @@
-{extend name="index"} {block name="title"}素材管理{/block} {block name="content"}
+{extend name="index"} {block name="title"}景点管理{/block} {block name="content"}
 
 <div class="col-md-8 col-md-offset-1" style="margin-top: 60px;min-height: 730px;">
-    <h2><span class="glyphicon glyphicon-edit"></span>&nbsp;素材编辑</h2>
+    <h2><span class="glyphicon glyphicon-edit"></span>&nbsp;景点编辑</h2>
     <br>
     {php}$action = request()->action() === 'add' ? 'save' : 'update';{/php}
     <form method="post" action="{:url ($action,['materialId'=>$material->id])}" enctype="multipart/form-data">

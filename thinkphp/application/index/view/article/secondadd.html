@@ -62,7 +62,7 @@
                                 用餐：{$_attraction->getMeals()}<br>
                                 用车：{$_attraction->getCars()}<br>
 
-                                素材：{volist name="$_attraction->getCheckedMaterial()" id="material"}<button type="button" class="btn btn-default btn-xs">{$material->designation}</button>
+                                景点：{volist name="$_attraction->getCheckedMaterial()" id="material"}<button type="button" class="btn btn-default btn-xs">{$material->designation}</button>
                                 {/volist}
                                 <br>
                                 酒店：{$_attraction->getHotelDesignation()}<br>
