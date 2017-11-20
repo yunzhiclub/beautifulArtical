@@ -5,6 +5,7 @@ use app\index\controller\IndexController;
 use think\Request;
 use app\index\model\Contractor;
 use app\index\service\Contractorservice;
+use app\index\model\Common;
 
 /**
  * @author 朴世超 朱晨澍
@@ -41,8 +42,10 @@ class ContractorController extends IndexController
 		$Contractor->mobile = '';
 		$Contractor->email = '';
 		$Contractor->id = 0;
+		$pre_url = Common::getPreUrl();
 
 		$this->assign('contractor', $Contractor);
+		$this->assign('pre_url', $pre_url);
 
 		return $this->fetch('edit');
 	}
