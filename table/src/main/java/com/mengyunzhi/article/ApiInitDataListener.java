@@ -131,52 +131,6 @@ public class ApiInitDataListener implements ApplicationListener<ContextRefreshed
                 "    </li>\n" +
                 "</ul>");
         paragraphRepository.save(paragraph1);
-        Paragraph paragraph2 = new Paragraph();
-        paragraph2.setTitle("报价说明");
-        paragraph2.setContent("<ul class=\" list-paddingleft-2\" style=\"list-style-type: decimal;\">\n" +
-                "    <li>\n" +
-                "        <p>\n" +"<span class=\"glyphicon glyphicon-hand-right\"></span>" +
-                "            米兰的Hiton Garden Inn Milan North 酒店的最晚免费取消日期为2017年9月12日12:00之前。\n" +
-                "        </p>\n" +
-                "    </li>\n" +
-                "    <li>\n" +
-                "        <p>\n" +"<span class=\"glyphicon glyphicon-hand-right\"></span>" +
-                "            未按预定日期入住酒店（NO SHOW）,收取全部酒店费用。\n" +
-                "        </p>\n" +
-                "    </li>\n" +
-                "    <li>\n" +
-                "        <p>\n" +"<span class=\"glyphicon glyphicon-hand-right\"></span>" +
-                "            9座一下用车出发前15天取消，收取用车费用的20%，出发前十五天内收取50%，出发前7天内取消收取用车费用100%。\n" +
-                "        </p>\n" +
-                "    </li>\n" +
-                "    <li>\n" +
-                "        <p>\n" +"<span class=\"glyphicon glyphicon-hand-right\"></span>" +
-                "            9座以上旅游用车一旦预定无法取消，收取用车费用的100%。\n" +
-                "        </p>\n" +
-                "    </li>\n" +
-                "    <li>\n" +
-                "        <p>\n" +"<span class=\"glyphicon glyphicon-hand-right\"></span>" +
-                "            以签证拒绝取消保险，取消日期在保险生效日期前一个工作日，每份保险收取服务费用20元。\n" +
-                "        </p>\n" +
-                "    </li>\n" +
-                "    <li>\n" +
-                "        <p>\n" +"<span class=\"glyphicon glyphicon-hand-right\"></span>" +
-                "            报价单最晚付款日期内未付款报价视为无效，需要重新核算资源价格。\n" +
-                "        </p>\n" +
-                "    </li>\n" +
-                "    <li>\n" +
-                "        <p>\n" +"<span class=\"glyphicon glyphicon-hand-right\"></span>" +
-                "            酒店双人间可入住两人，酒店内会放置两张床或一张大床。放置两套床上用品视酒店情况安排；双人间若住三人，根据酒店要求可能会加收第三人加床早餐等费用，由此产生的费用有客人直接付给前台。\n" +
-                "        </p>\n" +
-                "    </li>\n" +
-                "    <li>\n" +
-                "        <p>\n" +"<span class=\"glyphicon glyphicon-hand-right\"></span>" +
-                "            酒店单人间可入住一人，房间内设置一张单人床，也可能是一张大床或两张单人床，视酒店情况安排。三人间可入住三人，房间内设三张单人床，或一张大床加一个沙发床（折叠床），或者两张单人床加一张沙发床（折叠床），视酒店情况安排。四人间可入住四人，房间内设四张单人床，或两间间的套房<br/>\n" +
-                "        </p>\n" +
-                "    </li>\n" +
-                "</ul>");
-        paragraph2.setIsBeforeAttraction(0);
-        paragraphRepository.save(paragraph2);
         Paragraph paragraph3 = new Paragraph();
         paragraph3.setTitle("费用包括");
         paragraph3.setContent("<ul class=\" list-paddingleft-2\" style=\"list-style-type: decimal;\">\n" +
@@ -319,5 +273,51 @@ public class ApiInitDataListener implements ApplicationListener<ContextRefreshed
                 "</ul>");
         paragraph4.setIsBeforeAttraction(0);
         paragraphRepository.save(paragraph4);
+        Paragraph paragraph2 = new Paragraph();
+        paragraph2.setTitle("报价说明");
+        paragraph2.setContent("<ul class=\" list-paddingleft-2\" style=\"list-style-type: decimal;\">\n" +
+                "    <li>\n" +
+                "        <p>\n" +"<span class=\"glyphicon glyphicon-hand-right\"></span>" +
+                "            米兰的Hiton Garden Inn Milan North 酒店的最晚免费取消日期为2017年9月12日12:00之前。\n" +
+                "        </p>\n" +
+                "    </li>\n" +
+                "    <li>\n" +
+                "        <p>\n" +"<span class=\"glyphicon glyphicon-hand-right\"></span>" +
+                "            未按预定日期入住酒店（NO SHOW）,收取全部酒店费用。\n" +
+                "        </p>\n" +
+                "    </li>\n" +
+                "    <li>\n" +
+                "        <p>\n" +"<span class=\"glyphicon glyphicon-hand-right\"></span>" +
+                "            9座一下用车出发前15天取消，收取用车费用的20%，出发前十五天内收取50%，出发前7天内取消收取用车费用100%。\n" +
+                "        </p>\n" +
+                "    </li>\n" +
+                "    <li>\n" +
+                "        <p>\n" +"<span class=\"glyphicon glyphicon-hand-right\"></span>" +
+                "            9座以上旅游用车一旦预定无法取消，收取用车费用的100%。\n" +
+                "        </p>\n" +
+                "    </li>\n" +
+                "    <li>\n" +
+                "        <p>\n" +"<span class=\"glyphicon glyphicon-hand-right\"></span>" +
+                "            以签证拒绝取消保险，取消日期在保险生效日期前一个工作日，每份保险收取服务费用20元。\n" +
+                "        </p>\n" +
+                "    </li>\n" +
+                "    <li>\n" +
+                "        <p>\n" +"<span class=\"glyphicon glyphicon-hand-right\"></span>" +
+                "            报价单最晚付款日期内未付款报价视为无效，需要重新核算资源价格。\n" +
+                "        </p>\n" +
+                "    </li>\n" +
+                "    <li>\n" +
+                "        <p>\n" +"<span class=\"glyphicon glyphicon-hand-right\"></span>" +
+                "            酒店双人间可入住两人，酒店内会放置两张床或一张大床。放置两套床上用品视酒店情况安排；双人间若住三人，根据酒店要求可能会加收第三人加床早餐等费用，由此产生的费用有客人直接付给前台。\n" +
+                "        </p>\n" +
+                "    </li>\n" +
+                "    <li>\n" +
+                "        <p>\n" +"<span class=\"glyphicon glyphicon-hand-right\"></span>" +
+                "            酒店单人间可入住一人，房间内设置一张单人床，也可能是一张大床或两张单人床，视酒店情况安排。三人间可入住三人，房间内设三张单人床，或一张大床加一个沙发床（折叠床），或者两张单人床加一张沙发床（折叠床），视酒店情况安排。四人间可入住四人，房间内设四张单人床，或两间间的套房<br/>\n" +
+                "        </p>\n" +
+                "    </li>\n" +
+                "</ul>");
+        paragraph2.setIsBeforeAttraction(0);
+        paragraphRepository.save(paragraph2);
     }
 }
