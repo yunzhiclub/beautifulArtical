@@ -51,7 +51,6 @@ class Articleservice
         }
         
         $Article->title = $title;
-        $File = new Filter;
         $Article->summery = $summery;
         $Article->contractor_id = $contractorId;
 
@@ -192,11 +191,12 @@ class Articleservice
     }
     // 添加文章的固定内容
     public function especialName($especialmassage,$articleId) {
-        $Paragraph = Paragraph::where('title',$especialmassage)->where('article_id',null)->find();
+        $Paragraph = Paragraph::where('title', '=', $especialmassage)->find();
 
-        $newParagraph = new Paragraph;
-        $newParagraph->title = $Paragraph->title;
+        $newParagraph = new Paragraph();
+        $newParagraph->title   = $Paragraph->title;
         $newParagraph->content = $Paragraph->content;
+        $newParagraph->weight  = $Paragraph->weight;
         if($Paragraph->is_before_attraction == 0){
             $newParagraph->is_before_attraction = false;
         }else{
@@ -294,7 +294,7 @@ class Articleservice
         $Hotels = array_unique($Hotels);
         // 将段落按在景点的上下顺序分成两个类，并根据权重排序
         $paragraphUp = Paragraph::where('is_before_attraction',1)->where('article_id',$articleId)->order('weight')->select();
-        $paragraphDown = Paragraph::where('is_before_attraction',0)->where('article_id',$articleId)->order('weight')->select();
+        $paragraphDown = Paragraph::where('is_before_attraction',0)->where('article_id',$articleId)->order('weight desc')->select();
         // $Paragraph = Paragraph::order('weight')->select();
         $message['paragraphUp'] = $paragraphUp;
         $message['paragraphDown'] = $paragraphDown;

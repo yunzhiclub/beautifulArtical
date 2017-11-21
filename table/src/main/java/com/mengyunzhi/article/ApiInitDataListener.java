@@ -59,6 +59,7 @@ public class ApiInitDataListener implements ApplicationListener<ContextRefreshed
         //增加九大服务
         Paragraph paragraph = new Paragraph();
         paragraph.setTitle("九大服务");
+        paragraph.setWeight(5);
         paragraph.setContent(
                 "<ul class=\" list-paddingleft-2\" style=\"list-style-type: decimal;\">\n" +
                         "    <li>\n" +
@@ -97,6 +98,7 @@ public class ApiInitDataListener implements ApplicationListener<ContextRefreshed
         //六大品质
         Paragraph paragraph1 = new Paragraph();
         paragraph1.setTitle("六大品质");
+        paragraph1.setWeight(4);
         paragraph1.setIsBeforeAttraction(0);
         paragraph1.setContent("<ul class=\" list-paddingleft-2\" style=\"list-style-type: decimal;\">\n" +
                 "    <li>\n" +
@@ -132,6 +134,7 @@ public class ApiInitDataListener implements ApplicationListener<ContextRefreshed
                 "</ul>");
         paragraphRepository.save(paragraph1);
         Paragraph paragraph3 = new Paragraph();
+        paragraph3.setWeight(3);
         paragraph3.setTitle("费用包括");
         paragraph3.setContent("<ul class=\" list-paddingleft-2\" style=\"list-style-type: decimal;\">\n" +
                 "    <li>\n" +
@@ -183,6 +186,7 @@ public class ApiInitDataListener implements ApplicationListener<ContextRefreshed
         paragraph3.setIsBeforeAttraction(0);
         paragraphRepository.save(paragraph3);
         Paragraph paragraph4 = new Paragraph();
+        paragraph4.setWeight(2);
         paragraph4.setTitle("费用不包括");
         paragraph4.setContent("<ul class=\" list-paddingleft-2\" style=\"list-style-type: decimal;\">\n" +
                 "    <li>\n" +
@@ -275,6 +279,7 @@ public class ApiInitDataListener implements ApplicationListener<ContextRefreshed
         paragraphRepository.save(paragraph4);
         Paragraph paragraph2 = new Paragraph();
         paragraph2.setTitle("报价说明");
+        paragraph2.setWeight(1);
         paragraph2.setContent("<ul class=\" list-paddingleft-2\" style=\"list-style-type: decimal;\">\n" +
                 "    <li>\n" +
                 "        <p>\n" +"<span class=\"glyphicon glyphicon-hand-right\"></span>" +
