@@ -7,6 +7,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 .select_lable{
     line-height: 33.9px;
 }
+.zoom {
+            cursor: pointer;
+        }
 *{
 font-family:Microsoft Yahei;
 }
