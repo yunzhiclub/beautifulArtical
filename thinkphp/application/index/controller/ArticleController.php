@@ -253,7 +253,7 @@ class ArticleController extends IndexController {
         $Plans = Plan::where('article_id',$articleId)->select();
         
         $paragraphUps = Paragraph::where('is_before_attraction',1)->where('article_id',$articleId)->order('weight')->select();
-        $paragraphDowns = Paragraph::where('is_before_attraction',0)->where('article_id',$articleId)->order('weight')->select();
+        $paragraphDowns = Paragraph::where('is_before_attraction',0)->where('article_id',$articleId)->order('weight desc')->select();
 
         $this->assign('article',$Article);
         $this->assign('contractor',$Contractor);
