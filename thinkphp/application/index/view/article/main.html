@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="{:__ROOT__}/style/css/ken-burns.css" type="text/css" media="all" />
     <!-- //Custom Theme files -->
     <script src="{:__ROOT__}/style/js/jquery-2.1.1.min.js"></script>
+    <script src="{:__ROOT__}/style/js/zoomerang.js"></script>
     <!-- nice scroll-js -->
     <script src="{:__ROOT__}/style/js/jquery.nicescroll.min.js"></script>
     <script>
@@ -83,8 +84,8 @@
                 {volist name="paragraphUps" id="pragraph"}
                 <div class="about">
                     <h3 style="text-align: center;" class="w3ls-title">{$pragraph->title}</h3> {$pragraph->content}
-                    <div class="properties-img" {eq name="$pragraph->image" value="" }style="display: none"{/eq}>
-                        <img src="{:__ROOT__}/upload/{$pragraph->image}" alt="" {eq name="$pragraph->image" value="" }style="display: none"{/eq}>
+                    <div style="text-align: center;"  {eq name="$pragraph->image" value="" }style="display: none"{/eq}>
+                        <img  class='zoom' src="{:__ROOT__}/upload/{$pragraph->image}" alt="" {eq name="$pragraph->image" value="" }style="display: none"{/eq}>
                     </div>
                 </div>
                 {/volist}
@@ -290,5 +291,40 @@
         </div>
     </div>
 </body>
+<!-- 放大图片的配置参数 -->
+<script>
+    Zoomerang
+        .config({
+            maxHeight: 400,
+            maxWidth: 400,
+            bgColor: '#000',
+            bgOpacity: .85,
+            onOpen: openCallback,
+            onClose: closeCallback,
+            onBeforeOpen: beforeOpenCallback,
+            onBeforeClose: beforeCloseCallback
+        })
+        .listen('.zoom')
 
+    function openCallback (el) {
+        console.log('zoomed in on: ')
+        console.log(el)
+    }
+
+    function closeCallback (el) {
+        console.log('zoomed out on: ')
+        console.log(el)
+    }
+
+    function beforeOpenCallback (el) {
+        console.log('on before zoomed in on:')
+        console.log(el)
+    }
+
+    function beforeCloseCallback (el) {
+        console.log('on before zoomed out on:')
+        console.log(el)
+    }
+
+</script>
 </html>
