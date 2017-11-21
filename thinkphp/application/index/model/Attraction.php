@@ -152,4 +152,11 @@ class Attraction extends Model {
         //返回图片地址
         return $image;
     }
+
+    /**
+     * 获取日程的日期
+     */
+    public function getDate() {
+        return $this->date;
+    }
 }

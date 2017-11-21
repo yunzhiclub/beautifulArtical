@@ -62,7 +62,7 @@
                                 用餐：{$_attraction->getMeals()}<br>
                                 用车：{$_attraction->getCars()}<br>
 
-                                素材：{volist name="$_attraction->getCheckedMaterial()" id="material"}<button type="button" class="btn btn-default btn-xs">{$material->designation}</button>
+                                景点：{volist name="$_attraction->getCheckedMaterial()" id="material"}<button type="button" class="btn btn-default btn-xs">{$material->designation}</button>
                                 {/volist}
                                 <br>
                                 酒店：{$_attraction->getHotelDesignation()}<br>
@@ -264,9 +264,12 @@
                                         <th>电子邮件</th>
                                         <td>{$contractor->email}</td>
                                     </tr>
-                                    {/eq}
+
                                 </table>
-                                <a href="{:url('contractor/edit' ,['contractorId'=>$contractor->id] )}" class="btn btn-info btn-sm"><i class="glyphicon glyphicon-pencil"></i>&nbsp;编辑</a>
+                                <a href="{:url('contractor/edit' ,['contractorId'=>$contractor->id] )}" class="btn btn-info btn-sm">
+                                    <i class="glyphicon glyphicon-pencil"></i>&nbsp;编辑
+                                </a>
+                                {/eq}
                             </div>
                         </div>
                     </div>
