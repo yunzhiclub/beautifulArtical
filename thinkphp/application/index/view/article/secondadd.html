@@ -264,9 +264,12 @@
                                         <th>电子邮件</th>
                                         <td>{$contractor->email}</td>
                                     </tr>
-                                    {/eq}
+
                                 </table>
-                                <a href="{:url('contractor/edit' ,['contractorId'=>$contractor->id] )}" class="btn btn-info btn-sm"><i class="glyphicon glyphicon-pencil"></i>&nbsp;编辑</a>
+                                <a href="{:url('contractor/edit' ,['contractorId'=>$contractor->id] )}" class="btn btn-info btn-sm">
+                                    <i class="glyphicon glyphicon-pencil"></i>&nbsp;编辑
+                                </a>
+                                {/eq}
                             </div>
                         </div>
                     </div>
