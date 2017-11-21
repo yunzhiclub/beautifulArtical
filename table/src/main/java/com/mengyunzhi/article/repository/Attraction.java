@@ -26,6 +26,8 @@ public class Attraction {
     private String trip;
     @Column(length = 500)
     private String description;
+    @Column(length = 300)
+    private String image;          //图片
     private Date date;
     private String meal;
     private String car;
@@ -33,18 +35,6 @@ public class Attraction {
     private int weight;
 
     public Attraction() {
-    }
-
-    public Attraction(Article article, Hotel hotel, Set<Material> material, String trip, String description, Date date, String meal, String car, int weight) {
-        this.article = article;
-        this.hotel = hotel;
-        this.material = material;
-        this.trip = trip;
-        this.description = description;
-        this.date = date;
-        this.meal = meal;
-        this.car = car;
-        this.weight = weight;
     }
 
     public Long getId() {
@@ -95,6 +85,14 @@ public class Attraction {
         this.description = description;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     public Date getDate() {
         return date;
     }
@@ -119,6 +117,14 @@ public class Attraction {
         this.car = car;
     }
 
+    public String getGuide() {
+        return guide;
+    }
+
+    public void setGuide(String guide) {
+        this.guide = guide;
+    }
+
     public int getWeight() {
         return weight;
     }
@@ -136,9 +142,11 @@ public class Attraction {
                 ", material=" + material +
                 ", trip='" + trip + '\'' +
                 ", description='" + description + '\'' +
+                ", image='" + image + '\'' +
                 ", date=" + date +
                 ", meal='" + meal + '\'' +
                 ", car='" + car + '\'' +
+                ", guide='" + guide + '\'' +
                 ", weight=" + weight +
                 '}';
     }
