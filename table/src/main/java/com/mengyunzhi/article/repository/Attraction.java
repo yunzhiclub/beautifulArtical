@@ -27,7 +27,7 @@ public class Attraction {
     @Column(length = 500)
     private String description;
     @Column(length = 300)
-    private String images;          //图片
+    private String image;          //图片
     private Date date;
     private String meal;
     private String car;
@@ -85,12 +85,12 @@ public class Attraction {
         this.description = description;
     }
 
-    public String getImages() {
-        return images;
+    public String getImage() {
+        return image;
     }
 
-    public void setImages(String images) {
-        this.images = images;
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public Date getDate() {
@@ -142,7 +142,7 @@ public class Attraction {
                 ", material=" + material +
                 ", trip='" + trip + '\'' +
                 ", description='" + description + '\'' +
-                ", images='" + images + '\'' +
+                ", image='" + image + '\'' +
                 ", date=" + date +
                 ", meal='" + meal + '\'' +
                 ", car='" + car + '\'' +
