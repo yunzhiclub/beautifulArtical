@@ -114,9 +114,17 @@ class AttractionService {
         $materialIds = $param->post('materialId/a');
         $articleId   = $param->param('articleId/d');
         $hotelId     = $param->post('hotelId/d');
+        $image       = request()->file('image');
 
         $Attraction = Attraction::get($attractionId);
         $ContrastAttraction = clone $Attraction;
+
+        if (!empty($image)) {
+            $imagePath = json_decode($Attraction->image);
+            Common::deleteImage('upload/'.$imagePath);
+            $imagePath = Common::uploadImage($image);
+            $Attraction->image = json_encode($imagePath);
+        }
 
         $Attraction->trip  = $trip;
         $Attraction->date  = $date;
