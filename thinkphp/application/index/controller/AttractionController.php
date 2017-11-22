@@ -51,15 +51,16 @@ class AttractionController extends IndexController {
     }
 
     public function edit() {
-        $articleId = Request::instance()->param('articleId');
+        $articleId    = Request::instance()->param('articleId');
         $attractionId = Request::instance()->param('attractionId');
-        $attraction = Attraction::get($attractionId);
-        $hotel = Hotel::get($attraction->hotel_id);
+        $attraction   = Attraction::get($attractionId);
+        $hotel    = Hotel::get($attraction->hotel_id);
         $material = new Material();
         $this->assign('material', $material);
         $this->assign('hotel', $hotel);
         $this->assign('articleId', $articleId);
         $this->assign('attraction', $attraction);
+        $this->assign('image', json_decode($attraction->image));
         return $this->fetch('add');
     }
 

@@ -31,6 +31,7 @@ class AttractionService {
         $attraction->car = 'plane';
         $attraction->id = 0;
         $attraction->hotel_id = '';
+        $attraction->image = '';
         return $attraction;
     }
 
@@ -60,7 +61,6 @@ class AttractionService {
             $Attraction->image = '';
         }
 
-
         $Attraction->trip = $trip;
         if (empty($date)) {
             $date = "0000-00-0";
@@ -80,18 +80,18 @@ class AttractionService {
             $Attraction->car = '';
         }
         
-        $Attraction->hotel_id = $hotelId;
+        $Attraction->hotel_id   = $hotelId;
         $Attraction->article_id = $articleId;
-        $Attraction->weight = Attraction::where('article_id', '=', $articleId)->max("weight")+1;
+        $Attraction->weight     = Attraction::where('article_id', '=', $articleId)->max("weight")+1;
         if(!$Attraction->validate(true)->save()) {
-            $message['status'] = 'error';
+            $message['status']  = 'error';
             $message['message'] = $Attraction->getError();
             return $message;
         }
 
         if(!is_null($materialIds)) {
             if(!$Attraction->Materials()->saveAll($materialIds)) {
-                $message['status'] = 'error';
+                $message['status']  = 'error';
                 $message['message'] = '保存失败';
             }
         }
@@ -105,31 +105,31 @@ class AttractionService {
         $message['message'] = '更新成功';
 
         $attractionId = $param->param('attractionId');
-        $trip = $param->post('trip');
-        $date = $param->post('date');
+        $trip  = $param->post('trip');
+        $date  = $param->post('date');
         $guide = $param->post('guide');
         $description = $param->post('description');
         $meals = $param->post('meal/a');
-        $cars = $param->post('car/a');
+        $cars  = $param->post('car/a');
         $materialIds = $param->post('materialId/a');
-        $articleId = $param->param('articleId/d');
-        $hotelId = $param->post('hotelId/d');
+        $articleId   = $param->param('articleId/d');
+        $hotelId     = $param->post('hotelId/d');
 
         $Attraction = Attraction::get($attractionId);
         $ContrastAttraction = clone $Attraction;
 
-        $Attraction->trip = $trip;
-        $Attraction->date = $date;
+        $Attraction->trip  = $trip;
+        $Attraction->date  = $date;
         $Attraction->guide = $guide;
         $Attraction->description = $description;
         $Attraction->meal = json_encode($meals);
-        $Attraction->car = json_encode($cars);
-        $Attraction->hotel_id = $hotelId;
+        $Attraction->car  = json_encode($cars);
+        $Attraction->hotel_id   = $hotelId;
         $Attraction->article_id = $articleId;
 
         if(json_encode($Attraction) != json_encode($ContrastAttraction)) {
             if(!$Attraction->validate(true)->save()) {
-                $message['status'] = 'error';
+                $message['status']  = 'error';
                 $message['message'] = $Attraction->getError();
             }
         }
