@@ -10,6 +10,7 @@ namespace app\index\service;
 
 
 use app\index\model\Attraction;
+use app\index\model\Common;
 
 class AttractionService {
 
@@ -38,18 +39,28 @@ class AttractionService {
         $message['status'] = 'success';
         $message['message'] = '保存成功';
 
-        $trip = $param->post('trip');
-        $date = $param->post('date');
+        $trip  = $param->post('trip');
+        $date  = $param->post('date');
         $guide = $param->post('guide');
         $description = $param->post('description');
         $meals = $param->post('meal/a');
-        $cars = $param->post('car/a');
+        $cars  = $param->post('car/a');
         $materialIds = $param->post('materialId/a');
-        $articleId = $param->param('articleId');
-        $hotelId = $param->post('hotelId');
-
+        $articleId   = $param->param('articleId');
+        $hotelId     = $param->post('hotelId');
+        $image       = request()->file('image');
 
         $Attraction = new Attraction();
+
+        // 图片上传
+        if (!empty($image)) {
+            $imagePath = Common::uploadImage($image);
+            $Attraction->image = json_encode($imagePath);
+        } else {
+            $Attraction->image = '';
+        }
+
+
         $Attraction->trip = $trip;
         if (empty($date)) {
             $date = "0000-00-0";
