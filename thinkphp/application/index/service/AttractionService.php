@@ -144,13 +144,13 @@ class AttractionService {
 
         $map = ['attraction_id' => $attractionId];
         if(false === $Attraction->AttractionMaterials()->where($map)->delete()) {
-            $message['status'] = 'error';
+            $message['status']  = 'error';
             $message['message'] = '删除原始数据失败';
         }
 
         if(!is_null($materialIds)) {
             if(!$Attraction->Materials()->saveAll($materialIds)) {
-                $message['status'] = 'error';
+                $message['status']  = 'error';
                 $message['message'] = '更新失败';
             }
         }
@@ -160,7 +160,7 @@ class AttractionService {
 
     public function deleteAttraction($param) {
         $message = [];
-        $message['status'] = 'success';
+        $message['status']  = 'success';
         $message['message'] = '删除成功';
 
         $attractionId = $param->param('attractionId');
@@ -168,13 +168,16 @@ class AttractionService {
 
         $map = ['attraction_id' => $attractionId];
         if(false === $Attraction->AttractionMaterials()->where($map)->delete()) {
-            $message['status'] = 'error';
-            $message['message'] = '删除原始数据失败';
+            $message['status']  = 'error';
+            $message['message'] = '删除失败';
         }
 
         if(!$Attraction->delete()) {
-            $message['status'] = 'error';
+            $message['status']  = 'error';
             $message['message'] = '删除失败';
+        } else {
+            $imagePath = json_decode($Attraction->image);
+            Common::deleteImage('upload/'.$imagePath);
         }
 
         return $message;
