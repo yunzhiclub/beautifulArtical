@@ -36,6 +36,7 @@ class AttractionController extends IndexController {
         $this->assign('hotel', $hotel);
         $this->assign('articleId', $articleId);
         $this->assign('attraction', $this->attractionService->getNullAttraction($articleId));
+        $this->assign('image', '');
         return $this->fetch();
     }
 
