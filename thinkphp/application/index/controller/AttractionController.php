@@ -27,9 +27,8 @@ class AttractionController extends IndexController {
     }
 
     public function add() {
-        $hotel = $this->hotelService->getNullHotel();
-        $material = new Material();
-
+        $hotel     = $this->hotelService->getNullHotel();
+        $material  = new Material();
         $articleId = Request::instance()->param('articleId');
 
         $this->assign('material', $material);
@@ -41,9 +40,9 @@ class AttractionController extends IndexController {
     }
 
     public function save() {
-        $param = Request::instance();
+        $param     = Request::instance();
         $articleId = Request::instance()->param('articleId');
-        $message = $this->attractionService->saveAttraction($param);
+        $message   = $this->attractionService->saveAttraction($param);
         if($message['status'] == 'success') {
             return $this->success($message['message'], url('article/secondadd', ['articleId' => $articleId]));
         } else {

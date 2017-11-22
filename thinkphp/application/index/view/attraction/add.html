@@ -145,7 +145,7 @@
             </div>
             <div class="form-group">
                 <label>行程图片</label>
-                <input type="file" name="image">
+                <input type="file" class="image-file" name="image">
                 {eq name="$image" value=""}{else /}
                 <img src="{:__ROOT__}/upload/{$image}">
                 {/eq}
@@ -273,5 +273,23 @@
     window.onload = function () {
         hotelGetCity();
     }
+
+    var _URL = window.URL || window.webkitURL;
+    $('.image-file').bind('change', function() {
+        if ((file = this.files[0])) {
+            img = new Image();
+            img.onload = function() {
+                var width = this.width;
+                var height = this.height;
+                var ErrMsgErrMsg = "";//错误信息
+                if (width > 2048 || height > 2048) {
+                    ErrMsgErrMsg = "图片过大,请选择其他图片！";
+                    alert(ErrMsgErrMsg);
+                    return false;
+                }   // 判断图片大小是否符合
+            };
+            img.src = _URL.createObjectURL(file);
+        }
+    });
 </script>
 {/block}
