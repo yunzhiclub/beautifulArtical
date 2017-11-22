@@ -10,6 +10,7 @@ namespace app\index\service;
 
 
 use app\index\model\Attraction;
+use app\index\model\Common;
 
 class AttractionService {
 
@@ -30,6 +31,7 @@ class AttractionService {
         $attraction->car = 'plane';
         $attraction->id = 0;
         $attraction->hotel_id = '';
+        $attraction->image = '';
         return $attraction;
     }
 
@@ -38,18 +40,27 @@ class AttractionService {
         $message['status'] = 'success';
         $message['message'] = '保存成功';
 
-        $trip = $param->post('trip');
-        $date = $param->post('date');
+        $trip  = $param->post('trip');
+        $date  = $param->post('date');
         $guide = $param->post('guide');
         $description = $param->post('description');
         $meals = $param->post('meal/a');
-        $cars = $param->post('car/a');
+        $cars  = $param->post('car/a');
         $materialIds = $param->post('materialId/a');
-        $articleId = $param->param('articleId');
-        $hotelId = $param->post('hotelId');
-
+        $articleId   = $param->param('articleId');
+        $hotelId     = $param->post('hotelId');
+        $image       = request()->file('image');
 
         $Attraction = new Attraction();
+
+        // 图片上传
+        if (!empty($image)) {
+            $imagePath = Common::uploadImage($image);
+            $Attraction->image = json_encode($imagePath);
+        } else {
+            $Attraction->image = '';
+        }
+
         $Attraction->trip = $trip;
         if (empty($date)) {
             $date = "0000-00-0";
@@ -69,18 +80,18 @@ class AttractionService {
             $Attraction->car = '';
         }
         
-        $Attraction->hotel_id = $hotelId;
+        $Attraction->hotel_id   = $hotelId;
         $Attraction->article_id = $articleId;
-        $Attraction->weight = Attraction::where('article_id', '=', $articleId)->max("weight")+1;
+        $Attraction->weight     = Attraction::where('article_id', '=', $articleId)->max("weight")+1;
         if(!$Attraction->validate(true)->save()) {
-            $message['status'] = 'error';
+            $message['status']  = 'error';
             $message['message'] = $Attraction->getError();
             return $message;
         }
 
         if(!is_null($materialIds)) {
             if(!$Attraction->Materials()->saveAll($materialIds)) {
-                $message['status'] = 'error';
+                $message['status']  = 'error';
                 $message['message'] = '保存失败';
             }
         }
@@ -94,44 +105,52 @@ class AttractionService {
         $message['message'] = '更新成功';
 
         $attractionId = $param->param('attractionId');
-        $trip = $param->post('trip');
-        $date = $param->post('date');
+        $trip  = $param->post('trip');
+        $date  = $param->post('date');
         $guide = $param->post('guide');
         $description = $param->post('description');
         $meals = $param->post('meal/a');
-        $cars = $param->post('car/a');
+        $cars  = $param->post('car/a');
         $materialIds = $param->post('materialId/a');
-        $articleId = $param->param('articleId/d');
-        $hotelId = $param->post('hotelId/d');
+        $articleId   = $param->param('articleId/d');
+        $hotelId     = $param->post('hotelId/d');
+        $image       = request()->file('image');
 
         $Attraction = Attraction::get($attractionId);
         $ContrastAttraction = clone $Attraction;
 
-        $Attraction->trip = $trip;
-        $Attraction->date = $date;
+        if (!empty($image)) {
+            $imagePath = json_decode($Attraction->image);
+            Common::deleteImage('upload/'.$imagePath);
+            $imagePath = Common::uploadImage($image);
+            $Attraction->image = json_encode($imagePath);
+        }
+
+        $Attraction->trip  = $trip;
+        $Attraction->date  = $date;
         $Attraction->guide = $guide;
         $Attraction->description = $description;
         $Attraction->meal = json_encode($meals);
-        $Attraction->car = json_encode($cars);
-        $Attraction->hotel_id = $hotelId;
+        $Attraction->car  = json_encode($cars);
+        $Attraction->hotel_id   = $hotelId;
         $Attraction->article_id = $articleId;
 
         if(json_encode($Attraction) != json_encode($ContrastAttraction)) {
             if(!$Attraction->validate(true)->save()) {
-                $message['status'] = 'error';
+                $message['status']  = 'error';
                 $message['message'] = $Attraction->getError();
             }
         }
 
         $map = ['attraction_id' => $attractionId];
         if(false === $Attraction->AttractionMaterials()->where($map)->delete()) {
-            $message['status'] = 'error';
+            $message['status']  = 'error';
             $message['message'] = '删除原始数据失败';
         }
 
         if(!is_null($materialIds)) {
             if(!$Attraction->Materials()->saveAll($materialIds)) {
-                $message['status'] = 'error';
+                $message['status']  = 'error';
                 $message['message'] = '更新失败';
             }
         }
@@ -141,7 +160,7 @@ class AttractionService {
 
     public function deleteAttraction($param) {
         $message = [];
-        $message['status'] = 'success';
+        $message['status']  = 'success';
         $message['message'] = '删除成功';
 
         $attractionId = $param->param('attractionId');
@@ -149,13 +168,16 @@ class AttractionService {
 
         $map = ['attraction_id' => $attractionId];
         if(false === $Attraction->AttractionMaterials()->where($map)->delete()) {
-            $message['status'] = 'error';
-            $message['message'] = '删除原始数据失败';
+            $message['status']  = 'error';
+            $message['message'] = '删除失败';
         }
 
         if(!$Attraction->delete()) {
-            $message['status'] = 'error';
+            $message['status']  = 'error';
             $message['message'] = '删除失败';
+        } else {
+            $imagePath = json_decode($Attraction->image);
+            Common::deleteImage('upload/'.$imagePath);
         }
 
         return $message;

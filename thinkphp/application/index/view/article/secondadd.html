@@ -55,7 +55,7 @@
                         <h4>Day{$keys}</h4>
                         <br>
                         <div class="row">
-                            <div class="col-md-10">
+                            <div class="col-md-5">
                                 总行程：{$_attraction->trip}<br>
                                 日期：{$_attraction->date}<br>
                                 <!-- 导游：{$_attraction->guide}<br> -->
@@ -67,6 +67,11 @@
                                 <br>
                                 酒店：{$_attraction->getHotelDesignation()}<br>
                                 描述：{$_attraction->description | $filter->limitWordNumber}<br>
+                            </div>
+                            <div class="col-md-5">
+                                {eq name="$_attraction->image" value=""}{else /}
+                                <img src="{:__ROOT__}/upload/{:json_decode($_attraction->image)}" height="180px" width="320px">
+                                {/eq}
                             </div>
                             <div class="col-md-2">
                                 <br>

@@ -27,22 +27,22 @@ class AttractionController extends IndexController {
     }
 
     public function add() {
-        $hotel = $this->hotelService->getNullHotel();
-        $material = new Material();
-
+        $hotel     = $this->hotelService->getNullHotel();
+        $material  = new Material();
         $articleId = Request::instance()->param('articleId');
 
         $this->assign('material', $material);
         $this->assign('hotel', $hotel);
         $this->assign('articleId', $articleId);
         $this->assign('attraction', $this->attractionService->getNullAttraction($articleId));
+        $this->assign('image', '');
         return $this->fetch();
     }
 
     public function save() {
-        $param = Request::instance();
+        $param     = Request::instance();
         $articleId = Request::instance()->param('articleId');
-        $message = $this->attractionService->saveAttraction($param);
+        $message   = $this->attractionService->saveAttraction($param);
         if($message['status'] == 'success') {
             return $this->success($message['message'], url('article/secondadd', ['articleId' => $articleId]));
         } else {
@@ -51,22 +51,23 @@ class AttractionController extends IndexController {
     }
 
     public function edit() {
-        $articleId = Request::instance()->param('articleId');
+        $articleId    = Request::instance()->param('articleId');
         $attractionId = Request::instance()->param('attractionId');
-        $attraction = Attraction::get($attractionId);
-        $hotel = Hotel::get($attraction->hotel_id);
+        $attraction   = Attraction::get($attractionId);
+        $hotel    = Hotel::get($attraction->hotel_id);
         $material = new Material();
         $this->assign('material', $material);
         $this->assign('hotel', $hotel);
         $this->assign('articleId', $articleId);
         $this->assign('attraction', $attraction);
+        $this->assign('image', json_decode($attraction->image));
         return $this->fetch('add');
     }
 
     public function update() {
-        $param = Request::instance();
+        $param     = Request::instance();
         $articleId = Request::instance()->param('articleId');
-        $message = $this->attractionService->updateAttraction($param);
+        $message   = $this->attractionService->updateAttraction($param);
         if($message['status'] == 'success') {
             return $this->success($message['message'], url('article/secondadd', ['articleId' => $articleId]));
         } else {
@@ -75,9 +76,9 @@ class AttractionController extends IndexController {
     }
 
     public function delete() {
-        $param = Request::instance();
+        $param     = Request::instance();
         $articleId = Request::instance()->param('articleId');
-        $message = $this->attractionService->deleteAttraction($param);
+        $message   = $this->attractionService->deleteAttraction($param);
         if($message['status'] == 'success') {
             return $this->success($message['message'], url('article/secondadd', ['articleId' => $articleId]));
         } else {
