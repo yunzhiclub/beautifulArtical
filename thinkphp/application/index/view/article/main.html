@@ -85,7 +85,7 @@
                 <div class="about">
                     <h3 style="text-align: center;" class="w3ls-title">{$pragraph->title}</h3> {$pragraph->content}
                     <div style="text-align: center;"  {eq name="$pragraph->image" value="" }style="display: none"{/eq}>
-                        <img  class='zoom' src="{:__ROOT__}/upload/{$pragraph->image}" alt="" {eq name="$pragraph->image" value="" }style="display: none"{/eq}>
+                        <img  class="zoom" style="width: 100%; height: 160px;" src="{:__ROOT__}/upload/{$pragraph->image}" alt="" {eq name="$pragraph->image" value="" }style="display: none"{/eq} />
                     </div>
                 </div>
                 {/volist}
