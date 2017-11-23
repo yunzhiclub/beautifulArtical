@@ -33,7 +33,6 @@ class Common
     {
         if($imagePath !== 'upload/') {
             //拼接一个完整的文件路径
-            $imagePath = PUBLIC_PATH . "/" . $imagePath;
             if(file_exists($imagePath)){
                 unlink($imagePath);
             }
