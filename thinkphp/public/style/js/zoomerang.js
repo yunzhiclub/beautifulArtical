@@ -214,7 +214,7 @@
                     hPct = hPctMatch ? +hPctMatch[1] / 100 : 1
                 setStyle(wrapper, {
                     width: ~~(p.width / wPct) + 'px',
-                    height: ~~(p.height / hPct) + 'px'
+                    height:'10' + 'px'
                 })
             }
 
