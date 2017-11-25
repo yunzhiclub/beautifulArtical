@@ -293,7 +293,7 @@ class Articleservice
         }
         $Hotels = array_unique($Hotels);
         // 将段落按在景点的上下顺序分成两个类，并根据权重排序
-        $paragraphUp = Paragraph::where('is_before_attraction',1)->where('article_id',$articleId)->order('weight')->select();
+        $paragraphUp = Paragraph::where('is_before_attraction',1)->where('article_id',$articleId)->order('weight desc')->select();
         $paragraphDown = Paragraph::where('is_before_attraction',0)->where('article_id',$articleId)->order('weight desc')->select();
         // $Paragraph = Paragraph::order('weight')->select();
         $message['paragraphUp'] = $paragraphUp;
