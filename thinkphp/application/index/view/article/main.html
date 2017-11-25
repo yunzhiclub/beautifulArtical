@@ -97,7 +97,11 @@
                     {volist name="attractions" id="attraction" key="mainKey"}
                     <div class="properties-bottom">
                         <div class="properties-img">
-                            <img src="{:__ROOT__}/upload/{$attraction->getOneImage()}" alt="">
+                            {eq name="$attraction->image" value=""}
+                            <img src="{:__ROOT__}/style/images/noImage.png">
+                            {else /}
+                            <img src="{:__ROOT__}/upload/{:json_decode($attraction->image)}">
+                            {/eq}
                             <div class="w3ls-buy">
                                 <a href="single.html">Day{$mainKey}</a>
                             </div>
