@@ -263,6 +263,13 @@ class ArticleController extends IndexController {
         $this->assign('paragraphDowns',$paragraphDowns);
         $this->assign('filter', new Filter());
 
+        foreach ($Plans as $key => $value) {
+            $adultNum = $value->adult_num;
+            $childNum = $value->child_num;
+            $this->assign('adultNum', $adultNum);
+            $this->assign('childNum', $childNum);
+        }
+
         $Hotels = [];
 
         foreach ($Attractions as $key => $value) {
