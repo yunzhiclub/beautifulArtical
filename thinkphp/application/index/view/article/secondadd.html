@@ -1,6 +1,7 @@
 {extend name="index"} {block name="title"}文章编辑{/block} {block name="content"}
 <script type="text/javascript" src="{:__ROOT__}/style/js/Calculation.js"></script>
-<div class="col-md-8 col-md-offset-1" style="margin-top: 60px;min-height: 730px;">
+<div class="col-md-8 col-md-offset-1" style="margin-top: 10px;min-height: 730px;">
+    <a class="btn btn-primary" style="margin-bottom: 20px;" href="{:url('article/index')}"><i class="glyphicon glyphicon-arrow-left"></i>&nbsp;返回</a>
     <h2><span class="glyphicon glyphicon-edit"></span>&nbsp;文章编辑</h2>
     <br>
     <form method="post" action="{:url ('addsecond',['articleId'=>$articleId])}" enctype="multipart/form-data">
@@ -13,14 +14,14 @@
             <div class="panel panel-default">{$summery}</div>
         </div>
         <div class="form-group">
-            <label for="exampleInputFile">封面</label>
+            <label>封面</label>
             <img src="{:__ROOT__}/upload/{$cover}" style="height: 100px; width: 180px; " alt="无图">
             <br>
             <br>
             <a class="btn btn-default" href="{:url('editfirstadd?articleId=' . $articleId)}"><span class="glyphicon glyphicon-pencil"></span>&nbsp;更改文章及定制师</a>
         </div>
         <div class="form-group">
-            <label for="TextInput">正文</label>
+            <label>正文</label>
             <span class="col-md-offset-1">
 				<a class="btn btn-primary btn-sm" href="{:url('Attraction/add?articleId='.$articleId)}" ><span class="glyphicon glyphicon-plus"></span>&nbsp;日程</a>&nbsp;&nbsp;
             <a class="btn btn-primary btn-sm" href="{:url('Paragraph/index', ['articleId'=>$articleId,'id'=>''])}"><span class="glyphicon glyphicon-plus"></span>&nbsp;自定义段落</a>
@@ -208,9 +209,9 @@
                                         <hr>
                                     </div>
                                     <div class="control-group row">
-                                        <label for="currency">币种</label>
+                                        <label>币种</label>
                                         <div class="controls">
-                                            <input type="text" class="form-control" name="currency" placeholder="币种..." value="{$plan->currency}"/ required>
+                                            <input type="text" class="form-control" name="currency" placeholder="币种..." value="{$plan->currency}"　required>
                                         </div>
                                     </div>
                                     <hr>
@@ -222,9 +223,9 @@
                                     </div>
                                     <hr>
                                     <div class="control-group row">
-                                        <label for="lastPayTime">最晚付款时间</label>
+                                        <label>最晚付款时间</label>
                                         <div class="controls">
-                                            <input type="date" class="form-control" name="lastPayTime" value="{$plan->last_pay_time}"/ required>
+                                            <input type="date" class="form-control" name="lastPayTime" value="{$plan->last_pay_time}" required>
                                         </div>
                                     </div>
                                 </div>
@@ -320,7 +321,6 @@
         </ul>
         <script type="text/javascript" src="{:__ROOT__}/style/js/Calculation.js"></script>
         <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-ok"></span>&nbsp;完成</button>
-        <a class="btn btn-danger col-md-offset-9" href="{:url('article/delete',['articleId' => $articleId])}"><span class="glyphicon glyphicon-trash"></span>&nbsp;取消新增</a>
         <br>
         <br>
     </form>
