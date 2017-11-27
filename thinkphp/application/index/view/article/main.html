@@ -84,8 +84,7 @@
                 {volist name="paragraphUps" id="pragraph"}
                 <div class="about">
                     <h3 style="text-align: center;" class="w3ls-title">{$pragraph->title}</h3> {$pragraph->content}
-                    <div style="text-align: center;"  {eq name="$pragraph->image" value="" }style="display: none"{/eq}>
-                        <img  class="zoom" style="width: 100%; height: 160px;" src="{:__ROOT__}/upload/{$pragraph->image}" alt="" {eq name="$pragraph->image" value="" }style="display: none"{/eq} />
+                    <div style="text-align: center;">  {eq name="$pragraph->image" value="" } {else/} <img  class="zoom" style="width: 100%; height: 160px;" src="{:__ROOT__}/upload/{$pragraph->image}" alt="" /> {/eq}
                     </div>
                 </div>
                 {/volist}
@@ -97,7 +96,11 @@
                     {volist name="attractions" id="attraction" key="mainKey"}
                     <div class="properties-bottom">
                         <div class="properties-img">
-                            <img src="{:__ROOT__}/upload/{$attraction->getOneImage()}" alt="">
+                            {eq name="$attraction->image" value=""}
+                            <img src="{:__ROOT__}/style/images/noImage.png">
+                            {else /}
+                            <img src="{:__ROOT__}/upload/{:json_decode($attraction->image)}">
+                            {/eq}
                             <div class="w3ls-buy">
                                 <a href="single.html">Day{$mainKey}</a>
                             </div>
