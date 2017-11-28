@@ -2,11 +2,9 @@
 
 <body>
     {block name="content"}
-    <div class="col-md-8 col-md-offset-1" style="margin-top: 60px;min-height: 735px;">
-        <div class="row">
-            <h2>
-        <span class="glyphicon glyphicon-edit"></span>&nbsp;
-        编辑订制师</h2>
+    <div class="col-md-8 col-md-offset-1" style="margin-top: 10px;min-height: 735px;">
+        <a class="btn btn-primary" style="margin-bottom: 20px" onclick="javascript:history.back(-1);"><i class="glyphicon glyphicon-arrow-left"></i>&nbsp;返回</a>
+            <h2><span class="glyphicon glyphicon-edit"></span>&nbsp;编辑订制师</h2>
             <br>
             {php}$action = request()->action() === 'add' ? 'save' : 'update';{/php}
             <form action="{:url($action,['contractorId'=>$contractor->id])}" method="post">
@@ -38,7 +36,6 @@
                     <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-ok"></i>&nbsp;保存</button>
                 </div>
             </form>
-        </div>
     </div>
     {/block}
 </body>

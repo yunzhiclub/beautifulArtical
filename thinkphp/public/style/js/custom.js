@@ -7,7 +7,7 @@
 
 */
 
-$(function ($) {
+(function ($) {
 
     /*-----------------------------------------------------------------*/
     /* ANIMATE SLIDER CAPTION
@@ -37,7 +37,4 @@ $(function ($) {
         var $animatingElems = $(e.relatedTarget).find("[data-animation ^= 'animated']");
         doAnimations($animatingElems);
     });
-
-
-
 })(jQuery);

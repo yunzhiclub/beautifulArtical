@@ -68,7 +68,12 @@
                             <img src="{:__ROOT__}/style/images/cd-icon-location.svg" alt="Location">
                         </div>
                         <div class="cd-timeline-content">
-                            <h4>{$attraction->trip}</h4> {volist name="$attraction->getMaterials()" id="material" key="i"}
+                            <h3><strong>Day{$key}</strong>
+                                 <small>({$attraction->getDate()})</small>
+                            </h3>
+                            <br>
+                            <h4>{$attraction->trip}</h4>
+                            {volist name="$attraction->getMaterials()" id="material" key="i"}
                             <p style="display: inline;">
                                 {$filter->limitPreviewWordNumber($material->designation, 5)}
                             </p>&nbsp;&nbsp; {/volist}
