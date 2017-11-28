@@ -242,7 +242,7 @@ class Materialservice  {
         $material = Material::get($materialId);
         $images = $material->getMaterialImages();
 
-        $imagePath = $images[$key - 1];
+        $imagePath =  PUBLIC_PATH . '/' .$images[$key - 1];
         //删除图片
         Common::deleteImage($imagePath);
 
