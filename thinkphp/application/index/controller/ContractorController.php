@@ -37,8 +37,8 @@ class ContractorController extends IndexController
 		$Contractor = new Contractor;
 
 		$Contractor->designation = '';
-		$Contractor->phone = '';
-		$Contractor->fax = '';
+		$Contractor->phone = '';	// 微信
+		// $Contractor->fax = '';
 		$Contractor->mobile = '';
 		$Contractor->email = '';
 		$Contractor->id = 0;
