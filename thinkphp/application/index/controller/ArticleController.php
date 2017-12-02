@@ -263,11 +263,21 @@ class ArticleController extends IndexController {
         $this->assign('paragraphDowns',$paragraphDowns);
         $this->assign('filter', new Filter());
 
-        foreach ($Plans as $key => $value) {
-            $adultNum = $value->adult_num;
-            $childNum = $value->child_num;
+        // 无方案报价，成人数和儿童数初始化为0
+        if (empty($Plans)) {
+            $adultNum = 0;
+            $childNum = 0;
             $this->assign('adultNum', $adultNum);
             $this->assign('childNum', $childNum);
+
+            // 正常从数组中获取方案报价
+        } else {
+            foreach ($Plans as $key => $value) {
+                $adultNum = $value->adult_num;
+                $childNum = $value->child_num;
+                $this->assign('adultNum', $adultNum);
+                $this->assign('childNum', $childNum);
+            }
         }
 
         $Hotels = [];
