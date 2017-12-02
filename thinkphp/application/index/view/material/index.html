@@ -43,7 +43,7 @@
                                 <div class="carousel-inner" role="listbox">
                                     {volist name="$material->getMaterialImages()" id="image" key="key"}
                                     <div class="item {eq name='$key' value='1'}active{/eq}">
-                                        <img src="{:__ROOT__}/upload/{$image}" alt="" style="width: 268px;height: 148px;">
+                                        <img src="{:__ROOT__}/upload/{$image}" style="width: auto;height: auto;max-width: 268px;max-height: 148px;">
                                         <div class="carousel-caption">
                                         </div>
                                     </div>
