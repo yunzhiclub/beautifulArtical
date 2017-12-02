@@ -57,9 +57,9 @@ class Contractorservice
         $NewContractor = clone $Contractor;
 
 		$Contractor->designation = $param->post('designation');
-		$Contractor->fax = $param->post('fax');
-		$Contractor->mobile = $param->post('mobile');
-		$Contractor->phone = $param->post('phone');
+		// $Contractor->fax = $param->post('fax');
+		$Contractor->mobile = $param->post('mobile');	
+		$Contractor->phone = $param->post('phone');		// 微信
 		$Contractor->email = $param->post('email');
 
 		if (json_encode($NewContractor) != json_encode($Contractor)) {

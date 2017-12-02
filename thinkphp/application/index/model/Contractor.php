@@ -19,8 +19,8 @@ class Contractor extends Model
 	public function saveContractor($data)
 	{
 		$this->designation = $data['designation'];
-		$this->phone = $data['phone'];
-		$this->fax = $data['fax'];
+		$this->phone = $data['phone'];	// 微信
+		// $this->fax = $data['fax'];
 		$this->mobile = $data['mobile'];
 		$this->email = $data['email'];
 
