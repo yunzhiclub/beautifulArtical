@@ -51,7 +51,7 @@
                 <div class="clearfix"></div>
             </div>
             <div class="welcome">
-                <h3 class="w3ls-title" style="color: #81be32;">{$article->title}</h3>
+                <h3 class="w3ls-title" style="color: #43c2b7;">{$article->title}</h3>
                 <br>
                 <div>
                     <img src="{:__ROOT__}/upload/{$article->cover}" style="text-align: center; width: 100%;">
@@ -60,7 +60,7 @@
                 <br>
             </div>
             <div class="content">
-                <h3 class="w3ls-title" style="color: #8b008b;">线路概述</h3>
+                <h3 class="w3ls-title" style="color: #43c2b7;">线路概述</h3>
                 <section id="cd-timeline" class="cd-container">
                     {volist name="attractions" id="attraction" key="key"}
                     <div class="cd-timeline-block">
@@ -94,7 +94,7 @@
                 <!-- 旅游行程 -->
                 <br>
                 <div class="w3agile properties">
-                    <h3 class="w3ls-title" style="color: #8b008b;">旅游线路</h3> {volist name="attractions" id="attraction" key="mainKey"}
+                    <h3 class="w3ls-title" style="color: #43c2b7;">旅游线路</h3> {volist name="attractions" id="attraction" key="mainKey"}
                     <div class="properties-bottom">
                         <div class="properties-img">
                             {eq name="$attraction->image" value=""}

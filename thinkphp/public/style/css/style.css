@@ -117,7 +117,7 @@ body a:hover{
     width: 24%;
 }
 .header {
-    background: #8b008b;
+    background: #43c2b7;
     padding: 1.2em 3em;
 }
 .menu-icon,.logo,.login{
@@ -133,7 +133,7 @@ body a:hover{
 	font-family: 'Roboto', sans-serif;
 }
 .logo h2 a { 
-    color: #8b008b;
+    color: black;
     background: #fff; 
     font-weight: 300;
     border-radius: 40%;
@@ -774,7 +774,7 @@ p {
 	animation-iteration-count: 1;
 }
 .properties-img .view-caption {
-	background-color: #8b008b;
+	background-color: #43c2b7;
 	-webkit-transition: all cubic-bezier(0.27, 0.89, 0.95, 0.59) 0.5s;
 	-moz-transition: all cubic-bezier(0.27, 0.89, 0.95, 0.59) 0.5s;
 	-ms-transition: all cubic-bezier(0.27, 0.89, 0.95, 0.59) 0.5s;
@@ -795,7 +795,7 @@ p {
     background-color: #09cbce;
 }
 .properties-img .view-caption h4 {
-    color: #fff;
+    color: #555;
     font-size: 1em;
     line-height: 1.8em;
     letter-spacing: 1px;
@@ -827,9 +827,9 @@ p {
     background-color: #09cbce;
 }
 .properties-img .w3ls-buy a {
-    background-color: #8b008b;
+    background-color: #43c2b7;
     border-radius: 50%;
-    color: #ffffff;
+    color: #333;
     display: inline-block;
     margin: 0 1em;
     height: 45px;
