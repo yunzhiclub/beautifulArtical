@@ -23,15 +23,15 @@ class IndexController extends Controller
             return $this->error('请先登录！', url('Login/index'));
         }
     }
-    public function index()
-    {
-        $pageSize = config('paginate.var_page');
-        $articleTitle = Request::instance()->get('articleTitle');
+    // public function index()
+    // {
+    //     $pageSize = config('paginate.var_page');
+    //     $articleTitle = Request::instance()->get('articleTitle');
 
-        $articles = $this->articleService->searchArticle($articleTitle, $pageSize);
+    //     $articles = $this->articleService->searchArticle($articleTitle, $pageSize);
 
-        $this->assign('filter', $this->filter);
-        $this->assign('articles', $articles);
-        return $this->fetch('article/index');
-    } 
+    //     $this->assign('filter', $this->filter);
+    //     $this->assign('articles', $articles);
+    //     return $this->fetch('article/index');
+    // } 
 }
