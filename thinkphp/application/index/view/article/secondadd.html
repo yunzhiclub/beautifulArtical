@@ -4,7 +4,7 @@
     <a class="btn btn-primary" style="margin-bottom: 20px;" href="{:url('article/index')}"><i class="glyphicon glyphicon-arrow-left"></i>&nbsp;返回</a>
     <h2><span class="glyphicon glyphicon-edit"></span>&nbsp;文章编辑</h2>
     <br>
-    <form method="post" action="{:url ('addsecond',['articleId'=>$articleId])}" enctype="multipart/form-data">
+    <form method="post" action="{:url ('addsecond',['articleId'=>$articleId])}" enctype="multipart/form-data" onsubmit="setDisabledBtn()">
         <div class="form-group">
             <label for="TitleInput">标题</label>
             <input type="text" class="form-control" id="TitleInput" placeholder="标题" name="title" value="{$title}" readonly>
@@ -316,7 +316,7 @@
             </li>
         </ul>
         <script type="text/javascript" src="{:__ROOT__}/style/js/Calculation.js"></script>
-        <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-ok"></span>&nbsp;完成</button>
+        <button type="submit" id="submit-btn" class="btn btn-default"><span class="glyphicon glyphicon-ok"></span>&nbsp;完成</button>
         <br>
         <br>
     </form>
