@@ -117,7 +117,7 @@ body a:hover{
     width: 24%;
 }
 .header {
-    background: #43c2b7;
+    background: #41bccc;
     padding: 1.2em 3em;
 }
 .menu-icon,.logo,.login{
@@ -134,10 +134,10 @@ body a:hover{
 }
 .logo h2 a { 
     color: black;
-    background: #fff; 
-    font-weight: 300;
+    /*background: #fff; 
+    font-weight: 300;*/
     border-radius: 40%;
-    padding: 8px;
+    /*padding: 8px;*/
     display: inline-block;
 	text-decoration:none;
 }
@@ -659,7 +659,7 @@ a.w3-search:hover {
 }
 h3.w3ls-title {
     font-size: 2em;
-    color: #1e9c95;
+    color: #777;
     margin-bottom: .2em;
     text-align: center;
 }
@@ -774,7 +774,7 @@ p {
 	animation-iteration-count: 1;
 }
 .properties-img .view-caption {
-	background-color: #43c2b7;
+	background-color: #41bccc;
 	-webkit-transition: all cubic-bezier(0.27, 0.89, 0.95, 0.59) 0.5s;
 	-moz-transition: all cubic-bezier(0.27, 0.89, 0.95, 0.59) 0.5s;
 	-ms-transition: all cubic-bezier(0.27, 0.89, 0.95, 0.59) 0.5s;
@@ -827,7 +827,7 @@ p {
     background-color: #09cbce;
 }
 .properties-img .w3ls-buy a {
-    background-color: #43c2b7;
+    background-color: #41bccc;
     border-radius: 50%;
     color: #333;
     display: inline-block;
