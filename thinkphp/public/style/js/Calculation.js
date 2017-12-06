@@ -3,6 +3,7 @@
  * @date    2017-09-13 16:47:11
  */
 // 计算价格
+'use strict'
 function jisuan() {
     var adult_num = document.getElementById("adultNum").value;
     var child_num = document.getElementById("childNum").value;
@@ -64,4 +65,9 @@ function jisuan() {
 
     // 计算总费用
     document.getElementById('totalCost').value = plane_total_price + visa_total_price + tourism_total_price + insurance_total_price;
+}
+
+function setDisabledBtn() {
+    var btn = document.getElementById('submit-btn');
+    btn.setAttribute('disabled', true);
 }

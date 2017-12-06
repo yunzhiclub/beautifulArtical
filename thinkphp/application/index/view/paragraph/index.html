@@ -1,9 +1,11 @@
 {extend name="index"} {block name="title"}段落编辑{/block} {block name="content"}
-<div class="col-md-8 col-md-offset-1" style="margin-top: 60px;min-height: 736px;">
+<script type="text/javascript" src="{:__ROOT__}/style/js/Calculation.js"></script>
+<div class="col-md-8 col-md-offset-1" style="margin-top: 10px;min-height: 736px;">
     <div class="row">
+        <a class="btn btn-primary" style="margin-bottom: 20px" onclick="javascript:history.back(-1);"><i class="glyphicon glyphicon-arrow-left"></i>&nbsp;返回</a>
         <h2><span class="glyphicon glyphicon-edit"></span>&nbsp; {eq name="$judge" value="1"} 编辑段落 {else}添加段落{/eq}</h2>
         <br> {php}$action = request()->action() === 'index' ? 'add' : 'update';{/php}
-        <form method="post" action="{:url($action, ['id' => $Paragraph->getData('id'), 'articleId' => $articleId])}" enctype="multipart/form-data">
+        <form method="post" action="{:url($action, ['id' => $Paragraph->getData('id'), 'articleId' => $articleId])}" enctype="multipart/form-data" onsubmit="setDisabledBtn()">
             <div class="form-group">
                 <label for="title">标题</label>
                 <input type="text" required class="form-control" placeholder="标题" name="title" id="title" value="{$Paragraph->getData('title')}">
@@ -66,7 +68,7 @@
                     </label>
                 </div>
             </div>
-            <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-ok"></span>&nbsp;完成</button>
+            <button type="submit" id="submit-btn" class="btn btn-default"><span class="glyphicon glyphicon-ok"></span>&nbsp;完成</button>
         </form>
     </div>
 </div>
