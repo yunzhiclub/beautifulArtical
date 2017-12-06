@@ -279,7 +279,7 @@
                     <!-- footer -->
                     <div class="w3agile footer">
                         <div class="footer-text">
-                            <p>&copy; 2016 洛克旅行 . All Rights Reserved | Design by <a href="http://www.mengyunzhi.cn">梦云智</a></p>
+                            <p>&copy; <span id="year"></span> 洛克旅行 . All Rights Reserved | Design by <a href="http://www.mengyunzhi.cn">梦云智</a></p>
                         </div>
                     </div>
                 </div>
@@ -367,6 +367,9 @@ function calculate(adult_num, child_num) {
     child_total_price = (((sign) ? '' : '-') + child_total_price + '.' + cents);
     document.getElementById('childTotalPrice').innerHTML = child_total_price;
 }
+// 获取当前年份显示在脚标位置
+var myDate = new Date();
+document.getElementById("year").innerText = myDate.getFullYear();
 </script>
 
 </html>
