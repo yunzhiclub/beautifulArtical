@@ -54,8 +54,12 @@ class AttractionController extends IndexController {
         $articleId    = Request::instance()->param('articleId');
         $attractionId = Request::instance()->param('attractionId');
         $attraction   = Attraction::get($attractionId);
-        $hotel    = Hotel::get($attraction->hotel_id);
-        $material = new Material();
+        if (is_null($attraction->hotel_id)) {
+            $hotel    = $this->hotelService->getNullHotel();
+        } else {
+            $hotel    = Hotel::get($attraction->hotel_id);
+        }
+        $material     = new Material();
         $this->assign('material', $material);
         $this->assign('hotel', $hotel);
         $this->assign('articleId', $articleId);
