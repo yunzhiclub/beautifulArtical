@@ -50,7 +50,7 @@
                     </select>
                 </span>
             </div>
-            {eq name="$articleId" value=""}
+            
              <div class="form-group">
                 <label for="torvelRoutes">路线图</label>
                 <input type="file" id="torvelRoutes" name="routes" class="image-file">
@@ -65,11 +65,9 @@
                 </div>
                 <div class="col-md-2">
                     <label>
-                        <input type="radio" name="optionsRadios" id="optionsRadios1" value="1" checked>是&nbsp;&nbsp;
+                        <input type="checkbox" name="optionsRadios" id="optionsRadios1" value="1" {eq name="$route" value="1"}{else /} checked {/eq} >&nbsp;&nbsp;是
                     </label>
-                    <label>
-                        <input type="radio" name="optionsRadios" id="optionsRadios1" value="0">否
-                    </label>
+                    
                 </div>
             </div>
             <div class="form-group row">
@@ -78,11 +76,9 @@
                 </div>
                 <div class="col-md-2">
                     <label>
-                        <input type="radio" name="especialMassageService"  value="九大服务" checked>是&nbsp;&nbsp;
+                        <input type="checkbox" name="especialMassageService"  value="九大服务"{eq name="$service" value="1"} checked {/eq} >&nbsp;&nbsp;是
                     </label>
-                    <label>
-                        <input type="radio" name="especialMassageService"  value="" >否
-                    </label>
+                    
                 </div>
             </div>
             <div class="form-group row">
@@ -91,11 +87,9 @@
                 </div>
                 <div class="col-md-2">
                     <label>
-                        <input type="radio" name="especialMassageQuality"  value="六大品质" checked>是&nbsp;&nbsp;
+                        <input type="checkbox" name="especialMassageQuality"  value="六大品质" {eq name="$quality" value="1"} checked {/eq}>&nbsp;&nbsp;是
                     </label>
-                    <label>
-                        <input type="radio" name="especialMassageQuality"  value="" >否
-                    </label>
+                    
                 </div>
             </div>
             <div class="form-group row">
@@ -104,11 +98,9 @@
                 </div>
                 <div class="col-md-2">
                     <label>
-                        <input type="radio" name="especialMassageQuotes"  value="报价说明" checked>是&nbsp;&nbsp;
+                        <input type="checkbox" name="especialMassageQuotes"  value="报价说明"{eq name="$quotes" value="1"} checked {/eq} >&nbsp;&nbsp;是
                     </label>
-                    <label>
-                        <input type="radio" name="especialMassageQuotes"  value="" >否
-                    </label>
+                    
                 </div>
             </div>
             <div class="form-group row">
@@ -117,11 +109,9 @@
                 </div>
                 <div class="col-md-2">
                     <label>
-                        <input type="radio" name="especialMassageCost"  value="费用包括" checked>是&nbsp;&nbsp;
+                        <input type="checkbox" name="especialMassageCost"  value="费用包括" {eq name="$cost" value="1"} checked {/eq} >&nbsp;&nbsp;是
                     </label>
-                    <label>
-                        <input type="radio" name="especialMassageCost"  value="" >否
-                    </label>
+                    
                 </div>
             </div>
             <div class="form-group row">
@@ -130,14 +120,11 @@
                 </div>
                 <div class="col-md-2">
                     <label>
-                        <input type="radio" name="especialMassageNoCost"  value="费用不包括" checked>是&nbsp;&nbsp;
+                        <input type="checkbox" name="especialMassageNoCost"  value="费用不包括" {eq name="$noCost" value="1"} checked {/eq} >&nbsp;&nbsp;是
                     </label>
-                    <label>
-                        <input type="radio" name="especialMassageNoCost"  value="" >否
-                    </label>
+                    
                 </div>
             </div>
-            {/eq}
             <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-arrow-right"></span>&nbsp;下一步</button>
             <br>
             <br>
