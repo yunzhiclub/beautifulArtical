@@ -31,7 +31,7 @@
                 <label>用餐</label>
                 <div>
                     <label class="checkbox-inline">
-                        <input type="checkbox" name="meal[]" value="breakfast" {eq name="$attraction->defaultCheck(request()->action())" value="true"}checked{/eq} {eq name="$attraction->getMealIsChecked('breakfast')" value="true" }checked{/eq}> 早餐
+                        <input type="checkbox" name="meal[]" value="breakfast" {eq name="$attraction->defaultCheck(request()->action())" value="true" }checked{/eq} {eq name="$attraction->getMealIsChecked('breakfast')" value="true" }checked{/eq}> 早餐
                     </label>
                     <label class="checkbox-inline">
                         <input type="checkbox" name="meal[]" value="lunch" {eq name="$attraction->getMealIsChecked('lunch')" value="true" }checked{/eq}> 午餐
@@ -94,10 +94,19 @@
                         </div>
                     </div>
                     {/volist}
-                </div>  
+                </div>
             </div>
             <div class="form-group">
-                <label>酒店</label>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>酒店</label>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" id="noHotel" onclick="setDisable()">暂无酒店
+                            </label>
+                        </div>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-md-12">
                         <p id="city" class="hide">{$hotel->city}</p>
@@ -109,188 +118,201 @@
                     <div class="col-md-3 row">
                         <label class="col-md-4 select_lable">国家</label>
                         <div class="col-md-8">
-                        <select id="hotel-country" class="form-control" onclick="hotelGetCity()">
-                            {volist name="$hotel->getAllCountries()" id="country"}
-                            <option {eq name="$hotel->country" value="$country"}selected="true"{/eq} >
-                                {$country}
-                            </option>
-                            {/volist}
-                        </select>
+                            <select id="hotel-country" class="form-control" onclick="hotelGetCity()">
+                                {volist name="$hotel->getAllCountries()" id="country"}
+                                <option {eq name="$hotel->country" value="$country" }selected="true" {/eq}>
+                                    {$country}
+                                </option>
+                                {/volist}
+                            </select>
                         </div>
                     </div>
                     <div class="col-md-3 row">
                         <label class="col-md-4 select_lable">城市</label>
                         <div class="col-md-8">
-                        <select id="hotel-city" class="form-control" onclick="hotelGetStar()">
-
-                        </select>
+                            <select id="hotel-city" class="form-control" onclick="hotelGetStar()">
+                            </select>
                         </div>
                     </div>
                     <div class="col-md-3 row">
                         <label class="col-md-4 select_lable">星级</label>
                         <div class="col-md-8">
-                        <select id="hotel-star" class="form-control" onclick="hotelGetName()">
-
-                        </select>
+                            <select id="hotel-star" class="form-control" onclick="hotelGetName()">
+                            </select>
                         </div>
                     </div>
                     <div class="col-md-3 row">
                         <label class="col-md-4 select_lable">酒店</label>
                         <div class="col-md-8">
-                        <select name="hotelId" id="hotel-name" class="form-control">
-
-                        </select>
+                            <select name="hotelId" id="hotel-name" class="form-control">
+                            </select>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="form-group">
                 <label>行程图片</label>
-                <input type="file" class="image-file" name="image">
-                {eq name="$image" value=""}{else /}
-                <img src="{:__ROOT__}/upload/{$image}">
-                {/eq}
+                <input type="file" class="image-file" name="image"> {eq name="$image" value=""}{else /}
+                <img src="{:__ROOT__}/upload/{$image}"> {/eq}
             </div>
             <button type="submit" id="submit-btn" class="btn btn-default"><span class="glyphicon glyphicon-ok"></span>&nbsp;完成</button>
         </form>
     </div>
 </div>
 <script>
-    function hotelGetCity() {
-        // 获取数据
-        var city  　　　　   = document.getElementById('city').innerHTML;
-        var countryNode  = document.getElementById('hotel-country');
-        var cityNode     = document.getElementById('hotel-city');
+function hotelGetCity() {
+    // 获取数据
+    var city　　　　 = document.getElementById('city').innerHTML;
+    var countryNode = document.getElementById('hotel-country');
+    var cityNode = document.getElementById('hotel-city');
 
-        // 清空
-        clear(cityNode);
+    // 清空
+    clear(cityNode);
 
-        // 请求
-        var countryIndex = countryNode.selectedIndex;
-        var url          = "/index/attraction/getCity?country=" + countryIndex;
-        ajaxGet(url, function (response) {
-            var cities = response;
-            createOption(cityNode, cities);
-            setSelected(cityNode, city);
-            hotelGetStar();
-        });
-    }
+    // 请求
+    var countryIndex = countryNode.selectedIndex;
+    var url = "/index/attraction/getCity?country=" + countryIndex;
+    ajaxGet(url, function(response) {
+        var cities = response;
+        createOption(cityNode, cities);
+        setSelected(cityNode, city);
+        hotelGetStar();
+    });
+}
 
-    function hotelGetStar() {
-        // 获取数据
-        var star  　　　　   = document.getElementById('star').innerHTML;
-        var countryNode  = document.getElementById('hotel-country');
-        var cityNode     = document.getElementById('hotel-city');
-        var starNode     = document.getElementById('hotel-star');
+function hotelGetStar() {
+    // 获取数据
+    var star　　　　 = document.getElementById('star').innerHTML;
+    var countryNode = document.getElementById('hotel-country');
+    var cityNode = document.getElementById('hotel-city');
+    var starNode = document.getElementById('hotel-star');
 
-        // 清空
-        clear(starNode);
+    // 清空
+    clear(starNode);
 
-        // 请求
-        var countryIndex = countryNode.selectedIndex;
-        var cityIndex    = cityNode.selectedIndex;
-        var url          = "/index/attraction/getStar?country=" + countryIndex + "&city=" + cityIndex;
-        ajaxGet(url, function (response) {
-            var stars = response;
-            createOption(starNode, stars);
-            setSelected(starNode, star);
-            hotelGetName();
-        });
-    }
+    // 请求
+    var countryIndex = countryNode.selectedIndex;
+    var cityIndex = cityNode.selectedIndex;
+    var url = "/index/attraction/getStar?country=" + countryIndex + "&city=" + cityIndex;
+    ajaxGet(url, function(response) {
+        var stars = response;
+        createOption(starNode, stars);
+        setSelected(starNode, star);
+        hotelGetName();
+    });
+}
 
-    function hotelGetName() {
-        // 获取数据
-        var name         = document.getElementById('name').innerHTML;
-        var countryNode  = document.getElementById('hotel-country');
-        var starNode     = document.getElementById('hotel-star');
-        var cityNode     = document.getElementById('hotel-city');
-        var nameNode     = document.getElementById('hotel-name');
+function hotelGetName() {
+    // 获取数据
+    var name = document.getElementById('name').innerHTML;
+    var countryNode = document.getElementById('hotel-country');
+    var starNode = document.getElementById('hotel-star');
+    var cityNode = document.getElementById('hotel-city');
+    var nameNode = document.getElementById('hotel-name');
 
-        // 清空
-        clear(nameNode);
+    // 清空
+    clear(nameNode);
 
-        // 请求
-        var countryIndex = countryNode.selectedIndex;
-        var cityIndex    = cityNode.selectedIndex;
-        var starIndex    = starNode.selectedIndex;
-        var url          = "/index/attraction/getHotelName?country=" + countryIndex + "&city=" + cityIndex + "&star=" + starIndex;
-        ajaxGet(url, function (response) {
-            var names  = response;
-            var inners = [];
-            var values = [];
+    // 请求
+    var countryIndex = countryNode.selectedIndex;
+    var cityIndex = cityNode.selectedIndex;
+    var starIndex = starNode.selectedIndex;
+    var url = "/index/attraction/getHotelName?country=" + countryIndex + "&city=" + cityIndex + "&star=" + starIndex;
+    ajaxGet(url, function(response) {
+        var names = response;
+        var inners = [];
+        var values = [];
 
-            for (var i = 0; i < names.length; i ++) {
-                inners.push(names[i].designation);
-                values.push(names[i].id);
-            }
+        for (var i = 0; i < names.length; i++) {
+            inners.push(names[i].designation);
+            values.push(names[i].id);
+        }
 
-            createOption(nameNode, inners, values);
-            setSelected(nameNode, name);
-        }); 
-    }
+        createOption(nameNode, inners, values);
+        setSelected(nameNode, name);
+    });
+}
 
-    function clear(node) {
-        node.length = 0;
-    }
+function clear(node) {
+    node.length = 0;
+}
 
-    function setSelected(node, value) {
-        for (var i = 0; i < node.options.length; i ++) {
-            if (node.options[i].innerHTML == value) {
-                node.options[i].setAttribute("selected", "true");
-            }
+function setSelected(node, value) {
+    for (var i = 0; i < node.options.length; i++) {
+        if (node.options[i].innerHTML == value) {
+            node.options[i].setAttribute("selected", "true");
         }
     }
+}
 
-    function createOption(node, inners, values) {
-        for (var i = 0; i < inners.length; i ++) {
-            var option = document.createElement('option');
+function createOption(node, inners, values) {
+    for (var i = 0; i < inners.length; i++) {
+        var option = document.createElement('option');
 
-            if (arguments.length == 3) {
-                option.value = values[i];
-            }
-
-            option.innerHTML = inners[i];
-            node.appendChild(option);
+        if (arguments.length == 3) {
+            option.value = values[i];
         }
+
+        option.innerHTML = inners[i];
+        node.appendChild(option);
     }
+}
 
-    function ajaxGet(url, success) {
+function ajaxGet(url, success) {
 
-        var host = window.location.host;
-        var url  = "http://" + host + url;
+    var host = window.location.host;
+    var url = "http://" + host + url;
 
-        $.ajax({
-            url:   url,
-            type: "get",
-            success: function (response) {
-                success(response);
-            },
-            error: function (xhr) {
-                console.log('server error');
-            }
-        });
-    }
-
-    window.onload = function () {
-        hotelGetCity();
-    }
-
-    var _URL = window.URL || window.webkitURL;
-    $('.image-file').bind('change', function() {
-        if ((file = this.files[0])) {
-            img = new Image();
-            img.onload = function() {
-                var width = this.width;
-                var height = this.height;
-                var ErrMsgErrMsg = "";//错误信息
-                if (width > 2048 || height > 2048) {
-                    ErrMsgErrMsg = "图片过大,请选择其他图片！";
-                    alert(ErrMsgErrMsg);
-                    return false;
-                }   // 判断图片大小是否符合
-            };
-            img.src = _URL.createObjectURL(file);
+    $.ajax({
+        url: url,
+        type: "get",
+        success: function(response) {
+            success(response);
+        },
+        error: function(xhr) {
+            console.log('server error');
         }
     });
+}
+
+var _URL = window.URL || window.webkitURL;
+$('.image-file').bind('change', function() {
+    if ((file = this.files[0])) {
+        img = new Image();
+        img.onload = function() {
+            var width = this.width;
+            var height = this.height;
+            var ErrMsgErrMsg = ""; //错误信息
+            if (width > 2048 || height > 2048) {
+                ErrMsgErrMsg = "图片过大,请选择其他图片！";
+                alert(ErrMsgErrMsg);
+                return false;
+            } // 判断图片大小是否符合
+        };
+        img.src = _URL.createObjectURL(file);
+    }
+});
+
+function setDisable() {
+    var countryNode = document.getElementById('hotel-country');
+    var cityNode = document.getElementById('hotel-city');
+    var starNode = document.getElementById('hotel-star');
+    var nameNode = document.getElementById('hotel-name');
+    if (document.getElementById('noHotel').checked) {
+        countryNode.disabled = true;
+        cityNode.disabled = true;
+        starNode.disabled = true;
+        nameNode.disabled = true;
+    } else {
+        countryNode.disabled = false;
+        cityNode.disabled = false;
+        starNode.disabled = false;
+        nameNode.disabled = false;
+    }
+}
+
+window.onload = function() {
+    hotelGetCity();
+};
 </script>
 {/block}

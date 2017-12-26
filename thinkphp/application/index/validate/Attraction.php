@@ -14,8 +14,8 @@ class Attraction extends Validate {
         'date'  => 'require',
         // 'guide'  => 'require',
         'description'  => 'require|max:500',
-        'meal'  => 'require',
-        'hotel_id'  => 'require',
+        'meal'  => 'require'
+        // 'hotel_id'  => 'require',
     ];
 
     protected $message = [
@@ -23,7 +23,7 @@ class Attraction extends Validate {
         'date'  => '日期不为空',
         // 'guide'  => '导游信息不为空',
         'description'  => '描述最多允许添加500字',
-        'meal'  => '用餐信息不为空',
-        'hotel_id'  => '酒店信息不为空'
+        'meal'  => '用餐信息不为空'
+        // 'hotel_id'  => '酒店信息不为空'
     ];
 }  
