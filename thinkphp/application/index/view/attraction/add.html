@@ -74,22 +74,38 @@
                 <label>景点</label>
                 <div class="row">
                     <div class="col-md-2">
-                        <ul class="nav nav-pills nav-stacked">
+                        <ul class="nav nav-stacked nav-tabs">
                             {volist name="$material->getAllCountries()" id="country" key="mainKey"}
-                            <li role="presentation" onclick="showMaterial({$mainKey})"><a>{$country}</a></li>
+                            <li role="presentation" onclick="showMaterial({$mainKey})"><a data-toggle="tab" href="#{$country}">{$country}</a></li>
                             {/volist}
                         </ul>
                     </div>
                     {volist name="$material->getAllCountries()" id="country" key="secondKey"}
                     <div class="col-md-10" id="country-{$secondKey}" style="display: none; margin-top: 15px;">
-                        <div class="row">
-                            {volist name="$material->getAreasByCountry($country)" id="area"} {volist name="$material->getMaterialByCountryAndCity($country, $area)" id="material"}
-                            <label class="checkbox-inline">
-                                <input type="checkbox" name="materialId[]" value="{$material->id}" {eq name="$material->getIsChecked($attraction->id)" value="true" }checked{/eq}> {$material->designation}
-                            </label>
-                            {/volist} {/volist}
+                        <div class="row" id="{$country}">
+                            {volist name="$material->getAreasByCountry($country)" id="area"} 
+                                {volist name="$material->getMaterialByCountryAndCity($country, $area)" id="material"}
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" name="materialId[]" value="{$material->id}" {eq name="$material->getIsChecked($attraction->id)" value="true" }checked{/eq}> {$material->designation}
+                                </label>
+                                {/volist} 
+                            {/volist}
+                             <a class="btn btn-default btn-xs" onclick="hideMaterial({$secondKey})"><span class="glyphicon glyphicon-remove"></span></a>
                         </div>
-                        <a class="btn btn-default btn-xs" onclick="hideMaterial({$secondKey})"><span class="glyphicon glyphicon-remove"></span></a>
+                        <!-- <ul id="myTab" class="nav nav-tabs nav-stacked">
+                            <li class="active">
+                                <a href="#home" data-toggle="tab"> a</a>
+                            </li>
+                        <li><a href="#ios" data-toggle="tab">b</a></li>
+                        </ul>
+                        <div id="myTabContent" class="tab-content">
+                            <div class="tab-pane fade in active" id="home">
+                                <p>A</p>
+                            </div>
+                            <div class="tab-pane fade" id="ios">
+                                <p>B</p>
+                            </div>
+                        </div> -->
                     </div>
                     {/volist}
                 </div>
