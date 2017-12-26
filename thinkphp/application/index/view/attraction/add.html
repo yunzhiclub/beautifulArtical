@@ -102,7 +102,7 @@
                         <label>酒店</label>
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox" id="noHotel" onclick="setDisable()">暂无酒店
+                                <input type="checkbox" id="noHotel" onclick="setDisable()" {eq name="$hotel->id" value=""}check{/eq} {eq name="$attraction->id" value="0"}{else /}ed="true"{/eq}>暂无酒店
                             </label>
                         </div>
                     </div>
@@ -313,6 +313,7 @@ function setDisable() {
 
 window.onload = function() {
     hotelGetCity();
+    setDisable();
 };
 </script>
 {/block}
