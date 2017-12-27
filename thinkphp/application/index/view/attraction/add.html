@@ -72,25 +72,25 @@
             </div>
             <div class="form-group">
                 <label>景点</label>
-                <div>
-                    {volist name="$material->getAllCountries()" id="country"}
-                    <div class="row">
-                        <div class="col-md-11 col-md-offset-1">
-                            <label>{$country}</label>
-                            <table class="table table-bordered">
-                                {volist name="$material->getAreasByCountry($country)" id="area"}
-                                <tr>
-                                    <th class="col-md-3">{$area}</th>
-                                    <td>
-                                        {volist name="$material->getMaterialByCountryAndCity($country, $area)" id="material"}
-                                        <label class="checkbox-inline">
-                                            <input type="checkbox" name="materialId[]" value="{$material->id}" {eq name="$material->getIsChecked($attraction->id)" value="true  " }checked{/eq}> {$material->designation}
-                                        </label>
-                                        {/volist}
-                                    </td>
-                                </tr>
-                                {/volist}
-                            </table>
+                <div class="row">
+                    <div class="col-md-2">
+                        <ul class="nav nav-stacked nav-tabs">
+                            {volist name="$material->getAllCountries()" id="country" key="mainKey"}
+                            <li role="presentation" onclick="showMaterial({$mainKey})"><a data-toggle="tab" href="#{$country}">{$country}</a></li>
+                            {/volist}
+                        </ul>
+                    </div>
+                    {volist name="$material->getAllCountries()" id="country" key="secondKey"}
+                    <div class="col-md-10" id="country-{$secondKey}" style="display: none; margin-top: 15px;">
+                        <div class="row" id="{$country}">
+                            {volist name="$material->getAreasByCountry($country)" id="area"} 
+                                {volist name="$material->getMaterialByCountryAndCity($country, $area)" id="material"}
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" name="materialId[]" value="{$material->id}" {eq name="$material->getIsChecked($attraction->id)" value="true" }checked{/eq}> {$material->designation}
+                                </label>
+                                {/volist} 
+                            {/volist}
+                             <a class="btn btn-default btn-xs" onclick="hideMaterial({$secondKey})"><span class="glyphicon glyphicon-remove"></span></a>
                         </div>
                     </div>
                     {/volist}
@@ -102,7 +102,7 @@
                         <label>酒店</label>
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox" id="noHotel" onclick="setDisable()" {eq name="$hotel->id" value=""}check{/eq} {eq name="$attraction->id" value="0"}{else /}ed="true"{/eq}>暂无酒店
+                                <input type="checkbox" id="noHotel" onclick="setDisable()" {eq name="$hotel->id" value="" }check{/eq} {eq name="$attraction->id" value="0" }{else /}ed="true" {/eq}>暂无酒店
                             </label>
                         </div>
                     </div>
@@ -309,6 +309,18 @@ function setDisable() {
         starNode.disabled = false;
         nameNode.disabled = false;
     }
+}
+
+function showMaterial(index) {
+    var materialId = 'country-' + index;
+    var material   = document.getElementById(materialId);
+    material.style.display = 'block';
+}
+
+function hideMaterial(index) {
+    var id = 'country-' + index;
+    var material = document.getElementById(id);
+    material.style.display = 'none';
 }
 
 window.onload = function() {
