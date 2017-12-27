@@ -37,29 +37,39 @@
     <div class="agile-main">
         <div class="content-wrap">
             <!-- 紫色顶部 -->
-            <div class="header">
+            <!-- <div class="header">
                 <div class="menu-icon">
                     <button class="menu-button"></button>
                 </div>
                 <div class="logo">
                     <h2 style="font-size: 18px;"><a>洛克定制旅游</a></h2>
-                    <!-- 可以换成洛克酒店的logo -->
+                    可以换成洛克酒店的logo
                 </div>
                 <div class="login">
                     <span class="sign-in popup-top-anim glyphicon glyphicon-user menu-button"></span>
                 </div>
                 <div class="clearfix"></div>
-            </div>
+            </div> -->
             <div class="welcome">
                 <h3 class="w3ls-title" style="color: #777;">{$article->title}</h3>
+                <p class="w3title-text" style="text-align: left;">&nbsp;&nbsp;{$article->summery}</p>
                 <br>
                 <div>
                     <img src="{:__ROOT__}/upload/{$article->cover}" style="text-align: center; width: 100%;">
                 </div>
-                <p class="w3title-text" style="text-align: left;">&nbsp;&nbsp;{$article->summery}</p>
                 <br>
             </div>
             <div class="content">
+                <div class="backgroundcolor">
+                    {volist name="paragraphUps" id="pragraph"}
+                    <div class="about">
+                        <h3 style="text-align: center;" class="w3ls-title">{$pragraph->title}</h3> {$pragraph->content}
+                        <div style="text-align: center;"> {eq name="$pragraph->image" value="" } {else/} <img class="zoom" style="width: 100%;" src="{:__ROOT__}/upload/{$pragraph->image}" alt="" /> {/eq}
+                        </div>
+                    </div>
+                    {/volist}
+                </div>
+                <br>
                 <h3 class="w3ls-title" style="color: #777;">线路概述</h3>
                 <section id="cd-timeline" class="cd-container">
                     {volist name="attractions" id="attraction" key="key"}
@@ -82,15 +92,6 @@
                     {/volist}
                 </section>
                 <br>
-                <div class="backgroundcolor">
-                    {volist name="paragraphUps" id="pragraph"}
-                    <div class="about">
-                        <h3 style="text-align: center;" class="w3ls-title">{$pragraph->title}</h3> {$pragraph->content}
-                        <div style="text-align: center;"> {eq name="$pragraph->image" value="" } {else/} <img class="zoom" style="width: 100%;" src="{:__ROOT__}/upload/{$pragraph->image}" alt="" /> {/eq}
-                        </div>
-                    </div>
-                    {/volist}
-                </div>
                 <!-- 旅游行程 -->
                 <br>
                 <div class="w3agile properties">

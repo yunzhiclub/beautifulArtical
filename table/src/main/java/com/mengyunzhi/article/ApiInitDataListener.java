@@ -99,7 +99,7 @@ public class ApiInitDataListener implements ApplicationListener<ContextRefreshed
         Paragraph paragraph1 = new Paragraph();
         paragraph1.setTitle("六大品质");
         paragraph1.setWeight(4);
-        paragraph1.setIsBeforeAttraction(0);
+        paragraph1.setIsBeforeAttraction(1);
         paragraph1.setContent("<ul class=\" list-paddingleft-2\" style=\"list-style-type: decimal;\">\n" +
                 "    <li>\n" +
                 "        <p>\n" +"<span class=\"glyphicon glyphicon-menu-right\"></span>" +
