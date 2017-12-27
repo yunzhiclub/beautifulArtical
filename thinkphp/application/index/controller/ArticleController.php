@@ -52,14 +52,21 @@ class ArticleController extends IndexController {
         // 获取所有定制师
         $contractors = Contractor::all();
         $this->assign('contractors',$contractors);
-        // 判断是否为重写界面
-            $this->assign('title', '');
-            $this->assign('summery', '');
-            $this->assign('cover', '');
-            $this->assign('articleId', '');
-            $this->assign('contractorId', '');
-            $this->assign('route','');
-            return $this->fetch();  
+        // 定义初始化信息
+
+        $this->assign('title', '');
+        $this->assign('summery', '');
+        $this->assign('cover', '');
+        $this->assign('articleId', '');
+        $this->assign('contractorId', '');
+        $this->assign('route',1);
+        $this->assign('quality','');
+        $this->assign('service','');
+        $this->assign('quotes','');
+        $this->assign('cost','');
+        $this->assign('noCost','');
+
+        return $this->fetch();  
     }
      // firstadd界面完成后触发时间
     public function savefirstadd(){
@@ -74,7 +81,6 @@ class ArticleController extends IndexController {
         if ($message['status'] === 'success') {
             //跳转成功的界面
             $this->success($message['message'], url($message['route'], ['articleId' => $message['param']['articleId']]));
-
         } else {
             //跳转失败的界面
             $this->error($message['message']);
@@ -86,20 +92,59 @@ class ArticleController extends IndexController {
         // 获取所有定制师
         $contractors = Contractor::all();
         $this->assign('contractors',$contractors);
+
         $Article = Article::get($articleId);
+
         $this->assign('title', $Article->title);
         $this->assign('summery', $Article->summery);
         $this->assign('cover', $Article->cover);
         $this->assign('articleId', $articleId);
         $this->assign('contractorId', $Article->contractor_id);
-        $Paragraph = Paragraph::where('title',"行程路线")->where('article_id',$articleId)->find();
-        if(!empty($Paragraph)){
-            $this->assign('route',$Paragraph->image);
+
+        // 判断是否添加默认段落
+        $especialMassageService = $this->getEspecialPartical("九大服务", $articleId); 
+        $especialMassageQuality = $this->getEspecialPartical("六大品质", $articleId); 
+        $especialMassageQuotes  = $this->getEspecialPartical("报价说明", $articleId); 
+        $especialMassageCost    = $this->getEspecialPartical("费用包括", $articleId); 
+        $especialMassageNoCost  = $this->getEspecialPartical("费用不包括", $articleId);
+        $ParagraphRoure         = $this->getEspecialPartical("行程路线", $articleId); 
+
+        $service = $this->judjeEscepical($especialMassageService);
+        $this->assign('service', $service);
+
+        $quality = $this->judjeEscepical($especialMassageQuality);
+        $this->assign('quality', $quality);
+
+        $quotes = $this->judjeEscepical($especialMassageQuotes);
+        $this->assign('quotes', $quotes);
+
+        $cost = $this->judjeEscepical($especialMassageCost);
+        $this->assign('cost', $cost);
+
+        $noCost = $this->judjeEscepical($especialMassageNoCost);
+        $this->assign('noCost', $noCost);
+
+        if(!empty($ParagraphRoure)){
+            $this->assign('route',$ParagraphRoure->image);
         }else{
             $this->assign('route',1);
         }
+
         return $this->fetch('firstadd');
     }
+
+    public function getEspecialPartical($title, $article_id) {
+        return Paragraph::where('title', '=', $title)->where('article_id', $article_id)->find();
+    }
+
+    public function judjeEscepical($especialPartical) {
+        if(!empty($especialPartical)){
+            return 1;
+        }else{
+            return 0;
+        }
+    }
+
     public function updatefirstadd(){
         //接受参数
         $param = Request::instance();

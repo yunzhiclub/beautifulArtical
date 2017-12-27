@@ -88,12 +88,12 @@ class Articleservice
         }
         $especialMassageService = $parma->post('especialMassageService');
         $especialMassageQuality = $parma->post('especialMassageQuality');
-        $especialMassageQuotes = $parma->post('especialMassageQuotes');
-        $especialMassageCost = $parma->post('especialMassageCost');
-        $especialMassageNoCost = $parma->post('especialMassageNoCost');
+        $especialMassageQuotes  = $parma->post('especialMassageQuotes');
+        $especialMassageCost    = $parma->post('especialMassageCost');
+        $especialMassageNoCost  = $parma->post('especialMassageNoCost');
         // 将默认的段落添加到景点中
         if(!empty($especialMassageService)){
-            $this->especialName($especialMassageService,$Article->id);
+            $this->especialName($especialMassageService, $Article->id);
         }
         if(!empty($especialMassageQuality)){
             $this->especialName($especialMassageQuality,$Article->id);
@@ -138,7 +138,7 @@ class Articleservice
                 $message['message'] = '修改成功';
                 $message['route'] = 'secondadd';
                 $message['param']['articleId'] = $Article->id;
-                return $message;
+                //return $message;
         }
         $Article->title = $title;
         $Article->summery = $summery;
@@ -155,7 +155,7 @@ class Articleservice
         }
         // firstadd界面传入行程路线图片
         $routes = request()->file('routes');
-        $judge = request()->post('optionsRadios');
+        
         $Paragraph = Paragraph::where('title',"行程路线")->where('article_id',$articleId)->find();
         if(empty($Paragraph)){
             $Paragraph = new Paragraph;
@@ -165,6 +165,7 @@ class Articleservice
             Common::deleteImage($imagePath);
         }
         // 判断是否添加图片
+        $judge = request()->post('optionsRadios');
         if($judge==1){
             // 按段落保存
             $Paragraph->content = '';
@@ -177,34 +178,78 @@ class Articleservice
                 $Paragraph->image = $imagePath;
             }
             if(!$Paragraph->save()) {
-                return $message;
+                //return $message;
             }
-        }
-        if($judge==0 && !empty($judge)){
+        } else {
             $Paragraph = Paragraph::where('title',"行程路线")->where('article_id',$articleId)->find();
-            if(!empty($Paragraph)){
-                
+            if (!empty($Paragraph)) {
                 $Paragraph->delete();
             }
         }
+        
+        // 判断是否有默认段落，
+        // 如果添加但后台没有加上，如果后台有不做处理
+        // 如果不添加后台没有忽略，如果后台有删除
+        $especialMassageService = $parma->post('especialMassageService');
+        $especialMassageQuality = $parma->post('especialMassageQuality');
+        $especialMassageQuotes  = $parma->post('especialMassageQuotes');
+        $especialMassageCost    = $parma->post('especialMassageCost');
+        $especialMassageNoCost  = $parma->post('especialMassageNoCost');
+
+        $backEspecialMassageService = $this->backEspecial("九大服务", $articleId); 
+        $backEspecialMassageQuality = $this->backEspecial("六大品质", $articleId); 
+        $backEspecialMassageQuotes  = $this->backEspecial("报价说明", $articleId); 
+        $backEspecialMassageCost    = $this->backEspecial("费用包括", $articleId);
+        $backEspecialMassageNoCost  = $this->backEspecial("费用不包括", $articleId);
+
+        $this->dealEspesial($especialMassageService, $backEspecialMassageService, $Article->id);
+        $this->dealEspesial($especialMassageQuality, $backEspecialMassageQuality, $Article->id);
+        $this->dealEspesial($especialMassageQuotes, $backEspecialMassageQuotes, $Article->id);
+        $this->dealEspesial($especialMassageCost, $backEspecialMassageCost, $Article->id);
+        $this->dealEspesial($especialMassageNoCost, $backEspecialMassageNoCost, $Article->id);
+
         return $message;
     }
+
+    public function dealEspesial($especialMassage, $backEspecialMassage, $article_id) {
+        if(!empty($especialMassage)){
+            // 判断后台是否添加
+            if (empty($backEspecialMassage)) {
+                $this->especialName($especialMassage, $article_id);
+            }
+        }else {
+            if (!empty($backEspecialMassage)) {
+                $this->deleteEspecialName($backEspecialMassage->title, $article_id);
+            }
+        }
+    }
+
+    public function backEspecial($title, $article_id) {
+        return Paragraph::where('title', '=', $title)->where('article_id', $article_id)->find();
+    }
+
+    public function deleteEspecialName($especialmassage, $articleId) {
+        $Paragraph = Paragraph::where('title', '=', $especialmassage)->where('article_id',$articleId)->find();
+        $Paragraph -> delete();
+    }
+
     // 添加文章的固定内容
-    public function especialName($especialmassage,$articleId) {
+    public function especialName($especialmassage, $articleId) {
         $Paragraph = Paragraph::where('title', '=', $especialmassage)->find();
 
-        $newParagraph = new Paragraph();
-        $newParagraph->title   = $Paragraph->title;
-        $newParagraph->content = $Paragraph->content;
-        $newParagraph->weight  = $Paragraph->weight;
-        if($Paragraph->is_before_attraction == 0){
-            $newParagraph->is_before_attraction = false;
-        }else{
-            $newParagraph->is_before_attraction = true;
-        }      
-        $newParagraph->article_id = $articleId;
+        $newParagraph = new Paragraph(); 
+        $newParagraph->title   = $Paragraph->title; 
+        $newParagraph->content = $Paragraph->content; 
+        $newParagraph->weight  = $Paragraph->weight; 
 
-        $newParagraph->save();
+        if($Paragraph->is_before_attraction == 0){ 
+            $newParagraph->is_before_attraction = false; 
+        }else{ 
+            $newParagraph->is_before_attraction = true; 
+        }       
+        $newParagraph->article_id = $articleId; 
+ 
+        $newParagraph->save(); 
     }
     public function upAttraction($param) {
         $message = [];
