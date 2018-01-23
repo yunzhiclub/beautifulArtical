@@ -1,6 +1,7 @@
 {extend name="index" /} {block name="title"} 景点管理 {/block} {block name="content"}
 <script type="text/javascript" src="{:__ROOT__}/style/js/Calculation.js"></script>
 <div class="col-md-8 col-md-offset-1" style="margin-top: 60px;min-height: 760px;">
+<a class="btn btn-primary" style="margin-bottom: 20px;" href="{:url('article/secondadd',['articleId' => $articleId])}"><i class="glyphicon glyphicon-arrow-left"></i>&nbsp;返回</a>
     <div class="row">
         <h2><span class="glyphicon glyphicon-edit"></span>&nbsp;
             {eq name="$attraction->id" value="0"}

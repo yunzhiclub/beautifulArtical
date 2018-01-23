@@ -29,7 +29,7 @@
         {volist name="articles" id="article" key="key"}
 
             <li class="col-md-4" style="height: 275px;margin: 5px 0;">
-                <div style="border:#F8F8F8 solid 1px;margin: 2px -8px;">
+                <div style="border:#F8F8F8 solid 1px;margin: 2px -8px;" class="row">
                 <div class="row">
                     <div class="col-md-10 col-md-offset-1">
                         <h3 style="overflow: hidden;white-space:nowrap;text-overflow: ellipsis;">{$article->title}</h3>
@@ -39,10 +39,10 @@
                 <hr />
 
                 <div class="row" style="height: 125px;">
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <img src="{:__ROOT__}/upload/{$article->cover}" style="width: auto;height: auto;max-width: 200px;max-height: 112px;" alt="">
                     </div>
-                    <div class="col-md-8" style="word-wrap:break-word;">
+                    <div class="col-md-6" style="word-wrap:break-word;">
                             {$article->summery | $filter->limitWordNumber}
                     </div>
                 </div>
