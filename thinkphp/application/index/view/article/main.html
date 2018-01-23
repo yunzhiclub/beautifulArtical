@@ -219,6 +219,18 @@
                 </div>
                 {/volist}
                 <br>
+                <!--酒店信息-->
+                    <div class="contact-form">
+                        <br> {eq name="$hotel->judgeEmptyHotel($hotels)" value="true"} {else /}
+                        <p class="pcontact2">酒店信息</p>{volist name="hotels" id="hotel" key="key"}
+                        <p class="title"><b><i class="glyphicon glyphicon-glass"></i> {$hotel->designation} :</b></p>
+                        <p><b>酒店城市：</b>{$hotel->city}</p>
+                        <p><b>星级：</b>{$hotel->star_level}</p>
+                        <p><b>备注：</b>{$hotel->remark}</p>
+                        {/volist}
+                        {/eq}
+                        <br>
+                    </div>
                 <div class="backgroundcolor">
                     {volist name="paragraphDowns" id="_pragraph" key = "key"}
                     <div class="about ">
@@ -259,20 +271,7 @@
                     </div>
                     {/eq}
                     <br>
-                    <!-- 定制师信息 -->
-                    <!--酒店信息-->
-                    <div class="contact-form">
-                        <br> {eq name="$hotel->judgeEmptyHotel($hotels)" value="true"} {else /}
-                        <p class="pcontact2">酒店信息</p>{volist name="hotels" id="hotel" key="key"}
-                        <p class="title"><b><i class="glyphicon glyphicon-glass"></i> {$hotel->designation} :</b></p>
-                        <p><b>酒店城市：</b>{$hotel->city}</p>
-                        <p><b>星级：</b>{$hotel->star_level}</p>
-                        <p><b>备注：</b>{$hotel->remark}</p>
-                        {/volist}
-                        {/eq}
-                        <br>
-                    </div>
-                    <!--酒店信息-->
+                    
                     <!-- footer -->
                     <div class="w3agile footer">
                         <div class="footer-text">
