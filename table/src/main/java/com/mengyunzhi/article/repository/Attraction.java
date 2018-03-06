@@ -7,6 +7,7 @@ import java.util.Set;
 
 /**
  * Created by Mr Chen on 2017/8/30.
+ * 日程
  */
 @Entity
 public class Attraction {

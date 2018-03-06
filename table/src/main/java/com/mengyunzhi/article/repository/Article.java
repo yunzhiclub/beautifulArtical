@@ -1,8 +1,12 @@
 package com.mengyunzhi.article.repository;
 
 import javax.persistence.*;
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
+ * 文章
  * Created by Mr Chen on 2017/8/29.
  */
 @Entity
@@ -11,10 +15,11 @@ public class Article {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-
+    // 定制师
     @ManyToOne
     private Contractor contractor;
-
+    @OneToMany(mappedBy = "article")
+    private List<Attraction> attractions = new ArrayList<>();       // 日程
     // 文章标题
     private String title;
     // 文章摘要
@@ -22,8 +27,8 @@ public class Article {
     private String summery;
     // 文章封面
     private String cover;
-
-
+    // 出发日期
+    private Date beginDate;
 
     public Article(Plan plan, Contractor contractor, String title, String summery, String cover) {
 
@@ -75,6 +80,23 @@ public class Article {
     public void setCover(String cover) {
         this.cover = cover;
     }
+
+    public Date getBeginDate() {
+        return beginDate;
+    }
+
+    public void setBeginDate(Date beginDate) {
+        this.beginDate = beginDate;
+    }
+
+    public List<Attraction> getAttractions() {
+        return attractions;
+    }
+
+    public void setAttractions(List<Attraction> attractions) {
+        this.attractions = attractions;
+    }
+
     @Override
     public String toString() {
         return "Article{" +
