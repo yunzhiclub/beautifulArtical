@@ -13,6 +13,7 @@ use app\index\model\Material;
 use app\index\model\Detail;
 use app\index\service\AttractionService;
 use app\index\filter\Filter;
+use think\db\exception\DataNotFoundException;
 
 /**
  *
@@ -20,8 +21,31 @@ use app\index\filter\Filter;
  * @date    2017-09-01 09:24:18
  * @version $Id$
  */
-class Articleservice
+class ArticleService
 {
+    /**
+     * 更新某个文章的标题和摘要
+     * @param $id 要更新的文章ID
+     * @param $title 标准
+     * @param $summery 摘要
+     * @author panjie
+     * @return Article
+     * @throws \think\Exception\DbException
+     */
+    public function updateArticleByIdAndTitleAndSummery($id, $title, $summery)
+    {
+        $article = Article::get($id);
+        if (is_null($article)) {
+            throw new DataNotFoundException("要更新的实体不存在或已删除");
+        }
+
+        // 设置字段，并保存
+        $article->title = $title;
+        $article->summery = $summery;
+        $article->save();
+        return $article;
+    }
+
     /*
      * @param param 用来穿参数
      * @param $controler 用来跳转用的
@@ -43,21 +67,21 @@ class Articleservice
         $Article = new Article();
 
         // 新增的时候有没有上传图片
-        if(is_null($file)) {
+        if (is_null($file)) {
             $message['status'] = 'error';
             $message['message'] = '请上传图片';
             $message['route'] = 'firstadd';
             return $message;
         }
-        
+
         $Article->title = $title;
         $Article->summery = $summery;
         $Article->contractor_id = $contractorId;
 
         $imagePath = Common::uploadImage($file);
         $Article->cover = $imagePath;
-        
-        if($Article->validate(true)->save()) {
+
+        if ($Article->validate(true)->save()) {
             //保存成功
             $message['param']['articleId'] = $Article->id;
         } else {
@@ -71,16 +95,16 @@ class Articleservice
         $routes = request()->file('routes');
         $judge = request()->post('optionsRadios');
         $Paragraph = new Paragraph();
-        
+
         // 判断是否添加图片
-        if($judge==1){
+        if ($judge == 1) {
             // 按段落保存
             $Paragraph->content = '';
             $Paragraph->title = "行程路线";
             $Paragraph->article_id = $Article->id;
             $Paragraph->is_before_attraction = 1;
             // 保存文件，返回路径
-            if(!is_null($routes)){
+            if (!is_null($routes)) {
                 $imagePath = Common::uploadImage($routes);
                 $Paragraph->image = $imagePath;
             }
@@ -88,28 +112,29 @@ class Articleservice
         }
         $especialMassageService = $parma->post('especialMassageService');
         $especialMassageQuality = $parma->post('especialMassageQuality');
-        $especialMassageQuotes  = $parma->post('especialMassageQuotes');
-        $especialMassageCost    = $parma->post('especialMassageCost');
-        $especialMassageNoCost  = $parma->post('especialMassageNoCost');
+        $especialMassageQuotes = $parma->post('especialMassageQuotes');
+        $especialMassageCost = $parma->post('especialMassageCost');
+        $especialMassageNoCost = $parma->post('especialMassageNoCost');
         // 将默认的段落添加到景点中
-        if(!empty($especialMassageService)){
+        if (!empty($especialMassageService)) {
             $this->especialName($especialMassageService, $Article->id);
         }
-        if(!empty($especialMassageQuality)){
-            $this->especialName($especialMassageQuality,$Article->id);
+        if (!empty($especialMassageQuality)) {
+            $this->especialName($especialMassageQuality, $Article->id);
         }
-        if(!empty($especialMassageQuotes)){
-            $this->especialName($especialMassageQuotes,$Article->id);
+        if (!empty($especialMassageQuotes)) {
+            $this->especialName($especialMassageQuotes, $Article->id);
         }
-        if(!empty($especialMassageCost)){
-            $this->especialName($especialMassageCost,$Article->id);
+        if (!empty($especialMassageCost)) {
+            $this->especialName($especialMassageCost, $Article->id);
         }
-        if(!empty($especialMassageNoCost)){
-            $this->especialName($especialMassageNoCost,$Article->id);
+        if (!empty($especialMassageNoCost)) {
+            $this->especialName($especialMassageNoCost, $Article->id);
         }
-        
+
         return $message;
     }
+
     // firstadd的界面編輯
     public function EditAriticle($parma)
     {
@@ -128,79 +153,79 @@ class Articleservice
         //编辑文章
         $Article = Article::get($articleId);
         // 判断图片是否更改
-        if(!is_null($file)) {
+        if (!is_null($file)) {
             // 删除之前保存的图片,这样写是有问题的有待改进(增加附件列表上传后进行sha1加密，比较两个文件时候相同后再进行删除)
             $imagePath = PUBLIC_PATH . '/' . $Article->cover;
             Common::deleteImage($imagePath);
         }
-        if( $Article->title == $title && $Article->summery == $summery && is_null($file) && $Article->contractor_id == $contractorId){
-                $message['status'] = 'success';
-                $message['message'] = '修改成功';
-                $message['route'] = 'secondadd';
-                $message['param']['articleId'] = $Article->id;
-                //return $message;
+        if ($Article->title == $title && $Article->summery == $summery && is_null($file) && $Article->contractor_id == $contractorId) {
+            $message['status'] = 'success';
+            $message['message'] = '修改成功';
+            $message['route'] = 'secondadd';
+            $message['param']['articleId'] = $Article->id;
+            //return $message;
         }
         $Article->title = $title;
         $Article->summery = $summery;
         $Article->contractor_id = $contractorId;
 
-        if(!is_null($file)) {
+        if (!is_null($file)) {
             // 保存文件，返回路径
             $imagePath = Common::uploadImage($file);
             $Article->cover = $imagePath;
         }
-        if($Article->save()) {
+        if ($Article->save()) {
             //保存成功
             $message['param']['articleId'] = $Article->id;
         }
         // firstadd界面传入行程路线图片
         $routes = request()->file('routes');
-        
-        $Paragraph = Paragraph::where('title',"行程路线")->where('article_id',$articleId)->find();
-        if(empty($Paragraph)){
+
+        $Paragraph = Paragraph::where('title', "行程路线")->where('article_id', $articleId)->find();
+        if (empty($Paragraph)) {
             $Paragraph = new Paragraph;
         }
-        if(!empty( $Paragraph->image) && !empty($routes)){
+        if (!empty($Paragraph->image) && !empty($routes)) {
             $imagePath = PUBLIC_PATH . '/' . $Paragraph->image;
             Common::deleteImage($imagePath);
         }
         // 判断是否添加图片
         $judge = request()->post('optionsRadios');
-        if($judge==1){
+        if ($judge == 1) {
             // 按段落保存
             $Paragraph->content = '';
             $Paragraph->title = "行程路线";
             $Paragraph->article_id = $Article->id;
             $Paragraph->is_before_attraction = 1;
             // 保存文件，返回路径
-            if(!is_null($routes)){
+            if (!is_null($routes)) {
                 $imagePath = Common::uploadImage($routes);
                 $Paragraph->image = $imagePath;
             }
-            if(!$Paragraph->save()) {
+            if (!$Paragraph->save()) {
                 //return $message;
             }
         } else {
-            $Paragraph = Paragraph::where('title',"行程路线")->where('article_id',$articleId)->find();
+            $Paragraph = Paragraph::where('title', "行程路线")->where('article_id', $articleId)->find();
             if (!empty($Paragraph)) {
                 $Paragraph->delete();
             }
         }
-        
+
         // 判断是否有默认段落，
         // 如果添加但后台没有加上，如果后台有不做处理
         // 如果不添加后台没有忽略，如果后台有删除
         $especialMassageService = $parma->post('especialMassageService');
         $especialMassageQuality = $parma->post('especialMassageQuality');
-        $especialMassageQuotes  = $parma->post('especialMassageQuotes');
-        $especialMassageCost    = $parma->post('especialMassageCost');
-        $especialMassageNoCost  = $parma->post('especialMassageNoCost');
+        $especialMassageQuotes = $parma->post('especialMassageQuotes');
+        $especialMassageCost = $parma->post('especialMassageCost');
+        $especialMassageNoCost = $parma->post('especialMassageNoCost');
 
-        $backEspecialMassageService = $this->backEspecial("九大服务", $articleId); 
-        $backEspecialMassageQuality = $this->backEspecial("六大品质", $articleId); 
-        $backEspecialMassageQuotes  = $this->backEspecial("报价说明", $articleId); 
-        $backEspecialMassageCost    = $this->backEspecial("费用包括", $articleId);
-        $backEspecialMassageNoCost  = $this->backEspecial("费用不包括", $articleId);
+        $backEspecialMassageService = $this->backEspecial("九大服务", $articleId);
+        $backEspecialMassageQuality = $this->backEspecial("六大品质", $articleId);
+        $backEspecialMassageQuotes = $this->backEspecial("报价说明", $articleId);
+        $backEspecialMassageCost = $this->backEspecial("费用包括", $articleId);
+        $backEspecialMassageNoCost = $this->backEspecial("费用不包括", $articleId);
 
         $this->dealEspesial($especialMassageService, $backEspecialMassageService, $Article->id);
         $this->dealEspesial($especialMassageQuality, $backEspecialMassageQuality, $Article->id);
@@ -211,101 +236,111 @@ class Articleservice
         return $message;
     }
 
-    public function dealEspesial($especialMassage, $backEspecialMassage, $article_id) {
-        if(!empty($especialMassage)){
+    public function dealEspesial($especialMassage, $backEspecialMassage, $article_id)
+    {
+        if (!empty($especialMassage)) {
             // 判断后台是否添加
             if (empty($backEspecialMassage)) {
                 $this->especialName($especialMassage, $article_id);
             }
-        }else {
+        } else {
             if (!empty($backEspecialMassage)) {
                 $this->deleteEspecialName($backEspecialMassage->title, $article_id);
             }
         }
     }
 
-    public function backEspecial($title, $article_id) {
+    public function backEspecial($title, $article_id)
+    {
         return Paragraph::where('title', '=', $title)->where('article_id', $article_id)->find();
     }
 
-    public function deleteEspecialName($especialmassage, $articleId) {
-        $Paragraph = Paragraph::where('title', '=', $especialmassage)->where('article_id',$articleId)->find();
-        $Paragraph -> delete();
+    public function deleteEspecialName($especialmassage, $articleId)
+    {
+        $Paragraph = Paragraph::where('title', '=', $especialmassage)->where('article_id', $articleId)->find();
+        $Paragraph->delete();
     }
 
     // 添加文章的固定内容
-    public function especialName($especialmassage, $articleId) {
+    public function especialName($especialmassage, $articleId)
+    {
         $Paragraph = Paragraph::where('title', '=', $especialmassage)->find();
 
-        $newParagraph = new Paragraph(); 
-        $newParagraph->title   = $Paragraph->title; 
-        $newParagraph->content = $Paragraph->content; 
-        $newParagraph->weight  = $Paragraph->weight; 
+        $newParagraph = new Paragraph();
+        $newParagraph->title = $Paragraph->title;
+        $newParagraph->content = $Paragraph->content;
+        $newParagraph->weight = $Paragraph->weight;
 
-        if($Paragraph->is_before_attraction == 0){ 
-            $newParagraph->is_before_attraction = false; 
-        }else{ 
-            $newParagraph->is_before_attraction = true; 
-        }       
-        $newParagraph->article_id = $articleId; 
- 
-        $newParagraph->save(); 
+        if ($Paragraph->is_before_attraction == 0) {
+            $newParagraph->is_before_attraction = false;
+        } else {
+            $newParagraph->is_before_attraction = true;
+        }
+        $newParagraph->article_id = $articleId;
+
+        $newParagraph->save();
     }
-    public function upAttraction($param) {
+
+    public function upAttraction($param)
+    {
         $message = [];
         $message['message'] = '向上排序成功';
-        $message['status']  = 'success';
+        $message['status'] = 'success';
 
         $articleId = $param->param('articleId/d');
         // 获取位置
         $number = $param->param('number/d');
         // 获取排序景点
         $Attractions = Attraction::order('weight')->where('article_id', $articleId)->select();
-        $number --;
+        $number--;
         // 交换权重
         $tempWeight = $Attractions[$number]->weight;
-        $Attractions[$number]->weight   = $Attractions[$number-1]->weight;
-        $Attractions[$number-1]->weight = $tempWeight;
+        $Attractions[$number]->weight = $Attractions[$number - 1]->weight;
+        $Attractions[$number - 1]->weight = $tempWeight;
         // 交换时间
         $tempDate = $Attractions[$number]->date;
-        $Attractions[$number]->date   = $Attractions[$number-1]->date;
-        $Attractions[$number-1]->date = $tempDate;
+        $Attractions[$number]->date = $Attractions[$number - 1]->date;
+        $Attractions[$number - 1]->date = $tempDate;
 
-        if(!$Attractions[$number]->save() || !$Attractions[$number-1]->save()) {
+        if (!$Attractions[$number]->save() || !$Attractions[$number - 1]->save()) {
             $message['message'] = '排序失败';
-            $message['status']  = 'error';
+            $message['status'] = 'error';
         }
 
         return $message;
     }
-    public function downAttraction($param){
+
+    public function downAttraction($param)
+    {
         $message = [];
         $message['message'] = '向下排序成功';
-        $message['status']  = 'success';
+        $message['status'] = 'success';
 
         $articleId = $param->param('articleId/d');
         // 获取位置
         $number = $param->param('number/d');
         // 获取排序景点
         $Attractions = Attraction::order('weight')->where('article_id', $articleId)->select();
-        $number --;
+        $number--;
         // 交换权重
         $tempWeight = $Attractions[$number]->weight;
-        $Attractions[$number]->weight   = $Attractions[$number+1]->weight;
-        $Attractions[$number+1]->weight = $tempWeight;
+        $Attractions[$number]->weight = $Attractions[$number + 1]->weight;
+        $Attractions[$number + 1]->weight = $tempWeight;
         // 交换时间
         $tempDate = $Attractions[$number]->date;
-        $Attractions[$number]->date   = $Attractions[$number+1]->date;
-        $Attractions[$number+1]->date = $tempDate;
+        $Attractions[$number]->date = $Attractions[$number + 1]->date;
+        $Attractions[$number + 1]->date = $tempDate;
 
-        if(!$Attractions[$number]->save() || !$Attractions[$number+1]->save()) {
+        if (!$Attractions[$number]->save() || !$Attractions[$number + 1]->save()) {
             $message['message'] = '排序失败';
-            $message['status']  = 'error';
+            $message['status'] = 'error';
         }
 
         return $message;
     }
-    public function secondAriticle($param) {
+
+    public function secondAriticle($param)
+    {
         // 传入文章id
         $articleId = $param->param('articleId/d');
         $Article = Article::get($articleId);
@@ -317,7 +352,7 @@ class Articleservice
         $message['articleId'] = $articleId;
 
         // 根据景点权重排序
-        $Attraction = Attraction::order('weight')->where('article_id',$articleId)->select();
+        $Attraction = Attraction::order('weight')->where('article_id', $articleId)->select();
         $message['attraction'] = $Attraction;
 
         // 获取传入景点的个数
@@ -328,7 +363,7 @@ class Articleservice
 
         foreach ($Attraction as $key => $value) {
             $hotelId = $value->hotel_id;
-            if(!is_null($hotelId)) {
+            if (!is_null($hotelId)) {
                 $tempHotel = Hotel::where('id', $hotelId)->find();
                 if (!is_null($tempHotel)) {
                     array_push($Hotels, $tempHotel);
@@ -338,8 +373,8 @@ class Articleservice
         }
         $Hotels = array_unique($Hotels);
         // 将段落按在景点的上下顺序分成两个类，并根据权重排序
-        $paragraphUp = Paragraph::where('is_before_attraction',1)->where('article_id',$articleId)->order('weight desc')->select();
-        $paragraphDown = Paragraph::where('is_before_attraction',0)->where('article_id',$articleId)->order('weight desc')->select();
+        $paragraphUp = Paragraph::where('is_before_attraction', 1)->where('article_id', $articleId)->order('weight desc')->select();
+        $paragraphDown = Paragraph::where('is_before_attraction', 0)->where('article_id', $articleId)->order('weight desc')->select();
         // $Paragraph = Paragraph::order('weight')->select();
         $message['paragraphUp'] = $paragraphUp;
         $message['paragraphDown'] = $paragraphDown;
@@ -349,6 +384,7 @@ class Articleservice
 
         return $message;
     }
+
     /**
      * 张喜硕
      * 删除文章
@@ -356,7 +392,8 @@ class Articleservice
      * $message['message'] 提示信息
      * $message['status'] 状态，成功为success，失败为error
      */
-    public function deleteArticle($param) {
+    public function deleteArticle($param)
+    {
 
         $message = [];
         $message['message'] = '删除成功';
@@ -365,32 +402,32 @@ class Articleservice
         $Article = Article::get($articleId);
 
         // 验证文章是否为空
-        if(is_null($Article)) {
+        if (is_null($Article)) {
             $message['message'] = '文章为空';
             $message['status'] = 'error';
             return $message;
         }
 
         // 删除段落
-        $Paragraphs = Paragraph::where('article_id',$articleId)->select();
-        if(!is_null($Paragraphs)) {
+        $Paragraphs = Paragraph::where('article_id', $articleId)->select();
+        if (!is_null($Paragraphs)) {
             foreach ($Paragraphs as $Paragraph) {
                 $image = $Paragraph->image;
-                if(!$Paragraph->delete()) {
+                if (!$Paragraph->delete()) {
                     $message['message'] = '删除段落失败';
                     $message['status'] = 'error';
                     return $message;
                 }
-                Common::deleteImage('upload/'.$image);
+                Common::deleteImage('upload/' . $image);
             }
         }
 
         // 删除景点
-        $Attractions = Attraction::where('article_id',$articleId)->select();
+        $Attractions = Attraction::where('article_id', $articleId)->select();
         $attractionService = new AttractionService();
-        if(!is_null($Attractions)) {
+        if (!is_null($Attractions)) {
             foreach ($Attractions as $Attraction) {
-                if(!$attractionService->deleteAttraction($param)) {
+                if (!$attractionService->deleteAttraction($param)) {
                     $message['message'] = '删除景点失败';
                     $message['status'] = 'error';
                 }
@@ -398,17 +435,17 @@ class Articleservice
         }
 
         // 删除方案报价
-        $Plans = Plan::where('article_id',$articleId)->select();
-        if(!is_null($Plans)) {
+        $Plans = Plan::where('article_id', $articleId)->select();
+        if (!is_null($Plans)) {
             foreach ($Plans as $Plan) {
-                $Details = Detail::where('plan_id',$Plan->id)->select();
+                $Details = Detail::where('plan_id', $Plan->id)->select();
                 foreach ($Details as $Detail) {
-                    if(!$Detail->delete()) {
+                    if (!$Detail->delete()) {
                         $message['message'] = '删除明细失败';
                         $message['status'] = 'error';
                     }
                 }
-                if(!$Plan->delete()) {
+                if (!$Plan->delete()) {
                     $message['message'] = '删除方案报价失败';
                     $message['status'] = 'error';
                 }
@@ -417,19 +454,20 @@ class Articleservice
 
         // 删除文章
         $cover = $Article->cover;
-        if(!$Article->delete()) {
+        if (!$Article->delete()) {
             $message['message'] = '删除文章失败';
             $message['status'] = 'error';
             return $message;
         }
-        Common::deleteImage('upload/'.$cover);
+        Common::deleteImage('upload/' . $cover);
 
         return $message;
     }
+
     /**
-     * 保存订制师ID 
-     * @param  id       $contractorId 订制师ID
-     * @param  id       $articleId    文章ID
+     * 保存订制师ID
+     * @param  id $contractorId 订制师ID
+     * @param  id $articleId 文章ID
      * @return boolen                 保存成功返回true，否则返回false
      */
     public function saveContractorId($contractorId, $articleId)
@@ -443,10 +481,11 @@ class Articleservice
         return false;
     }
 
-    public function searchArticle($articleTitle, $pageSize) {
+    public function searchArticle($articleTitle, $pageSize)
+    {
         if (!empty($articleTitle)) {
             // 取出匹配的定制师
-            $articles = Article::where('title', 'like', '%'. $articleTitle. '%')->order('id desc')->paginate($pageSize, false, [
+            $articles = Article::where('title', 'like', '%' . $articleTitle . '%')->order('id desc')->paginate($pageSize, false, [
                 'query' => [
                     'articleTitle' => $articleTitle,
                 ],
