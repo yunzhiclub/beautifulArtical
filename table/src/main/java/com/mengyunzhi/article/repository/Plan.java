@@ -11,11 +11,11 @@ public class Plan {
     private Long id;
 
     @OneToOne
-    private Article article; //文章实体
+    private Article article;    // 文章实体
 
     private Integer adultNum;   // 成人数
     private Integer childNum;   // 儿童数
-    private String currency; // 币种
+    private String currency;    // 币种
     private DecimalFormat totalCost; // 总费用
     private Date lastPayTime; // 最晚付款时间
 
