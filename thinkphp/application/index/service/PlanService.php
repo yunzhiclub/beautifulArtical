@@ -31,10 +31,16 @@ class PlanService
         $message['message'] = '文章编辑成功！';
         $message['route'] = 'article/index';
 
-        //获取到参数
+        // 更新文章标准及摘要
         $articleId = $param->param('articleId/d');
         $data = $param->post();
 
+        $title = $data['title'];
+        $summery = $data['summery'];
+        $articleService = new ArticleService();
+        $articleService->updateArticleByIdAndTitleAndSummery($articleId, $title, $summery);
+
+        $data = $param->post();
         $Plan = Plan::where('article_id', $articleId)->find();
         if (empty($Plan)) {
             $Plan = new Plan();
