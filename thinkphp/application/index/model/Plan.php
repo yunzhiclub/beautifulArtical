@@ -39,4 +39,34 @@ class Plan extends Model
 
         return $Detail;
     }
+
+    /**
+     * 克隆一个日程实体
+     * @param  [type] $planId [description]
+     * @return Plan
+     * @author 陈志高 <[<1641088568@qq.com>]>
+     */
+    public function clonePlan($planId)
+    {
+        $originalPlan = Plan::get($planId);
+        $clonedPlan = new Plan;
+        $clonedPlan->adult_num = $originalPlan->adult_num;
+        $clonedPlan->child_num = $originalPlan->child_num;
+        $clonedPlan->currency = $originalPlan->currency;
+        $clonedPlan->last_pay_time = $originalPlan->last_pay_time;
+        $clonedPlan->total_cost = $originalPlan->total_cost;
+        $clonedPlan->article_id = $originalPlan->article_id;
+        $clonedPlan->save();
+        return $clonedPlan;
+    }
+    /**
+     * 根据id克隆日程
+     * @param  [type] $planId [description]
+     * @return Plan 
+     * @author chenzhigao        
+     */
+    public function cloneById($planId) {
+        $Plan = new Plan();
+        return $Plan->clonePlan($planId);
+    }
 }
