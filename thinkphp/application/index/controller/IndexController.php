@@ -4,7 +4,7 @@ namespace app\index\controller;
 use think\Controller;
 use think\Request;
 use app\index\service\Loginservice;
-use app\index\service\Articleservice;
+use app\index\service\ArticleService;
 use app\index\filter\Filter;
 
 class IndexController extends Controller
@@ -16,7 +16,7 @@ class IndexController extends Controller
 
         //实例化服务层
         $this->loginService = new Loginservice();
-        $this->articleService = new Articleservice();
+        $this->articleService = new ArticleService();
         $this->filter = new Filter();
         // 验证用户是否登陆
         if (!$this->loginService->isLogin(Request::instance())) {
