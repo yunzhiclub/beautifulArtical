@@ -28,19 +28,27 @@ class ArticleService
      * @param $id 要更新的文章ID
      * @param $title 标准
      * @param $summery 摘要
+     * @param $beginDate 行程开始日期
      * @author panjie
      * @return Article
      * @throws \think\Exception\DbException
      */
-    static public function updateArticleByIdAndTitleAndSummery($id, $title, $summery)
+    static public function updateArticleByIdAndTitleAndSummeryAndBeginDate($id, $title, $summery, $beginDate)
     {
         $article = Article::get($id);
         if (is_null($article)) {
             throw new DataNotFoundException("要更新的实体不存在或已删除");
         }
 
-        return $article->updateArticleByTitleAndSummery($title, $summery);
+        return $article->updateArticleByTitleAndSummeryAndBeginDate($title, $summery, $beginDate);
     }
+
+
+    public static function findById($articleId)
+    {
+        return Article::get($articleId);
+    }
+
 
     /*
      * @param param 用来穿参数
