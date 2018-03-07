@@ -79,7 +79,7 @@
                         </div>
                         <div class="cd-timeline-content">
                             <h3><strong>Day{$key}</strong>
-                                 <small>({$attraction->getDate()})</small>
+                                 <small>({$attraction->getDateByBeginDateAndOrder($article->begin_date, $key)})</small>
                             </h3>
                             <br>
                             <h4>{$attraction->trip}</h4>

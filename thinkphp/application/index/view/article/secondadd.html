@@ -1,10 +1,12 @@
 {extend name="index"} {block name="title"}文章编辑{/block} {block name="content"}
 <script type="text/javascript" src="{:__ROOT__}/style/js/Calculation.js"></script>
 <div class="col-md-8 col-md-offset-1" style="margin-top: 10px;min-height: 730px;">
-    <a class="btn btn-primary" style="margin-bottom: 20px;" href="{:url('article/index')}"><i class="glyphicon glyphicon-arrow-left"></i>&nbsp;返回</a>
+    <a class="btn btn-primary" style="margin-bottom: 20px;" href="{:url('article/index')}"><i
+            class="glyphicon glyphicon-arrow-left"></i>&nbsp;返回</a>
     <h2><span class="glyphicon glyphicon-edit"></span>&nbsp;文章编辑</h2>
     <br>
-    <form method="post" action="{:url ('addsecond',['articleId'=>$articleId])}" enctype="multipart/form-data" onsubmit="setDisabledBtn()">
+    <form method="post" action="{:url ('addsecond',['articleId'=>$articleId])}" enctype="multipart/form-data"
+          onsubmit="setDisabledBtn()">
         <div class="form-group">
             <label for="TitleInput">标题</label>
             <input type="text" class="form-control" id="TitleInput" placeholder="标题" name="title" value="{$title}">
@@ -14,7 +16,8 @@
             <!-- 加载编辑器的容器 -->
             <script id="container" name="summery" type="text/plain">
                     {$summery}
-                </script>
+
+            </script>
             <!-- 配置文件 -->
             <script type="text/javascript" src="{:__ROOT__}/style/js/paragraphController/ueditor.config.js"></script>
             <script type="text/javascript" src="{:__ROOT__}/style/js/paragraphController/ueditor.all.js"></script>
@@ -30,16 +33,23 @@
             </script>
         </div>
         <div class="form-group">
+            <label>出发日期</label>
+            <input type="date" class="form-control" name="begin_date" value="{$article->begin_date}" required>
+        </div>
+        <div class="form-group">
             <label>封面</label>
-            <img src="{:__ROOT__}/upload/{$cover}" style="width: auto; height: auto; max-width: 280px; max-height: 158px;" alt="无图">
+            <img src="{:__ROOT__}/upload/{$cover}"
+                 style="width: auto; height: auto; max-width: 280px; max-height: 158px;" alt="无图">
             <br>
             <br>
-            <a class="btn btn-default" href="{:url('editfirstadd?articleId=' . $articleId)}"><span class="glyphicon glyphicon-pencil"></span>&nbsp;更改文章及定制师</a>
+            <a class="btn btn-default" href="{:url('editfirstadd?articleId=' . $articleId)}"><span
+                    class="glyphicon glyphicon-pencil"></span>&nbsp;更改文章及定制师</a>
         </div>
         <div class="form-group">
             <label>正文</label>
-            <span class="col-md-offset-1"></span>	
-            <a class="btn btn-primary btn-sm" href="{:url('Paragraph/index', ['articleId'=>$articleId,'id'=>''])}"><span class="glyphicon glyphicon-plus"></span>&nbsp;自定义段落</a>
+            <span class="col-md-offset-1"></span>
+            <a class="btn btn-primary btn-sm" href="{:url('Paragraph/index', ['articleId'=>$articleId,'id'=>''])}"><span
+                    class="glyphicon glyphicon-plus"></span>&nbsp;自定义段落</a>
         </div>
         <ul style="list-style-type: none;">
             {volist name="paragraphUp" id="paragraph"}
@@ -49,7 +59,8 @@
                         <h4>{$paragraph->title}</h4>
                         <div class="row">
                             <div class="col-md-3" style="height: auto;">
-                                <img src="{:__ROOT__}/upload/{$paragraph->image}" style="width: auto; height: auto; max-width: 250px; max-height: 140px;" alt="">
+                                <img src="{:__ROOT__}/upload/{$paragraph->image}"
+                                     style="width: auto; height: auto; max-width: 250px; max-height: 140px;" alt="">
                             </div>
                             <div class="col-md-6 col-md-offset-1" style="word-wrap: break-word;">
                                 {$filter->limitWordNumber($paragraph->content, 245)}
@@ -57,8 +68,12 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12" style="height: 40px; margin-top: 10px;">
-                                <a class="btn btn-info btn-sm" href="{:url('Paragraph/edit',['articleId'=>$articleId,'id'=>$paragraph->id])}"><span class="glyphicon glyphicon-pencil"></span>&nbsp;编辑</a>
-                                <a class="btn btn-danger btn-sm" href="{:url('Paragraph/delete', ['articleId'=>$articleId,'id'=>$paragraph->id])}"><span class="glyphicon glyphicon-trash"></span>&nbsp;删除</a>
+                                <a class="btn btn-info btn-sm"
+                                   href="{:url('Paragraph/edit',['articleId'=>$articleId,'id'=>$paragraph->id])}"><span
+                                        class="glyphicon glyphicon-pencil"></span>&nbsp;编辑</a>
+                                <a class="btn btn-danger btn-sm"
+                                   href="{:url('Paragraph/delete', ['articleId'=>$articleId,'id'=>$paragraph->id])}"><span
+                                        class="glyphicon glyphicon-trash"></span>&nbsp;删除</a>
                             </div>
                         </div>
                     </div>
@@ -73,12 +88,13 @@
                         <div class="row">
                             <div class="col-md-5">
                                 总行程：{$_attraction->trip}<br>
-                                日期：{$_attraction->date}<br>
+                                日期：{$_attraction->getDateByBeginDateAndOrder($article->begin_date, $keys)}<br>
                                 <!-- 导游：{$_attraction->guide}<br> -->
                                 用餐：{$_attraction->getMeals()}<br>
                                 用车：{$_attraction->getCars()}<br>
 
-                                景点：{volist name="$_attraction->getCheckedMaterial()" id="material"}<button type="button" class="btn btn-default btn-xs">{$material->designation}</button>
+                                景点：{volist name="$_attraction->getCheckedMaterial()" id="material"}
+                                <button type="button" class="btn btn-default btn-xs">{$material->designation}</button>
                                 {/volist}
                                 <br>
                                 酒店：{$_attraction->getHotelDesignation()}<br>
@@ -86,168 +102,232 @@
                             </div>
                             <div class="col-md-5">
                                 {eq name="$_attraction->image" value=""}{else /}
-                                <img src="{:__ROOT__}/upload/{:json_decode($_attraction->image)}" style="width: auto;height: auto;max-width: 300px;max-height: 170px;">
+                                <img src="{:__ROOT__}/upload/{:json_decode($_attraction->image)}"
+                                     style="width: auto;height: auto;max-width: 300px;max-height: 170px;">
                                 {/eq}
                             </div>
                             <div class="col-md-2">
                                 <br>
                                 <br>
-                                {eq name="$keys" value="1"} {else /}<a class="btn btn-default" href="{:url('upAttraction',['articleId'=>$articleId,'attractionId'=>$_attraction->id,'number'=>$keys])}"><span class="glyphicon glyphicon-arrow-up" ></span></a>{/eq}
+                                {eq name="$keys" value="1"} {else /}<a class="btn btn-default"
+                                                                       href="{:url('upAttraction',['articleId'=>$articleId,'attractionId'=>$_attraction->id,'number'=>$keys])}"><span
+                                    class="glyphicon glyphicon-arrow-up"></span></a>{/eq}
                                 <br>
-                                {eq name="$keys" value="$length"} {else /}<a class="btn btn-default" href="{:url('downAttraction',['articleId'=>$articleId,'attractionId'=>$_attraction->id,'number'=>$keys])}"><span class="glyphicon glyphicon-arrow-down"></span></a>{/eq}
+                                {eq name="$keys" value="$length"} {else /}<a class="btn btn-default"
+                                                                             href="{:url('downAttraction',['articleId'=>$articleId,'attractionId'=>$_attraction->id,'number'=>$keys])}"><span
+                                    class="glyphicon glyphicon-arrow-down"></span></a>{/eq}
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12" style="height: 40px; margin-top: 10px;">
-                                <a class="btn btn-info btn-sm" href="{:url('attraction/edit' ,['articleId'=>$articleId,'attractionId'=>$_attraction->id] )}"><span class="glyphicon glyphicon-pencil"></span>&nbsp;编辑</a>
-                                <a class="btn btn-danger btn-sm" href="{:url('attraction/delete' ,['articleId'=>$articleId,'attractionId'=>$_attraction->id] )}"><span class="glyphicon glyphicon-trash"></span>&nbsp;删除</a>
+                                <a class="btn btn-info btn-sm"
+                                   href="{:url('attraction/edit' ,['articleId'=>$articleId,'attractionId'=>$_attraction->id] )}"><span
+                                        class="glyphicon glyphicon-pencil"></span>&nbsp;编辑</a>
+                                <a class="btn btn-danger btn-sm"
+                                   href="{:url('attraction/delete' ,['articleId'=>$articleId,'attractionId'=>$_attraction->id] )}"><span
+                                        class="glyphicon glyphicon-trash"></span>&nbsp;删除</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </li>
-             <div class="row-fluid">
-            
-        </div>
-            {/volist} 
+            <div class="row-fluid">
+
+            </div>
+            {/volist}
             &nbsp;&nbsp;
-            <a class="btn btn-primary btn-sm" href="{:url('Attraction/add?articleId='.$articleId)}" ><span class="glyphicon glyphicon-plus"></span>&nbsp;日程</a>
+            <a class="btn btn-primary btn-sm" href="{:url('Attraction/add?articleId='.$articleId)}"><span
+                    class="glyphicon glyphicon-plus"></span>&nbsp;日程</a>
             <div style="margin-top: 60px;">
                 <div class="row">
                     <div class="col-md-12">
-                            <div id="myTabContent" class="tab-content">
-                                <div class="tab-pane fade in active" id="firstform">
-                                    <br>
-                                    <div class="control-group row">
-                                        <label class="control-label">出行人数</label>
-                                        <br><br>
-                                        <div class="row">
-                                            <div class="form-group col-md-3" style="background-color: ">
+                        <div id="myTabContent" class="tab-content">
+                            <div class="tab-pane fade in active" id="firstform">
+                                <br>
+                                <div class="control-group row">
+                                    <label class="control-label">出行人数</label>
+                                    <br><br>
+                                    <div class="row">
+                                        <div class="form-group col-md-3" style="background-color: ">
                                             <label>成人数</label>
-                                            <input type="number" style="background-color: #fcf8e3;" class="form-control" id="adultNum" name="adultNum" placeholder="成人..." value="{$plan->adult_num}" onkeyup="jisuan();" required>
-                                            </div>
-                                            <div class="form-group col-md-3">
-                                                <label>儿童数</label>
-                                                <input type="number" style="background-color: #fcf8e3;" class="form-control" id="childNum" name="childNum" placeholder="儿童..." value="{$plan->child_num}" onkeyup="jisuan();" required>
-                                            </div>
+                                            <input type="number" style="background-color: #fcf8e3;" class="form-control"
+                                                   id="adultNum" name="adultNum" placeholder="成人..."
+                                                   value="{$plan->adult_num}" onkeyup="jisuan();" required>
                                         </div>
-                                        <hr>
-                                    </div>
-                                    <div class="control-group row">
-                                        <label>机票</label>
-                                        <br><br>
-                                        <div class="row">
-                                            <div class="form-group col-md-3">
-                                            <label>成人单价</label>
-                                            <input type="text" class="form-control" id="planeAdultUnitPrice" name="planeAdultUnitPrice" placeholder="成人单价..." value="{$plan->getDetail('plane', $plan)->adult_unit_price | $filter->moneyFilter}" onkeyup="jisuan();">
-                                            </div>
-                                            <div class="form-group col-md-3">
-                                                <label>儿童单价</label>
-                                                <input type="text" class="form-control" id="planeChildUnitPrice" name="planeChildUnitPrice" placeholder="儿童单价..." value="{$plan->getDetail('plane', $plan)->child_unit_price | $filter->moneyFilter}" onkeyup="jisuan();">
-                                            </div>
-                                            <div class="form-group col-md-3">
-                                                <label>总价</label>
-                                                <input readonly type="text" class="form-control" id="planeTotalPrice" name="planeTotalPrice" placeholder="总价..." value="{$plan->getDetail('plane', $plan)->total_price | $filter->moneyFilter}">
-                                            </div>
-                                            <div class="form-group col-md-3">
-                                                <label>备注</label>
-                                                <input type="text" class="form-control" id="planeRemark" name="planeRemark" placeholder="备注..." value="{$plan->getDetail('plane', $plan)->remark}">
-                                            </div>
-                                        </div>
-                                        <hr>
-                                    </div>
-                                    <div class="control-group row">
-                                        <label>签证</label>
-                                        <br><br>
-                                        <div class="row">
-                                            <div class="form-group col-md-3">
-                                            <label>成人单价</label>
-                                            <input type="text" style="background-color: #fcf8e3;" class="form-control" id="visaAdultUnitPrice" name="visaAdultUnitPrice" placeholder="成人单价..." value="{$plan->getDetail('visa', $plan)->adult_unit_price | $filter->moneyFilter}" onkeyup="jisuan();">
-                                            </div>
-                                            <div class="form-group col-md-3">
-                                                <label>儿童单价</label>
-                                                <input type="text" style="background-color: #fcf8e3;" class="form-control" id="visaChildUnitPrice" name="visaChildUnitPrice" placeholder="儿童单价..." value="{$plan->getDetail('visa', $plan)->child_unit_price | $filter->moneyFilter}" onkeyup="jisuan();">
-                                            </div>
-                                            <div class="form-group col-md-3">
-                                                <label>总价</label>
-                                                <input readonly type="text" style="background-color: #fcf8e3;" class="form-control" id="visaTotalPrice" name="visaTotalPrice" placeholder="总价..." value="{$plan->getDetail('visa', $plan)->total_price | $filter->moneyFilter}" >
-                                            </div>
-                                            <div class="form-group col-md-3">
-                                                <label>备注</label>
-                                                <input type="text" style="background-color: #fcf8e3;" class="form-control" id="visaRemark" name="visaRemark" placeholder="备注..." value="{$plan->getDetail('visa', $plan)->remark}">
-                                            </div>
-                                        </div>
-                                        <hr>
-                                    </div>
-                                    <div class="control-group row">
-                                        <label>旅游</label>
-                                        <br><br>
-                                        <div class="row">
-                                            <div class="form-group col-md-3">
-                                            <label>成人单价</label>
-                                            <input type="text" class="form-control" id="tourismAdultUnitPrice" name="tourismAdultUnitPrice" placeholder="成人单价..." value="{$plan->getDetail('tourism', $plan)->adult_unit_price | $filter->moneyFilter}" onkeyup="jisuan();">
-                                            </div>
-                                            <div class="form-group col-md-3">
-                                                <label>儿童单价</label>
-                                                <input type="text" class="form-control" id="tourismChildUnitPrice" name="tourismChildUnitPrice" placeholder="儿童单价..." value="{$plan->getDetail('tourism', $plan)->child_unit_price | $filter->moneyFilter}" onkeyup="jisuan();">
-                                            </div>
-                                            <div class="form-group col-md-3">
-                                                <label>总价</label>
-                                                <input readonly type="text" class="form-control" id="tourismTotalPrice" name="tourismTotalPrice" placeholder="总价..." value="{$plan->getDetail('tourism', $plan)->total_price | $filter->moneyFilter}" >
-                                            </div>
-                                            <div class="form-group col-md-3">
-                                                <label>备注</label>
-                                                <input type="text" class="form-control" id="tourismRemark" name="tourismRemark" placeholder="备注..." value="{$plan->getDetail('tourism', $plan)->remark}">
-                                            </div>
-                                        </div>
-                                        <hr>
-                                    </div>
-                                    <div class="control-group row">
-                                        <label>保险</label>
-                                        <br><br>
-                                        <div class="row">
-                                            <div class="form-group col-md-3">
-                                            <label>成人单价</label>
-                                            <input type="text" style="background-color: #fcf8e3;" class="form-control" id="insuranceAdultUnitPrice" name="insuranceAdultUnitPrice" placeholder="成人单价..." value="{$plan->getDetail('insurance', $plan)->adult_unit_price | $filter->moneyFilter}" onkeyup="jisuan();">
-                                            </div>
-                                            <div class="form-group col-md-3">
-                                                <label>儿童单价</label>
-                                                <input type="text" style="background-color: #fcf8e3;" class="form-control" id="insuranceChildUnitPrice" name="insuranceChildUnitPrice" placeholder="儿童单价..." value="{$plan->getDetail('insurance', $plan)->child_unit_price | $filter->moneyFilter}" onkeyup="jisuan();">
-                                            </div>
-                                            <div class="form-group col-md-3">
-                                                <label>总价</label>
-                                                <input readonly type="text" style="background-color: #fcf8e3;" class="form-control" id="insuranceTotalPrice" name="insuranceTotalPrice" placeholder="总价..." value="{$plan->getDetail('insurance', $plan)->total_price | $filter->moneyFilter}" >
-                                            </div>
-                                            <div class="form-group col-md-3">
-                                                <label>备注</label>
-                                                <input type="text" style="background-color: #fcf8e3;" class="form-control" id="insuranceRemark" name="insuranceRemark" placeholder="备注..." value="{$plan->getDetail('insurance', $plan)->remark}">
-                                            </div>
-                                        </div>
-                                        <hr>
-                                    </div>
-                                    <div class="control-group row">
-                                        <label>币种</label>
-                                        <div class="controls">
-                                            <input type="text" class="form-control" name="currency" placeholder="币种..." value="{$plan->currency}"　required>
+                                        <div class="form-group col-md-3">
+                                            <label>儿童数</label>
+                                            <input type="number" style="background-color: #fcf8e3;" class="form-control"
+                                                   id="childNum" name="childNum" placeholder="儿童..."
+                                                   value="{$plan->child_num}" onkeyup="jisuan();" required>
                                         </div>
                                     </div>
                                     <hr>
-                                    <div class="control-group row">
-                                        <label for="totalCost">总费用</label>
-                                        <div class="controls">
-                                            <input readonly type="text" style="background-color: #fcf8e3;" class="form-control" id="totalCost" name="totalCost" placeholder="总费用..." value="{$plan->total_cost | $filter->moneyFilter}" />
+                                </div>
+                                <div class="control-group row">
+                                    <label>机票</label>
+                                    <br><br>
+                                    <div class="row">
+                                        <div class="form-group col-md-3">
+                                            <label>成人单价</label>
+                                            <input type="text" class="form-control" id="planeAdultUnitPrice"
+                                                   name="planeAdultUnitPrice" placeholder="成人单价..."
+                                                   value="{$plan->getDetail('plane', $plan)->adult_unit_price | $filter->moneyFilter}"
+                                                   onkeyup="jisuan();">
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label>儿童单价</label>
+                                            <input type="text" class="form-control" id="planeChildUnitPrice"
+                                                   name="planeChildUnitPrice" placeholder="儿童单价..."
+                                                   value="{$plan->getDetail('plane', $plan)->child_unit_price | $filter->moneyFilter}"
+                                                   onkeyup="jisuan();">
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label>总价</label>
+                                            <input readonly type="text" class="form-control" id="planeTotalPrice"
+                                                   name="planeTotalPrice" placeholder="总价..."
+                                                   value="{$plan->getDetail('plane', $plan)->total_price | $filter->moneyFilter}">
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label>备注</label>
+                                            <input type="text" class="form-control" id="planeRemark" name="planeRemark"
+                                                   placeholder="备注..."
+                                                   value="{$plan->getDetail('plane', $plan)->remark}">
                                         </div>
                                     </div>
                                     <hr>
-                                    <div class="control-group row">
-                                        <label>最晚付款时间</label>
-                                        <div class="controls">
-                                            <input type="date" class="form-control" name="lastPayTime" value="{$plan->last_pay_time}" required>
+                                </div>
+                                <div class="control-group row">
+                                    <label>签证</label>
+                                    <br><br>
+                                    <div class="row">
+                                        <div class="form-group col-md-3">
+                                            <label>成人单价</label>
+                                            <input type="text" style="background-color: #fcf8e3;" class="form-control"
+                                                   id="visaAdultUnitPrice" name="visaAdultUnitPrice"
+                                                   placeholder="成人单价..."
+                                                   value="{$plan->getDetail('visa', $plan)->adult_unit_price | $filter->moneyFilter}"
+                                                   onkeyup="jisuan();">
                                         </div>
+                                        <div class="form-group col-md-3">
+                                            <label>儿童单价</label>
+                                            <input type="text" style="background-color: #fcf8e3;" class="form-control"
+                                                   id="visaChildUnitPrice" name="visaChildUnitPrice"
+                                                   placeholder="儿童单价..."
+                                                   value="{$plan->getDetail('visa', $plan)->child_unit_price | $filter->moneyFilter}"
+                                                   onkeyup="jisuan();">
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label>总价</label>
+                                            <input readonly type="text" style="background-color: #fcf8e3;"
+                                                   class="form-control" id="visaTotalPrice" name="visaTotalPrice"
+                                                   placeholder="总价..."
+                                                   value="{$plan->getDetail('visa', $plan)->total_price | $filter->moneyFilter}">
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label>备注</label>
+                                            <input type="text" style="background-color: #fcf8e3;" class="form-control"
+                                                   id="visaRemark" name="visaRemark" placeholder="备注..."
+                                                   value="{$plan->getDetail('visa', $plan)->remark}">
+                                        </div>
+                                    </div>
+                                    <hr>
+                                </div>
+                                <div class="control-group row">
+                                    <label>旅游</label>
+                                    <br><br>
+                                    <div class="row">
+                                        <div class="form-group col-md-3">
+                                            <label>成人单价</label>
+                                            <input type="text" class="form-control" id="tourismAdultUnitPrice"
+                                                   name="tourismAdultUnitPrice" placeholder="成人单价..."
+                                                   value="{$plan->getDetail('tourism', $plan)->adult_unit_price | $filter->moneyFilter}"
+                                                   onkeyup="jisuan();">
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label>儿童单价</label>
+                                            <input type="text" class="form-control" id="tourismChildUnitPrice"
+                                                   name="tourismChildUnitPrice" placeholder="儿童单价..."
+                                                   value="{$plan->getDetail('tourism', $plan)->child_unit_price | $filter->moneyFilter}"
+                                                   onkeyup="jisuan();">
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label>总价</label>
+                                            <input readonly type="text" class="form-control" id="tourismTotalPrice"
+                                                   name="tourismTotalPrice" placeholder="总价..."
+                                                   value="{$plan->getDetail('tourism', $plan)->total_price | $filter->moneyFilter}">
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label>备注</label>
+                                            <input type="text" class="form-control" id="tourismRemark"
+                                                   name="tourismRemark" placeholder="备注..."
+                                                   value="{$plan->getDetail('tourism', $plan)->remark}">
+                                        </div>
+                                    </div>
+                                    <hr>
+                                </div>
+                                <div class="control-group row">
+                                    <label>保险</label>
+                                    <br><br>
+                                    <div class="row">
+                                        <div class="form-group col-md-3">
+                                            <label>成人单价</label>
+                                            <input type="text" style="background-color: #fcf8e3;" class="form-control"
+                                                   id="insuranceAdultUnitPrice" name="insuranceAdultUnitPrice"
+                                                   placeholder="成人单价..."
+                                                   value="{$plan->getDetail('insurance', $plan)->adult_unit_price | $filter->moneyFilter}"
+                                                   onkeyup="jisuan();">
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label>儿童单价</label>
+                                            <input type="text" style="background-color: #fcf8e3;" class="form-control"
+                                                   id="insuranceChildUnitPrice" name="insuranceChildUnitPrice"
+                                                   placeholder="儿童单价..."
+                                                   value="{$plan->getDetail('insurance', $plan)->child_unit_price | $filter->moneyFilter}"
+                                                   onkeyup="jisuan();">
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label>总价</label>
+                                            <input readonly type="text" style="background-color: #fcf8e3;"
+                                                   class="form-control" id="insuranceTotalPrice"
+                                                   name="insuranceTotalPrice" placeholder="总价..."
+                                                   value="{$plan->getDetail('insurance', $plan)->total_price | $filter->moneyFilter}">
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label>备注</label>
+                                            <input type="text" style="background-color: #fcf8e3;" class="form-control"
+                                                   id="insuranceRemark" name="insuranceRemark" placeholder="备注..."
+                                                   value="{$plan->getDetail('insurance', $plan)->remark}">
+                                        </div>
+                                    </div>
+                                    <hr>
+                                </div>
+                                <div class="control-group row">
+                                    <label>币种</label>
+                                    <div class="controls">
+                                        <input type="text" class="form-control" name="currency" placeholder="币种..."
+                                               value="{$plan->currency}" 　required>
                                     </div>
                                 </div>
                                 <hr>
+                                <div class="control-group row">
+                                    <label for="totalCost">总费用</label>
+                                    <div class="controls">
+                                        <input readonly type="text" style="background-color: #fcf8e3;"
+                                               class="form-control" id="totalCost" name="totalCost" placeholder="总费用..."
+                                               value="{$plan->total_cost | $filter->moneyFilter}"/>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="control-group row">
+                                    <label>最晚付款时间</label>
+                                    <div class="controls">
+                                        <input type="date" class="form-control" name="lastPayTime"
+                                               value="{$plan->last_pay_time}" required>
+                                    </div>
+                                </div>
                             </div>
+                            <hr>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -258,7 +338,8 @@
                         <h4>{$paragraph->title}</h4>
                         <div class="row">
                             <div class="col-md-3" style="height: 100px;">
-                                <img src="{:__ROOT__}/upload/{$paragraph->image}" style="height: 100px; width: 180px;" alt="">
+                                <img src="{:__ROOT__}/upload/{$paragraph->image}" style="height: 100px; width: 180px;"
+                                     alt="">
                             </div>
                             <div class="col-md-6 col-md-offset-1" style="word-wrap: break-word;">
                                 {$paragraph->content | $filter->limitWordNumber}
@@ -266,8 +347,12 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12" style="height: 40px; margin-top: 10px;">
-                                <a class="btn btn-info btn-sm" href="{:url('Paragraph/edit',['articleId'=>$articleId,'id'=>$paragraph->id])}"><span class="glyphicon glyphicon-pencil"></span>&nbsp;编辑</a>
-                                <a class="btn btn-danger btn-sm" href="{:url('Paragraph/delete', ['articleId'=>$articleId,'id'=>$paragraph->id])}"><span class="glyphicon glyphicon-trash"></span>&nbsp;删除</a>
+                                <a class="btn btn-info btn-sm"
+                                   href="{:url('Paragraph/edit',['articleId'=>$articleId,'id'=>$paragraph->id])}"><span
+                                        class="glyphicon glyphicon-pencil"></span>&nbsp;编辑</a>
+                                <a class="btn btn-danger btn-sm"
+                                   href="{:url('Paragraph/delete', ['articleId'=>$articleId,'id'=>$paragraph->id])}"><span
+                                        class="glyphicon glyphicon-trash"></span>&nbsp;删除</a>
                             </div>
                         </div>
                     </div>
@@ -300,7 +385,8 @@
                                     </tr>
 
                                 </table>
-                                <a href="{:url('contractor/edit' ,['contractorId'=>$contractor->id] )}" class="btn btn-info btn-sm">
+                                <a href="{:url('contractor/edit' ,['contractorId'=>$contractor->id] )}"
+                                   class="btn btn-info btn-sm">
                                     <i class="glyphicon glyphicon-pencil"></i>&nbsp;编辑
                                 </a>
                                 {/eq}
@@ -333,7 +419,8 @@
             </li>
         </ul>
         <script type="text/javascript" src="{:__ROOT__}/style/js/Calculation.js"></script>
-        <button type="submit" id="submit-btn" class="btn btn-default"><span class="glyphicon glyphicon-ok"></span>&nbsp;完成</button>
+        <button type="submit" id="submit-btn" class="btn btn-default"><span class="glyphicon glyphicon-ok"></span>&nbsp;完成
+        </button>
         <br>
         <br>
     </form>

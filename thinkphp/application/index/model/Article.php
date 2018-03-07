@@ -11,11 +11,50 @@ use think\Model;
 
 class Article extends Model
 {
-	public function updateArticleByTitleAndSummery($title, $summery) {
+    // 日程信息
+    protected $attractions = null;
+    /**
+     * 更新部分信息
+     * @param $title    标题
+     * @param $summery  摘要
+     * @param $beginDate 出发日期
+     * @return $this
+     * @author panjie
+     */
+	public function updateArticleByTitleAndSummeryAndBeginDate($title, $summery, $beginDate) {
         // 设置字段，并保存
         $this->title = $title;
         $this->summery = $summery;
+        $this->begin_date = $beginDate;
         $this->save();
         return $this;
+    }
+
+    /**
+     * 日程信息
+     * @return array
+     */
+    public function getAttractions() {
+        if (is_null($this->attractions)) {
+            $this->loadAttractions();
+        }
+        return $this->attractions;
+    }
+
+    /**
+     * 重新加载日程信息。适用于更新最新的关联数据
+     */
+    public function reloadAttractions() {
+        $this->loadAttractions();
+    }
+
+    /**
+     * 加载日程信息
+     */
+    private function loadAttractions() {
+        $this->attractions = Attraction::order('weight')->where('article_id', $this->id)->select();
+        if (is_null($this->attractions)) {
+            $this->attractions = array();
+        }
     }
 }
