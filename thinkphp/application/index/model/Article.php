@@ -11,6 +11,8 @@ use think\Model;
 
 class Article extends Model
 {
+    // 日程信息
+    protected $attractions = null;
     /**
      * 更新部分信息
      * @param $title    标题
@@ -26,5 +28,33 @@ class Article extends Model
         $this->begin_date = $beginDate;
         $this->save();
         return $this;
+    }
+
+    /**
+     * 日程信息
+     * @return array
+     */
+    public function getAttractions() {
+        if (is_null($this->attractions)) {
+            $this->loadAttractions();
+        }
+        return $this->attractions;
+    }
+
+    /**
+     * 重新加载日程信息。适用于更新最新的关联数据
+     */
+    public function reloadAttractions() {
+        $this->loadAttractions();
+    }
+
+    /**
+     * 加载日程信息
+     */
+    private function loadAttractions() {
+        $this->attractions = Attraction::order('weight')->where('article_id', $this->id)->select();
+        if (is_null($this->attractions)) {
+            $this->attractions = array();
+        }
     }
 }
