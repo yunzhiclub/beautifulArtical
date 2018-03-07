@@ -534,6 +534,7 @@ class ArticleService
 
                 $newAttraction->id = null;
                 $newAttraction->article_id = $newArtical['id'];
+                $newAttraction['cover'] = Common::mvImage($Attraction['cover'], 'attraction', $Attraction['id']);
 
                 if(!$newAttraction->isUpdate(false)->save()) {
                     $message['message'] = '克隆失败';
@@ -548,6 +549,7 @@ class ArticleService
                     $newAttractionMaterial = unserialize($n);
 
                     $newAttractionMaterial->attraction_id = $newAttraction->id;
+
 
                     if(!$newAttractionMaterial->isUpdate(false)->save()) {
                         $message['message'] = '克隆失败';
@@ -565,6 +567,7 @@ class ArticleService
 
                 $newParagraph->id = null;
                 $newParagraph->article_id = $newArtical['id'];
+                $newParagraph['image'] = Common::mvImage($Paragraph['image'], 'paragraph', $Paragraph['id']);
 
                 if(!$newParagraph->isUpdate(false)->save()) {
                     $message['message'] = '克隆失败';
