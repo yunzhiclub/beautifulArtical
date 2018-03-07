@@ -40,6 +40,7 @@ class ArticleService
             throw new DataNotFoundException("要更新的实体不存在或已删除");
         }
 
+        // 更新基本信息
         return $article->updateArticleByTitleAndSummeryAndBeginDate($title, $summery, $beginDate);
     }
 
