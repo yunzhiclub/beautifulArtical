@@ -80,9 +80,10 @@
         //删除照片的ajax请求
         function deleteImage (key,　materialId) {
             //获取当前路径域名
-            var host = window.location.host;
+            var host = {$host};
+            console.log(host);
             //拼接路径
-            var url = "http://" + host + "/index/material/deleteImage?materialId=" + materialId + "&imageKey=" + key;
+            var url = "http://localhost" + host + "/index/material/deleteImage?materialId=" + materialId + "&imageKey=" + key;
             //发送ajax请求
             console.log(key);
             console.log(materialId);
