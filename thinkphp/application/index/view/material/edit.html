@@ -49,6 +49,7 @@
             {/volist}
             {/eq}
         </div>
+        {:var_dump($host)}
         <br>
         <div class="form-group">
             <label for="input-b3">上传图片(最多{:config('maxImage.count')}张)</label>
@@ -80,10 +81,10 @@
         //删除照片的ajax请求
         function deleteImage (key,　materialId) {
             //获取当前路径域名
-            var host = {$host};
+            var host = "{$host}";
             console.log(host);
             //拼接路径
-            var url = "http://localhost" + host + "/index/material/deleteImage?materialId=" + materialId + "&imageKey=" + key;
+            var url = host + "/index/material/deleteImage?materialId=" + materialId + "&imageKey=" + key;
             //发送ajax请求
             console.log(key);
             console.log(materialId);

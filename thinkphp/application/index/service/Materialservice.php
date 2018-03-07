@@ -139,9 +139,6 @@ class Materialservice  {
         $message['status'] = 'success';
         $message['route'] = 'index';
 
-        // 获取public/index.php所在路径
-        $message['host'] = __ROOT__;
-
         // 接受传来的素材id
         $materialId = $param->param('materialId/d');
 
