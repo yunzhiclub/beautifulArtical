@@ -47,6 +47,25 @@ class ArticleController extends IndexController {
 	    $this->assign('articles', $articles);
 		return $this->fetch();
 	}
+
+    // 文章克隆
+    public function cloneArtical() {
+        // 接受传入的文章id
+        $articalId = Request::instance()->param('articleId/d');
+
+        $message = $this->articleService->cloneArticle($articalId);
+        
+        var_dump($message);
+        //返回相应的界面
+        if ($message['status'] === 'success') {
+            //跳转成功的界面
+            $this->success($message['message'], url('article/index'));
+        } else {
+            //跳转失败的界面
+            $this->error($message['message'], url('article/index'));
+        }
+    }
+
     // 返回firstadd界面
     public function firstadd(){
         // 获取所有定制师

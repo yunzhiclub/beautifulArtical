@@ -27,6 +27,18 @@ class Common
         }
     }
 
+    public static function mvImage($dir, $style, $id)
+    {
+        $fileDir = PUBLIC_PATH.DS.$style.DS.$id.DS;
+        if(!file_exists($fileDir))
+        {
+            mkdir($fileDir);
+        }
+        chmod($fileDir, 0777);
+        // copy(PUBLIC_PATH.DS.$dir, $fileDir);
+        return DS.$style.DS.$id.DS.$dir;
+    }
+
 
     // 删除指定文件夹下的图片
     public static function deleteImage($imagePath)
