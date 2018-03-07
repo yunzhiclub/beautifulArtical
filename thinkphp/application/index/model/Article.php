@@ -11,5 +11,11 @@ use think\Model;
 
 class Article extends Model
 {
-	
+	public function updateArticleByTitleAndSummery($title, $summery) {
+        // 设置字段，并保存
+        $this->title = $title;
+        $this->summery = $summery;
+        $this->save();
+        return $this;
+    }
 }

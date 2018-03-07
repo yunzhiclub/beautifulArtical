@@ -32,18 +32,14 @@ class ArticleService
      * @return Article
      * @throws \think\Exception\DbException
      */
-    public function updateArticleByIdAndTitleAndSummery($id, $title, $summery)
+    static public function updateArticleByIdAndTitleAndSummery($id, $title, $summery)
     {
         $article = Article::get($id);
         if (is_null($article)) {
             throw new DataNotFoundException("要更新的实体不存在或已删除");
         }
 
-        // 设置字段，并保存
-        $article->title = $title;
-        $article->summery = $summery;
-        $article->save();
-        return $article;
+        return $article->updateArticleByTitleAndSummery($title, $summery);
     }
 
     /*

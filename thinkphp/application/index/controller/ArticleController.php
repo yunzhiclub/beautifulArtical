@@ -171,8 +171,6 @@ class ArticleController extends IndexController {
         // 获取并传输plan
         $articleId = $param->param('articleId');
 
-        // 保存文章标题及摘要信息
-
         $Plan = new Plan();
         $Plan = $Plan->getPlanByArticleId($articleId);
 
