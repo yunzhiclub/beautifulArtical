@@ -12,7 +12,7 @@ use app\index\model\Attraction;
 use app\index\model\Hotel;
 use app\index\model\Plan;
 use app\index\model\Paragraph;
-use app\index\service\Articleservice;
+use app\index\service\ArticleService;
 use app\index\service\PlanService;
 
 /**
@@ -32,7 +32,7 @@ class ArticleController extends IndexController {
     {
         parent::__construct($request);
         //实例化服务层
-        $this->articleService = new Articleservice();
+        $this->articleService = new ArticleService();
         $this->filter = new Filter();
     }
 
@@ -181,6 +181,7 @@ class ArticleController extends IndexController {
             $this->error($message['message']);
         }
     }
+
     // 返回secondadd界面
     public function secondadd(){
         // 接收参数
@@ -188,6 +189,8 @@ class ArticleController extends IndexController {
 
         // 获取并传输plan
         $articleId = $param->param('articleId');
+        $article = ArticleService::findById($articleId);
+
         $Plan = new Plan();
         $Plan = $Plan->getPlanByArticleId($articleId);
 
@@ -204,6 +207,7 @@ class ArticleController extends IndexController {
         // 调用service中的保存方法
         $message = $this->articleService->secondAriticle($param);
         // 将serve中处理的数据传给前台
+        $this->assign('article', $article);
         // 标题
         $this->assign('title', $message['title']);
         // 摘要
