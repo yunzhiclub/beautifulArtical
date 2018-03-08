@@ -1,4 +1,6 @@
-package com.mengyunzhi.article.repository;
+package com.mengyunzhi.article.entity;
+
+import com.mengyunzhi.article.entity.Article;
 
 import javax.persistence.*;
 import java.sql.Date;

@@ -33,7 +33,7 @@
     <script src="{:__ROOT__}/style/js/custom.js"></script>
 </head>
 
-<body class="bg" style="overflow-x: hidden;position: absolute" onload="calculate({$adultNum}, {$childNum})">
+<body class="bg" style="overflow-x: hidden;position: absolute">
     <div class="agile-main">
         <div class="content-wrap">
             <!-- 紫色顶部 -->
@@ -185,30 +185,14 @@
                             <th width="25%">儿童</th>
                             <th width="32%">备注</th>
                         </tr>
-                        <tr>
-                            <td>机票</td>
-                            <td id="planeAdultUnitPrice" style="word-break: break-all;">{$plan->getDetail('plane', $plan)->adult_unit_price | $filter->moneyFilter}</td>
-                            <td id="planeChildUnitPrice" style="word-break: break-all;">{$plan->getDetail('plane', $plan)->child_unit_price | $filter->moneyFilter}</td>
-                            <td style="word-break: break-all;">{$plan->getDetail('plane', $plan)->remark}</td>
+                        {volist name="$plan->getRelevantDetails()" id="detail"}
+                        <tr class="details">
+                            <td>{$detail->designation}</td>
+                            <td style="word-break: break-all;">{$detail->adult_unit_price | $filter->moneyFilter}</td>
+                            <td style="word-break: break-all;">{$detail->child_unit_price | $filter->moneyFilter}</td>
+                            <td style="word-break: break-all;">{$detail->remark}</td>
                         </tr>
-                        <tr>
-                            <td>签证</td>
-                            <td id="visaAdultUnitPrice" style="word-break: break-all;">{$plan->getDetail('visa', $plan)->adult_unit_price | $filter->moneyFilter}</td>
-                            <td id="visaChildUnitPrice" style="word-break: break-all;">{$plan->getDetail('visa', $plan)->child_unit_price | $filter->moneyFilter}</td>
-                            <td style="word-break: break-all;">{$plan->getDetail('visa', $plan)->remark}</td>
-                        </tr>
-                        <tr>
-                            <td>旅游</td>
-                            <td id="tourismAdultUnitPrice" style="word-break: break-all;">{$plan->getDetail('tourism', $plan)->adult_unit_price | $filter->moneyFilter}</td>
-                            <td id="tourismChildUnitPrice" style="word-break: break-all;">{$plan->getDetail('tourism', $plan)->child_unit_price | $filter->moneyFilter}</td>
-                            <td style="word-break: break-all;">{$plan->getDetail('tourism', $plan)->remark}</td>
-                        </tr>
-                        <tr>
-                            <td>保险</td>
-                            <td id="insuranceAdultUnitPrice" style="word-break: break-all;">{$plan->getDetail('insurance', $plan)->adult_unit_price | $filter->moneyFilter}</td>
-                            <td id="insuranceChildUnitPrice" style="word-break: break-all;">{$plan->getDetail('insurance', $plan)->child_unit_price | $filter->moneyFilter}</td>
-                            <td style="word-break: break-all;">{$plan->getDetail('insurance', $plan)->remark}</td>
-                        </tr>
+                        {/volist}
                         <tr>
                             <td>总价</td>
                             <td id="adultTotalPrice" style="word-break: break-all;"></td>
@@ -318,54 +302,100 @@ function beforeCloseCallback(el) {
     console.log(el)
 }
 
-function calculate(adult_num, child_num) {
-    /* 成人机票、签证、旅游、保险单价 */
-    var plane_adult_unit_price = document.getElementById('planeAdultUnitPrice').innerHTML;
-    var visa_adult_unit_price = document.getElementById("visaAdultUnitPrice").innerHTML;
-    var tourism_adult_unit_price = document.getElementById('tourismAdultUnitPrice').innerHTML;
-    var insurance_adult_unit_price = document.getElementById('insuranceAdultUnitPrice').innerHTML;
+// function calculate(adult_num, child_num) {
+//     /* 成人机票、签证、旅游、保险单价 */
+//     var plane_adult_unit_price = document.getElementById('planeAdultUnitPrice').innerHTML;
+//     var visa_adult_unit_price = document.getElementById("visaAdultUnitPrice").innerHTML;
+//     var tourism_adult_unit_price = document.getElementById('tourismAdultUnitPrice').innerHTML;
+//     var insurance_adult_unit_price = document.getElementById('insuranceAdultUnitPrice').innerHTML;
+//
+//     /* 成人总价 */
+//     var adult_total_price = (parseFloat(plane_adult_unit_price) + parseFloat(visa_adult_unit_price) + parseFloat(tourism_adult_unit_price) + parseFloat(insurance_adult_unit_price)) * parseFloat(adult_num);
+//     /* 金钱格式化 */
+//     adult_total_price = adult_total_price.toString().replace(/\$|\,/g, '');
+//     sign = (adult_total_price == (adult_total_price = Math.abs(adult_total_price)));
+//     adult_total_price = Math.floor(adult_total_price * 100 + 0.50000000001);
+//     cents = adult_total_price % 100;
+//     adult_total_price = Math.floor(adult_total_price / 100).toString();
+//     if (cents < 10)
+//         cents = "0" + cents;
+//     for (var i = 0; i < Math.floor((adult_total_price.length - (1 + i)) / 3); i++)
+//         adult_total_price = adult_total_price.substring(0, adult_total_price.length - (4 * i + 3)) + ',' +
+//         adult_total_price.substring(adult_total_price.length - (4 * i + 3));
+//     adult_total_price = (((sign) ? '' : '-') + adult_total_price + '.' + cents);
+//     document.getElementById('adultTotalPrice').innerHTML = adult_total_price;
+//
+//     /* 儿童机票、签证、旅游、保险单价 */
+//     var plane_child_unit_price = document.getElementById('planeChildUnitPrice').innerHTML;
+//     var visa_child_unit_price = document.getElementById("visaChildUnitPrice").innerHTML;
+//     var tourism_child_unit_price = document.getElementById('tourismChildUnitPrice').innerHTML;
+//     var insurance_child_unit_price = document.getElementById('insuranceChildUnitPrice').innerHTML;
+//
+//     /* 儿童总价 */
+//     var child_total_price = (parseFloat(plane_child_unit_price) + parseFloat(visa_child_unit_price) + parseFloat(tourism_child_unit_price) + parseFloat(insurance_child_unit_price)) * parseFloat(child_num);
+//     /* 金钱格式化 */
+//     child_total_price = child_total_price.toString().replace(/\$|\,/g, '');
+//     sign = (child_total_price == (child_total_price = Math.abs(child_total_price)));
+//     child_total_price = Math.floor(child_total_price * 100 + 0.50000000001);
+//     cents = child_total_price % 100;
+//     child_total_price = Math.floor(child_total_price / 100).toString();
+//     if (cents < 10)
+//         cents = "0" + cents;
+//     for (var i = 0; i < Math.floor((child_total_price.length - (1 + i)) / 3); i++)
+//         child_total_price = child_total_price.substring(0, child_total_price.length - (4 * i + 3)) + ',' +
+//         child_total_price.substring(child_total_price.length - (4 * i + 3));
+//     child_total_price = (((sign) ? '' : '-') + child_total_price + '.' + cents);
+//     document.getElementById('childTotalPrice').innerHTML = child_total_price;
+// }
 
-    /* 成人总价 */
-    var adult_total_price = (parseFloat(plane_adult_unit_price) + parseFloat(visa_adult_unit_price) + parseFloat(tourism_adult_unit_price) + parseFloat(insurance_adult_unit_price)) * parseFloat(adult_num);
-    /* 金钱格式化 */
-    adult_total_price = adult_total_price.toString().replace(/\$|\,/g, '');
-    sign = (adult_total_price == (adult_total_price = Math.abs(adult_total_price)));
-    adult_total_price = Math.floor(adult_total_price * 100 + 0.50000000001);
-    cents = adult_total_price % 100;
-    adult_total_price = Math.floor(adult_total_price / 100).toString();
-    if (cents < 10)
-        cents = "0" + cents;
-    for (var i = 0; i < Math.floor((adult_total_price.length - (1 + i)) / 3); i++)
-        adult_total_price = adult_total_price.substring(0, adult_total_price.length - (4 * i + 3)) + ',' +
-        adult_total_price.substring(adult_total_price.length - (4 * i + 3));
-    adult_total_price = (((sign) ? '' : '-') + adult_total_price + '.' + cents);
-    document.getElementById('adultTotalPrice').innerHTML = adult_total_price;
-
-    /* 儿童机票、签证、旅游、保险单价 */
-    var plane_child_unit_price = document.getElementById('planeChildUnitPrice').innerHTML;
-    var visa_child_unit_price = document.getElementById("visaChildUnitPrice").innerHTML;
-    var tourism_child_unit_price = document.getElementById('tourismChildUnitPrice').innerHTML;
-    var insurance_child_unit_price = document.getElementById('insuranceChildUnitPrice').innerHTML;
-
-    /* 儿童总价 */
-    var child_total_price = (parseFloat(plane_child_unit_price) + parseFloat(visa_child_unit_price) + parseFloat(tourism_child_unit_price) + parseFloat(insurance_child_unit_price)) * parseFloat(child_num);
-    /* 金钱格式化 */
-    child_total_price = child_total_price.toString().replace(/\$|\,/g, '');
-    sign = (child_total_price == (child_total_price = Math.abs(child_total_price)));
-    child_total_price = Math.floor(child_total_price * 100 + 0.50000000001);
-    cents = child_total_price % 100;
-    child_total_price = Math.floor(child_total_price / 100).toString();
-    if (cents < 10)
-        cents = "0" + cents;
-    for (var i = 0; i < Math.floor((child_total_price.length - (1 + i)) / 3); i++)
-        child_total_price = child_total_price.substring(0, child_total_price.length - (4 * i + 3)) + ',' +
-        child_total_price.substring(child_total_price.length - (4 * i + 3));
-    child_total_price = (((sign) ? '' : '-') + child_total_price + '.' + cents);
-    document.getElementById('childTotalPrice').innerHTML = child_total_price;
-}
 // 获取当前年份显示在脚标位置
 var myDate = new Date();
 document.getElementById("year").innerText = myDate.getFullYear();
+
+/**
+ * 在网上找的一个金钱过滤器
+ * 没有深究实现，直接就拿过来用了
+ * @type {RegExp}
+ */
+const digitsRE = /(\d{3})(?=\d)/g;
+
+function currency(value, decimals) {
+    value = parseFloat(value);
+    if (!isFinite(value) || (!value && value !== 0))
+        return '';
+    decimals = decimals != null ? decimals : 2;
+    var stringified = Math.abs(value).toFixed(decimals)
+    var _int = decimals ? stringified.slice(0, -1 - decimals) : stringified;
+    var i = _int.length % 3;
+    var head = i > 0 ? (_int.slice(0, i) + (_int.length > 3 ? ',' : '')) : '';
+    var _float = decimals ? stringified.slice(-1 - decimals) : '';
+    var sign = value < 0 ? '-' : '';
+    return sign + head + _int.slice(i).replace(digitsRE, '$1,') + _float;
+}
+
+/**
+ * 计算总价
+ */
+var calculate = function() {
+    var adult_num = {$plan->adult_num};         // 获取成人数
+    var child_num = {$plan->child_num};         // 获取儿童数
+    var adult_sum = 0;                          // 初始化总价
+    var child_sum = 0;                          // 初始化总价
+    var details   = $('.details');              // 获取报价方案
+    var length    = details.length;             // 获取长度
+    for(var i = 0; i < length; i ++) {
+        var adult_unit_price = parseFloat(details[i].children[1].innerHTML);     // 获取成人单价
+        var child_unit_price = parseFloat(details[i].children[2].innerHTML);     // 获取儿童单价
+        adult_sum += adult_unit_price;          // 累加
+        child_sum += child_unit_price;          // 累加
+    }
+    adult_sum *= adult_num;                     // 乘以人数得到最终总价
+    child_sum *= child_num;                     // 乘以人数得到最终总价
+    $('#adultTotalPrice').append(currency(adult_sum));   // 追加到HTML中
+    $('#childTotalPrice').append(currency(child_sum));   // 追加到HTML中
+};
+
+calculate();
 </script>
 
 </html>

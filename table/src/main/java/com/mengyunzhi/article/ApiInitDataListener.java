@@ -1,8 +1,8 @@
 package com.mengyunzhi.article;
 
-import com.mengyunzhi.article.repository.Paragraph;
+import com.mengyunzhi.article.entity.Paragraph;
 import com.mengyunzhi.article.repository.ParagraphRepository;
-import com.mengyunzhi.article.repository.User;
+import com.mengyunzhi.article.entity.User;
 import com.mengyunzhi.article.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

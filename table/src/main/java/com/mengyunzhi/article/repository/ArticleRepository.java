@@ -1,5 +1,6 @@
 package com.mengyunzhi.article.repository;
 
+import com.mengyunzhi.article.entity.Article;
 import org.springframework.data.repository.CrudRepository;
 
 /**
