@@ -15,6 +15,14 @@ class Plan extends Model
         return $this->where('article_id','=',$articleId)->find();
     }
 
+    /**
+     * 获取相关的报价方案信息
+     * @return false|\PDOStatement|string|\think\Collection
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     * zhangxishuo
+     */
     public function getRelevantDetails() {
         $planId = $this->id;
         $details = Detail::where('plan_id', $planId)->select();

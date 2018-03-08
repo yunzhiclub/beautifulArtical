@@ -1,5 +1,5 @@
 {extend name="index"} {block name="title"}文章编辑{/block} {block name="content"}
-<script type="text/javascript" src="{:__ROOT__}/style/js/Calculation.js"></script>
+<!-- <script type="text/javascript" src="{:__ROOT__}/style/js/Calculation.js"></script> | 此处不再需要计算总价-->
 <!-- 报价逻辑 -->
 <script type="text/javascript" src="{:__ROOT__}/style/js/quoteService.js"></script>
 <div class="col-md-8 col-md-offset-1" style="margin-top: 10px;min-height: 730px;">
@@ -174,17 +174,13 @@
                                             <label>名称</label>
                                             <input type="text" class="form-control" value="{$detail->designation}" name="designation[]">
                                         </div>
-                                        <div class="form-group col-md-2">
+                                        <div class="form-group col-md-3">
                                             <label>成人单价</label>
                                             <input type="text" class="form-control" value="{$detail->adult_unit_price}" name="adultUnitPrice[]">
                                         </div>
-                                        <div class="form-group col-md-2">
+                                        <div class="form-group col-md-3">
                                             <label>儿童单价</label>
                                             <input type="text" class="form-control" value="{$detail->child_unit_price}" name="childUnitPrice[]">
-                                        </div>
-                                        <div class="form-group col-md-2">
-                                            <label>总价</label>
-                                            <input type="text" class="form-control" value="{$detail->total_price}" name="totalPrice[]" readonly>
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label>备注</label>
