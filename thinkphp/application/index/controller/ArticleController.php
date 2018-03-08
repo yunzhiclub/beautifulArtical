@@ -326,7 +326,8 @@ class ArticleController extends IndexController {
         $contractorId = $Article->contractor_id;
         $Contractor = Contractor::get($contractorId);
 
-        $Plans = Plan::where('article_id',$articleId)->select();
+        $Plans  = Plan::where('article_id',$articleId)->select();
+        $covers = $Article->getArticleCover();
         
         $paragraphUps = Paragraph::where('is_before_attraction',1)->where('article_id',$articleId)->order('weight desc')->select();
         $paragraphDowns = Paragraph::where('is_before_attraction',0)->where('article_id',$articleId)->order('weight desc')->select();
@@ -338,6 +339,7 @@ class ArticleController extends IndexController {
         $this->assign('paragraphUps',$paragraphUps);
         $this->assign('paragraphDowns',$paragraphDowns);
         $this->assign('filter', new Filter());
+        $this->assign('covers', $covers);
 
         // 无方案报价，成人数和儿童数初始化为0
         if (empty($Plans)) {
