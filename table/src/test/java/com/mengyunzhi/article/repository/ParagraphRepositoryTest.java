@@ -1,21 +1,14 @@
 package com.mengyunzhi.article.repository;
 
+import com.mengyunzhi.article.ArticleApplicationTests;
 import com.mengyunzhi.article.entity.Article;
 import com.mengyunzhi.article.entity.Paragraph;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
-
-import javax.transaction.Transactional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
-@Transactional
-public class ParagraphRepositoryTest {
+public class ParagraphRepositoryTest extends ArticleApplicationTests {
     @Autowired
     ParagraphRepository paragraphRepository;
     @Autowired

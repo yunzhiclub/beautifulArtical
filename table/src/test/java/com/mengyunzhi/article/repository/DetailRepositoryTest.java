@@ -1,14 +1,10 @@
 package com.mengyunzhi.article.repository;
 
+import com.mengyunzhi.article.ArticleApplicationTests;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
-public class DetailRepositoryTest {
+public class DetailRepositoryTest extends ArticleApplicationTests {
 
     @Autowired
     private DetailRepository detailRepository;
