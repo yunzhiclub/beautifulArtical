@@ -1,5 +1,6 @@
 package com.mengyunzhi.article.repository;
 
+import com.mengyunzhi.article.entity.Material;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

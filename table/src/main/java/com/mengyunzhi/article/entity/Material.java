@@ -1,4 +1,4 @@
-package com.mengyunzhi.article.repository;
+package com.mengyunzhi.article.entity;
 
 import javax.persistence.*;
 
