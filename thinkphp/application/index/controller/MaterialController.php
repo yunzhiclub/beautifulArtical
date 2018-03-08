@@ -97,7 +97,11 @@ class MaterialController extends IndexController {
         $param = Request::instance();
         // 调用service中的编辑方法
         $message =  $this->materialService->materialEdit($param);
+        // 获取public/index.php所在路径
+        $host = $param->root(true);
+
         // 传递素材信息到v层
+        $this->assign('host', $host);
         $this->assign('material', $message['material']);
         $this->assign('images', $message['images']);
         return $this->fetch();
