@@ -11,6 +11,7 @@ use app\index\model\Plan;
 use app\index\model\Contractor;
 use app\index\model\Material;
 use app\index\model\Detail;
+use app\index\model\AttractionMaterial;
 use app\index\service\AttractionService;
 use app\index\filter\Filter;
 use think\db\exception\DataNotFoundException;
@@ -502,6 +503,103 @@ class ArticleService
         $articles = Article::order('id desc')->paginate($pageSize);
         return $articles;
     }
+    /**
+     * 朱晨澍
+     * 克隆文章
+     * @param  $articleId  文章id
+     * @return $message
+     * $message['message'] 提示信息
+     * $message['status'] 状态，成功为success，失败为error
+     */
+    public function cloneArticle($articalId) {
+        $message = [];
+        $message['message'] = '克隆成功';
+        $message['status'] = 'success';
+
+        // 根据传入的文章id找到要克隆的文章
+        $Artical = Article::get($articalId);
+        // 创建新的文章，并增加相关属性
+        $n = serialize($Artical);
+        $newArtical = unserialize($n);
+        $newArtical['id'] = null;
+        $newArtical['cover'] = Common::mvImage($Artical['cover'], 'article', $Artical['id']);
+        $newArtical['title'] = '新建文章';
+
+        if($newArtical->isUpdate(false)->save()) {
+            // 找出原文章所关联的行程，并进行复制
+            $Attractions = Attraction::where('article_id',$articalId)->select();
+            foreach ($Attractions as $Attraction) {
+                $n = serialize($Attraction);
+                $newAttraction = unserialize($n);
+
+                $newAttraction->id = null;
+                $newAttraction->article_id = $newArtical['id'];
+                $newAttraction['cover'] = Common::mvImage($Attraction['cover'], 'attraction', $Attraction['id']);
+
+                if(!$newAttraction->isUpdate(false)->save()) {
+                    $message['message'] = '克隆失败';
+                    $message['status'] = 'error';
+                    return $message;
+                }
+
+                // 找出原行程所关联的素材，并进行复制
+                $AttractionMaterials = AttractionMaterial::where('attraction_id',$Attraction->id)->select();
+                foreach ($AttractionMaterials as $AttractionMaterial) {
+                    $n = serialize($AttractionMaterial);
+                    $newAttractionMaterial = unserialize($n);
+
+                    $newAttractionMaterial->attraction_id = $newAttraction->id;
+
+
+                    if(!$newAttractionMaterial->isUpdate(false)->save()) {
+                        $message['message'] = '克隆失败';
+                        $message['status'] = 'error';
+                        return $message;
+                    }
+                }
+            }
+
+            // 找出原文章所关联的段落，并进行复制
+            $Paragraphs = Paragraph::where('article_id',$articalId)->select();
+            foreach ($Paragraphs as $Paragraph) {
+                $n = serialize($Paragraph);
+                $newParagraph = unserialize($n);
+
+                $newParagraph->id = null;
+                $newParagraph->article_id = $newArtical['id'];
+                $newParagraph['image'] = Common::mvImage($Paragraph['image'], 'paragraph', $Paragraph['id']);
+
+                if(!$newParagraph->isUpdate(false)->save()) {
+                    $message['message'] = '克隆失败';
+                    $message['status'] = 'error';
+                    return $message;
+                }
+            }
+            // 找出原文章所关联的报价，并进行复制
+            $Plans = Plan::where('article_id',$articalId)->select();
+            foreach ($Plans as $Plan) {
+
+                $n = serialize($Plan);
+                $newPlan = unserialize($n);
+
+                $newPlan->id = null;
+                $newPlan->article_id = $newArtical['id'];
+
+                if(!$newPlan->isUpdate(false)->save()) {
+                    $message['message'] = '克隆失败';
+                    $message['status'] = 'error';
+                    return $message;
+                }
+            }
+        } else {
+            $message['message'] = '克隆失败';
+            $message['status'] = 'error';
+            return $message;
+        }
+
+        return $message;
+    }
+    
 }
  
 
