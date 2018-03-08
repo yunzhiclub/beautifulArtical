@@ -636,7 +636,6 @@ class ArticleService
         //从数据库取出数据
         $article = Article::get($articleId);
         $images = json_decode($article->cover);
-        var_dump($images);
 
         $imagePath =  PUBLIC_PATH . '/' .$images[$key - 1];
         //删除图片
@@ -661,7 +660,7 @@ class ArticleService
         $article->cover = json_encode($images);
 
         //从数据库更新数据
-        if (!$article->validate(true)->save()) {
+        if (!$article->save()) {
             $message['status'] = 'error';
         }
 

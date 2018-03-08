@@ -172,7 +172,7 @@ function deleteImage(key, articleId) {
     console.log(articleId);
     $.ajax({
         url: url,
-        type: "get",
+        type: "GET",
         success: function(response) {
             if (response.status === "success") {
                 //刷新当前界面

@@ -381,7 +381,7 @@ class ArticleController extends IndexController {
     // 封面图片删除
     public function deleteImage() {
         $param = Request::instance();
-        $message = $this->ArticleService->deleteImage($param);
+        $message = $this->articleService->deleteImage($param);
 
         //返回相关的消息
         return $message;
