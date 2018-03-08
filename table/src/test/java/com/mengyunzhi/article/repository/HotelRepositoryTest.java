@@ -1,19 +1,13 @@
 package com.mengyunzhi.article.repository;
 
+import com.mengyunzhi.article.ArticleApplicationTests;
+import com.mengyunzhi.article.entity.Hotel;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
-
-import javax.transaction.Transactional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
-@Transactional
-public class HotelRepositoryTest {
+public class HotelRepositoryTest extends ArticleApplicationTests {
     @Autowired
     private HotelRepository hotelRepository;
 

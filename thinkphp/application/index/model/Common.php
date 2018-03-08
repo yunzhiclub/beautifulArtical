@@ -7,6 +7,14 @@ use think\File;
 
 class Common
 {
+
+    // 通过序列化与反序列化拷贝对象
+    public static function deepCopy($oldObject) {
+        $n = serialize($oldObject);
+        $newObject = unserialize($n);
+        return $newObject;
+    }
+
     /**
      * Created by PhpStorm.
      * User: zhangxishuo
@@ -26,19 +34,28 @@ class Common
             return $file->getError();
         }
     }
-
+    /**
+     * Created by PhpStorm.
+     * User: zhuchenshu
+     * @uploadImage 克隆图片,将克隆后的图片放在upload/$style/$id/里面
+     * @param $dir 原图片地址, $style 上传图片类型, $id上传读片所属类型id
+     * @return 文件存储后的路径
+     */
     public static function mvImage($dir, $style, $id)
     {
         $fileDir = PUBLIC_PATH.DS.$style.DS.$id.DS;
-        $clone = 'clone';
-        if(!file_exists($fileDir))
-        {
-            mkdir($fileDir);
-            fopen($fileDir.$clone, 'w');
+
+        if (!is_null($dir)) {
+            if(!file_exists($fileDir)) {
+                mkdir($fileDir,0777,true);
+                fopen($fileDir.'clone', 'w');
+            }
+            
+            copy(PUBLIC_PATH.DS.$dir, $fileDir.'clone');
+            return DS.$style.DS.$id.DS.'clone';
         }
-        chmod($fileDir, 0777);
-        copy(PUBLIC_PATH.DS.$dir, $fileDir.$clone);
-        return DS.$style.DS.$id.DS.$clone;
+        
+        return null;
     }
 
 

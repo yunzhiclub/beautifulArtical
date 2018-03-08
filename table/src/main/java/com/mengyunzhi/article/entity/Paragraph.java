@@ -1,5 +1,6 @@
-package com.mengyunzhi.article.repository;
+package com.mengyunzhi.article.entity;
 
+import com.mengyunzhi.article.entity.Article;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;

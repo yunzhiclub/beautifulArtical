@@ -56,7 +56,7 @@ class AttractionService {
         // 图片上传
         if (!empty($image)) {
             $imagePath = Common::uploadImage($image);
-            $Attraction->image = json_encode($imagePath);
+            $Attraction->image = $imagePath;
         } else {
             $Attraction->image = '';
         }
@@ -158,12 +158,11 @@ class AttractionService {
         return $message;
     }
 
-    public function deleteAttraction($param) {
+    public function deleteAttraction($attractionId) {
         $message = [];
         $message['status']  = 'success';
         $message['message'] = '删除成功';
-
-        $attractionId = $param->param('attractionId');
+        
         $Attraction = Attraction::get($attractionId);
 
         $map = ['attraction_id' => $attractionId];

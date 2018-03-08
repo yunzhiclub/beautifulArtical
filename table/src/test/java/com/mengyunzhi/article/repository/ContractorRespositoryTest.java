@@ -1,10 +1,9 @@
 package com.mengyunzhi.article.repository;
 
+import com.mengyunzhi.article.ArticleApplicationTests;
+import com.mengyunzhi.article.entity.Contractor;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -12,9 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * Created by Poshichao on 17/8/29.
  */
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
-public class ContractorRespositoryTest {
+public class ContractorRespositoryTest extends ArticleApplicationTests {
     @Autowired
     private ContractorRespository contractorRespository;
 

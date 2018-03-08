@@ -1,4 +1,4 @@
-package com.mengyunzhi.article.repository;
+package com.mengyunzhi.article.entity;
 
 import org.hibernate.annotations.ColumnDefault;
 
@@ -6,19 +6,20 @@ import javax.persistence.*;
 import java.text.DecimalFormat;
 
 @Entity
-@DiscriminatorColumn(name="db_type")
 public class Detail {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    private String designation;             // 名称
     private DecimalFormat adultUnitPrice;   // 成人单价
     private DecimalFormat childUnitPrice;   // 儿童单价
-    private DecimalFormat totalPrice; //总价
-    @ColumnDefault("'无'")
-    private String remark; // 备注
+    private DecimalFormat totalPrice;       // 总价
 
-    @ManyToOne          //关联Plan实体
-    private Plan plan;
+    @ColumnDefault("'无'")
+    private String remark;                  // 备注
+
+    @ManyToOne
+    private Plan plan;                      // 关联Plan实体
 
     public Detail() {
     }
@@ -29,6 +30,14 @@ public class Detail {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getDesignation() {
+        return designation;
+    }
+
+    public void setDesignation(String designation) {
+        this.designation = designation;
     }
 
     public DecimalFormat getAdultUnitPrice() {
@@ -69,17 +78,5 @@ public class Detail {
 
     public void setPlan(Plan plan) {
         this.plan = plan;
-    }
-
-    @Override
-    public String toString() {
-        return "Detail{" +
-                "id=" + id +
-                ", adultUnitPrice=" + adultUnitPrice +
-                ", childUnitPrice=" + childUnitPrice +
-                ", totalPrice=" + totalPrice +
-                ", remark='" + remark + '\'' +
-                ", plan=" + plan +
-                '}';
     }
 }
