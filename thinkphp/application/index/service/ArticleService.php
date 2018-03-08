@@ -597,7 +597,7 @@ class ArticleService
                 $newParagraph->id = null;
                 $newParagraph->article_id = $newArtical['id'];
                 $newParagraph['image'] = Common::mvImage($Paragraph['image'], 'paragraph', $Paragraph['id']);
-
+                
                 if(!$newParagraph->isUpdate(false)->save()) {
                     return false;
                 }

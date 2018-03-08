@@ -47,7 +47,7 @@ class Common
 
         if (!is_null($dir)) {
             if(!file_exists($fileDir)) {
-                mkdir($fileDir);
+                mkdir($fileDir,0777,true);
                 fopen($fileDir.'clone', 'w');
             }
             
