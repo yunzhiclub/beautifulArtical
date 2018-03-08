@@ -2,8 +2,7 @@
 <div class="col-md-8 col-md-offset-1" style="margin-top: 60px;min-height: 730px;">
     <div class="row">
         <h2><span class="glyphicon glyphicon-edit"></span>&nbsp;文章编辑</h2>
-        <br>
-        {php}$action = request()->action() === 'firstadd' ? 'savefirstadd' : 'updatefirstadd';{/php}
+        <br> {php}$action = request()->action() === 'firstadd' ? 'savefirstadd' : 'updatefirstadd';{/php}
         <form method="post" action="{:url ($action,['articleId'=>$articleId])}" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="TitleInput">标题</label>
@@ -29,14 +28,18 @@
                 });
                 </script>
             </div>
-            <div class="form-group">
-                <label for="exampleInputFile">封面</label>
-                <input type="file" class="image-file" name="image" onchange="checkImg()">
-                {eq name="$cover" value=""} {else /}
-                <img src="{:__ROOT__}/upload/{$cover}" style="height: 100px; width: 180px; " alt=""> {/eq}
+            <div class="row">
+                {eq name = "$action" value = "updatefirstadd"} {volist name = "covers" id = "cover"}
+                <div class="form-group col-md-4">
+                    <img src="{:__ROOT__}/upload/{$cover}" style="height: 100px; width: 200px;" id="{$i}">
+                    <button class="btn btn-xs btn-danger" type="button" onclick="deleteImage({$i}, {$articleId})" id="but_{$i}"><i class="glyphicon glyphicon-trash"></i>&nbsp;删除</button>
+                </div>
+                {/volist} {/eq}
             </div>
-           
-            
+            <div class="form-group">
+                <label for="input-b3">上传图片(最多{:config('maxImage.coverCount')}张)</label>
+                <input id="input-b3" name="images[]" type="file" class="file" multiple data-show-upload="false" data-show-caption="true">
+            </div>
             <br>
             <div class="form-group">
                 <span class="span6">
@@ -50,14 +53,10 @@
                     </select>
                 </span>
             </div>
-            
-             <div class="form-group">
+            <div class="form-group">
                 <label for="torvelRoutes">路线图</label>
-                <input type="file" id="torvelRoutes" name="routes" class="image-file">
-
-                {eq name="$route" value="1"}{else /} 
-                <img src="{:__ROOT__}/upload/{$route}" style="height: 100px; width: 180px; " alt="">
-                {/eq}
+                <input type="file" id="torvelRoutes" name="routes" class="image-file"> {eq name="$route" value="1"}{else /}
+                <img src="{:__ROOT__}/upload/{$route}" style="height: 100px; width: 180px; " alt=""> {/eq}
             </div>
             <div class="form-group row">
                 <div class="col-md-2">
@@ -65,9 +64,8 @@
                 </div>
                 <div class="col-md-2">
                     <label>
-                        <input type="checkbox" name="optionsRadios" id="optionsRadios1" value="1" {eq name="$route" value="1"}{else /} checked {/eq} >&nbsp;&nbsp;是
+                        <input type="checkbox" name="optionsRadios" id="optionsRadios1" value="1" {eq name="$route" value="1" }{else /} checked {/eq}>&nbsp;&nbsp;是
                     </label>
-                    
                 </div>
             </div>
             <div class="form-group row">
@@ -76,9 +74,8 @@
                 </div>
                 <div class="col-md-2">
                     <label>
-                        <input type="checkbox" name="especialMassageService"  value="九大服务"{eq name="$service" value="1"} checked {/eq} >&nbsp;&nbsp;是
+                        <input type="checkbox" name="especialMassageService" value="九大服务" {eq name="$service" value="1" } checked {/eq}>&nbsp;&nbsp;是
                     </label>
-                    
                 </div>
             </div>
             <div class="form-group row">
@@ -87,9 +84,8 @@
                 </div>
                 <div class="col-md-2">
                     <label>
-                        <input type="checkbox" name="especialMassageQuality"  value="六大品质" {eq name="$quality" value="1"} checked {/eq}>&nbsp;&nbsp;是
+                        <input type="checkbox" name="especialMassageQuality" value="六大品质" {eq name="$quality" value="1" } checked {/eq}>&nbsp;&nbsp;是
                     </label>
-                    
                 </div>
             </div>
             <div class="form-group row">
@@ -98,9 +94,8 @@
                 </div>
                 <div class="col-md-2">
                     <label>
-                        <input type="checkbox" name="especialMassageQuotes"  value="报价说明"{eq name="$quotes" value="1"} checked {/eq} >&nbsp;&nbsp;是
+                        <input type="checkbox" name="especialMassageQuotes" value="报价说明" {eq name="$quotes" value="1" } checked {/eq}>&nbsp;&nbsp;是
                     </label>
-                    
                 </div>
             </div>
             <div class="form-group row">
@@ -109,9 +104,8 @@
                 </div>
                 <div class="col-md-2">
                     <label>
-                        <input type="checkbox" name="especialMassageCost"  value="费用包括" {eq name="$cost" value="1"} checked {/eq} >&nbsp;&nbsp;是
+                        <input type="checkbox" name="especialMassageCost" value="费用包括" {eq name="$cost" value="1" } checked {/eq}>&nbsp;&nbsp;是
                     </label>
-                    
                 </div>
             </div>
             <div class="form-group row">
@@ -120,9 +114,8 @@
                 </div>
                 <div class="col-md-2">
                     <label>
-                        <input type="checkbox" name="especialMassageNoCost"  value="费用不包括" {eq name="$noCost" value="1"} checked {/eq} >&nbsp;&nbsp;是
+                        <input type="checkbox" name="especialMassageNoCost" value="费用不包括" {eq name="$noCost" value="1" } checked {/eq}>&nbsp;&nbsp;是
                     </label>
-                    
                 </div>
             </div>
             <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-arrow-right"></span>&nbsp;下一步</button>
@@ -132,22 +125,69 @@
     </div>
 </div>
 <script type="text/javascript">
-                var _URL = window.URL || window.webkitURL;
-                $('.image-file').bind('change', function() {
-                    if ((file = this.files[0])) {
-                        img = new Image();
-                        img.onload = function() {
-                            var width = this.width;
-                            var height = this.height;
-                            var ErrMsgErrMsg = "";//错误信息
-                            if (width > 2048 || height > 2048) {
-                                ErrMsgErrMsg = "图片过大,请选择其他图片！";
-                                alert(ErrMsgErrMsg);
-                                return false;
-                            }   // 判断图片大小是否符合
-                        };
-                        img.src = _URL.createObjectURL(file);     
-                    }
-                });
-                </script>
+// var _URL = window.URL || window.webkitURL;
+// $('.image-file').bind('change', function() {
+//     if ((file = this.files[0])) {
+//         img = new Image();
+//         img.onload = function() {
+//             var width = this.width;
+//             var height = this.height;
+//             var ErrMsgErrMsg = ""; //错误信息
+//             if (width > 2048 || height > 2048) {
+//                 ErrMsgErrMsg = "图片过大,请选择其他图片！";
+//                 alert(ErrMsgErrMsg);
+//                 return false;
+//             } // 判断图片大小是否符合
+//         };
+//         img.src = _URL.createObjectURL(file);
+//     }
+// });
+
+$("#input-b3").fileinput({
+    language: 'zh', //设置语言
+    uploadUrl: "./list.json", //上传的地址(访问接口地址)
+    allowedFileExtensions: ['jpg', 'gif', 'png'], //接收的文件后缀
+    dropZoneEnabled: false, //是否显示拖拽区域
+    maxFileSize: 2048, //单位为kb，如果为0表示不限制文件大小
+    maxFileCount: 10, //表示允许同时上传的最大文件个数
+    enctype: 'multipart/form-data',
+    validateInitialCount: true,
+    previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
+    msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！",
+    layoutTemplates: {
+        actionDelete: '',
+        actionUpload: '',
+        actionZoom: ''
+    }
+});
+
+//删除照片的ajax请求
+function deleteImage(key, articleId) {
+    //获取当前路径域名
+    var host = "{$host}";
+    //拼接路径
+    var url = host + "/index/article/deleteImage?articleId=" + articleId + "&imageKey=" + key;
+    //发送ajax请求
+    console.log(key);
+    console.log(articleId);
+    $.ajax({
+        url: url,
+        type: "get",
+        success: function(response) {
+            if (response.status === "success") {
+                //刷新当前界面
+                location.reload();
+                //隐藏相应的元素
+                var image = document.getElementById(key);
+                var buttom = document.getElementById("but_" + key);
+                image.style.visibility = 'hidden';
+                buttom.style.visibility = 'hidden';
+            }
+        },
+        error: function(xhr) {
+            alert("服务器内部发生错误");
+        }
+    });
+}
+</script>
 {/block}

@@ -73,17 +73,18 @@ class ArticleController extends IndexController {
         $this->assign('contractors',$contractors);
         // 定义初始化信息
 
-        $this->assign('title', '');
-        $this->assign('summery', '');
-        $this->assign('cover', '');
-        $this->assign('articleId', '');
-        $this->assign('contractorId', '');
-        $this->assign('route',1);
-        $this->assign('quality','');
-        $this->assign('service','');
-        $this->assign('quotes','');
-        $this->assign('cost','');
-        $this->assign('noCost','');
+        $this->assign('title', '');         // 标题
+        $this->assign('summery', '');       // 摘要
+        $this->assign('cover', '');         // 封面
+        $this->assign('articleId', '');     // 文章id
+        $this->assign('contractorId', '');  // 定制师id
+        $this->assign('route',1);           // 路线
+        $this->assign('quality','');        // 六大品质
+        $this->assign('service','');        // 九大服务
+        $this->assign('quotes','');         // 报价说明
+        $this->assign('cost','');           // 费用包含
+        $this->assign('noCost','');         // 费用不包含
+        $this->assign('host', '');
 
         return $this->fetch();  
     }
@@ -107,16 +108,23 @@ class ArticleController extends IndexController {
     }
     // 编辑firstadd界面 
     public function editfirstadd() {
-        $articleId = Request::instance()->param('articleId/d');
+        $param = Request::instance();
+        $articleId = $param->param('articleId/d');
         // 获取所有定制师
         $contractors = Contractor::all();
         $this->assign('contractors',$contractors);
 
         $Article = Article::get($articleId);
 
+        // 获取封面图片路径数组
+        $covers  = json_decode($Article->cover);
+        // 获取public/index.php所在路径
+        $host    = $param->root(true);
+
+        $this->assign('host', $host);
         $this->assign('title', $Article->title);
         $this->assign('summery', $Article->summery);
-        $this->assign('cover', $Article->cover);
+        $this->assign('covers', $covers);
         $this->assign('articleId', $articleId);
         $this->assign('contractorId', $Article->contractor_id);
 
@@ -366,5 +374,14 @@ class ArticleController extends IndexController {
         $this->assign('hotel', $Hotel);
 
         return $this->fetch();
+    }
+
+    // 封面图片删除
+    public function deleteImage() {
+        $param = Request::instance();
+        $message = $this->ArticleService->deleteImage($param);
+
+        //返回相关的消息
+        return $message;
     }
 }
