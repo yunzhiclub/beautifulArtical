@@ -635,7 +635,7 @@ class ArticleService
 
         //从数据库取出数据
         $article = Article::get($articleId);
-        $images = json_decode($article->cover);
+        $images = $article->getArticleCover();
 
         $imagePath =  PUBLIC_PATH . '/' .$images[$key - 1];
         //删除图片

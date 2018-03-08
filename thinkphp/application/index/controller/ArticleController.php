@@ -117,7 +117,12 @@ class ArticleController extends IndexController {
         $Article = Article::get($articleId);
 
         // 获取封面图片路径数组
-        $covers  = json_decode($Article->cover);
+        $covers  = $Article->getArticleCover();
+        // （解决历史遗留问题）封面不存在或封面路径不是数组
+        if (is_null($covers)) {
+            $covers = [];
+            array_push($covers, $Article->cover);
+        }
         // 获取public/index.php所在路径
         $host    = $param->root(true);
 
