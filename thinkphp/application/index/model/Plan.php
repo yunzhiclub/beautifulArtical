@@ -12,33 +12,39 @@ use app\index\model\Common;
 class Plan extends Model
 {
     public function getPlanByArticleId($articleId) {
-        return $this->where('article_id','=',$articleId)->select();
+        return $this->where('article_id','=',$articleId)->find();
     }
 
-    public function getDetail($type, $plan) {
-        $Detail = new Detail();
-
-        if (empty($plan->id) || empty($Detail->where('plan_id', $plan->id)->select())) {
-            // 不存在id，细节字段置空
-            $Detail->adult_unit_price = '';
-            $Detail->child_unit_price = '';
-            $Detail->total_price = '';
-            $Detail->remark = '';
-
-        }  else {
-            // 根据id和db_type获取细节
-            $Detail = $Detail->where('plan_id', $plan->id)->where('db_type', $type)->find();
-            if (empty($Detail)) {
-                $Detail = new Detail();
-                $Detail->adult_unit_price = '';
-                $Detail->child_unit_price = '';
-                $Detail->total_price = '';
-                $Detail->remark = '';
-            }
-        }
-
-        return $Detail;
+    public function getRelevantDetails() {
+        $planId = $this->id;
+        $details = Detail::where('plan_id', $planId)->select();
+        return $details;
     }
+
+//    public function getDetail($type, $plan) {
+//        $Detail = new Detail();
+//
+//        if (empty($plan->id) || empty($Detail->where('plan_id', $plan->id)->select())) {
+//            // 不存在id，细节字段置空
+//            $Detail->adult_unit_price = '';
+//            $Detail->child_unit_price = '';
+//            $Detail->total_price = '';
+//            $Detail->remark = '';
+//
+//        }  else {
+//            // 根据id和db_type获取细节
+//            $Detail = $Detail->where('plan_id', $plan->id)->where('db_type', $type)->find();
+//            if (empty($Detail)) {
+//                $Detail = new Detail();
+//                $Detail->adult_unit_price = '';
+//                $Detail->child_unit_price = '';
+//                $Detail->total_price = '';
+//                $Detail->remark = '';
+//            }
+//        }
+//
+//        return $Detail;
+//    }
 
     /**
      * 克隆一个日程实体

@@ -168,6 +168,30 @@
                                 <div class="control-group row" id="quoteGroup">
                                     <label>报价类别</label>
                                     <br><br>
+                                    {volist name="$plan->getRelevantDetails()" id="detail"}
+                                    <div class="row">
+                                        <div class="form-group col-md-3">
+                                            <label>名称</label>
+                                            <input type="text" class="form-control" value="{$detail->designation}" name="designation[]">
+                                        </div>
+                                        <div class="form-group col-md-2">
+                                            <label>成人单价</label>
+                                            <input type="text" class="form-control" value="{$detail->adult_unit_price}" name="adultUnitPrice[]">
+                                        </div>
+                                        <div class="form-group col-md-2">
+                                            <label>儿童单价</label>
+                                            <input type="text" class="form-control" value="{$detail->child_unit_price}" name="childUnitPrice[]">
+                                        </div>
+                                        <div class="form-group col-md-2">
+                                            <label>总价</label>
+                                            <input type="text" class="form-control" value="{$detail->total_price}" name="totalPrice[]" readonly>
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label>备注</label>
+                                            <input type="text" class="form-control" value="{$detail->remark}" name="remark[]">
+                                        </div>
+                                    </div>
+                                    {/volist}
                                 </div>
                                 <a class="btn btn-primary" id="newQuote"><i class="glyphicon glyphicon-plus"></i></a>
                                 <a class="btn btn-danger" id="removeQuote"><i class="glyphicon glyphicon-minus"></i></a>

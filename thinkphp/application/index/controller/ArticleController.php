@@ -200,7 +200,7 @@ class ArticleController extends IndexController {
             $plan = $planService->addPlan();
             $this->assign('plan', $plan);
         } else {
-            $this->assign('plan', $Plan[0]);
+            $this->assign('plan', $Plan);
         }
         //传输过滤器信息
         $this->assign('filter', $this->filter);

@@ -9,23 +9,23 @@ $(function() {
     var quote = '<div class="row">\n' +
         '    <div class="form-group col-md-3">\n' +
         '        <label>名称</label>\n' +
-        '        <input type="text" class="form-control">\n' +
+        '        <input type="text" class="form-control" name="designation[]">\n' +
         '    </div>\n' +
         '    <div class="form-group col-md-2">\n' +
         '        <label>成人单价</label>\n' +
-        '        <input type="text" class="form-control">\n' +
+        '        <input type="text" class="form-control" name="adultUnitPrice[]">\n' +
         '    </div>\n' +
         '    <div class="form-group col-md-2">\n' +
         '        <label>儿童单价</label>\n' +
-        '        <input type="text" class="form-control">\n' +
+        '        <input type="text" class="form-control" name="childUnitPrice[]">\n' +
         '    </div>\n' +
         '    <div class="form-group col-md-2">\n' +
         '        <label>总价</label>\n' +
-        '        <input type="text" class="form-control" readonly>\n' +
+        '        <input type="text" class="form-control" name="totalPrice[]" readonly>\n' +
         '    </div>\n' +
         '    <div class="form-group col-md-3">\n' +
         '        <label>备注</label>\n' +
-        '        <input type="text" class="form-control">\n' +
+        '        <input type="text" class="form-control" name="remark[]">\n' +
         '    </div>\n' +
         '</div>';
     /**

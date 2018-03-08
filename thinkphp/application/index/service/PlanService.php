@@ -14,6 +14,7 @@ class PlanService
         $Plan = new Plan();
 
         // 为方案报价所有字段置空
+        $Plan->id = null;
         $Plan->adult_num = '';
         $Plan->child_num = '';
         $Plan->currency = '';

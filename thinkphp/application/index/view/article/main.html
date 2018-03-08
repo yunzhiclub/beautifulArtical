@@ -185,30 +185,14 @@
                             <th width="25%">儿童</th>
                             <th width="32%">备注</th>
                         </tr>
+                        {volist name="$plan->getRelevantDetails()" id="detail"}
                         <tr>
-                            <td>机票</td>
-                            <td id="planeAdultUnitPrice" style="word-break: break-all;">{$plan->getDetail('plane', $plan)->adult_unit_price | $filter->moneyFilter}</td>
-                            <td id="planeChildUnitPrice" style="word-break: break-all;">{$plan->getDetail('plane', $plan)->child_unit_price | $filter->moneyFilter}</td>
-                            <td style="word-break: break-all;">{$plan->getDetail('plane', $plan)->remark}</td>
+                            <td>{$detail->designation}</td>
+                            <td style="word-break: break-all;">{$detail->adult_unit_price | $filter->moneyFilter}</td>
+                            <td style="word-break: break-all;">{$detail->child_unit_price | $filter->moneyFilter}</td>
+                            <td style="word-break: break-all;">{$detail->remark}</td>
                         </tr>
-                        <tr>
-                            <td>签证</td>
-                            <td id="visaAdultUnitPrice" style="word-break: break-all;">{$plan->getDetail('visa', $plan)->adult_unit_price | $filter->moneyFilter}</td>
-                            <td id="visaChildUnitPrice" style="word-break: break-all;">{$plan->getDetail('visa', $plan)->child_unit_price | $filter->moneyFilter}</td>
-                            <td style="word-break: break-all;">{$plan->getDetail('visa', $plan)->remark}</td>
-                        </tr>
-                        <tr>
-                            <td>旅游</td>
-                            <td id="tourismAdultUnitPrice" style="word-break: break-all;">{$plan->getDetail('tourism', $plan)->adult_unit_price | $filter->moneyFilter}</td>
-                            <td id="tourismChildUnitPrice" style="word-break: break-all;">{$plan->getDetail('tourism', $plan)->child_unit_price | $filter->moneyFilter}</td>
-                            <td style="word-break: break-all;">{$plan->getDetail('tourism', $plan)->remark}</td>
-                        </tr>
-                        <tr>
-                            <td>保险</td>
-                            <td id="insuranceAdultUnitPrice" style="word-break: break-all;">{$plan->getDetail('insurance', $plan)->adult_unit_price | $filter->moneyFilter}</td>
-                            <td id="insuranceChildUnitPrice" style="word-break: break-all;">{$plan->getDetail('insurance', $plan)->child_unit_price | $filter->moneyFilter}</td>
-                            <td style="word-break: break-all;">{$plan->getDetail('insurance', $plan)->remark}</td>
-                        </tr>
+                        {/volist}
                         <tr>
                             <td>总价</td>
                             <td id="adultTotalPrice" style="word-break: break-all;"></td>
