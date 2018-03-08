@@ -55,7 +55,6 @@ class ArticleController extends IndexController {
 
         $message = $this->articleService->cloneArticle($articalId);
         
-        var_dump($message);
         //返回相应的界面
         if ($message['status'] === 'success') {
             //跳转成功的界面
