@@ -433,7 +433,7 @@ class ArticleService
         $attractionService = new AttractionService();
         if (!is_null($Attractions)) {
             foreach ($Attractions as $Attraction) {
-                if (!$attractionService->deleteAttraction($param)) {
+                if (!$attractionService->deleteAttraction($Attraction['id'])) {
                     $message['message'] = '删除景点失败';
                     $message['status'] = 'error';
                 }
@@ -503,6 +503,7 @@ class ArticleService
         $articles = Article::order('id desc')->paginate($pageSize);
         return $articles;
     }
+
     /**
      * 朱晨澍
      * 克隆文章
@@ -513,33 +514,57 @@ class ArticleService
      */
     public function cloneArticle($articalId) {
         $message = [];
-        $message['message'] = '克隆成功';
-        $message['status'] = 'success';
+        $message['message'] = '克隆失败';
+        $message['status'] = 'error';
 
         // 根据传入的文章id找到要克隆的文章
         $Artical = Article::get($articalId);
         // 创建新的文章，并增加相关属性
-        $n = serialize($Artical);
-        $newArtical = unserialize($n);
+        $newArtical = Common::deepCopy($Artical);
         $newArtical['id'] = null;
         $newArtical['cover'] = Common::mvImage($Artical['cover'], 'article', $Artical['id']);
         $newArtical['title'] = '新建文章';
 
         if($newArtical->isUpdate(false)->save()) {
             // 找出原文章所关联的行程，并进行复制
-            $Attractions = Attraction::where('article_id',$articalId)->select();
+            $cloneAttraction = $this->cloneAttractionByArticle($articalId, $newArtical);
+            
+            // 找出原文章所关联的段落，并进行复制
+            $cloneParagraph = $this->cloneParagraphByArticle($articalId, $newArtical);
+            
+            // 找出原文章所关联的报价，并进行复制
+            $clonePlan = $this->clonePlanByArticle($articalId, $newArtical);
+
+            if ($cloneAttraction and $cloneParagraph and $clonePlan === false) {
+                return $message;
+            }
+            
+        } else {
+            return $message;
+        }
+
+        $message['message'] = '克隆成功';
+        $message['status'] = 'success';
+        return $message;
+    }
+    
+    /**
+     * 朱晨澍
+     * 克隆行程
+     * @param  $articleId  原文章id $newArtical 新文章id
+     * @return $message
+     */
+    public function cloneAttractionByArticle($articalId, $newArtical) {
+        $Attractions = Attraction::where('article_id',$articalId)->select();
             foreach ($Attractions as $Attraction) {
-                $n = serialize($Attraction);
-                $newAttraction = unserialize($n);
+                $newAttraction = Common::deepCopy($Attraction);
 
                 $newAttraction->id = null;
                 $newAttraction->article_id = $newArtical['id'];
-                $newAttraction['cover'] = Common::mvImage($Attraction['cover'], 'attraction', $Attraction['id']);
+                $newAttraction['image'] = Common::mvImage($Attraction->image, 'attraction', $Attraction['id']);
 
                 if(!$newAttraction->isUpdate(false)->save()) {
-                    $message['message'] = '克隆失败';
-                    $message['status'] = 'error';
-                    return $message;
+                    return false;
                 }
 
                 // 找出原行程所关联的素材，并进行复制
@@ -550,56 +575,72 @@ class ArticleService
 
                     $newAttractionMaterial->attraction_id = $newAttraction->id;
 
-
                     if(!$newAttractionMaterial->isUpdate(false)->save()) {
-                        $message['message'] = '克隆失败';
-                        $message['status'] = 'error';
-                        return $message;
+                        return false;
                     }
                 }
             }
+        return true;    
+    }
 
-            // 找出原文章所关联的段落，并进行复制
-            $Paragraphs = Paragraph::where('article_id',$articalId)->select();
+    /**
+     * 朱晨澍
+     * 克隆段落
+     * @param  $articleId  原文章id $newArtical 新文章id
+     * @return $message
+     */ 
+    public function cloneParagraphByArticle($articalId, $newArtical) {
+        $Paragraphs = Paragraph::where('article_id',$articalId)->select();
             foreach ($Paragraphs as $Paragraph) {
-                $n = serialize($Paragraph);
-                $newParagraph = unserialize($n);
+                $newParagraph = Common::deepCopy($Paragraph);
 
                 $newParagraph->id = null;
                 $newParagraph->article_id = $newArtical['id'];
                 $newParagraph['image'] = Common::mvImage($Paragraph['image'], 'paragraph', $Paragraph['id']);
-
+                
                 if(!$newParagraph->isUpdate(false)->save()) {
-                    $message['message'] = '克隆失败';
-                    $message['status'] = 'error';
-                    return $message;
+                    return false;
                 }
+
             }
-            // 找出原文章所关联的报价，并进行复制
-            $Plans = Plan::where('article_id',$articalId)->select();
+        return true; 
+    }
+
+    /**
+     * 朱晨澍
+     * 克隆报价
+     * @param  $articleId  原文章id $newArtical 新文章id
+     * @return $message
+     */ 
+    public function clonePlanByArticle($articalId, $newArtical) {
+        $Plans = Plan::where('article_id',$articalId)->select();
             foreach ($Plans as $Plan) {
 
-                $n = serialize($Plan);
-                $newPlan = unserialize($n);
+                $newPlan = Common::deepCopy($Plan);
 
                 $newPlan->id = null;
                 $newPlan->article_id = $newArtical['id'];
 
                 if(!$newPlan->isUpdate(false)->save()) {
-                    $message['message'] = '克隆失败';
-                    $message['status'] = 'error';
-                    return $message;
+                    return false;
+                }
+
+                $details = Detail::where('plan_id', $Plan['id'])->select();
+                foreach ($details as $detail) {
+                    
+                    $newdetail = Common::deepCopy($detail);
+
+                    $newdetail->id = null;
+                    $newdetail->plan_id = $newPlan['id'];
+
+                    if(!$newdetail->isUpdate(false)->save()) {
+                        return false;
+                    }
+
                 }
             }
-        } else {
-            $message['message'] = '克隆失败';
-            $message['status'] = 'error';
-            return $message;
-        }
-
-        return $message;
+        return true; 
     }
-    
 }
  
 
