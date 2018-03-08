@@ -72,17 +72,18 @@ class ArticleController extends IndexController {
         $this->assign('contractors',$contractors);
         // 定义初始化信息
 
-        $this->assign('title', '');
-        $this->assign('summery', '');
-        $this->assign('cover', '');
-        $this->assign('articleId', '');
-        $this->assign('contractorId', '');
-        $this->assign('route',1);
-        $this->assign('quality','');
-        $this->assign('service','');
-        $this->assign('quotes','');
-        $this->assign('cost','');
-        $this->assign('noCost','');
+        $this->assign('title', '');         // 标题
+        $this->assign('summery', '');       // 摘要
+        $this->assign('cover', '');         // 封面
+        $this->assign('articleId', '');     // 文章id
+        $this->assign('contractorId', '');  // 定制师id
+        $this->assign('route',1);           // 路线
+        $this->assign('quality','');        // 六大品质
+        $this->assign('service','');        // 九大服务
+        $this->assign('quotes','');         // 报价说明
+        $this->assign('cost','');           // 费用包含
+        $this->assign('noCost','');         // 费用不包含
+        $this->assign('host', '');
 
         return $this->fetch();  
     }
@@ -106,16 +107,28 @@ class ArticleController extends IndexController {
     }
     // 编辑firstadd界面 
     public function editfirstadd() {
-        $articleId = Request::instance()->param('articleId/d');
+        $param = Request::instance();
+        $articleId = $param->param('articleId/d');
         // 获取所有定制师
         $contractors = Contractor::all();
         $this->assign('contractors',$contractors);
 
         $Article = Article::get($articleId);
 
+        // 获取封面图片路径数组
+        $covers  = $Article->getArticleCover();
+        // （解决历史遗留问题）封面不存在或封面路径不是数组
+        if (is_null($covers)) {
+            $covers = [];
+            array_push($covers, $Article->cover);
+        }
+        // 获取public/index.php所在路径
+        $host    = $param->root(true);
+
+        $this->assign('host', $host);
         $this->assign('title', $Article->title);
         $this->assign('summery', $Article->summery);
-        $this->assign('cover', $Article->cover);
+        $this->assign('covers', $covers);
         $this->assign('articleId', $articleId);
         $this->assign('contractorId', $Article->contractor_id);
 
@@ -317,7 +330,8 @@ class ArticleController extends IndexController {
         $contractorId = $Article->contractor_id;
         $Contractor = Contractor::get($contractorId);
 
-        $Plans = Plan::where('article_id',$articleId)->select();
+        $Plans  = Plan::where('article_id',$articleId)->select();
+        $covers = $Article->getArticleCover();
         
         $paragraphUps = Paragraph::where('is_before_attraction',1)->where('article_id',$articleId)->order('weight desc')->select();
         $paragraphDowns = Paragraph::where('is_before_attraction',0)->where('article_id',$articleId)->order('weight desc')->select();
@@ -329,6 +343,7 @@ class ArticleController extends IndexController {
         $this->assign('paragraphUps',$paragraphUps);
         $this->assign('paragraphDowns',$paragraphDowns);
         $this->assign('filter', new Filter());
+        $this->assign('covers', $covers);
 
         // 无方案报价，成人数和儿童数初始化为0
         if (empty($Plans)) {
@@ -365,5 +380,14 @@ class ArticleController extends IndexController {
         $this->assign('hotel', $Hotel);
 
         return $this->fetch();
+    }
+
+    // 封面图片删除
+    public function deleteImage() {
+        $param = Request::instance();
+        $message = $this->articleService->deleteImage($param);
+
+        //返回相关的消息
+        return $message;
     }
 }

@@ -27,10 +27,10 @@ class Filter
     public function limitWordNumber($str) {
         $str = strip_tags($str);
         $str = str_replace(' ', '', $str);
-        if (mb_strlen($str) < 130) {
+        if (mb_strlen($str) < 65) {
             return $str;
         } else {
-            return mb_substr($str, 0, 130) . '...';
+            return mb_substr($str, 0, 65) . '...';
         }
     }
     public function limitPreviewWordNumber($str,$number) {

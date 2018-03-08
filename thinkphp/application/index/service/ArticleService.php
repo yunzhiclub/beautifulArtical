@@ -68,24 +68,47 @@ class ArticleService
         $title = $parma->post('title');
         $summery = $parma->post('summery');
         $contractorId = $parma->post('contractorId/d');
-        $file = request()->file('image');
+        $files = request()->file('images');
         //实例化一个空文章
         $Article = new Article();
 
-        // 新增的时候有没有上传图片
-        if (is_null($file)) {
-            $message['status'] = 'error';
-            $message['message'] = '请上传图片';
-            $message['route'] = 'firstadd';
-            return $message;
+        //新建一个保存上传文件路径的数组
+        $imagePaths = [];
+        if(!empty($files)) {
+            // 最多上传10张图片
+            if (sizeof($files) > 10) {
+                $message['status']  = 'error';
+                $message['message'] = '最多上传' . config('maxImage.coverCount') . '张图片，请重新选择';
+
+                return $message;
+            }
+            
+            //开始保存图片的路径数据
+            foreach ($files as $key => $value) {
+                $imagePath = Common::uploadImage($value);
+                array_push($imagePaths, $imagePath);
+            }
+
+            //将图片数组保存到实体中
+            $Article->cover = json_encode($imagePaths);
+        } else {
+            $Article->cover = '';
         }
+
+        // 新增的时候有没有上传图片
+        // if (is_null($file)) {
+        //     $message['status'] = 'error';
+        //     $message['message'] = '请上传图片';
+        //     $message['route'] = 'firstadd';
+        //     return $message;
+        // }
 
         $Article->title = $title;
         $Article->summery = $summery;
         $Article->contractor_id = $contractorId;
 
-        $imagePath = Common::uploadImage($file);
-        $Article->cover = $imagePath;
+        // $imagePath = Common::uploadImage($file);
+        // $Article->cover = $imagePath;
 
         if ($Article->validate(true)->save()) {
             //保存成功
@@ -154,17 +177,22 @@ class ArticleService
         $title = $parma->post('title');
         $summery = $parma->post('summery');
         $contractorId = $parma->post('contractorId/d');
-        $file = request()->file('image');
+        $files = request()->file('images');
 
         //编辑文章
         $Article = Article::get($articleId);
-        // 判断图片是否更改
-        if (!is_null($file)) {
-            // 删除之前保存的图片,这样写是有问题的有待改进(增加附件列表上传后进行sha1加密，比较两个文件时候相同后再进行删除)
-            $imagePath = PUBLIC_PATH . '/' . $Article->cover;
-            Common::deleteImage($imagePath);
+        // 获取封面路径
+        $imagePaths = $Article->getArticleCover();
+
+        // 文件不为空，将新增文件保存
+        if (!empty($files)) {
+            foreach ($files as $key => $value) {
+                $imagePath = Common::uploadImage($value);
+                array_push($imagePaths, $imagePath);
+            }
+            $Article->cover = json_encode($imagePaths);
         }
-        if ($Article->title == $title && $Article->summery == $summery && is_null($file) && $Article->contractor_id == $contractorId) {
+        if ($Article->title == $title && $Article->summery == $summery && empty($files) && $Article->contractor_id == $contractorId) {
             $message['status'] = 'success';
             $message['message'] = '修改成功';
             $message['route'] = 'secondadd';
@@ -175,11 +203,6 @@ class ArticleService
         $Article->summery = $summery;
         $Article->contractor_id = $contractorId;
 
-        if (!is_null($file)) {
-            // 保存文件，返回路径
-            $imagePath = Common::uploadImage($file);
-            $Article->cover = $imagePath;
-        }
         if ($Article->save()) {
             //保存成功
             $message['param']['articleId'] = $Article->id;
@@ -641,6 +664,52 @@ class ArticleService
             }
         return true; 
     }
+
+    /**
+     * 删除封面图片
+     */
+    public function deleteImage($param) {
+        //定义返回信息
+        $message['status'] = 'success';
+
+        $articleId = $param->param('articleId/d');
+        $key = $param->param('imageKey/d');
+
+        //从数据库取出数据
+        $article = Article::get($articleId);
+        $images = $article->getArticleCover();
+
+        $imagePath =  PUBLIC_PATH . '/' .$images[$key - 1];
+        //删除图片
+        Common::deleteImage($imagePath);
+
+        //获取图片中的数组元素
+        $arrayLength = count($images);
+
+        if ($key === $arrayLength) {
+            //说明只有一个元素
+            unset($images[$key - 1]);
+        } else {
+            //从数组中移除这个元素
+            $i = $key - 1;
+            for (; $i < $arrayLength - 1; $i++) {
+                $images[$i] = $images[$i + 1];
+            }
+
+            unset($images[$i]);
+        }
+
+        $article->cover = json_encode($images);
+
+        //从数据库更新数据
+        if (!$article->save()) {
+            $message['status'] = 'error';
+        }
+
+        return $message;
+
+    }
+    
 }
  
 

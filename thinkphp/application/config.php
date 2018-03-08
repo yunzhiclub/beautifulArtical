@@ -231,6 +231,9 @@ return [
 
     //最多能上传图片的配置
     'maxImage'              => [
-         'count'    => 5
+        // 景点图片数
+        'count'        => 5,
+        // 文章封面图片数
+        'coverCount'   => 10,
     ],
 ];

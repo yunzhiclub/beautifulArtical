@@ -49,6 +49,7 @@ class MaterialController extends IndexController {
 
         $this->assign('material', $Material);
         $this->assign('images', '');
+        $this->assign('host', '');
     	return $this->fetch('edit');
     }
 
