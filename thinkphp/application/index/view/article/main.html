@@ -118,7 +118,7 @@
                             <!--弹窗-->
                             {volist name="$attraction->getMaterials()" id="material" key="i"}
                             <!-- Button trigger modal -->
-                            <a class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal-{$mainKey}-{$i}">
+                            <a class="btn btn-default btn-xs" data-toggle="modal" data-target="#myModal-{$mainKey}-{$i}" style="color: #41bccc;">
                                 {$filter->limitPreviewWordNumber($material->designation, 5)}
                                 </a> {/volist}
                             <!--弹窗-->
