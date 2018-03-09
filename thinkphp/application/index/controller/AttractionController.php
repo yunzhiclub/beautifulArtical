@@ -71,7 +71,7 @@ class AttractionController extends IndexController {
     public function update() {
         $param     = Request::instance();
         $articleId = Request::instance()->param('articleId');
-        $message   = $this->attractionService->updateAttraction($param->param('attractionId'));
+        $message   = $this->attractionService->updateAttraction($param);
         if($message['status'] == 'success') {
             return $this->success($message['message'], url('article/secondadd', ['articleId' => $articleId]));
         } else {
