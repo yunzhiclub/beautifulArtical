@@ -61,13 +61,41 @@ class PlanService
             $message['message'] = '保存失败:' . $Plan->getError();
 
         } else {
+            $message['message'] = '保存成功';
             $plan = $Plan->where('article_id', $articleId)->find();
             $planId = $plan->id;
 
+            $data['totalPrice'] = $data['totalCost'];
+
+            // 格式化数据
+            $details = $this->getDetailServiceByPostData($data);
             $detailService = new DetailService();
-            $message = $detailService->saveDetail($planId, $data);
+            try {
+                $detailService->saveDetail($planId, $details);
+            } catch (\Exception $e) {
+                $message['message'] = '保存出行详情失败, 请确认是否删除了detail表中的db_type字段';
+            }
         }
 
         return $message;
 	}
+
+    /**
+     * 格式化数据
+     * @param $postData
+     * @return array
+     * @author panjie
+     */
+	private function getDetailServiceByPostData($postData) {
+        $result = [];
+        foreach ($postData['designation'] as $key => $designation) {
+            $detail = [];
+            $detail['designation'] = $designation;
+            $detail['adultUnitPrice'] = $postData['adultUnitPrice'][$key];
+            $detail['childUnitPrice'] = $postData['childUnitPrice'][$key];
+            $detail['remark'] = $postData['remark'][$key];
+            array_push($result, $detail);
+        }
+        return $result;
+    }
 }
