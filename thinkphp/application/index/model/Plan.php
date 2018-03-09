@@ -54,8 +54,8 @@ class Plan extends Model
      * @return Plan 
      * @author chenzhigao        
      */
-    public function cloneById($planId) {
+    public static function cloneById($id) {
         $Plan = new Plan();
-        return $Plan->clonePlan($planId);
+        return $Plan->clonePlan($id);
     }
 }
