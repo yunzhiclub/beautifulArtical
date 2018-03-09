@@ -51,9 +51,21 @@ class Common
                 mkdir($fileDir,0777,true);
                 fopen($fileDir.$time, 'w');
             }
-            
-            copy(PUBLIC_PATH.DS.$dir, $fileDir.$time);
-            return DS.$style.DS.$time;
+
+            if (is_array($dir)) {
+                $imagePaths = [];
+
+                foreach ($dir as $key => $value) {
+                    // 时间更新比foreach慢，因此让时间戳加上$key以区分文件
+                    $time = intval(time()) + $key.'.jpg';
+                    copy(PUBLIC_PATH.DS.$value, $fileDir.$time);
+                    array_push($imagePaths, DS.$style.DS.$time);
+                }
+                return json_encode($imagePaths);
+            } else {
+                copy(PUBLIC_PATH.DS.$dir, $fileDir.$time);
+                return DS.$style.DS.$time;
+            }
         }
         
         return null;
