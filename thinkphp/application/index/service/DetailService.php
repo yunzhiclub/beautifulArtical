@@ -80,7 +80,7 @@ class DetailService
         $designations    = $details['designation'];
         $adultUnitPrices = $details['adultUnitPrice'];
         $childUnitPrices = $details['childUnitPrice'];
-        $totalPrices     = $details['totalPrice'];
+        //$totalPrices     = $details['totalPrice'];
         $remarks         = $details['remark'];
 
         /*
@@ -91,7 +91,7 @@ class DetailService
             $detail->designation      = $designations[$key];
             $detail->adult_unit_price = $adultUnitPrices[$key];
             $detail->child_unit_price = $childUnitPrices[$key];
-            $detail->total_price      = $totalPrices[$key];
+            //$detail->total_price      = $totalPrices[$key];
             $detail->remark           = $remarks[$key];
             $detail->plan_id          = $planId;
             if (false === $detail->save()) {
