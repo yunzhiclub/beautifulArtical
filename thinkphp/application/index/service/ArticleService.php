@@ -545,7 +545,7 @@ class ArticleService
         // 创建新的文章，并增加相关属性
         $newArtical = Common::deepCopy($Artical);
         $newArtical['id'] = null;
-        $newArtical['cover'] = Common::mvImage($Artical['cover'], 'article');
+        $newArtical['cover'] = Common::mvImage(json_decode($Artical['cover']), 'article');
         $newArtical['title'] = '新建文章';
 
         if($newArtical->isUpdate(false)->save()) {
