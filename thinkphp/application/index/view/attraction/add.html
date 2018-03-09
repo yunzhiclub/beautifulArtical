@@ -154,7 +154,7 @@
             <div class="form-group">
                 <label>行程图片</label>
                 <input type="file" class="image-file" name="image"> {eq name="$image" value=""}{else /}
-                <img src="{:__ROOT__}/upload/{$image}"> {/eq}
+                <img src="{:__ROOT__}/upload/{$image}" style="height: 100px; width: 180px;"> {/eq}
             </div>
             <button type="submit" id="submit-btn" class="btn btn-default"><span class="glyphicon glyphicon-ok"></span>&nbsp;完成</button>
         </form>
