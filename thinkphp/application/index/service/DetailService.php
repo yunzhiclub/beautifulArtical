@@ -74,7 +74,6 @@ class DetailService
      * zhangxishuo
      */
     public function persistDetail($planId, $details) {
-
         /*
          * 循环保存信息
          */

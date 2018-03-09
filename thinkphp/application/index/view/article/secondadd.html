@@ -7,11 +7,14 @@
     var app = angular.module('app',[]);
         app.controller('mainCtrl', function($scope) {
             var self = this;
-            $scope.adultNum = {$plan->adult_num};
-            $scope.childNum = {$plan->child_num};
-            $scope.totalFee = 0;
-            $scope.relevantDetails = [];
 
+            // 初始化。
+            $scope.adultNum = {$plan->adult_num};   // 成人数
+            $scope.childNum = {$plan->child_num};   // 儿童数
+            $scope.totalFee = 0;                    // 总费用
+            $scope.relevantDetails = [];            // 费用详情
+
+            // 获取一个费用详情
             self.getOneRelevantDetail = function() {
                 var relevantDetail = {
                     designation: '',
@@ -22,9 +25,9 @@
                 return relevantDetail;
             };
 
+            // 计算总费用
             self.countTotalFee = function(adultNum, childNum, relevantDetails) {
                 var total = 0;
-
                 angular.forEach(relevantDetails, function (relevantDetail) {
                         total += relevantDetail.adultUnitPrice * adultNum;
                         total += relevantDetail.childUnitPrice * childNum;
@@ -33,15 +36,18 @@
                 return total;
             };
 
+            // 添加一个费用
             self.addRelevantDetail = function() {
                 var relevantDetail = self.getOneRelevantDetail();
                 $scope.relevantDetails.push(relevantDetail);
             };
 
+            // 减少一个费用
             self.subRelevantDetail = function() {
                 $scope.relevantDetails.pop();
             };
 
+            // 费用初始化
             {volist name="$plan->getRelevantDetails()" id="detail"}
                 var relevantDetail = {
                     designation: '{$detail->designation}',
@@ -52,14 +58,16 @@
                 $scope.relevantDetails.push(relevantDetail);
             {/volist}
 
+                // 监视成人数，儿童数发生变化，重新计算总费用
             $scope.$watchGroup(['adultNum', 'childNum'], function(newValues) {
                 $scope.totalFee = self.countTotalFee(newValues[0], newValues[1], $scope.relevantDetails);
             });
-
+                // 监视费用详情发生变化，重新计算总费用
             $scope.$watch('relevantDetails', function(newValue){
                 $scope.totalFee = self.countTotalFee($scope.adultNum, $scope.childNum, $scope.relevantDetails);
-                }, true);
+                }, true); // 第三个参数为true，表示深度监视
 
+                // 绑定
             $scope.subRelevantDetail = self.subRelevantDetail;
             $scope.addRelevantDetail = self.addRelevantDetail;
         });
