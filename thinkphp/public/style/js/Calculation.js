@@ -3,7 +3,7 @@
  * @date    2017-09-13 16:47:11
  */
 // 计算价格
-'use strict'
+'use strict';
 function jisuan() {
     var adult_num = document.getElementById("adultNum").value;
     var child_num = document.getElementById("childNum").value;

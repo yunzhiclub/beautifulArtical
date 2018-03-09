@@ -57,4 +57,13 @@ class Article extends Model
             $this->attractions = array();
         }
     }
+
+    /**
+     * 获取文章封面图片
+     * @return [type] [description]
+     */
+    public function getArticleCover() {
+        $images = json_decode($this->cover);
+        return $images;
+    }
 }
