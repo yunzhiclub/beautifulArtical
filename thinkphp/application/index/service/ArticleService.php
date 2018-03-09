@@ -522,7 +522,7 @@ class ArticleService
         // 创建新的文章，并增加相关属性
         $newArtical = Common::deepCopy($Artical);
         $newArtical['id'] = null;
-        $newArtical['cover'] = Common::mvImage($Artical['cover'], 'article', $Artical['id']);
+        $newArtical['cover'] = Common::mvImage($Artical['cover'], 'article');
         $newArtical['title'] = '新建文章';
 
         if($newArtical->isUpdate(false)->save()) {
@@ -561,7 +561,7 @@ class ArticleService
 
                 $newAttraction->id = null;
                 $newAttraction->article_id = $newArtical['id'];
-                $newAttraction['image'] = Common::mvImage($Attraction->image, 'attraction', $Attraction['id']);
+                $newAttraction['image'] = Common::mvImage($Attraction->image, 'attraction');
 
                 if(!$newAttraction->isUpdate(false)->save()) {
                     return false;
@@ -596,7 +596,7 @@ class ArticleService
 
                 $newParagraph->id = null;
                 $newParagraph->article_id = $newArtical['id'];
-                $newParagraph['image'] = Common::mvImage($Paragraph['image'], 'paragraph', $Paragraph['id']);
+                $newParagraph['image'] = Common::mvImage($Paragraph['image'], 'paragraph');
                 
                 if(!$newParagraph->isUpdate(false)->save()) {
                     return false;

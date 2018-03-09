@@ -175,7 +175,7 @@ class AttractionService {
             $message['status']  = 'error';
             $message['message'] = '删除失败';
         } else {
-            $imagePath = json_decode($Attraction->image);
+            $imagePath = $Attraction->image;
             Common::deleteImage('upload/'.$imagePath);
         }
 
