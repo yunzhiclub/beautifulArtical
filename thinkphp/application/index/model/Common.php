@@ -37,22 +37,23 @@ class Common
     /**
      * Created by PhpStorm.
      * User: zhuchenshu
-     * @uploadImage 克隆图片,将克隆后的图片放在upload/$style/$id/里面
-     * @param $dir 原图片地址, $style 上传图片类型, $id上传读片所属类型id
+     * @uploadImage 克隆图片,将克隆后的图片放在upload/$style/里面
+     * @param $dir 原图片地址, $style 上传图片类型
      * @return 文件存储后的路径
      */
-    public static function mvImage($dir, $style, $id)
+    public static function mvImage($dir, $style)
     {
-        $fileDir = PUBLIC_PATH.DS.$style.DS.$id.DS;
+        $fileDir = PUBLIC_PATH.DS.$style.DS;
+        $time = intval(time()).'.jpg'; // 当前时间戳
 
         if (!is_null($dir)) {
             if(!file_exists($fileDir)) {
                 mkdir($fileDir,0777,true);
-                fopen($fileDir.'clone', 'w');
+                fopen($fileDir.$time, 'w');
             }
             
-            copy(PUBLIC_PATH.DS.$dir, $fileDir.'clone');
-            return DS.$style.DS.$id.DS.'clone';
+            copy(PUBLIC_PATH.DS.$dir, $fileDir.$time);
+            return DS.$style.DS.$time;
         }
         
         return null;
