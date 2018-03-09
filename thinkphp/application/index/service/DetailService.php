@@ -9,16 +9,16 @@ class DetailService
     /**
      * 保存报价所有方案
      * @param $planId
-     * @param $data
+     * @param $array
      * @return array
      * zhangxishuo
      */
-    public function saveDetail($planId, $data) {
+    public function saveDetail($planId, $array) {
         $message = $this->initSuccessMessage();                 // 初始化返回信息
 
         try {
             $this->deleteDetail($planId);                       // 删除旧的报价方案信息
-            $this->persistDetail($planId, $data);               // 保存新的报价方案信息
+            $this->persistDetail($planId, $array);               // 保存新的报价方案信息
         } catch (DbException $e) {
             $message = $this->catchErrorMessage($e);            // 捕获异常，修改提示信息
         }
@@ -74,30 +74,22 @@ class DetailService
      * zhangxishuo
      */
     public function persistDetail($planId, $details) {
-        /*
-         * 获取信息
-         */
-        $designations    = $details['designation'];
-        $adultUnitPrices = $details['adultUnitPrice'];
-        $childUnitPrices = $details['childUnitPrice'];
-        $totalPrices     = $details['totalPrice'];
-        $remarks         = $details['remark'];
 
         /*
          * 循环保存信息
          */
-        foreach ($designations as $key => $designation) {
+        foreach ($details as $key => $_detail) {
             $detail = new Detail();
-            $detail->designation      = $designations[$key];
-            $detail->adult_unit_price = $adultUnitPrices[$key];
-            $detail->child_unit_price = $childUnitPrices[$key];
-            $detail->total_price      = $totalPrices[$key];
-            $detail->remark           = $remarks[$key];
+            $detail->designation      = $_detail['designation'];
+            $detail->adult_unit_price = $_detail['adultUnitPrice'];
+            $detail->child_unit_price = $_detail['childUnitPrice'];
+            $detail->remark           = $_detail['remark'];
             $detail->plan_id          = $planId;
             if (false === $detail->save()) {
                 throw new DbException('数据保存失败');     // 保存失败，抛出异常
             }
         }
+        return;
     }
 
     /**

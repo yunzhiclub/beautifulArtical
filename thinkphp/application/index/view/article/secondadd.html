@@ -1,8 +1,70 @@
 {extend name="index"} {block name="title"}文章编辑{/block} {block name="content"}
 <!-- <script type="text/javascript" src="{:__ROOT__}/style/js/Calculation.js"></script> | 此处不再需要计算总价-->
+<script type="text/javascript" src="{:__ROOT__}/style/js/Calculation.js"></script>
 <!-- 报价逻辑 -->
-<script type="text/javascript" src="{:__ROOT__}/style/js/quoteService.js"></script>
-<div class="col-md-8 col-md-offset-1" style="margin-top: 10px;min-height: 730px;">
+<script type="text/javascript" src="{:__ROOT__}/bower_components/angular/angular.min.js"></script>
+<script>
+    var app = angular.module('app',[]);
+        app.controller('mainCtrl', function($scope) {
+            var self = this;
+            $scope.adultNum = {$plan->adult_num};
+            $scope.childNum = {$plan->child_num};
+            $scope.totalFee = 0;
+            $scope.relevantDetails = [];
+
+            self.getOneRelevantDetail = function() {
+                var relevantDetail = {
+                    designation: '',
+                    adultUnitPrice: 0,
+                    childUnitPrice: 0,
+                    remark: ''
+                };
+                return relevantDetail;
+            };
+
+            self.countTotalFee = function(adultNum, childNum, relevantDetails) {
+                var total = 0;
+
+                angular.forEach(relevantDetails, function (relevantDetail) {
+                        total += relevantDetail.adultUnitPrice * adultNum;
+                        total += relevantDetail.childUnitPrice * childNum;
+                    }
+                );
+                return total;
+            };
+
+            self.addRelevantDetail = function() {
+                var relevantDetail = self.getOneRelevantDetail();
+                $scope.relevantDetails.push(relevantDetail);
+            };
+
+            self.subRelevantDetail = function() {
+                $scope.relevantDetails.pop();
+            };
+
+            {volist name="$plan->getRelevantDetails()" id="detail"}
+                var relevantDetail = {
+                    designation: '{$detail->designation}',
+                    adultUnitPrice: {$detail->adult_unit_price},
+                    childUnitPrice: {$detail->child_unit_price},
+                    remark: '{$detail->remark}'
+                };
+                $scope.relevantDetails.push(relevantDetail);
+            {/volist}
+
+            $scope.$watchGroup(['adultNum', 'childNum'], function(newValues) {
+                $scope.totalFee = self.countTotalFee(newValues[0], newValues[1], $scope.relevantDetails);
+            });
+
+            $scope.$watch('relevantDetails', function(newValue){
+                $scope.totalFee = self.countTotalFee($scope.adultNum, $scope.childNum, $scope.relevantDetails);
+                }, true);
+
+            $scope.subRelevantDetail = self.subRelevantDetail;
+            $scope.addRelevantDetail = self.addRelevantDetail;
+        });
+</script>
+<div class="col-md-8 col-md-offset-1" style="margin-top: 10px;min-height: 730px;" ng-app="app" ng-controller="mainCtrl">
     <a class="btn btn-primary" style="margin-bottom: 20px;" href="{:url('article/index')}"><i
             class="glyphicon glyphicon-arrow-left"></i>&nbsp;返回</a>
     <h2><span class="glyphicon glyphicon-edit"></span>&nbsp;文章编辑</h2>
@@ -161,17 +223,18 @@
                                     <br>
                                     <br>
                                     <div class="row">
-                                        <div class="form-group col-md-3" style="background-color: ">
+                                        <div class="form-group col-md-3">
                                             <label>成人数</label>
                                             <input type="number" style="background-color: #fcf8e3;" class="form-control"
                                                    name="adultNum" placeholder="成人..."
-                                                   value="{$plan->adult_num}" required>
+                                                   ng-model="adultNum" required>
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label>儿童数</label>
                                             <input type="number" style="background-color: #fcf8e3;" class="form-control"
                                                    name="childNum" placeholder="儿童..."
-                                                   value="{$plan->child_num}" required>
+                                                   ng-model="childNum" required>
+
                                         </div>
                                     </div>
                                     <hr>
@@ -179,29 +242,27 @@
                                 <div class="control-group row" id="quoteGroup">
                                     <label>报价类别</label>
                                     <br><br>
-                                    {volist name="$plan->getRelevantDetails()" id="detail"}
-                                    <div class="row">
+                                    <div class="row" ng-repeat="relevantDetail in relevantDetails">
                                         <div class="form-group col-md-3">
                                             <label>名称</label>
-                                            <input type="text" class="form-control" value="{$detail->designation}" name="designation[]">
+                                            <input type="text" class="form-control" ng-model="relevantDetail.designation" name="designation[]">
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label>成人单价</label>
-                                            <input type="text" class="form-control" value="{$detail->adult_unit_price}" name="adultUnitPrice[]">
+                                            <input type="text" class="form-control" ng-model="relevantDetail.adultUnitPrice" name="adultUnitPrice[]">
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label>儿童单价</label>
-                                            <input type="text" class="form-control" value="{$detail->child_unit_price}" name="childUnitPrice[]">
+                                            <input type="text" class="form-control" ng-model="relevantDetail.childUnitPrice" name="childUnitPrice[]">
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label>备注</label>
-                                            <input type="text" class="form-control" value="{$detail->remark}" name="remark[]">
+                                            <input type="text" class="form-control" ng-model="relevantDetail.remark" name="remark[]">
                                         </div>
                                     </div>
-                                    {/volist}
                                 </div>
-                                <a class="btn btn-primary" id="newQuote"><i class="glyphicon glyphicon-plus"></i></a>
-                                <a class="btn btn-danger" id="removeQuote"><i class="glyphicon glyphicon-minus"></i></a>
+                                <a class="btn btn-primary" ng-click="addRelevantDetail()" ><i class="glyphicon glyphicon-plus"></i></a>
+                                <a class="btn btn-danger" ng-click="subRelevantDetail()"><i class="glyphicon glyphicon-minus"></i></a>
                                 <hr>
                                 <div class="control-group row">
                                     <label>币种</label>
@@ -211,9 +272,9 @@
                                 </div>
                                 <hr>
                                 <div class="control-group row">
-                                    <label for="totalCost">总费用</label>
+                                    <label>总费用</label>
                                     <div class="controls">
-                                        <input readonly type="text" style="background-color: #fcf8e3;" class="form-control" id="totalCost" name="totalCost" placeholder="总费用..." value="{$plan->total_cost | $filter->moneyFilter}" />
+                                        <input readonly type="text" style="background-color: #fcf8e3;" class="form-control" name="totalCost" placeholder="总费用..." ng-model="totalFee" />
                                     </div>
                                 </div>
                                 <hr>
@@ -317,4 +378,5 @@
         <br>
     </form>
 </div>
+
 {/block}

@@ -61,13 +61,35 @@ class PlanService
             $message['message'] = '保存失败:' . $Plan->getError();
 
         } else {
+            $message['message'] = '保存成功';
             $plan = $Plan->where('article_id', $articleId)->find();
             $planId = $plan->id;
 
-            $detailService = new DetailService();
-            $message = $detailService->saveDetail($planId, $data);
+            $data['totalPrice'] = $data['totalCost'];
+            $details = $this->getDetailServiceByPostData($data);
+            if (count($details) > 0) {
+                $detailService = new DetailService();
+                try {
+                    $detailService->saveDetail($planId, $details);
+                } catch (\Exception $e) {
+                    $message['message'] = '保存出行详情失败';
+                }
+            }
         }
 
         return $message;
 	}
+
+	private function getDetailServiceByPostData($postData) {
+        $result = [];
+        foreach ($postData['designation'] as $key => $designation) {
+            $detail = [];
+            $detail['designation'] = $designation;
+            $detail['adultUnitPrice'] = $postData['adultUnitPrice'][$key];
+            $detail['childUnitPrice'] = $postData['childUnitPrice'][$key];
+            $detail['remark'] = $postData['remark'][$key];
+            array_push($result, $detail);
+        }
+        return $result;
+    }
 }
