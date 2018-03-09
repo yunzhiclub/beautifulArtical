@@ -26,6 +26,7 @@ public class Article {
     @Column(length = 3000)
     private String summery;
     // 文章封面
+    @Column(length = 2000)
     private String cover;
     // 出发日期
     private Date beginDate;
