@@ -482,14 +482,18 @@ class ArticleService
         }
 
         // 删除文章
-        $cover = $Article->cover;
         if (!$Article->delete()) {
             $message['message'] = '删除文章失败';
             $message['status'] = 'error';
             return $message;
         }
-        Common::deleteImage('upload/' . $cover);
 
+        // 刪除文章封面所有的圖片
+        $cover = $Article->cover;
+        $covers = json_decode($cover);
+        foreach ($covers as $_cover) {
+            Common::deleteImage('upload/' . $_cover);
+        }
         return $message;
     }
 
