@@ -383,8 +383,8 @@ function currency(value, decimals) {
  * 计算总价
  */
 var calculate = function() {
-    var adult_num = {$plan->adult_num};         // 获取成人数
-    var child_num = {$plan->child_num};         // 获取儿童数
+    var adult_num = {adult_num};                // 获取成人数
+    var child_num = {child_num};                // 获取儿童数
     var adult_sum = 0;                          // 初始化总价
     var child_sum = 0;                          // 初始化总价
     var details   = $('.details');              // 获取报价方案
