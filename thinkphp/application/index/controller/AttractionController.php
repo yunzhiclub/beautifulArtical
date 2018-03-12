@@ -27,10 +27,15 @@ class AttractionController extends IndexController {
     }
 
     public function add() {
+        // 实例化请求类
+        $request   = Request::instance();
+
+        $host      = $request->root(true);
         $hotel     = $this->hotelService->getNullHotel();
         $material  = new Material();
-        $articleId = Request::instance()->param('articleId');
+        $articleId = $request->param('articleId');
 
+        $this->assign('host',$host);
         $this->assign('material', $material);
         $this->assign('hotel', $hotel);
         $this->assign('articleId', $articleId);
@@ -51,8 +56,12 @@ class AttractionController extends IndexController {
     }
 
     public function edit() {
-        $articleId    = Request::instance()->param('articleId');
-        $attractionId = Request::instance()->param('attractionId');
+        // 实例化请求类
+        $request   = Request::instance();
+        
+        $host      = $request->root(true);
+        $articleId    = $request->param('articleId');
+        $attractionId = $request->param('attractionId');
         $attraction   = Attraction::get($attractionId);
         if (is_null($attraction->hotel_id)) {
             $hotel    = $this->hotelService->getNullHotel();
@@ -60,6 +69,8 @@ class AttractionController extends IndexController {
             $hotel    = Hotel::get($attraction->hotel_id);
         }
         $material     = new Material();
+
+        $this->assign('host',$host);
         $this->assign('material', $material);
         $this->assign('hotel', $hotel);
         $this->assign('articleId', $articleId);
