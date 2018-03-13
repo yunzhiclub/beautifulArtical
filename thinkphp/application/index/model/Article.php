@@ -21,9 +21,11 @@ class Article extends Model
      * @return $this
      * @author panjie
      */
-	public function updateArticleByTitleAndSummeryAndBeginDate($title, $summery, $beginDate) {
+    
+	public function updateArticleByTitleAndSubtitleAndSummeryAndBeginDate($title,$subtitle,$summery,$beginDate) {
         // 设置字段，并保存
         $this->title = $title;
+        $this->subtitle = $subtitle;
         $this->summery = $summery;
         $this->begin_date = $beginDate;
         $this->save();

@@ -24,17 +24,18 @@ public class ArticleRepositoryTest extends ArticleApplicationTests {
     public void savetest(){
         Contractor contractor = new Contractor("张友善","1225458878","654846345","57468435435","zhangyoushan@yunzhi.com");
         contractorRespository.save(contractor);
+        // 断言定制师不为空
         assertThat(contractor.getId()).isNotNull();
         Date date = new Date(2017,06,31);
         Plan plan =new Plan();
         planRepository.save(plan);
 
+        // 断言方案报价实体不为空
         assertThat(plan.getId()).isNotNull();
 
-        Article article = new Article(plan,contractor,"我的一天","美好的一天","url");
+        // 持久化一个文章实体
+        Article article = new Article();
         articleRepository.save(article);
-        assertThat(article.getTitle()).isNotNull();
-        assertThat(article.getSummery()).isNotNull();
         assertThat(articleRepository.findOne(article.getId())).isNotNull();
 
     }

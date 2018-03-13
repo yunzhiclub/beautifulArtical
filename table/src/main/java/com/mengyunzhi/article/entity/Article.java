@@ -22,8 +22,10 @@ public class Article {
     private List<Attraction> attractions = new ArrayList<>();       // 日程
     // 文章标题
     private String title;
+    // 文章副标题
+    private String subtitle;
     // 文章摘要
-    @Column(length = 3000)
+    @Column(length = 5000)
     private String summery;
     // 文章封面
     @Column(length = 2000)
@@ -31,15 +33,16 @@ public class Article {
     // 出发日期
     private Date beginDate;
 
-    public Article(Plan plan, Contractor contractor, String title, String summery, String cover) {
-
-        this.contractor = contractor;
-        this.title = title;
-        this.summery = summery;
-        this.cover = cover;
-    }
     public Article(){
         
+    }
+
+    public String getSubtitle() {
+        return subtitle;
+    }
+
+    public void setSubtitle(String subtitle) {
+        this.subtitle = subtitle;
     }
 
     public Long getId() {
@@ -103,9 +106,12 @@ public class Article {
         return "Article{" +
                 "id=" + id +
                 ", contractor=" + contractor +
+                ", attractions=" + attractions +
                 ", title='" + title + '\'' +
+                ", subtitle='" + subtitle + '\'' +
                 ", summery='" + summery + '\'' +
                 ", cover='" + cover + '\'' +
+                ", beginDate=" + beginDate +
                 '}';
     }
 }

@@ -38,9 +38,10 @@ class PlanService
 
         // 更新文章标题及摘要
         $title = $data['title'];
+        $subtitle = $data['subtitle']; 
         $summery = $data['summery'];
         $beginDate = $data['begin_date'];
-        ArticleService::updateArticleByIdAndTitleAndSummeryAndBeginDate($articleId, $title, $summery, $beginDate);
+        ArticleService::updateArticleByIdAndSubtitleAndTitleAndSummeryAndBeginDate($articleId,$title,$subtitle,$summery,$beginDate);
 
         $Plan = Plan::where('article_id', $articleId)->find();
         if (empty($Plan)) {
