@@ -127,6 +127,7 @@ class ArticleController extends IndexController {
 
         $this->assign('host', $host);
         $this->assign('title', $Article->title);
+        $this->assign('subtitle', $Article->subtitle);
         $this->assign('summery', $Article->summery);
         $this->assign('covers', $covers);
         $this->assign('articleId', $articleId);
