@@ -178,6 +178,7 @@ class ArticleService
         //获取到参数
         $articleId = $parma->param('articleId/d');
         $title = $parma->post('title');
+        $subtitle = $parma->post('subtitle');
         $summery = $parma->post('summery');
         $contractorId = $parma->post('contractorId/d');
         $files = request()->file('images');
@@ -203,6 +204,7 @@ class ArticleService
             //return $message;
         }
         $Article->title = $title;
+        $Article->subtitle = $subtitle;
         $Article->summery = $summery;
         $Article->contractor_id = $contractorId;
 
