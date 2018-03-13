@@ -259,16 +259,15 @@ function createOption(node, inners, values) {
     }
 }
 
-function ajaxGet(url, success) {
-
-    var host = window.location.host;
-    var url = "http://" + host + url;
+function ajaxGet(url, callback) {
+    var host = "{$host}";
+    var url  = host + url;
 
     $.ajax({
         url: url,
         type: "get",
         success: function(response) {
-            success(response);
+            callback(response);
         },
         error: function(xhr) {
             console.log('server error');
