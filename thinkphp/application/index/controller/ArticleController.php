@@ -71,8 +71,8 @@ class ArticleController extends IndexController {
         $contractors = Contractor::all();
         $this->assign('contractors',$contractors);
         // 定义初始化信息
-
         $this->assign('title', '');         // 标题
+        $this->assign('subtitle','');       // 副标题
         $this->assign('summery', '');       // 摘要
         $this->assign('cover', '');         // 封面
         $this->assign('articleId', '');     // 文章id
@@ -222,6 +222,8 @@ class ArticleController extends IndexController {
         $this->assign('article', $article);
         // 标题
         $this->assign('title', $message['title']);
+        // 副标题
+        $this->assign('subtitle', $message['subtitle']);
         // 摘要
         $this->assign('summery', $message['summery']);
         // 封面

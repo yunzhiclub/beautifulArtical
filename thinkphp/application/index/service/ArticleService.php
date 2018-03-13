@@ -28,13 +28,14 @@ class ArticleService
      * 更新某个文章的标题和摘要
      * @param $id 要更新的文章ID
      * @param $title 标准
+     * @param $subtitle 副标题
      * @param $summery 摘要
      * @param $beginDate 行程开始日期
      * @author panjie
      * @return Article
      * @throws \think\Exception\DbException
      */
-    static public function updateArticleByIdAndTitleAndSummeryAndBeginDate($id, $title, $summery, $beginDate)
+    static public function updateArticleByIdAndSubtitleAndTitleAndSummeryAndBeginDate($id,$title,$subtitle,$summery,$beginDate)
     {
         $article = Article::get($id);
         if (is_null($article)) {
@@ -42,7 +43,7 @@ class ArticleService
         }
 
         // 更新基本信息
-        return $article->updateArticleByTitleAndSummeryAndBeginDate($title, $summery, $beginDate);
+        return $article->updateArticleByTitleAndSubtitleAndSummeryAndBeginDate($title,$subtitle,$summery,$beginDate);
     }
 
 
@@ -65,10 +66,11 @@ class ArticleService
         $message['route'] = 'secondadd';
         $message['message'] = '添加成功，请继续完善文章详情';
 
-        $title = $parma->post('title');
-        $summery = $parma->post('summery');
+        $title        = $parma->post('title');
+        $subtitle     = $parma->post('subtitle');
+        $summery      = $parma->post('summery');
         $contractorId = $parma->post('contractorId/d');
-        $files = request()->file('images');
+        $files        = request()->file('images');
         //实例化一个空文章
         $Article = new Article();
 
@@ -103,8 +105,9 @@ class ArticleService
         //     return $message;
         // }
 
-        $Article->title = $title;
-        $Article->summery = $summery;
+        $Article->title         = $title;
+        $Article->subtitle      = $subtitle;
+        $Article->summery       = $summery;
         $Article->contractor_id = $contractorId;
 
         // $imagePath = Common::uploadImage($file);
@@ -376,6 +379,7 @@ class ArticleService
 
         $message = [];
         $message['title'] = $Article->title;
+        $message['subtitle'] = $Article->subtitle;
         $message['summery'] = $Article->summery;
         $message['cover'] = $Article->cover;
         $message['articleId'] = $articleId;

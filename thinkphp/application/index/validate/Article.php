@@ -6,6 +6,7 @@ class Article extends Validate
 {
 	protected $rule = [
         'title'  => 'require',
+        'subtitle' => 'require',
         'summery' => 'require',
     ];
 }
