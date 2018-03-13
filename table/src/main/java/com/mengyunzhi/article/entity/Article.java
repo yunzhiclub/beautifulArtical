@@ -25,7 +25,7 @@ public class Article {
     // 文章副标题
     private String subtitle;
     // 文章摘要
-    @Column(length = 3000)
+    @Column(length = 5000)
     private String summery;
     // 文章封面
     @Column(length = 2000)
