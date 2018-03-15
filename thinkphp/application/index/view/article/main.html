@@ -107,7 +107,7 @@
                         <div class="properties-img">
                             {eq name="$attraction->image" value=""}
                             <img src="{:__ROOT__}/style/images/noImage.png"> {else /}
-                            <img src="{:__ROOT__}/upload/{:json_decode($attraction->image)}"> {/eq}
+                            <img src="{:__ROOT__}/upload/{$attraction->image}"> {/eq}
                             <div class="w3ls-buy" style="opacity: 0.7">
                                 <a>Day{$mainKey}</a>
                             </div>
