@@ -56,7 +56,7 @@ class AttractionService {
         // 图片上传
         if (!empty($image)) {
             $imagePath = Common::uploadImage($image);
-            $Attraction->image = json_encode($imagePath);
+            $Attraction->image = $imagePath;
         } else {
             $Attraction->image = '';
         }

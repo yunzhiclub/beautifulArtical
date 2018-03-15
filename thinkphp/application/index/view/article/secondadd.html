@@ -198,7 +198,7 @@
                             </div>
                             <div class="col-md-5">
                                 {eq name="$_attraction->image" value=""}{else /}
-                                <img src="{:__ROOT__}/upload/{:json_decode($_attraction->image)}" style="width: auto;height: auto;max-width: 300px;max-height: 170px;"> {/eq}
+                                <img src="{:__ROOT__}/upload/{$_attraction->image}" style="width: auto;height: auto;max-width: 300px;max-height: 170px;"> {/eq}
                             </div>
                             <div class="col-md-2">
                                 <br>
