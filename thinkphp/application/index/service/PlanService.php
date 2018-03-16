@@ -72,7 +72,7 @@ class PlanService
             $details = $this->getDetailServiceByPostData($data);
             $detailService = new DetailService();
             try {
-                $message['message'] = $detailService->saveDetail($planId, $details);
+                $detailService->saveDetail($planId, $details);
             } catch (\Exception $e) {
                 $message['message'] = '保存出行详情失败, 请确认是否删除了detail表中的db_type字段';
             }
