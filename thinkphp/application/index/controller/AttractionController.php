@@ -49,7 +49,7 @@ class AttractionController extends IndexController {
         $articleId = Request::instance()->param('articleId');
         $message   = $this->attractionService->saveAttraction($param);
         if($message['status'] == 'success') {
-            return $this->success($message['message'], url('article/secondadd', ['articleId' => $articleId]));
+            return $this->success($message['message'], url('article/secondadd#attraction', ['articleId' => $articleId]));
         } else {
             return $this->error($message['message']);
         }
@@ -84,7 +84,7 @@ class AttractionController extends IndexController {
         $articleId = Request::instance()->param('articleId');
         $message   = $this->attractionService->updateAttraction($param);
         if($message['status'] == 'success') {
-            return $this->success($message['message'], url('article/secondadd', ['articleId' => $articleId]));
+            return $this->success($message['message'], url('article/secondadd#attraction', ['articleId' => $articleId]));
         } else {
             return $this->error($message['message']);
         }
@@ -95,9 +95,9 @@ class AttractionController extends IndexController {
         $articleId = Request::instance()->param('articleId');
         $message   = $this->attractionService->deleteAttraction($attractionId);
         if($message['status'] == 'success') {
-            return $this->success($message['message'], url('article/secondadd', ['articleId' => $articleId]));
+            return $this->success($message['message'], url('article/secondadd#attraction', ['articleId' => $articleId]));
         } else {
-            return $this->error($message['message'], url('article/secondadd', ['articleId' => $articleId]));
+            return $this->error($message['message'], url('article/secondadd#attraction', ['articleId' => $articleId]));
         }
     }
 

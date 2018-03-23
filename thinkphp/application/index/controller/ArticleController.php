@@ -174,7 +174,7 @@ class ArticleController extends IndexController {
             return 1;
         }else{
             return 0;
-        }
+        }  
     }
 
     public function updatefirstadd(){
@@ -266,7 +266,7 @@ class ArticleController extends IndexController {
 
         // 调用Service层保存操作
         $planService = new PlanService();
-        $message = $planService->save($param);
+        $message = $planService->save($param); 
 
         // 返回相应信息
         if ($message['status'] === 'success') {
@@ -305,9 +305,9 @@ class ArticleController extends IndexController {
 
         $message =  $this->articleService->upAttraction($param);
         if ($message['status'] == 'success') {
-            $this->success($message['message'], url('secondadd',['articleId'=>$articleId]));
+            $this->success($message['message'], url('secondadd#attraction',['articleId'=>$articleId]));
         } else {
-            $this->error($message['message'], url('secondadd',['articleId'=>$articleId]));
+            $this->error($message['message'], url('secondadd#attraction',['articleId'=>$articleId]));
         }
     }
     public function downAttraction() {
@@ -317,9 +317,9 @@ class ArticleController extends IndexController {
 
         $message =  $this->articleService->downAttraction($param);
         if ($message['status'] == 'success') {
-            $this->success($message['message'], url('secondadd',['articleId'=>$articleId]));
+            $this->success($message['message'], url('secondadd#attraction',['articleId'=>$articleId]));
         } else {
-            $this->error($message['message'], url('secondadd',['articleId'=>$articleId]));
+            $this->error($message['message'], url('secondadd#attraction',['articleId'=>$articleId]));
         }
     }
 

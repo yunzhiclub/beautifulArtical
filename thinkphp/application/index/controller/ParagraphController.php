@@ -117,7 +117,7 @@ class ParagraphController extends IndexController {
 			return $this->success($message['message'], url($message['route'], ['articleId' =>$message['articleId']]));
 		} else {
 			// 返回保存失败界面
-			return $this->error($message['message'], url($message['route'], ['articleId' =>$message['articleId']]));
+			return $this->error($message['message'], url($message['route']."#especialMassage", ['articleId' =>$message['articleId']]));
 		}
 	}
 }
