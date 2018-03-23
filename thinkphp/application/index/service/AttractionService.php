@@ -120,10 +120,10 @@ class AttractionService {
         $ContrastAttraction = clone $Attraction;
 
         if (!empty($image)) {
-            $imagePath = json_decode($Attraction->image);
+            $imagePath = $Attraction->image;
             Common::deleteImage('upload/'.$imagePath);
             $imagePath = Common::uploadImage($image);
-            $Attraction->image = json_encode($imagePath);
+            $Attraction->image = $imagePath;
         }
 
         $Attraction->trip  = $trip;

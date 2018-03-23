@@ -75,7 +75,7 @@ class AttractionController extends IndexController {
         $this->assign('hotel', $hotel);
         $this->assign('articleId', $articleId);
         $this->assign('attraction', $attraction);
-        $this->assign('image', json_decode($attraction->image));
+        $this->assign('image', $attraction->image);
         return $this->fetch('add');
     }
 
