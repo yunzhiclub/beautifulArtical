@@ -199,7 +199,7 @@ class ArticleService
         if ($Article->title == $title && $Article->summery == $summery && empty($files) && $Article->contractor_id == $contractorId) {
             $message['status'] = 'success';
             $message['message'] = '修改成功';
-            $message['route'] = 'secondadd';
+            $message['route'] = 'secondadd#changeCtrAndCov';
             $message['param']['articleId'] = $Article->id;
             //return $message;
         }

@@ -46,11 +46,12 @@ class Contractorservice
 		// 获取接受信息
 		$contractorId = $param->param('contractorId/d');
 		$url = $param->post('pre_url');
+		$a = $url . "#contractor";
 		
 		$message = [];
         $message['status'] = 'success';
         $message['message'] = '编辑成功！';
-        $message['url'] = $url;
+        $message['url'] = $url . '#contractor';
 
 		$Contractor = Contractor::get($contractorId);
 

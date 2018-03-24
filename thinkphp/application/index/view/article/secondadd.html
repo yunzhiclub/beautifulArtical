@@ -110,6 +110,7 @@
             <label>出发日期</label>
             <input type="date" class="form-control" name="begin_date" value="{$article->begin_date}" required>
         </div>
+        <div id="changeCtrAndCov">
         <div class="form-group">
             <label>封面</label>
             <br>
@@ -144,6 +145,7 @@
             <a class="btn btn-default" href="{:url('editfirstadd?articleId=' . $articleId)}"><span
                     class="glyphicon glyphicon-pencil"></span>&nbsp;更改文章及定制师</a>
         </div>
+        </div>
         <div class="form-group">
             <label>正文</label>
             <span class="col-md-offset-1"></span>
@@ -175,6 +177,7 @@
                     </div>
                 </div>
             </li>
+            <div id="attraction">
             {/volist} {volist name="attraction" id="_attraction" key="keys"}
             <li>
                 <div class="panel panel-default">
@@ -221,7 +224,9 @@
             </li>
             <div class="row-fluid">
             </div>
-            {/volist} &nbsp;&nbsp;
+            {/volist}
+            </div>
+            &nbsp;&nbsp;
             <a class="btn btn-primary btn-sm" href="{:url('Attraction/add?articleId='.$articleId)}"><span
                     class="glyphicon glyphicon-plus"></span>&nbsp;日程</a>
             <div style="margin-top: 60px;">
@@ -237,16 +242,11 @@
                                     <div class="row">
                                         <div class="form-group col-md-3">
                                             <label>成人数</label>
-                                            <input type="number" style="background-color: #fcf8e3;" class="form-control"
-                                                   name="adultNum" placeholder="成人..."
-                                                   ng-model="adultNum" required>
+                                            <input type="number" style="background-color: #fcf8e3;" class="form-control" name="adultNum" placeholder="成人..." ng-model="adultNum" required>
                                         </div>
                                         <div class="form-group col-md-3">
                                             <label>儿童数</label>
-                                            <input type="number" style="background-color: #fcf8e3;" class="form-control"
-                                                   name="childNum" placeholder="儿童..."
-                                                   ng-model="childNum" required>
-
+                                            <input type="number" style="background-color: #fcf8e3;" class="form-control" name="childNum" placeholder="儿童..." ng-model="childNum" required>
                                         </div>
                                     </div>
                                     <hr>
@@ -328,38 +328,40 @@
             </li>
             {/volist}
             <!-- 定制师 -->
-            <li>
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <table class="table table-hover table-bordered">
-                                    {eq name="$judgeContractor" value="0"} {else/}
-                                    <tr>
-                                        <th>定制师</th>
-                                        <td>{$contractor->designation}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>微信</th>
-                                        <td>{$contractor->phone}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>手机号码</th>
-                                        <td>{$contractor->mobile}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>电子邮件</th>
-                                        <td>{$contractor->email}</td>
-                                    </tr>
-                                </table>
-                                <a href="{:url('contractor/edit' ,['contractorId'=>$contractor->id] )}" class="btn btn-info btn-sm">
-                                    <i class="glyphicon glyphicon-pencil"></i>&nbsp;编辑
-                                </a> {/eq}
+            <div id="contractor">
+                <li>
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <table class="table table-hover table-bordered">
+                                        {eq name="$judgeContractor" value="0"} {else/}
+                                        <tr>
+                                            <th>定制师</th>
+                                            <td>{$contractor->designation}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>微信</th>
+                                            <td>{$contractor->phone}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>手机号码</th>
+                                            <td>{$contractor->mobile}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>电子邮件</th>
+                                            <td>{$contractor->email}</td>
+                                        </tr>
+                                    </table>
+                                    <a href="{:url('contractor/edit' ,['contractorId'=>$contractor->id] )}" class="btn btn-info btn-sm">
+                                        <i class="glyphicon glyphicon-pencil"></i>&nbsp;编辑
+                                    </a> {/eq}
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </li>
+                </li>
+            </div>
             <li>
                 <div>
                     <table class="table table-hover table-responsive table-bordered" style="word-break:break-all;">
