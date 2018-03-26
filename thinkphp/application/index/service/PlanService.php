@@ -88,14 +88,17 @@ class PlanService
      * @author panjie
      */
 	private function getDetailServiceByPostData($postData) {
-        $result = [];
-        foreach ($postData['designation'] as $key => $designation) {
-            $detail = [];
-            $detail['designation'] = $designation;
-            $detail['adultUnitPrice'] = $postData['adultUnitPrice'][$key];
-            $detail['childUnitPrice'] = $postData['childUnitPrice'][$key];
-            $detail['remark'] = $postData['remark'][$key];
-            array_push($result, $detail);
+        
+        $result = [];   
+        if(array_key_exists('designation', $postData)) {
+            foreach ($postData['designation'] as $key => $designation) {
+                $detail = [];
+                $detail['designation'] = $designation;
+                $detail['adultUnitPrice'] = $postData['adultUnitPrice'][$key];
+                $detail['childUnitPrice'] = $postData['childUnitPrice'][$key];
+                $detail['remark'] = $postData['remark'][$key];
+                array_push($result, $detail);
+            } 
         }
         return $result;
     }
