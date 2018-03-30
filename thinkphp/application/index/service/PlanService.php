@@ -35,7 +35,7 @@ class PlanService
         // 获取参数及POST数据信息
         $articleId = $param->param('articleId/d');
         $data = $param->post();
-        var_dump($data);
+
         // 更新文章标题及摘要
         $title = $data['title'];
         $subtitle = $data['subtitle']; 
