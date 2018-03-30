@@ -39,16 +39,21 @@ class PlanService
         // 更新文章标题及摘要
         $title = $data['title'];
         $subtitle = $data['subtitle']; 
-        $summery = $data['summery'];
         $beginDate = $data['begin_date'];
+        // 判断摘要是否添加
+        if(array_key_exists('summery', $data)){
+            $summery = $data['summery'];
+        } else {
+            $summery = '';
+        }
         ArticleService::updateArticleByIdAndSubtitleAndTitleAndSummeryAndBeginDate($articleId,$title,$subtitle,$summery,$beginDate);
-
         $Plan = Plan::where('article_id', $articleId)->find();
         if (empty($Plan)) {
             $Plan = new Plan();
         }
 
         // 给plan的字段赋值
+        
         $Plan->article_id = $articleId;
         $Plan->adult_num = $data['adultNum'];
         $Plan->child_num = $data['childNum'];
