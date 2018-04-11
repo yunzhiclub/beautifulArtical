@@ -33,8 +33,8 @@
     <script src="{:__ROOT__}/style/js/custom.js"></script>
 </head>
 
-<body class="bg" style="overflow-x: hidden;position: absolute">
-    <div class="agile-main">
+<body class="bg">
+    <div class="agile-main" style="overflow-x:hidden;position: absolute">
         <div class="content-wrap">
             <!-- 紫色顶部 -->
             <!-- <div class="header">
@@ -116,7 +116,7 @@
                             </div>
                         </div>
                         <div class="w3ls-text">
-                            <p><b class="pfont">日期 :</b> {$attraction->date} </p>
+                            <p><b class="pfont">日期 :</b> {$attraction->getDateByBeginDateAndOrder($article->begin_date, $mainKey)} </p>
                             <p><b class="pfont">用餐 :</b> {$attraction->getMeals()} </p>
                             <p><b class="pfont">用车 :</b> {$attraction->getCars()} </p>
                             <p><b class="pfont">酒店 :</b> {$attraction->getHotelDesignation()} </p>
