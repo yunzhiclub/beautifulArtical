@@ -595,6 +595,7 @@ class ArticleService
                 $newAttraction->id = null;
                 $newAttraction->article_id = $newArtical['id'];
                 $newAttraction['image'] = Common::mvImage($Attraction->image, 'attraction');
+                var_dump($newAttraction['image']);
 
                 if(!$newAttraction->isUpdate(false)->save()) {
                     return false;

@@ -44,7 +44,7 @@ class Common
     public static function mvImage($dir, $style)
     {
         $fileDir = PUBLIC_PATH.DS.$style.DS;
-        $time = intval(time()).'.jpg'; // 当前时间戳
+        $time = intval((time()+microtime())*100).'.jpg'; // 当前时间戳
 
         if (!is_null($dir)) {
             if(!file_exists($fileDir)) {
