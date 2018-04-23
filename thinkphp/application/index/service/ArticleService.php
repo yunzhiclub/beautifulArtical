@@ -497,9 +497,12 @@ class ArticleService
         // 刪除文章封面所有的圖片
         $cover = $Article->cover;
         $covers = json_decode($cover);
-        foreach ($covers as $_cover) {
-            Common::deleteImage('upload/' . $_cover);
+        if(!empty($covers)) {
+            foreach ($covers as $_cover) {
+                Common::deleteImage('upload/' . $_cover);
+            }
         }
+        
         return $message;
     }
 
