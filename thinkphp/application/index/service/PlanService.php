@@ -41,11 +41,8 @@ class PlanService
         $subtitle = $data['subtitle']; 
         $beginDate = $data['begin_date'];
         // 判断摘要是否添加
-        if(array_key_exists('summery', $data)){
-            $summery = $data['summery'];
-        } else {
-            $summery = '';
-        }
+        $summery  = array_key_exists('summery', $data) ? $data['summery']:'';
+        
         ArticleService::updateArticleByIdAndSubtitleAndTitleAndSummeryAndBeginDate($articleId,$title,$subtitle,$summery,$beginDate);
         $Plan = Plan::where('article_id', $articleId)->find();
         if (empty($Plan)) {

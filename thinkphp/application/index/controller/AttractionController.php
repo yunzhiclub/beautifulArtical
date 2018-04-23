@@ -91,7 +91,7 @@ class AttractionController extends IndexController {
     }
 
     public function delete() {
-        $attractionId     = Request::instance()->param('id/d');
+        $attractionId     = Request::instance()->param('attractionId/d');
         $articleId = Request::instance()->param('articleId');
         $message   = $this->attractionService->deleteAttraction($attractionId);
         if($message['status'] == 'success') {
